@@ -1,10 +1,12 @@
 import { Button, Card,  Container, Grid } from "@mui/material";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import NextLink from 'next/link';
 
 
-// import Page from '../../../components/Page';
+// components
 import Layout from '../../../../layouts';
+import HeaderBreadcrumbs from '../../../../components/HeaderBreadcrumbs';
+import Iconify from '../../../../components/Iconify';
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
@@ -18,19 +20,7 @@ export default function HEXList({HEXs=[]}) {
 
     const router = useRouter();
 
-/*     if(tasks.length === 0){
-        return (
-                <Grid>
-                    <Grid textAlign="center">
-                        <h1>No Tasks now</h1>
-                        <div>
-            <Button size="mini" primary onClick={() => router.push('tasks/new')} >Create Task</Button>
-                        </div>
-                    </Grid>
-                </Grid>
 
-        )
-    } */
 
     const columns = [
         // { field: "id", headerName: "ID", width: 70 },
@@ -76,19 +66,29 @@ export default function HEXList({HEXs=[]}) {
         <div>
             <Grid container spacing={2}>
                     <Grid item xs={8} sx={{height: 900}}>
+                    
+
+<HeaderBreadcrumbs
+          heading="Crawler Excavator"
+          links={[
+            { name: '형식승인',  },
+            { name: 'HEX',  },
+            
+          ]}
+          action={
+            <NextLink href='HEX/new' >
+              <Button variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
+                New File
+              </Button>
+            </NextLink>
+          }
+        />
                         <DataGrid 
                         rows={rows}
                         columns={columns}
                         disableMultipleSelection={true}
             
                         />
-                        {/* {tasks && tasks.map((task) => (
-                            <Card key={task._id}>
-                                        {task.title}
-                                        <Link href={`/tasks/${task._id}`}>{task.title}</Link>
-            
-                            </Card>
-                        ))} */}
                     </Grid>
                     <Grid item xs={8}></Grid>
             </Grid>
