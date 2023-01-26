@@ -1,2 +1,2 @@
 # NextSnR
- S&R Platform with NextJS and MongoDB
+ HD PVC Data Platform with NextJS and MongoDB
