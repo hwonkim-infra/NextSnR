@@ -1,14 +1,20 @@
-import { Button, Card, Container, Grid } from "@mui/material";
+import { useState } from "react";
+import { Button, Box,  Grid, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
 // components
-import Layout from "../../../../layouts";
-import HeaderBreadcrumbs from "../../../../components/HeaderBreadcrumbs";
-import Iconify from "../../../../components/Iconify";
+import Layout from "@/layouts";
+import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs";
+import Iconify from "@/components/Iconify";
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+
+// Preview
+
+
 
 HEXList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
@@ -16,11 +22,10 @@ HEXList.getLayout = function getLayout(page) {
 
 export default function HEXList({ HEXs = [] }) {
   const router = useRouter();
+  const [currentHEX, setCurrentHEX] = useState({});
 
   const columns = [
     // { field: "id", headerName: "ID", width: 70 },
-    // { field: "title", headerName: "Title", width: 110 },
-    // { field: "description", headerName: "description", width: 110 },
     { field: "model_name", headerName: "기종명", width: 110 },
     { field: "registration_no", headerName: "형식", width: 70 },
     { field: "weight", headerName: "중량", width: 70 },
@@ -36,7 +41,7 @@ export default function HEXList({ HEXs = [] }) {
     { field: "result", headerName: "완료", width: 50 },
   ];
 
-  const rows = HEXs?.map((HEX) => {
+  const rows = HEXs.map((HEX) => {
     return {
       id: HEX._id,
       model_name: HEX.model_name,
@@ -78,9 +83,77 @@ export default function HEXList({ HEXs = [] }) {
             rows={rows}
             columns={columns}
             disableMultipleSelection={true}
+            onSelectionModelChange={(ids) => {
+              const selectedIDs = new Set(ids);
+              const selectedRowData = rows.filter((row) =>
+                selectedIDs.has(row.id.toString())
+              );
+              setCurrentHEX(selectedRowData[0]);
+            }}
           />
         </Grid>
-        <Grid item xs={8}></Grid>
+        <Grid item xs={4}>
+        <Stack
+            direction="row"
+            spacing={3}
+            alignItems="flex-start"
+            justifyContent="space-between"
+          >
+            <Box component="span" sx={{ fontSize: "h2.fontSize" }}>
+              {currentHEX?.model_name}
+            </Box>
+            <Box component="span" sx={{ p: 1, border: "1px" }}>
+              {currentHEX?.serial_no}
+            </Box>
+
+            {currentHEX.model_name && (
+              <Box>
+                <Button
+                  sx={{m:1}}
+                  variant="outlined"
+                  href={"HEX/" + currentHEX?.id+"/edit"}                  
+                >
+                  수정
+                </Button>
+                <Button
+                  sx={{m:1}}
+                  variant="contained"
+                  // startIcon={<PrintIcon />}
+                  href={"HEX/" + currentHEX?.id+"/print"}
+                  target="_blank"
+                >
+                  출력
+                </Button>
+                <Button
+                  sx={{m:1}}
+                  variant="text"
+                  // startIcon={<TextSnippet />}
+                  href={"/HEX/specW/" + currentHEX?.id}
+                  target="_blank"
+                >
+                  제원표
+                </Button>
+              </Box>
+            )}
+          </Stack>
+
+          
+          {(!currentHEX.ChangeModel && currentHEX.model_name) && (
+            <Box>
+              <Button
+                variant="outlined"
+                // startIcon={<QueueIcon />}
+                href={`/HEX/addChange/${currentHEX?.id}`}
+                
+              > 변경형식
+                
+              </Button>
+            </Box>
+          )}
+
+<SpecSheet values={currentHEX}></SpecSheet>
+
+        </Grid>
       </Grid>
     </div>
   );

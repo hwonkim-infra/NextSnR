@@ -7,6 +7,8 @@ const nextConfig = {
 module.exports = {
   reactStrictMode: true,
   env: {
-      MONGODB_URI: "mongodb://127.0.0.1:27017/KRTA_REST"
+      MONGODB_URI: "mongodb://127.0.0.1:27017/KRTA_REST",
+      BASE_URL: process.env.BASE_URL,
+
   }
 }

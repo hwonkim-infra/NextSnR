@@ -1,4 +1,4 @@
-import Task from "../../../model/Task";
+import HEX from "../../../model/HEX";
 import Morgan from "morgan";
 import { dbConnect, runMiddleware } from "../../../utils/index";
 
@@ -15,8 +15,8 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const task = await Task.findById(id);
-        if (!task) return res.status(400).json({ msg: "Task does Not exits " });
+        const task = await HEX.findById(id);
+        if (!task) return res.status(400).json({ msg: "HEX does Not exits " });
         await runMiddleware(req, res, morgan);
         return res.status(200).json(task);
       } catch (err) {
@@ -24,9 +24,9 @@ export default async (req, res) => {
       }
     case "DELETE":
       try {
-        const deletedTask = await Task.findByIdAndDelete(id);
-        if (!deletedTask)
-          return res.status(404).json({ msg: "Task does Not exits " });
+        const deletedHEX = await HEX.findByIdAndDelete(id);
+        if (!deletedHEX)
+          return res.status(404).json({ msg: "HEX does Not exits " });
         await runMiddleware(req, res, morgan);
         return res.status(200).json();
       } catch (err) {
@@ -34,13 +34,13 @@ export default async (req, res) => {
       }
     case "PUT":
       try {
-        const updatedTask = await Task.findByIdAndUpdate(id, body, {
+        const updatedHEX = await HEX.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
-        if (!updatedTask)
-          return res.status(404).json({ msg: "Task does Not exits " });
-        return res.status(200).json(updatedTask);
+        if (!updatedHEX)
+          return res.status(404).json({ msg: "HEX does Not exits " });
+        return res.status(200).json(updatedHEX);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

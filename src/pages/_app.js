@@ -44,14 +44,14 @@ export default function MyApp(props) {
 
       <CollapseDrawerProvider>
         <SettingsProvider defaultSettings={settings}>
-          <MotionLazyContainer>
+          {/* <MotionLazyContainer> */}
             <ThemeProvider>
-              <ThemeSettings>
+              {/* <ThemeSettings> */}
                 <ProgressBar />
                 {getLayout(<Component {...pageProps} />)}
-              </ThemeSettings>
+              {/* </ThemeSettings> */}
             </ThemeProvider>
-          </MotionLazyContainer>
+          {/* </MotionLazyContainer> */}
         </SettingsProvider>
       </CollapseDrawerProvider>
     </>

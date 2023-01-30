@@ -15,15 +15,16 @@ const radians_to_degrees = (radians) => {
 
 
 const HEXCalc = (values) => {
-    /* values.undercarriage ?? = {};
-    values.engine ?? = {};
-    values.attachments ?? = {};
-    values.swivel ?? = {};
-    values.travel ?? = {};
-    values.drawings ?? = {};
-    values.description ?? = {};
-    values.COG ?? = {};
-    values.transport ?? = {}; */
+    values.undercarriage ??  {};
+    
+    values.engine ?? {};
+    values.attachments ?? {};
+    values.swivel ?? {};
+    values.travel ?? {};
+    values.drawings ?? {};
+    values.description ?? {};
+    values.COG ?? {};
+    values.transport ?? {};
 
     // const _id = values.model_name + "_" + Date.now();
 
