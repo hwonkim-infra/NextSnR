@@ -1,12 +1,14 @@
 import React from "react";
 
-const HEXSpec = ({values, styles}) => {
+import styles from '@/components/KRTAForms/print/printPages.module.scss'
+
+const HEXSpec = ({values}) => {
   
   return (
     <div className={styles.pages}>
         
 <h5> [별지 제3호의2서식] </h5>
-      <table className={styles.table} style={{height: "270mm"}} >
+      <table  style={{height: "270mm"}} >
       <thead>
         <tr >
           <th colSpan="6" height="50px" style={{ textAlign: "center"}}>건설기계 (무한궤도식 등) 제원표</th>

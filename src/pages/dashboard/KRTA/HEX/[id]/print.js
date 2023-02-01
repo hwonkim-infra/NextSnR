@@ -3,9 +3,16 @@ import React from 'react'
 import { useRouter } from "next/router";
 
 // print Page components
-import styles from '@/components/KRTAForms/print/printPages.module.scss'
 import HEXSpec from "@/components/KRTAForms/print/HEXSpec";
 import Drawings from "@/components/KRTAForms/print/Drawings";
+import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
+import QCouplr from "@/components/KRTAForms/print/QCouplr";
+import GrossWeights from "@/components/KRTAForms/print/GrossWeights";
+import GroundPressure from "@/components/KRTAForms/print/GroundPressure";
+import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
+import TravelSpecHX from "@/components/KRTAForms/print/TravelSpecHX";
+import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
+import Transportation from "@/components/KRTAForms/print/Transportation";
 
 const HEXprint = () => {
     const { push, query } = useRouter();
@@ -23,12 +30,36 @@ const HEXprint = () => {
         if (query.id) getHEX();
       }, [query.id]);
 
+      const config = {
+        loader: { load: ["[tex]/html"] },
+        tex: {
+          packages: { "[+]": ["html"] },
+          inlineMath: [
+            ["$$", "$$"],
+            ["\\(", "\\)"]
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"]
+          ]
+        }
+      };
+    
 
   return (
-    <div contenteditable="true">
-        {newHEX.model_name}
-      <HEXSpec values={newHEX} styles={styles} />
-      <Drawings values={newHEX} styles={styles}  />
+    <div contentEditable="true">
+        <>
+      <HEXSpec values={newHEX} />
+      {/* <Drawings values={newHEX}  /> */}
+      <WorkingRange values={newHEX} />
+      <QCouplr values={newHEX} />
+      <GrossWeights values={newHEX} />
+      <GroundPressure values={newHEX} />
+      <SwivelSpeed values={newHEX} config={config} />
+      <TravelSpecHX values={newHEX} config={config} />
+      <TravelSlope values={newHEX} config={config} />
+      <Transportation values={newHEX}  />
+        </>
     </div>
   )
 }

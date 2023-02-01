@@ -1,5 +1,6 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
 // 퀵커플러 탈착
 
@@ -11,23 +12,25 @@ const swing_reduction_rev =  Math.round((values.swivel?.pump_flow * values.swive
     <>
         <MathJaxContext version={3} config={config}>
 
-        <div className="pages" id="Swing_Speed">
-              <table className="bordertable">
+    <div className={styles.pages}>
+      <table className={styles.borderTable}>
                 <thead>
 
-                <tr className="borderheader">
-                  <td height="30mm">
+                <tr>
+                  <th>
                     선회 속도
-                  </td>
+                  </th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <tr>
-                  <td className="head_description">
+              <td className={styles.head_description}>
                     <p>▷ 아래 계산 결과에 따라 <strong> 최고 선회 속도는 { values.swivel?.swing_rev } rpm </strong></p>
+                <br />
+                <br />
                     <p>○ 선회 성능 관련 사양</p>
-                    <table className="innertable" width="80%" height="30%">
+                    <table style={{width:"100%", height:"30%", margin: "auto"}} >
                       <thead>
                         <tr>
                           <th>항목</th>
@@ -70,7 +73,7 @@ const swing_reduction_rev =  Math.round((values.swivel?.pump_flow * values.swive
                       </tbody>
                     </table>
                     <p>○ 선회 속도 계산</p>
-                    <table className="innertable" width="80%">
+                    <table style={{width:"100%", height:"30%", margin: "auto"}} >
                       
                       <tbody>
                         <tr>

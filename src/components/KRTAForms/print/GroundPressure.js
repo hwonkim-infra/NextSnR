@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
 // 퀵커플러 탈착
 
@@ -10,11 +11,11 @@ const GroundPressure = ({ values, config }) => {
 
   return (
     <>
-        <div className="pages" id="ground_pressure">
-          <table className="bordertable">
+    <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">접지압</td>
+              <tr>
+                <th>접지압</th>
               </tr>
             </thead>
             <tbody>
@@ -27,12 +28,12 @@ const GroundPressure = ({ values, config }) => {
                   width="80%"
                 />
 
-                <table className="innertable" width="90%" height="60%">
+                <table className={styles.innerTable}>
                   <thead></thead>
                   <tbody>
                     <tr>
                       <td colSpan="5">
-                        <h5>접지압</h5>
+                        <h4>접지압</h4>
                       </td>
                     </tr>
                     <tr>
@@ -89,7 +90,7 @@ const GroundPressure = ({ values, config }) => {
                     </tr>
                     <tr>
                       <td colSpan="5">
-                       <h5>접지압 (퀵커플러 {quick_coupler_weight}kg 포함)</h5> 
+                       <h4>접지압 (퀵커플러 {quick_coupler_weight}kg 포함)</h4> 
                       </td>
                     </tr>
 

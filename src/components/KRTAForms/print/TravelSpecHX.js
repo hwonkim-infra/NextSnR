@@ -1,6 +1,7 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import { Card } from "@mui/material";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
 // 퀵커플러 탈착
 
@@ -36,25 +37,25 @@ const TravelSpecHX = ({ values, config }) => {
   return (
     <>
       <MathJaxContext version={3} config={config}>
-        <div className="pages" id="Travel_Spec">
-          <table className="bordertable">
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-            <tr className="borderheader">
-              <td height="30mm">주행 속도</td>
+            <tr>
+              <th>주행 속도</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-              <td className="head_description">
-                <p>
+              <td className={styles.head_description}>
                   ▷ 아래 계산 결과에 따라{" "}
                   <strong>
                     {" "}
                     최고 주행 속도는 {values.travel?.travel_speed}㎞/h
                   </strong>
-                </p>
+                <br />
+                <br />
                 <p>○ 주행 성능 관련 사양</p>
-                <table className="innertable" width="80%" height="50%">
+                    <table style={{width:"100%", height:"50%", margin: "auto"}} >
                   <thead>
                     <tr>
                       <th>항목</th>
@@ -137,23 +138,23 @@ const TravelSpecHX = ({ values, config }) => {
           </table>
         </div>
 
-        <div className="pages" id="Travel_Speed">
-          <table className="bordertable">
+    <div className={styles.pages}>
+      <table className={styles.borderTable}>
+
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">주행 속도</td>
+              <tr>
+                <th >주행 속도</th>
               </tr>
             </thead>
             <tbody>
 
             <tr>
-              <td className="head_description">
+              <td className={styles.head_description}>
                 <p>○ 주행모터 회전속도에 따른 주행속도 계산</p>
-                <Card variant="outlined">
-                  <table className="innertable" width="100%" height="50%">
+                    <table style={{width:"100%", height:"70%", margin: "auto"}} >
                     <tbody>
                       <tr>
-                        <td className="item-headers" colSpan="3">
+                        <td className={styles.item_headers} colSpan="3">
                           주행모터 축 회전 SM(rpm)
                         </td>
                       </tr>
@@ -211,7 +212,6 @@ const TravelSpecHX = ({ values, config }) => {
                       </tr>
                     </tbody>
                   </table>
-                </Card>
               </td>
             </tr>
             </tbody>

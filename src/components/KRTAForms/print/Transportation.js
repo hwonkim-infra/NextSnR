@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
-// 퀵커플러 탈착
 
 const Transportation = ({ values }) => {
   const trailer_weight = 15;
@@ -23,8 +23,8 @@ const Transportation = ({ values }) => {
 
   return (
     <>
-        <div className="pages" id="Transportation">
-          <table className="bordertable">
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
             <tr className="borderheader">
               <td height="30mm">도로에서의 수송</td>
@@ -33,7 +33,7 @@ const Transportation = ({ values }) => {
             <tbody>
 
             <tr>
-              <td className="head_description">
+              <td className={styles.head_description}>
       <Box justifyContent="center" padding="10px" sx={{ width:"100%"}}>
               전체 운송 제원
                 <table className="innertable" width="90%">

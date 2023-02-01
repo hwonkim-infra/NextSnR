@@ -1,7 +1,7 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
-// 퀵커플러 탈착
 
 const TravelSlope = ({ values, config }) => {
   /* const TM_rev_1 =
@@ -62,8 +62,8 @@ const TravelSlope = ({ values, config }) => {
   return (
     <>
       <MathJaxContext version={3} config={config}>
-        <div className="pages" id="Greadability_Spec">
-          <table className="bordertable">
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
               <tr className="borderheader">
                 <td height="30mm">경사지 등판 및 제동 능력</td>
@@ -71,7 +71,7 @@ const TravelSlope = ({ values, config }) => {
             </thead>{" "}
             <tbody>
               <tr>
-                <td className="head_description">
+              <td className={styles.head_description}>
                   <p>
                     굴착기는 100분의 25(무한궤도식 굴착기는 100분의 30을 말한다)
                     기울기의 견고한 건조 지면을 올라갈 수 있고, 정지상태를
@@ -182,20 +182,21 @@ const TravelSlope = ({ values, config }) => {
           </table>
         </div>
 
-        {values.travel?.pump_pressure && <div className="pages" id="Greadability">
-          <table className="bordertable">
+        {values.travel?.pump_pressure && 
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">경사지 등판 및 제동 능력</td>
+              <tr>
+                <th>경사지 등판 및 제동 능력</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+              <td className={styles.head_description}>
                   <p>▷ 아래 계산 결과에 따라 주행 견인력은 {values.travel?.DP} kgf</p>
-                  <div className="head_description">주행 모터 토크 계산</div>
+                  <div >주행 모터 토크 계산</div>
 
-                  <table className="innertable" width="100%">
+                  <table>
                     <tbody>
                       <tr>
                         <td className="item-headers" rowSpan="2">
@@ -276,16 +277,16 @@ const TravelSlope = ({ values, config }) => {
           </table>
         </div>}
 
-        <div className="pages" id="Greadability_Slope">
-          <table className="bordertable">
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">경사지 등판 및 제동 능력</td>
+              <tr>
+                <th>경사지 등판 및 제동 능력</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+              <td className={styles.head_description}>
                   <p>
                     등판 및 정차 가능 경사각은 아래 사양 중 가장 작은 각에 해당:{" "}
                     <br />
@@ -370,16 +371,16 @@ const TravelSlope = ({ values, config }) => {
           </table>
         </div>
 
-        <div className="pages" id="Greadability_hold">
-          <table className="bordertable">
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">경사지 등판 및 제동 능력</td>
+              <tr>
+                <th>경사지 등판 및 제동 능력</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+              <td className={styles.head_description}>
                   <div className="head_description">
                     경사지에서의 제동 유지는 제동 토크와 밀려 내려가는 힘 간의
                     비교로 결정
@@ -396,7 +397,7 @@ const TravelSlope = ({ values, config }) => {
                     <p>○ 제동능력 관련 사양</p>
                   </div>
 
-                  <table className="innertable" width="80%" height="30%">
+                    <table style={{width:"100%", height:"40%", margin: "auto"}} >
                     <thead>
                       <tr>
                         <th>항목</th>
@@ -458,10 +459,10 @@ const TravelSlope = ({ values, config }) => {
                   </table>
 
                   <div>
-                    <p>○ 주차 토크와 내려가는 힘 간의 비교</p>
+                    <br/>○ 주차 토크와 내려가는 힘 간의 비교<br/>
                   </div>
 
-                  <table className="innertable" width="100%">
+                    <table style={{width:"100%", height:"30%", margin: "auto"}} >
                     <tbody>
                       <tr>
                         <td className="head_description" colSpan="3">

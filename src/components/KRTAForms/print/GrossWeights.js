@@ -1,21 +1,22 @@
 import React from "react";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
 // 퀵커플러 탈착
 
 const GrossWeights = ({ values, config }) => {
   return (
-    <div className="pages">
-      <table className="bordertable">
+    <div className={styles.pages}>
+      <table className={styles.borderTable}>
         <thead>
-          <tr className="borderheader">
-            <th height="30mm">자체중량 및 총중량 </th>
+          <tr>
+            <th>자체중량 및 총중량 </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>
-              <table className="innertable" height="90%" width="90%">
+              <table style={{width:"80%", height:"80%", margin: "auto"}}>
                 <thead></thead>
                 <tbody>
                   <tr>

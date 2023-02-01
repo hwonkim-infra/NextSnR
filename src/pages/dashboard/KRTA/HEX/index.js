@@ -143,7 +143,7 @@ export default function HEXList({ HEXs = [] }) {
               <Button
                 variant="outlined"
                 // startIcon={<QueueIcon />}
-                href={`/HEX/addChange/${currentHEX?.id}`}
+                href={"HEX/" + currentHEX?.id+"/addChange"}                  
                 
               > 변경형식
                 

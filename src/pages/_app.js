@@ -23,6 +23,8 @@ import ThemeSettings from '../components/settings';
 import ProgressBar from '../components/ProgressBar';
 import MotionLazyContainer from '../components/animate/MotionLazyContainer';
 
+
+
 // ----------------------------------------------------------------------
 
 MyApp.propTypes = {
@@ -44,14 +46,14 @@ export default function MyApp(props) {
 
       <CollapseDrawerProvider>
         <SettingsProvider defaultSettings={settings}>
-          {/* <MotionLazyContainer> */}
+          <MotionLazyContainer>
             <ThemeProvider>
               {/* <ThemeSettings> */}
                 <ProgressBar />
                 {getLayout(<Component {...pageProps} />)}
               {/* </ThemeSettings> */}
             </ThemeProvider>
-          {/* </MotionLazyContainer> */}
+          </MotionLazyContainer>
         </SettingsProvider>
       </CollapseDrawerProvider>
     </>
