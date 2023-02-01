@@ -95,7 +95,14 @@ export default function CreateHEX() {
 
   const onSubmit = useCallback(async (values) => {
     if (Object.keys(errors).length) return setErrors(errors);
-    if (query.id) {
+
+    if (pathname.includes("addChange")){
+      values.origin = values._id;
+      delete values._id;
+
+      await createHEXChange(values);
+      await push("/dashboard/KRTA/HEX");
+    } else if (query.id) {
       await updateHEX(values);
     } else {
       await createHEX(values);
@@ -118,6 +125,21 @@ export default function CreateHEX() {
   };
 
   const createHEX = async (values) => {
+    values._id = values.model_name + "_" + Date.now();
+    try {
+      await fetch("http://localhost:3000/api/HEX/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createHEXChange = async (values) => {
     values._id = values.model_name + "_" + Date.now();
     try {
       await fetch("http://localhost:3000/api/HEX/", {
@@ -215,7 +237,7 @@ export default function CreateHEX() {
           // potentially other mutators could be merged here
           ...arrayMutators,
         }}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        render={useCallback(({ handleSubmit, form, submitting, pristine, values }) => (
           <>
             <form onSubmit={handleSubmit}>
               <Grid container spacing={2}>
@@ -284,7 +306,7 @@ export default function CreateHEX() {
               <pre> {JSON.stringify(values, 0, 2)}</pre>
             </form>
           </>
-        )}
+        ))}
       />
     </Grid>
   );

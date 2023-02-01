@@ -6,17 +6,20 @@ import NextLink from "next/link";
 import Layout from "@/layouts";
 
 // mui
-import { Button, Snackbar, Stack, Grid, Tabs, Tab, Box } from "@mui/material";
+import { Button, Snackbar, Stack, Grid, Tabs, Tab, Box, TextField, Input } from "@mui/material";
+import Select from "react-select";
 
 // hooks
 import useTabs from "@/hooks/useTabs";
 
 // Form
-import { Form, Field } from "react-final-form";
-import arrayMutators from "final-form-arrays";
+import { useForm, Controller } from "react-hook-form";
+// import ButtonsResult from "@/components/formComponents/ButtonsResult";
+import { RHFTextField } from "@/components/hook-form";
+import FormProvider from "@/components/hook-form/FormProvider";
 
 // Form Components
-import Summary from "@/components/KRTAForms/Summary";
+/* import Summary from "@/components/KRTAForms/Summary";
 
 import HEXCalc from "@/components/KRTAForms/HEXCalc";
 import Dimensions from "@/components/KRTAForms/Dimensions";
@@ -30,12 +33,13 @@ import EngineFields from "@/components/KRTAForms/EngineFields";
 import TransPortation from "@/components/KRTAForms/TransPortation";
 import TAResult from "@/components/KRTAForms/TAResult";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
-
+ */
 CreateHEX.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-const initialHEXState = {
+
+const defaultValues = {
   ECN: "",
   engine: { engine_name: "" },
   undercarriage: { ground_clearance: "" },
@@ -61,8 +65,10 @@ const initialHEXState = {
   },
 };
 
-export default function CreateHEX() {
-  const [newHEX, setNewHEX] = useState(initialHEXState);
+export default function CreateHEX({ name, ...other }) {
+  const [data, setData] = useState(null);
+
+  const [newHEX, setNewHEX] = useState({});
   const { model_name, ...rest } = newHEX;
   const { push, query, pathname } = useRouter();
   const [errors, setErrors] = useState({});
@@ -70,8 +76,23 @@ export default function CreateHEX() {
 
   const { currentTab, onChangeTab } = useTabs("dimensions");
 
+  const methods = useForm({
+    // resolver: yupResolver(NewUserSchema),
+    defaultValues,
+  });
 
-  console.log("push: ", pathname)
+  const {
+    reset,
+    watch,
+    control,
+    setValue,
+    getValues,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
+
+  const watchAllFields = watch();
+
   const snackbarClick = () => {
     setSnackbarOpen(true);
   };
@@ -168,7 +189,7 @@ export default function CreateHEX() {
     }
   };
 
-  const Form_Tabs = [
+/*   const Form_Tabs = [
     {
       value: "dimensions",
       label: "외관 제원",
@@ -225,89 +246,24 @@ export default function CreateHEX() {
       ),
     },
   ];
-
+ */
   // Using arrow functions or binding in JSX: the function is recreated on each render.
   return (
     <Grid>
       <h1>{query.id ? "Update HEX" : "Create HEX"}</h1>
-      <Form
-        onSubmit={onSubmit}
-        initialValues={newHEX || initialHEXState}
-        mutators={{
-          // potentially other mutators could be merged here
-          ...arrayMutators,
-        }}
-        render={useCallback(({ handleSubmit, form, submitting, pristine, values }) => (
-          <>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={7}>
-                  {HEXCalc(values)}
-                  <Summary {...values} />
+      <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
 
-                  <Tabs
-                    allowScrollButtonsMobile
-                    variant="scrollable"
-                    scrollButtons="auto"
-                    value={currentTab}
-                    onChange={onChangeTab}
-                  >
-                    {Form_Tabs.map((tab) => (
-                      <Tab
-                        disableRipple
-                        key={tab.value}
-                        label={tab.label}
-                        value={tab.value}
-                      />
-                    ))}
-                  </Tabs>
-
-                  {Form_Tabs.map((tab) => {
-                    const isMatched = tab.value === currentTab;
-                    return (
-                      isMatched && <Box key={tab.value}>{tab.component}</Box>
-                    );
-                  })}
-
-                  <Stack
-                    direction="row"
-                    spacing={3}
-                    alignItems="flex-end"
-                    justifyContent="space-between"
-                  >
-                    <Button
-                      variant="outlined"
-                      // startIcon={<SaveIcon />}
-                      type="submit"
-                      onClick={snackbarClick}
-                    >
-                      저장
-                    </Button>
-                    <Snackbar
-                      open={snackbarOpen}
-                      autoHideDuration={3000}
-                      message="This File was updated successfully"
-                      onClose={snackbarClose}
-                    />
-
-                    <Button variant="contained" onClick={removeHEX}>
-                      삭제
-                    </Button>
-                  </Stack>
-                </Grid>
-                <Grid item xs={5}>
-                  {/* {values.ChangeModel && <CompareSheet values={values} />}
-                   */}
-                  <SpecSheet values={values} />
-
-                  {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
-                </Grid>
-              </Grid>
-              <pre> {JSON.stringify(values, 0, 2)}</pre>
-            </form>
-          </>
-        ))}
+      <Controller
+        name="firstName"
+        control={control}
+        render={({ field }) => <Input {...field} />}
       />
+            <RHFTextField name="model_name" label="기종명" />
+      <input type="submit" />
+              {getValues("model_name")*2}
+    </FormProvider>
+  
+      
     </Grid>
   );
 }
