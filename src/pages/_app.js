@@ -22,6 +22,7 @@ import ThemeProvider from '../theme';
 import ThemeSettings from '../components/settings';
 import ProgressBar from '../components/ProgressBar';
 import MotionLazyContainer from '../components/animate/MotionLazyContainer';
+import NotistackProvider from '@/components/NotistackProvider';
 
 
 
@@ -49,8 +50,10 @@ export default function MyApp(props) {
           <MotionLazyContainer>
             <ThemeProvider>
               {/* <ThemeSettings> */}
-                <ProgressBar />
-                {getLayout(<Component {...pageProps} />)}
+                <NotistackProvider>
+                  <ProgressBar />
+                  {getLayout(<Component {...pageProps} />)}
+                </NotistackProvider>
               {/* </ThemeSettings> */}
             </ThemeProvider>
           </MotionLazyContainer>
