@@ -6,11 +6,14 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack } from '@mui/material';
+import { Box,  Button,  Card, Grid, Stack } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 // utils
 // routes
 // import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
+import HEXinit from '@/model/HEXinit'
 // components
 import { FormProvider, RHFTextField } from '@/components/hook-form';
 import Summary from '@/components/KRTAForms/Summary';
@@ -24,19 +27,10 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
 
 
 
-  const defaultValues = useMemo(
-    () => ({
-        model_name: currentModel?.model_name || '',
-        serial_no: currentModel?.serial_no || '',
-        registration_no: currentModel?.registration_no || '',
-        
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentModel]
-  );
-
+  const defaultValues = HEXinit(currentModel)
+  
   const methods = useForm({
-    defaultValues,
+    ...defaultValues,
   });
 
   const {
@@ -51,6 +45,10 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   const values = watch();
 
   useEffect(() => {
+
+    if (isChangeModel && currentModel) {
+      reset(defaultValues);
+    }
     if (isEdit && currentModel) {
       reset(defaultValues);
     }
@@ -58,7 +56,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
       reset(defaultValues);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentModel]);
+  }, [isEdit, isChangeModel, currentModel]);
 
   /* const onSubmit = async () => {
     try {
@@ -73,15 +71,15 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
 
   const onSubmit = useCallback(async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
-/* 
-    if (pathname.includes("addChange")){
-      values.origin = values._id;
+
+    if (isChangeModel){
+      /* values.origin = values._id;
       delete values._id;
+      console.log(values.origin); */
 
       await createHEXChange(values);
       await push("/dashboard/KRTA/HEX");
-    } else  */
-    if (isEdit) {
+    } else if (isEdit) {
       await updateHEX(values);
     } else {
       await createHEX(values);
@@ -119,7 +117,9 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   };
 
   const createHEXChange = async (values) => {
-    values._id = values.model_name + "_" + Date.now();
+      values.origin = values._id;
+      delete values._id;
+      values._id = values.model_name + "_" + Date.now();
     try {
       await fetch("http://localhost:3000/api/HEX/", {
         method: "POST",
@@ -159,17 +159,20 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
                 // display: 'grid',
                 columnGap: 2,
                 rowGap: 3,
-                gridTemplateColumns: 'repeat(6, 1fr)',
+                gridTemplateColumns: 'repeat(8, 1fr)',
               }}
             >
                 Form
               <Summary />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                 {!isEdit ? 'Create Model' : 'Save Changes'}
               </LoadingButton>
+              <Button variant="outlined" startIcon={<DeleteIcon />} onClick={removeHEX}>
+                      삭제
+                    </Button>
             </Stack>
           </Card>
         </Grid>

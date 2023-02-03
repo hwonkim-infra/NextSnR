@@ -28,8 +28,8 @@ export default function HEXCreate() {
         <HeaderBreadcrumbs
           heading="Create a new HEX"
           links={[
-            { name: 'Dashboard' },
-            { name: 'HEX',  },
+            { name: 'Dashboard', href: '/dashboard/' },
+            { name: 'HEX', href: '/dashboard/KRTA/HEX'  },
             { name: 'New HEX' },
           ]}
         /> 
