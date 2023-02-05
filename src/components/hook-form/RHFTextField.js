@@ -14,6 +14,7 @@ export default function RHFTextField({ name, ...other }) {
     <Controller
       name={name}
       control={control}
+      defaultValue = {''}
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}

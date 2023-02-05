@@ -1,7 +1,7 @@
-import React, { useMemo } from "react";
+// import React, { useMemo } from "react";
 
 const HEXinit = (currentModel) => {
-  return useMemo(() => ({
+  return {
     _id: currentModel?._id || "",
     model_name: currentModel?.model_name || "",
     origin: currentModel?.origin || "",
@@ -23,7 +23,6 @@ const HEXinit = (currentModel) => {
     approval_result: currentModel?.approval_result || "",
 
 
-    // undercarriage.ground_clearance: currentModel.undercarriage?.ground_clearance || "",
 
     undercarriage:     
     {ground_clearance: currentModel?.undercarriage?.ground_clearance || "",
@@ -130,7 +129,7 @@ const HEXinit = (currentModel) => {
     transport_5: currentModel?.transport_5 || "",
     transport_5_height: currentModel?.transport_5_height || "",
     transport_5_weight: currentModel?.transport_5_weight || "",}, 
-  }), [currentModel]);
+  };
 };
 
 export default HEXinit;

@@ -1,6 +1,7 @@
 // @mui
 import { Container } from '@mui/material';
 // routes
+import { PATH_DASHBOARD } from '@/routes/paths';
 // import { PATH_DASHBOARD } from '../../../routes/paths';
 // hooks
 // import useSettings from '@/hooks/useSettings';
@@ -28,12 +29,11 @@ export default function HEXCreate() {
         <HeaderBreadcrumbs
           heading="Create a new HEX"
           links={[
-            { name: 'Dashboard', href: '/dashboard/' },
-            { name: 'HEX', href: '/dashboard/KRTA/HEX'  },
+            { name: 'Dashboard', },
+            { name: 'HEX', href: PATH_DASHBOARD.KRTA.HEX },
             { name: 'New HEX' },
           ]}
         /> 
-        럐그
         <HEXEditForm />
     </Page>
   );

@@ -1,6 +1,8 @@
 // next
 import { useRouter } from 'next/router';
 // @mui
+// routes
+import { PATH_DASHBOARD } from '@/routes/paths';
 // layouts
 import Layout from '@/layouts';
 // components
@@ -43,7 +45,7 @@ const { query } = useRouter();
           heading="Edit HEX"
           links={[
             { name: 'Dashboard', href: '/dashboard/' },
-            { name: 'HEX', href: '/dashboard/KRTA/HEX'  },
+            { name: 'HEX', href: PATH_DASHBOARD.KRTA.HEX  },
             { name: (currentModel?.model_name) },
           ]}
         />

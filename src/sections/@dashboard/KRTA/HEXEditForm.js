@@ -1,34 +1,41 @@
-
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from "react";
 // next
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 // form
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 // @mui
-import { LoadingButton } from '@mui/lab';
-import { Box,  Button,  Card, Grid, Stack } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { LoadingButton } from "@mui/lab";
+import { Box, Button, Card, Grid, Stack, Tab, Tabs } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 // utils
+import useTabs from "@/hooks/useTabs";
 // routes
 // import { PATH_DASHBOARD } from '../../../routes/paths';
 // _mock
-import HEXinit from '@/model/HEXinit'
+import HEXinit from "@/model/HEXinit2";
 // components
-import { FormProvider, RHFTextField } from '@/components/hook-form';
-import Summary from '@/components/KRTAForms/Summary';
+import { FormProvider, RHFTextField } from "@/components/hook-form";
+import Summary from "@/components/KRTAForms/Summary";
+import Dimensions from "@/components/KRTAForms/Dimensions";
+import Swivel from "@/components/KRTAForms/Swivel";
+import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
+import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
 
 // ----------------------------------------------------------------------
 
-
-export default function HEXEditForm({ isEdit = false, isChangeModel = false, currentModel }) {
+export default function HEXEditForm({
+  isEdit = false,
+  isChangeModel = false,
+  currentModel,
+}) {
   const { push, query, pathname } = useRouter();
 
+  const { currentTab, onChangeTab } = useTabs("dimensions");
 
+  const defaultValues = useMemo(() =>(HEXinit(currentModel)));
 
-
-  const defaultValues = HEXinit(currentModel)
-  
   const methods = useForm({
     ...defaultValues,
   });
@@ -43,10 +50,10 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   } = methods;
 
   const values = watch();
-
+  
   useEffect(() => {
-
-    if (isChangeModel && currentModel) {
+      reset(defaultValues);
+    /* if (isChangeModel && currentModel) {
       reset(defaultValues);
     }
     if (isEdit && currentModel) {
@@ -54,29 +61,15 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     }
     if (!isEdit) {
       reset(defaultValues);
-    }
+    } */
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, isChangeModel, currentModel]);
 
-  /* const onSubmit = async () => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-    //   enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
-      push("/dashboard/KRTA/HEX");
-    } catch (error) {
-      console.error(error);
-    }
-  }; */
 
-  const onSubmit = useCallback(async (values) => {
+  const onSubmit = (async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
 
-    if (isChangeModel){
-      /* values.origin = values._id;
-      delete values._id;
-      console.log(values.origin); */
-
+    if (isChangeModel) {
       await createHEXChange(values);
       await push("/dashboard/KRTA/HEX");
     } else if (isEdit) {
@@ -117,9 +110,9 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   };
 
   const createHEXChange = async (values) => {
-      values.origin = values._id;
-      delete values._id;
-      values._id = values.model_name + "_" + Date.now();
+    values.origin = values._id;
+    delete values._id;
+    values._id = values.model_name + "_" + Date.now();
     try {
       await fetch("http://localhost:3000/api/HEX/", {
         method: "POST",
@@ -147,35 +140,104 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     }
   };
 
+  const FORM_TABS = [
+    {
+      value: "dimensions",
+      title: "기본제원",
+      component: (
+        <>
+          <Dimensions /> 
+          <DimensionsTrack /> 
+          <DimensionsQC />
+        </>
+      ),
+    },
+    {
+      value: "swivelTravel",
+      title: "선회주행",
+      component: (
+        <>
+          <Swivel />
+        </>
+      ),
+    },
+    /* {
+      value: 'friends',
+      component: <ProfileFriends friends={_userFriends} findFriends={findFriends} onFindFriends={handleFindFriends} />,
+    },
+    {
+      value: 'gallery',
+      icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
+      component: <ProfileGallery gallery={_userGallery} />,
+    }, */
+  ];
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={3}>
-       
+      <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-          <Card sx={{ p: 3 }}>
+          <Card sx={{ p: 1 }}>
             <Box
               sx={{
                 // display: 'grid',
                 columnGap: 2,
                 rowGap: 3,
-                gridTemplateColumns: 'repeat(8, 1fr)',
+                gridTemplateColumns: "repeat(8, 1fr)",
               }}
             >
-                Form
               <Summary />
             </Box>
+            <Tabs
+              allowScrollButtonsMobile
+              variant="scrollable"
+              scrollButtons="auto"
+              value={currentTab}
+              onChange={onChangeTab}
+            >
+              {FORM_TABS.map((tab) => (
+                <Tab
+                  disableRipple
+                  key={tab.value}
+                  value={tab.value}
+                  icon={tab.icon}
+                  label={tab.title}
+                />
+              ))}
+            </Tabs>
+            {FORM_TABS.map((tab) => {
+              const isMatched = tab.value === currentTab;
+              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+            })}
 
-            <Stack direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ mt: 3 }}>
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create Model' : 'Save Changes'}
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="flex-end"
+              sx={{ mt: 3 }}
+            >
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+              >
+                {!isEdit ? "Create Model" : "Save Changes"}
               </LoadingButton>
-              <Button variant="outlined" startIcon={<DeleteIcon />} onClick={removeHEX}>
-                      삭제
-                    </Button>
+              <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={removeHEX}
+              >
+                삭제
+              </Button>
             </Stack>
           </Card>
         </Grid>
+        <Grid item xs={12} md={4}>
+          <Card sx={{ p: 1 }}>
+            Preview
+            <SpecSheet values={values} />
+          </Card>
+      </Grid>
       </Grid>
     </FormProvider>
   );
