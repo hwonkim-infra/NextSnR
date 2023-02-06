@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 // next
 import { useRouter } from "next/router";
 // form
@@ -22,15 +22,13 @@ import Swivel from "@/components/KRTAForms/Swivel";
 import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
 import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+import HEXCalc from "@/components/KRTAForms/HEXCalc";
 
 // ----------------------------------------------------------------------
 
-export default function HEXEditForm({
-  isEdit = false,
-  isChangeModel = false,
-  currentModel,
-}) {
+export default function HEXEditForm({ isEdit = false, isChangeModel = false, currentModel, }) {
   const { push, query, pathname } = useRouter();
+  const [calValue, setCalValue] = useState({});
 
   const { currentTab, onChangeTab } = useTabs("dimensions");
 
@@ -50,7 +48,10 @@ export default function HEXEditForm({
   } = methods;
 
   const values = watch();
-  
+  // console.log("🚀 ~ file: HEXEditForm.js:51 ~ values", values)
+  values.grossWeight = Number(values.operating_weight) + 65;
+  values.bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500;
+
   useEffect(() => {
       reset(defaultValues);
     /* if (isChangeModel && currentModel) {
@@ -64,10 +65,17 @@ export default function HEXEditForm({
     } */
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, isChangeModel, currentModel]);
+  
+  /* useEffect(() => {
+    values.grossWeight = Number(values.operating_weight) + 65;
+  }, [values]) */
+  
 
 
   const onSubmit = (async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
+    // values.grossWeight = Number(values.operating_weight) + 65;
+                  HEXCalc(values);
 
     if (isChangeModel) {
       await createHEXChange(values);
@@ -126,7 +134,8 @@ export default function HEXEditForm({
     }
   };
 
-  const removeHEX = async () => {
+  // const removeHEX = async () => {
+  async function removeHEX () {
     const { id } = query;
     if (window.confirm("이 모델을 삭제하시겠습니까")) {
       try {
@@ -186,6 +195,8 @@ export default function HEXEditForm({
               }}
             >
               <Summary />
+              {values.grossWeight}
+              {values.bucket_exca_capa}
             </Box>
             <Tabs
               allowScrollButtonsMobile
@@ -208,6 +219,7 @@ export default function HEXEditForm({
               const isMatched = tab.value === currentTab;
               return isMatched && <Box key={tab.value}>{tab.component}</Box>;
             })}
+                  {/* {HEXCalc={}(values)} */}
 
             <Stack
               direction="row"

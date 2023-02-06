@@ -44,7 +44,7 @@ const { query } = useRouter();
         <HeaderBreadcrumbs
           heading="Edit HEX"
           links={[
-            { name: 'Dashboard', href: '/dashboard/' },
+            { name: 'Dashboard', href: PATH_DASHBOARD.KRTA },
             { name: 'HEX', href: PATH_DASHBOARD.KRTA.HEX  },
             { name: (currentModel?.model_name) },
           ]}

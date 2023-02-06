@@ -23,7 +23,6 @@ const HEXinit = (currentModel) => {
     approval_result: currentModel?.approval_result || "",
 
 
-    // undercarriage.ground_clearance: currentModel.undercarriage?.ground_clearance || "",
 
     undercarriage:     
     {ground_clearance: currentModel?.undercarriage?.ground_clearance || "",
@@ -113,9 +112,9 @@ const HEXinit = (currentModel) => {
     
     COG: {
       tipping_line: currentModel?.COG?.tipping_line || "",
-      bucket_COS: currentModel?.COG?.bucket_COS || "",
+      bucket_COS: currentModel?.COG?.bucket_COS || "",},
       
-      transport: currentModel?.transport || "",
+      transport: {
       transport_1: currentModel?.transport_1 || "",
     transport_1_height: currentModel?.transport_1_height || "",
     transport_2: currentModel?.transport_2 || "",
@@ -130,7 +129,14 @@ const HEXinit = (currentModel) => {
     transport_5: currentModel?.transport_5 || "",
     transport_5_height: currentModel?.transport_5_height || "",
     transport_5_weight: currentModel?.transport_5_weight || "",}, 
-  }), [currentModel]);
-};
 
+      }), [currentModel]) 
+      
+};
+/* 
+
+useMemo(() => ({
+  _id: currentModel?._id || "",
+  model_name: currentModel?.model_name || "",
+}), [currentModel]) */
 export default HEXinit;

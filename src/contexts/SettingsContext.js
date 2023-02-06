@@ -106,7 +106,7 @@ function SettingsProvider({ children, defaultSettings }) {
   const onToggleLayout = () => {
     setSettings({
       ...settings,
-      themeLayout: settings.themeLayout === 'vertical' ? 'horizontal' : 'vertical',
+      themeLayout: settings.themeLayout === 'horizontal' ? 'horizontal' : 'vertical',
     });
   };
 

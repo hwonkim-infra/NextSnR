@@ -9,7 +9,6 @@ import {
 import { RHFTextField } from "../hook-form";
 
 const Summary = () => {
-  
 
   return (
     <>
@@ -39,7 +38,6 @@ const Summary = () => {
               <RHFTextField label="버켓 용량(산적)" name="attachments.bucket_heap"  type="number" />
             </Box>
 
-            
           </Card>
           </Grid>
         </Paper>
