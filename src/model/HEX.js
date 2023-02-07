@@ -7,7 +7,7 @@ const HEXSchema = new Schema({
     origin: String,
 
     // 제원 사양
-    model_name: String,
+    model_name: String, 
     serial_no: Number,
     registration_no: String,
     machine_grade: String,

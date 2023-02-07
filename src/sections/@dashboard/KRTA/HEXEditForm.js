@@ -26,13 +26,44 @@ import HEXCalc from "@/components/KRTAForms/HEXCalc";
 
 // ----------------------------------------------------------------------
 
+let values = {
+  ECN: null,
+  attachments: { bucket_exca_capa: null },
+  undercarriage: { ground_clearance: null },
+engine: { engine_name: null },
+swivel: {
+  pump_flow: null,
+  
+},
+travel: {
+  pump_displacement: null,
+},
+drawings: {
+  exterior: null,
+},
+description: {
+  swing_reduction: null
+},
+COG: {
+  upperStructure_longitudinal: null
+},
+transport: {
+  transport_1: "본체",
+  transport_1_weight: null,
+
+}
+}
+
 export default function HEXEditForm({ isEdit = false, isChangeModel = false, currentModel, }) {
   const { push, query, pathname } = useRouter();
-  const [calValue, setCalValue] = useState({});
-
+  
   const { currentTab, onChangeTab } = useTabs("dimensions");
-
+  
   const defaultValues = useMemo(() =>(HEXinit(currentModel)));
+  
+  
+  const [calValue, setCalValue] = useState(defaultValues);
+  
 
   const methods = useForm({
     ...defaultValues,
@@ -47,14 +78,17 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     formState: { isSubmitting },
   } = methods;
 
-  const values = watch();
-  // console.log("🚀 ~ file: HEXEditForm.js:51 ~ values", values)
-  values.grossWeight = Number(values.operating_weight) + 65;
-  values.bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500;
-
+  values = watch();
+  //  {values.attachments.bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500}
+  
+  
   useEffect(() => {
-      reset(defaultValues);
-    /* if (isChangeModel && currentModel) {
+    // HEXCalc(defaultValues);
+    reset(defaultValues);
+    // setCalValue(values)
+      // setCalValue(values)
+                  
+                  /* if (isChangeModel && currentModel) {
       reset(defaultValues);
     }
     if (isEdit && currentModel) {
@@ -66,16 +100,12 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, isChangeModel, currentModel]);
   
-  /* useEffect(() => {
-    values.grossWeight = Number(values.operating_weight) + 65;
-  }, [values]) */
   
-
 
   const onSubmit = (async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
     // values.grossWeight = Number(values.operating_weight) + 65;
-                  HEXCalc(values);
+                  // HEXCalc(values);
 
     if (isChangeModel) {
       await createHEXChange(values);
@@ -186,6 +216,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 1 }}>
+            {HEXCalc(values)}
             <Box
               sx={{
                 // display: 'grid',
@@ -193,10 +224,9 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
                 rowGap: 3,
                 gridTemplateColumns: "repeat(8, 1fr)",
               }}
-            >
+              >
               <Summary />
-              {values.grossWeight}
-              {values.bucket_exca_capa}
+              { values.grossWeight_load }
             </Box>
             <Tabs
               allowScrollButtonsMobile
@@ -219,7 +249,6 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
               const isMatched = tab.value === currentTab;
               return isMatched && <Box key={tab.value}>{tab.component}</Box>;
             })}
-                  {/* {HEXCalc={}(values)} */}
 
             <Stack
               direction="row"
@@ -251,6 +280,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
           </Card>
       </Grid>
       </Grid>
+      {/* {values.attachments.bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500} */}
     </FormProvider>
   );
 }

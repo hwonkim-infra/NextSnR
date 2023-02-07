@@ -1,6 +1,7 @@
 import HEXinit from "@/model/HEXinit2";
 
 
+
 const roundTwo = (num) => {
     return +(Math.round(num + "e+2") + "e-2");
 };
@@ -18,12 +19,14 @@ const radians_to_degrees = (radians) => {
 
 
 function HEXCalc (values) {
-console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values)
+    
+    console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values)
 
-    // HEXinit(values)
-    values.undercarriage ?? {};
+    // values.attachments ?? {};
+//   values.attachments ?? {};
+
+    /* values.undercarriage ?? {};
     values.engine ?? {};
-    values.attachments ?? {};
     values.swivel ?? {};
     values.travel ?? {};
     values.drawings ?? {};
@@ -31,8 +34,12 @@ console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values)
     values.COG ?? {};
     values.transport ?? {
         transport_1_weight: ''
-    };
+    }; */
+    // HEXinit(values)
 
+    // console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values.attachments", values.attachments)
+    
+    // console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values.attachments)
 
     const grossWeight = Number(values.operating_weight) + 65; // 총중량
     const bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500; // 산적 시 버켓 중량
@@ -165,11 +172,13 @@ console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values)
 
     return (
         // (values._id = _id),
-        (values.grossWeight = grossWeight),
-        (values.attachments.bucket_exca_capa ? '' : bucket_exca_capa),
-        (values.grossWeight_load = grossWeight_load),
+        values.grossWeight = grossWeight,
+        values.grossWeight_load = grossWeight_load,
+        // values.attachments.bucket_exca_capa = bucket_exca_capa,
+        /* values.transport.transport_1_weight = transport_1_weight,
         (values.undercarriage.ground_Length = ground_Length),
         (values.undercarriage.ground_pressure = ground_pressure),
+         
         (values.undercarriage.ground_pressure_woqc = ground_pressure_woqc),
         (values.swivel.swing_rev = swing_rev),
         (values.travel.TM_rev_1 = TM_rev_1),
@@ -185,10 +194,9 @@ console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values)
         (values.travel.theta_2 = theta_2),
         (values.travel.traction_slope = traction_slope),
         (values.travel.greadability = greadability),
-        (values.transport.transport_1_weight = transport_1_weight),
         (values.COG.COG_longitudinal = COG_longitudinal),
         (values.COG.COG_lateral = COG_lateral),
-        (values.COG.COG_vertical = COG_vertical),
+        (values.COG.COG_vertical = COG_vertical), */
         ""
     );
 };
