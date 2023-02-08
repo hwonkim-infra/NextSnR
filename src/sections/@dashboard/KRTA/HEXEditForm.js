@@ -22,7 +22,9 @@ import Swivel from "@/components/KRTAForms/Swivel";
 import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
 import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
-import {HEX_Calc} from "@/components/KRTAForms/HEXCalc2";
+import {HEXCalc, HEXSave} from "@/components/KRTAForms/HEXCalc2";
+import TravelHX from "@/components/KRTAForms/TravelHX";
+import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
 
 // ----------------------------------------------------------------------
 
@@ -32,11 +34,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   const { currentTab, onChangeTab } = useTabs("dimensions");
   
   const defaultValues = useMemo(() =>(HEXinit(currentModel)));
-  
-  
-  const [calValue, setCalValue] = useState(defaultValues);
-  
-
+    
   const methods = useForm({
     ...defaultValues,
   });
@@ -51,24 +49,12 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   } = methods;
 
   const values = watch();
-  //  {values.attachments.bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500}
-  HEX_Calc(values)
+  HEXCalc(values)
   
   
   useEffect(() => {
-    // HEXCalc(defaultValues);
     reset(defaultValues);
-    
                   
-                  /* if (isChangeModel && currentModel) {
-      reset(defaultValues);
-    }
-    if (isEdit && currentModel) {
-      reset(defaultValues);
-    }
-    if (!isEdit) {
-      reset(defaultValues);
-    } */
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, isChangeModel, currentModel]);
   
@@ -76,8 +62,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
 
   const onSubmit = (async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
-    // values.grossWeight = Number(values.operating_weight) + 65;
-                  // HEXCalc(values);
+    HEXSave({values, HEXCalc})
 
     if (isChangeModel) {
       await createHEXChange(values);
@@ -169,10 +154,19 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
       component: (
         <>
           <Swivel />
+          <TravelHX />
         </>
       ),
     },
-    
+    {
+      value: "drawings",
+      title: "외관도",
+      component: (
+        <>
+          <AddDrawings />
+        </>
+      ),
+    },
   ];
 
 
@@ -182,7 +176,6 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 1 }}>
-            {/* {HEX_Calc(values)} */}
             <Box
               sx={{
                 // display: 'grid',
@@ -192,7 +185,6 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
               }}
               >
               <Summary />
-              { HEX_Calc.grossWeight }
             </Box>
             <Tabs
               allowScrollButtonsMobile

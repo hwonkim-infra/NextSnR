@@ -1,43 +1,117 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Paper, Tab, Tabs, Typography } from "@mui/material";
 import { Editor } from "@tinymce/tinymce-react";
 import React, { useState } from "react";
-import { Field } from "react-final-form";
 import DrawingAdditional from "./DrawingAdditional";
+import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
+import { Controller, useForm } from "react-hook-form";
 
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-};
 
+/* const DRAWING_TABS = [
+  {
+    value: "dimensions",
+    title: "기본제원",
+    component: (
+      <>
+        <Dimensions /> 
+        <DimensionsTrack /> 
+        <DimensionsQC />
+      </>
+    ),
+  },
+  {
+    value: "swivelTravel",
+    title: "선회주행",
+    component: (
+      <>
+        <Swivel />
+        <TravelHX />
+      </>
+    ),
+  },
+  {
+    value: "drawings",
+    title: "외관도",
+    component: (
+      <>
+        <AddDrawings />
+      </>
+    ),
+  },
+]; */
+
+/* 
 const allyProps = (index) => ({
   id: `simple-tab-${index}`,
   "aria-controls": `simple-tabpanel-${index}`,
 });
-
+ */
 const AddDrawings = (values) => {
   const [tabValue, setTabValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
+  const { control  } = useForm();
 
   return (
     <>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+           <div className="input-group mb-1">
+        <Paper style={{ padding: 16 }}>
+        <Controller
+          name="drawings.exterior"
+          control={control}
+          defaultValue=""
+          render={({ onChange, value }) => (
+            <TinyEditor onChange={onChange} value={value} />
+          )}
+        />
+
+{/* 
+        {({ input: { onChange, value } }) => (
+            <Editor
+              tinymceScriptSrc="/tinymce/tinymce.min.js"
+              value={value}
+              init={{ height: "960", resize: true, menubar: false }}
+              onEditorChange={(e) => onChange(e)}
+            />
+          )} */}
+{/* 
+        <Field name="drawings.exterior">
+          {({ input: { onChange, value } }) => (
+            <Editor
+              tinymceScriptSrc="/tinymce/tinymce.min.js"
+              value={value}
+              init={{ height: "960", resize: true, menubar: false }}
+              onEditorChange={(e) => onChange(e)}
+            />
+          )}
+        </Field>
+        <Tabs
+              allowScrollButtonsMobile
+              variant="scrollable"
+              scrollButtons="auto"
+              value={currentTab}
+              onChange={onChangeTab}
+            >
+              {DRAWING_TABS.map((tab) => (
+                <Tab
+                  disableRipple
+                  key={tab.value}
+                  value={tab.value}
+                  icon={tab.icon}
+                  label={tab.title}
+                />
+              ))}
+            </Tabs>
+            {DRAWING_TABS.map((tab) => {
+              const isMatched = tab.value === currentTab;
+              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+            })}
+ */}
+        </Paper>
+
+      </div>
+    {/*   <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={tabValue}
           onChange={handleChange}
@@ -175,7 +249,7 @@ const AddDrawings = (values) => {
       <DrawingAdditional />
       
 
-      </TabPanel>
+      </TabPanel> */}
     </>
   );
 };

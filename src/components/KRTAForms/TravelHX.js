@@ -1,23 +1,32 @@
-import { TextField } from "mui-rff";
-import {
-  AppBar,
+import React from "react";
+import {  
   Box,
-  Button,
-  FormGroup,
+  Card,
   Grid,
   InputAdornment,
-  Link,
   Paper,
-  Typography,
 } from "@mui/material";
+import { RHFTextField } from "../hook-form";
 
 const TravelHX = () => {
-  const formFields = [
-    // 주행속도
-    {
-      size: 2,
-      field: (
-        <TextField
+  
+
+  return (
+    <>
+       
+       <div className="input-group mb-1">
+        <Paper style={{ padding: 16 }}>
+          <Grid container alignItems="flex-start" spacing={2}>
+          <Card sx={{ p: 3 }}>
+            <Box
+              sx={{
+                display: 'grid',
+                columnGap: 2,
+                // rowGap: 2,
+                gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
+              }}
+            >
+                   <RHFTextField
           label="주행펌프 유량"
           name="travel.pump_displacement"
           margin="none"
@@ -28,13 +37,7 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-
-    {
-      size: 2,
-      field: (
-        <TextField
+        <RHFTextField
           label="주행모터 용적(1)"
           name="travel.TM_flow_1"
           margin="none"
@@ -45,12 +48,8 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="주행모터 용적(2)"
           name="travel.TM_flow_2"
           margin="none"
@@ -61,13 +60,7 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-
-    {
-      size: 2,
-      field: (
-        <TextField
+        <RHFTextField
           label="모터 용적 효율"
           name="travel.TM_mv"
           margin="none"
@@ -80,12 +73,8 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="스프로켓 반경"
           name="travel.sprocket_radius"
           margin="none"
@@ -94,12 +83,8 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end">㎜</InputAdornment>,
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="주행감속비"
           name="travel.reduc"
           margin="none"
@@ -108,17 +93,8 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end"></InputAdornment>,
           }}
         />
-      ),
-    },
-  ];
-
-  const formFields2 = [
-    // 견인력
-
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="주행펌프 압력"
           name="travel.pump_pressure"
           margin="none"
@@ -129,12 +105,8 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="견인력"
           name="travel.traction_force"
           margin="none"
@@ -143,12 +115,8 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end">㎏f</InputAdornment>,
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="모터 기계 효율"
           name="travel.TM_mt"
           margin="none"
@@ -161,12 +129,8 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="동력 전달 효율"
           name="travel.TM_r"
           margin="none"
@@ -179,12 +143,8 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="구동 점착 계수"
           name="travel.surface_drag"
           margin="none"
@@ -197,12 +157,8 @@ const TravelHX = () => {
             ),
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="주행 저항 계수"
           name="travel.drag"
           margin="none"
@@ -211,12 +167,8 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end">(η)</InputAdornment>,
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="지면마찰계수"
           name="travel.friction_surface"
           margin="none"
@@ -225,12 +177,8 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end"></InputAdornment>,
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="기준등판각도"
           name="travel.greadability_ref"
           margin="none"
@@ -239,12 +187,8 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end">°</InputAdornment>,
           }}
         />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
+      
+        <RHFTextField
           label="브레이크 토크"
           name="travel.brake_torque"
           margin="none"
@@ -253,65 +197,14 @@ const TravelHX = () => {
             endAdornment: <InputAdornment position="end">㎏m</InputAdornment>,
           }}
         />
-      ),
-    },
-  ];
+            </Box>
 
-
-  return (
-    <>
-      <div className="input-group mb-1">
-        <Paper style={{ padding: 16 }}>
-          <Grid container alignItems="flex-start" spacing={2}>
-            {formFields.map((item, idx) => (
-              <Grid item xs={item.size} key={idx}>
-                {item.field}
-              </Grid>
-            ))}
+            
+          </Card>
           </Grid>
         </Paper>
+
       </div>
-
-      <Grid container spacing={2}>
-
-      <Grid item xs={6}>
-          주행속도 관련
-          <Paper style={{ padding: 10 }}>
-            <FormGroup row>
-              {formFields.map((item, idx) => (
-                <Grid item xs={6} key={idx}>
-                  {item.field}
-                </Grid>
-              ))}
-            </FormGroup>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={6}>
-          등판 능력 관련
-          <Paper style={{ padding: 10 }}>
-            <FormGroup row>
-              {formFields2.map((item, idx) => (
-                <Grid item xs={6} key={idx}>
-                  {item.field}
-                </Grid>
-              ))}
-            </FormGroup>
-          </Paper>
-        </Grid>
-{/*         <Grid item xs={6}>
-          등판 주행 제동 능력 관련
-          <Paper style={{ padding: 10 }}>
-            <FormGroup row>
-              {formFieldsTravelSlope.map((item, idx) => (
-                <Grid item xs={6} key={idx}>
-                  {item.field}
-                </Grid>
-              ))}
-            </FormGroup>
-          </Paper>
-        </Grid> */}
-      </Grid>
     </>
   );
 };
