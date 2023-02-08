@@ -22,37 +22,9 @@ import Swivel from "@/components/KRTAForms/Swivel";
 import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
 import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
-import HEXCalc from "@/components/KRTAForms/HEXCalc";
+import {HEX_Calc} from "@/components/KRTAForms/HEXCalc2";
 
 // ----------------------------------------------------------------------
-
-let values = {
-  ECN: null,
-  attachments: { bucket_exca_capa: null },
-  undercarriage: { ground_clearance: null },
-engine: { engine_name: null },
-swivel: {
-  pump_flow: null,
-  
-},
-travel: {
-  pump_displacement: null,
-},
-drawings: {
-  exterior: null,
-},
-description: {
-  swing_reduction: null
-},
-COG: {
-  upperStructure_longitudinal: null
-},
-transport: {
-  transport_1: "본체",
-  transport_1_weight: null,
-
-}
-}
 
 export default function HEXEditForm({ isEdit = false, isChangeModel = false, currentModel, }) {
   const { push, query, pathname } = useRouter();
@@ -78,15 +50,15 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     formState: { isSubmitting },
   } = methods;
 
-  values = watch();
+  const values = watch();
   //  {values.attachments.bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500}
+  HEX_Calc(values)
   
   
   useEffect(() => {
     // HEXCalc(defaultValues);
     reset(defaultValues);
-    // setCalValue(values)
-      // setCalValue(values)
+    
                   
                   /* if (isChangeModel && currentModel) {
       reset(defaultValues);
@@ -200,23 +172,17 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
         </>
       ),
     },
-    /* {
-      value: 'friends',
-      component: <ProfileFriends friends={_userFriends} findFriends={findFriends} onFindFriends={handleFindFriends} />,
-    },
-    {
-      value: 'gallery',
-      icon: <Iconify icon={'ic:round-perm-media'} width={20} height={20} />,
-      component: <ProfileGallery gallery={_userGallery} />,
-    }, */
+    
   ];
 
+
+  
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <Card sx={{ p: 1 }}>
-            {HEXCalc(values)}
+            {/* {HEX_Calc(values)} */}
             <Box
               sx={{
                 // display: 'grid',
@@ -226,7 +192,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
               }}
               >
               <Summary />
-              { values.grossWeight_load }
+              { HEX_Calc.grossWeight }
             </Box>
             <Tabs
               allowScrollButtonsMobile

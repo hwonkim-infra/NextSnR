@@ -171,11 +171,14 @@ function HEXCalc (values) {
 
 
     return (
+  grossWeight ,
+//   grossWeight,
+        // grossWeight, 
         // (values._id = _id),
-        values.grossWeight = grossWeight,
-        values.grossWeight_load = grossWeight_load,
         // values.attachments.bucket_exca_capa = bucket_exca_capa,
         /* values.transport.transport_1_weight = transport_1_weight,
+        values.grossWeight = grossWeight,
+        values.grossWeight_load = grossWeight_load,
         (values.undercarriage.ground_Length = ground_Length),
         (values.undercarriage.ground_pressure = ground_pressure),
          
