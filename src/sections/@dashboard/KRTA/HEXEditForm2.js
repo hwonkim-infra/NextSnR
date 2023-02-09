@@ -29,37 +29,50 @@ import { Editor } from "@tinymce/tinymce-react";
 
 // ----------------------------------------------------------------------
 
+const defaultValues = {ECN: null,
+    engine: { engine_name: null },
+    undercarriage: { ground_clearance: null },
+    attachments: { bucket_struck: null },
+    swivel: {
+      pump_flow: null,
+      
+    },
+    travel: {
+      pump_displacement: null,
+    },
+    drawings: {
+      exterior: null,
+    },
+    description: {
+      swing_reduction: null
+    },
+    COG: {
+      upperStructure_longitudinal: null
+    },
+    transport: {
+      transport_1: "본체",
+      transport_1_weight: null,
+  
+    }};
+
+
 export default function HEXEditForm({ isEdit = false, isChangeModel = false, currentModel, }) {
   const { push, query, pathname } = useRouter();
-  
+  const { control, handleSubmit, setValue, watch } = useForm();
+
   const { currentTab, onChangeTab } = useTabs("dimensions");
   
-  const defaultValues = useMemo(() =>(HEXinit(currentModel)));
+//   const defaultValues = useMemo(() =>(HEXinit(currentModel)));
     
-  const methods = useForm({
-    ...defaultValues,
-  });
-
-  const {
-    reset,
-    watch,
-    control,
-    setValue,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
-
   const values = watch();
   HEXCalc(values)
   
-  
   useEffect(() => {
-    reset(defaultValues);
-                  
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, isChangeModel, currentModel]);
-  
-  
+    // Do your request here
+    setValue(defaultValues);
+  }, []);
+
+
 
   const onSubmit = (async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
@@ -185,8 +198,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
                 gridTemplateColumns: "repeat(8, 1fr)",
               }}
               >
-              <Summary />
-              {HEXCalc.grossWeight}
+              
               <Controller
             name="machine_grade"
             control={control}
@@ -208,27 +220,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
 
 
             </Box>
-            <Tabs
-              allowScrollButtonsMobile
-              variant="scrollable"
-              scrollButtons="auto"
-              value={currentTab}
-              onChange={onChangeTab}
-            >
-              {FORM_TABS.map((tab) => (
-                <Tab
-                  disableRipple
-                  key={tab.value}
-                  value={tab.value}
-                  icon={tab.icon}
-                  label={tab.title}
-                />
-              ))}
-            </Tabs>
-            {FORM_TABS.map((tab) => {
-              const isMatched = tab.value === currentTab;
-              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
-            })}
+        
 
             <Stack
               direction="row"

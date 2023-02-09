@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import DrawingAdditional from "./DrawingAdditional";
 import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
 import { Controller, useForm } from "react-hook-form";
+import RHFEditor from "@/components/hook-form/RHFEditor";
 
 
 /* const DRAWING_TABS = [
@@ -57,15 +58,34 @@ const AddDrawings = (values) => {
     <>
            <div className="input-group mb-1">
         <Paper style={{ padding: 16 }}>
-        <Controller
+        {/* <Controller
           name="drawings.exterior"
           control={control}
-          defaultValue=""
+          // defaultValue=""
           render={({ onChange, value }) => (
             <TinyEditor onChange={onChange} value={value} />
           )}
-        />
+        /> */}
 
+        {/* <RHFEditor name="machine_grade" /> */}
+
+        <Controller
+      name="content"
+      control={control}
+      defaultValue = {''}
+      render={({ onChange, value, }) => (
+        <Editor
+        tinymceScriptSrc="/tinymce/tinymce.min.js"
+          value={value}
+        init={{ selector: "textarea", height: "400", resize: true, menubar: false }}
+        onEditorChange={onChange}
+      />    
+
+
+      )}
+      />
+
+      
 {/* 
         {({ input: { onChange, value } }) => (
             <Editor
