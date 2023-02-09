@@ -29,13 +29,37 @@ import { Editor } from "@tinymce/tinymce-react";
 
 // ----------------------------------------------------------------------
 
+const defaultValues = {ECN: null,
+  engine: { engine_name: null },
+  undercarriage: { ground_clearance: null },
+  attachments: { bucket_struck: null },
+  swivel: {
+    pump_flow: null,
+    
+  },
+  travel: {
+    pump_displacement: null,
+  },
+  drawings: {
+    exterior: null,
+  },
+  description: {
+    swing_reduction: null
+  },
+  COG: {
+    upperStructure_longitudinal: null
+  },
+  transport: {
+    transport_1: "본체",
+    transport_1_weight: null,
+
+  }};
+
 export default function HEXEditForm({ isEdit = false, isChangeModel = false, currentModel, }) {
   const { push, query, pathname } = useRouter();
   
   const { currentTab, onChangeTab } = useTabs("dimensions");
-  
-  const defaultValues = useMemo(() =>(HEXinit(currentModel)));
-    
+
   const methods = useForm({
     ...defaultValues,
   });
@@ -50,6 +74,13 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   } = methods;
 
   const values = watch();
+
+
+  
+  
+  const defaultValues = useMemo(() =>(HEXinit(currentModel)));
+    
+
   HEXCalc(values)
   
   
@@ -188,7 +219,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
               <Summary />
               {HEXCalc.grossWeight}
               <Controller
-            name="machine_grade"
+            name="content"
             control={control}
             defaultValue={""}
             render={({ onChange, value }) => (

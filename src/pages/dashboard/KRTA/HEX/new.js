@@ -11,7 +11,7 @@ import Layout from '@/layouts';
 import Page from '@/components/Page';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 // sections
-import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm';
+import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm2';
 
 // ----------------------------------------------------------------------
 
