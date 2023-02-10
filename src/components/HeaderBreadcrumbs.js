@@ -35,7 +35,7 @@ export default function HeaderBreadcrumbs({ links, action, heading, moreLink = '
           </Link>
         ) : (
           moreLink.map((href) => (
-            <Link noWrap key={href} href={href} variant="body2" target="_blank" sx={{ display: 'table' }}>
+            <Link noWrap key={links.name} href={href} variant="body2" target="_blank" sx={{ display: 'table' }}>
               {href}
             </Link>
           ))

@@ -26,6 +26,7 @@ import {HEXCalc, HEXSave} from "@/components/KRTAForms/HEXCalc2";
 import TravelHX from "@/components/KRTAForms/TravelHX";
 import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
 import { Editor } from "@tinymce/tinymce-react";
+import TinyEditor from "./TinyEditor";
 
 // ----------------------------------------------------------------------
 
@@ -60,9 +61,8 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   
   const { currentTab, onChangeTab } = useTabs("dimensions");
 
-  const methods = useForm({
-    ...defaultValues,
-  });
+  // const methods = useForm({ ...defaultValues, });
+  const methods = useForm();
 
   const {
     reset,
@@ -218,24 +218,15 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
               >
               <Summary />
               {HEXCalc.grossWeight}
-              <Controller
-            name="content"
-            control={control}
-            defaultValue={""}
-            render={({ onChange, value }) => (
-              <Editor
-                tinymceScriptSrc="/tinymce/tinymce.min.js"
-                value={value}
-                init={{
-                  selector: "textarea",
-                  height: "400",
-                  resize: true,
-                  menubar: false,
-                }}
-                onEditorChange={onChange}
-              />
-            )}
-          />
+              
+        <Controller
+          name="drawings.exterior"
+          control={control}
+          defaultValue=""
+          render={({field: {onChange, value} }) => (
+            <TinyEditor onChange={onChange} value={value} />
+          )}
+        />
 
 
             </Box>

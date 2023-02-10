@@ -171,13 +171,10 @@ function HEXCalc (values) {
 
 
     return (
-  grossWeight ,
-//   grossWeight,
-        // grossWeight, 
-        // (values._id = _id),
-        // values.attachments.bucket_exca_capa = bucket_exca_capa,
-        /* values.transport.transport_1_weight = transport_1_weight,
+  
+        values.transport.transport_1_weight = transport_1_weight,
         values.grossWeight = grossWeight,
+        values.attachments.bucket_exca_capa = bucket_exca_capa,
         values.grossWeight_load = grossWeight_load,
         (values.undercarriage.ground_Length = ground_Length),
         (values.undercarriage.ground_pressure = ground_pressure),
@@ -199,7 +196,7 @@ function HEXCalc (values) {
         (values.travel.greadability = greadability),
         (values.COG.COG_longitudinal = COG_longitudinal),
         (values.COG.COG_lateral = COG_lateral),
-        (values.COG.COG_vertical = COG_vertical), */
+        (values.COG.COG_vertical = COG_vertical), 
         ""
     );
 };

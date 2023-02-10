@@ -1,9 +1,30 @@
-import React from 'react'
+import React, { useEffect } from "react";
+
+// next
+import { useRouter } from "next/router";
+
+// utils
+import useTabs from "@/hooks/useTabs";
+
 import { Controller, useForm } from "react-hook-form";
 // import { FormProvider, RHFTextField } from "@/components/hook-form";
 import TinyEditor from "./TinyEditor";
 import Summary from "@/components/KRTAForms/Summary";
-import { TextField } from '@mui/material';
+import { Box, Button, Card, Grid, Stack, Tab, Tabs } from "@mui/material";
+import { TextField } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { LoadingButton } from "@mui/lab";
+
+
+import HEXCalc from "@/components/KRTAForms/HEXCalc";
+import Dimensions from "@/components/KRTAForms/Dimensions";
+import Swivel from "@/components/KRTAForms/Swivel";
+import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
+import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+import TravelHX from "@/components/KRTAForms/TravelHX";
+import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
+
 
 const defaultValues = {
   ECN: null,
@@ -12,7 +33,6 @@ const defaultValues = {
   attachments: { bucket_struck: null },
   swivel: {
     pump_flow: null,
-    
   },
   travel: {
     pump_displacement: null,
@@ -21,92 +41,243 @@ const defaultValues = {
     exterior: null,
   },
   description: {
-    swing_reduction: null
+    swing_reduction: null,
   },
   COG: {
-    upperStructure_longitudinal: null
+    upperStructure_longitudinal: null,
   },
   transport: {
     transport_1: "본체",
     transport_1_weight: null,
+  },
+};
 
+const HEXEditForm = ({
+  isEdit = false,
+  isChangeModel = false,
+  currentModel,
+}) => {
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { isSubmitting },
+  } = useForm({
+    defaultValues: defaultValues,
+  });
+  const { push, query, pathname } = useRouter();
+  const { currentTab, onChangeTab } = useTabs("dimensions");
+
+  const values = watch();
+  
+
+  useEffect(() => {
+    reset(currentModel);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEdit, isChangeModel, currentModel]);
+
+  const onSubmit = async (values) => {
+    // if (Object.keys(errors).length) return setErrors(errors);
+    // HEXSave({values, HEXCalc})
+
+    if (isChangeModel) {
+      await createHEXChange(values);
+      await push("/dashboard/KRTA/HEX");
+    } else if (isEdit) {
+      await updateHEX(values);
+    } else {
+      await createHEX(values);
+      await push("/dashboard/KRTA/HEX");
+    }
+  };
+
+  const updateHEX = async (values) => {
+    try {
+      await fetch(`http://localhost:3000/api/HEX/${query.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createHEX = async (values) => {
+    values._id = values.model_name + "_" + Date.now();
+    try {
+      await fetch("http://localhost:3000/api/HEX/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createHEXChange = async (values) => {
+    values.origin = values._id;
+    delete values._id;
+    values._id = values.model_name + "_" + Date.now();
+    try {
+      await fetch("http://localhost:3000/api/HEX/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // const removeHEX = async () => {
+  async function removeHEX() {
+    const { id } = query;
+    if (window.confirm("이 모델을 삭제하시겠습니까")) {
+      try {
+        await fetch(`http://localhost:3000/api/HEX/${id}`, {
+          method: "DELETE",
+        });
+        await push("/dashboard/KRTA/HEX");
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
-}
 
-const RHFTxtField = ({ name, label, ...other }) => {
-  // const { control } = useFormContext();
-  const { control } = useForm({});
+  
+  const FORM_TABS = [
+    {
+      value: "dimensions",
+      title: "기본제원",
+      component: (
+        <>
+          <Dimensions control={control} /> 
+          <DimensionsTrack /> 
+          <DimensionsQC />
+        </>
+      ),
+    },
+    {
+      value: "swivelTravel",
+      title: "선회주행",
+      component: (
+        <>
+          <Swivel />
+          <TravelHX />
+        </>
+      ),
+    },
+    {
+      value: "drawings",
+      title: "외관도",
+      component: (
+        <>
+          <AddDrawings control={control} />
+        </>
+      ),
+    },
+  ];
+
 
   return (
-    <Controller
-      name={name}
-      control={control}
-      defaultValue = {''}
-      render={({ field, fieldState: { error } }) => (
-        <TextField
-        label={label}
-          {...field}
-          error={!!error}
-          helperText={error?.message}
-          // {...other}
-        />
-      )}
-    />
-  );
-}
-
-
-const HEXEditForm = () => {
-  const { control, handleSubmit, setValue, watch } = useForm({defaultValues: defaultValues});
-  const values = watch()
-  const onSubmit = (data) => console.log(data);
-  return (
-    <div >
+    <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-              <Summary />
-              <Controller
-      name={"attachments.quick_coupler_weight_1"}
-      control={control}
-      defaultValue = {''}
-      render={({ field, fieldState: { error }, }) => (
-        <TextField
-        label="퀵커플러"
-          {...field}
-          error={!!error}
-          helperText={error?.message}
-          // {...other}
-        />
-      )}
-    />
-    <Controller
-      name={"rear_swing_radius"}
-      control={control}
-      defaultValue = {''}
-      render={({ field, fieldState: { error }, }) => (
-        <TextField
-        label="선회반경"
-          {...field}
-          error={!!error}
-          helperText={error?.message}
-          // {...other}
-        />
-      )}
-    />
-              <RHFTxtField label="선회반경" name={"rear_swing_radius"} />
-        <Controller
-          name="drawings.exterior"
-          control={control}
-          defaultValue=""
-          render={({field: {onChange, value} }) => (
-            <TinyEditor onChange={onChange} value={value} />
-          )}
-        />
-        <input type="submit" />
-        {JSON.stringify(values,0,2)}
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={8}>
+            <Card sx={{ p: 1 }}>
+              <Box
+                sx={{
+                  // display: 'grid',
+                  columnGap: 2,
+                  rowGap: 3,
+                  gridTemplateColumns: "repeat(8, 1fr)",
+                }}
+              >
+                {HEXCalc(values)}
+                <Summary control={control} />
+                
+                
 
+                {/* <Controller
+                  render={({ field }) => <TextField {...field} />}
+                  name="TextField"
+                  control={control}
+                /> */}
+                {/* <Controller
+                  name="drawings.exterior"
+                  control={control}
+                  defaultValue=""
+                  render={({ field: { onChange, value } }) => (
+                    <TinyEditor onChange={onChange} value={value} />
+                  )}
+                /> */}
+              </Box>
+              <Tabs
+              allowScrollButtonsMobile
+              variant="scrollable"
+              scrollButtons="auto"
+              value={currentTab}
+              onChange={onChangeTab}
+            >
+              {FORM_TABS.map((tab) => (
+                <Tab
+                  disableRipple
+                  key={tab.value}
+                  value={tab.value}
+                  icon={tab.icon}
+                  label={tab.title}
+                />
+              ))}
+            </Tabs>
+            {FORM_TABS.map((tab) => {
+              const isMatched = tab.value === currentTab;
+              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+            })}
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="flex-end"
+                sx={{ mt: 3 }}
+              >
+                <LoadingButton
+                  type="submit"
+                  variant="contained"
+                  loading={isSubmitting}
+                >
+                  {!isEdit ? "Create Model" : "Save Changes"}
+                </LoadingButton>
+                <Button
+                  variant="outlined"
+                  startIcon={<DeleteIcon />}
+                  onClick={removeHEX}
+                >
+                  삭제
+                </Button>
+              </Stack>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Card sx={{ p: 1 }}>
+              Preview
+              {/* <SpecSheet values={values} /> */}
+              {JSON.stringify(values, 0, 2)}
+            </Card>
+          </Grid>
+        </Grid>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default HEXEditForm
+export default HEXEditForm;

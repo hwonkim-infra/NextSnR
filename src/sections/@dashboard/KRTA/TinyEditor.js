@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { Editor } from "@tinymce/tinymce-react";
 
 function TinyEditor ({ onChange, value }) {
-  const [content, setContent] = useState("")
-    // const handleEditorChange = (_content, _editor) => { setContent(_content) }
   const handleEditorChange = (editor) => onChange(editor);
   // console.log(value)
     

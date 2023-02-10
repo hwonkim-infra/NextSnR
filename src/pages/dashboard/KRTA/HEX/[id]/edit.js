@@ -9,7 +9,7 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm';
+import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm2';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------

@@ -1,91 +1,100 @@
+import React, { useState } from "react";
+// utils
+import useTabs from "@/hooks/useTabs";
+
 import { Box, Paper, Tab, Tabs, Typography } from "@mui/material";
 import { Editor } from "@tinymce/tinymce-react";
-import React, { useState } from "react";
 import DrawingAdditional from "./DrawingAdditional";
 import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import RHFEditor from "@/components/hook-form/RHFEditor";
 
 
-/* const DRAWING_TABS = [
-  {
-    value: "dimensions",
-    title: "기본제원",
-    component: (
-      <>
-        <Dimensions /> 
-        <DimensionsTrack /> 
-        <DimensionsQC />
-      </>
-    ),
-  },
-  {
-    value: "swivelTravel",
-    title: "선회주행",
-    component: (
-      <>
-        <Swivel />
-        <TravelHX />
-      </>
-    ),
-  },
-  {
-    value: "drawings",
-    title: "외관도",
-    component: (
-      <>
-        <AddDrawings />
-      </>
-    ),
-  },
-]; */
-
-/* 
-const allyProps = (index) => ({
-  id: `simple-tab-${index}`,
-  "aria-controls": `simple-tabpanel-${index}`,
-});
- */
-const AddDrawings = (values) => {
+const AddDrawings = ({control}) => {
   const [tabValue, setTabValue] = useState(0);
+  const { currentTab, onChangeTab } = useTabs("exterior");
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
-  const { control  } = useForm();
-
+  const DRAWINGS_TABS = [
+    {
+      value: "exterior",
+      title: "외관도",
+      component: (
+        <>
+          <Controller
+                  name="drawings.exterior"
+                  control={control}
+                  defaultValue=""
+                  render={({ field: { onChange, value } }) => (
+                    <TinyEditor onChange={onChange} value={value} />
+                  )}
+                />
+        </>
+      ),
+    },
+    {
+      value: "boom",
+      title: "붐",
+      component: (
+        <>
+          <Controller
+                  name="drawings.boom"
+                  control={control}
+                  defaultValue=""
+                  render={({ field: { onChange, value } }) => (
+                    <TinyEditor onChange={onChange} value={value} />
+                  )}
+                />
+        </>
+      ),
+    },
+    {
+      value: "arm",
+      title: "암",
+      component: (
+        <>
+          <Controller
+                  name="drawings.arm"
+                  control={control}
+                  defaultValue=""
+                  render={({ field: { onChange, value } }) => (
+                    <TinyEditor onChange={onChange} value={value} />
+                  )}
+                />
+        </>
+      ),
+    },
+  ];
   return (
     <>
            <div className="input-group mb-1">
         <Paper style={{ padding: 16 }}>
-        {/* <Controller
-          name="drawings.exterior"
-          control={control}
-          // defaultValue=""
-          render={({ onChange, value }) => (
-            <TinyEditor onChange={onChange} value={value} />
-          )}
-        /> */}
+        
+        
 
-        {/* <RHFEditor name="machine_grade" /> */}
-
-        <Controller
-      name="content"
-      control={control}
-      defaultValue = {''}
-      render={({ onChange, value, }) => (
-        <Editor
-        tinymceScriptSrc="/tinymce/tinymce.min.js"
-          value={value}
-        init={{ selector: "textarea", height: "400", resize: true, menubar: false }}
-        onEditorChange={onChange}
-      />    
-
-
-      )}
-      />
-
-      
+<Tabs
+              allowScrollButtonsMobile
+              variant="scrollable"
+              scrollButtons="auto"
+              value={currentTab}
+              onChange={onChangeTab}
+            >
+              {DRAWINGS_TABS.map((tab) => (
+                <Tab
+                  disableRipple
+                  key={tab.value}
+                  value={tab.value}
+                  icon={tab.icon}
+                  label={tab.title}
+                />
+              ))}
+            </Tabs>
+            {DRAWINGS_TABS.map((tab) => {
+              const isMatched = tab.value === currentTab;
+              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+            })}
 {/* 
         {({ input: { onChange, value } }) => (
             <Editor
