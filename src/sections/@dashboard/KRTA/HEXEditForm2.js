@@ -24,6 +24,7 @@ import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
 import TravelHX from "@/components/KRTAForms/TravelHX";
 import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
+import EngineFields from "@/components/KRTAForms/EngineFields";
 
 
 const defaultValues = {
@@ -163,8 +164,8 @@ const HEXEditForm = ({
       component: (
         <>
           <Dimensions control={control} /> 
-          <DimensionsTrack /> 
-          <DimensionsQC />
+          <DimensionsTrack control={control} /> 
+          <DimensionsQC control={control} />
         </>
       ),
     },
@@ -173,17 +174,26 @@ const HEXEditForm = ({
       title: "선회주행",
       component: (
         <>
-          <Swivel />
-          <TravelHX />
+          <Swivel control={control} />
+          <TravelHX control={control} />
         </>
       ),
     },
     {
       value: "drawings",
-      title: "외관도",
+      title: "도면",
       component: (
         <>
           <AddDrawings control={control} />
+        </>
+      ),
+    },
+    {
+      value: "engine",
+      title: "엔진 사양",
+      component: (
+        <>
+          <EngineFields control={control} />
         </>
       ),
     },

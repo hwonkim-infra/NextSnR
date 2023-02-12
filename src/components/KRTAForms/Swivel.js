@@ -1,16 +1,21 @@
-import React from "react";
-import {  
+import {
   Box,
   Card,
   Grid,
   InputAdornment,
   Paper,
+  TextField,
 } from "@mui/material";
-import { RHFTextField } from "../hook-form";
+import { Controller } from "react-hook-form";
 
-const Swivel = () => {
+const Swivel = ({ control }) => {
 
-
+  const InputForms = [
+    { label: "선회펌프 유량", name: "swivel.pump_flow", type: "number", unit: "l/min" },
+    { label: "선회모터 용적", name: "swivel.motor_displacement", type: "number", unit: "cc/rev" },
+    { label: "선회 감속비", name: "swivel.reduction", type: "number", unit: "" },
+    { label: "선회모터 용적 효율", name: "swivel.motor_eff", type: "number", unit: "" },    
+  ];
   return (
     <>
       
@@ -26,10 +31,27 @@ const Swivel = () => {
                 gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
               }}
             >
-              <RHFTextField label="선회펌프 유량" name="swivel.pump_flow" type="number"  InputProps={{endAdornment: <InputAdornment position="end">l/min"</InputAdornment>}} />
-              <RHFTextField label="선회모터 용적" name="swivel.motor_displacement" type="number"  InputProps={{endAdornment: <InputAdornment position="end">cc/rev</InputAdornment>}} />
-              <RHFTextField label="선회 감속비" name="swivel.reduction" type="number"  InputProps={{endAdornment: <InputAdornment position="end"></InputAdornment>}} />
-              <RHFTextField label="선회모터 용적 효율" name="swivel.motor_eff" type="number"  InputProps={{endAdornment: <InputAdornment position="end"></InputAdornment>}} />
+               {InputForms.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField
+                        label={fieldData.label}
+                        {...field}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {fieldData.unit}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
               
             </Box>
 

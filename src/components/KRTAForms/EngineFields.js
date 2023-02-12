@@ -1,42 +1,22 @@
 import {
-  FormGroup,
+  Box,
+  Card,
   Grid,
   InputAdornment,
   Paper,
+  TextField,
 } from "@mui/material";
-import { TextField } from "mui-rff";
-import React from "react";
+import { Controller } from "react-hook-form";
 
-const EngineFields = () => {
-  const formFields = [
-    {
-      size: 2,
-      field: <TextField label="엔진형식" name="engine.engine_name" margin="none" InputProps={{endAdornment: <InputAdornment position="end"> </InputAdornment>}} />,
-    },
-    {
-      size: 2,
-      field: <TextField label="엔진제작사" name="engine.supplier" margin="none" InputProps={{endAdornment: <InputAdornment position="end"></InputAdornment>}} />,
-    },    
-    {
-      size: 2,
-      field: <TextField label="출력(정격)" name="engine.power" margin="none" type="number" InputProps={{endAdornment: <InputAdornment position="end">ps</InputAdornment>}} />,
-    },
-    {
-      size: 2,
-      field: <TextField label="" name="engine.nominal_rev" margin="none" type="number"  InputProps={{endAdornment: <InputAdornment position="end">rpm</InputAdornment>}} />,
-    },    
-    {
-      size: 2,
-      field: <TextField label="최대 토크" name="engine.torque" margin="none" type="number"  InputProps={{endAdornment: <InputAdornment position="end">kgf m</InputAdornment>}} />,
-    },    {
-      size: 2,
-      field: <TextField label="" name="engine.torque_rev" margin="none" type="number"  InputProps={{endAdornment: <InputAdornment position="end">rpm</InputAdornment>}} />,
-    }, 
-    {
-      size: 2,
-      field: <TextField label="" name="engine.cylinder" margin="none" type="number"  InputProps={{endAdornment: <InputAdornment position="end">기통</InputAdornment>}} />,
-    },   
-    
+const EngineFields = ({ control }) => {
+  const InputForms = [
+    { label: "엔진형식", name: "engine.engine_name", type: "", unit: "" },
+    { label: "엔진제작사", name: "engine.supplier", type: "", unit: "" },
+    { label: "출력(정격)", name: "engine.power", type: "number", unit: "ps" },
+    { label: "", name: "engine.nominal_rev", type: "number", unit: "rpm" },
+    { label: "최대 토크", name: "engine.torque", type: "number", unit: "kgf m" },
+    { label: "", name: "engine.torque_rev", type: "number", unit: "rpm" },
+    { label: "", name: "engine.cylinder", type: "number", unit: "기통" },
   ];
   
     return (
@@ -44,25 +24,51 @@ const EngineFields = () => {
 
 
 <div className="input-group mb-1">
-      <Paper style={{ padding: 16 }}>
-        <Grid container /* alignItems="flex-start" */ spacing={2}>
-          <Grid container item xs={6} spacing={2} >
+        <Paper style={{ padding: 4 }}>
+          <Grid container alignItems="flex-start" spacing={2}>
+          <Card sx={{ p: 3 }}>
+            <Box
+              sx={{
+                display: 'grid',
+                // columnGap: 2,
+                // rowGap: 2,
+                gridTemplateColumns: '2fr 2fr',
+                // gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
+              }}
+            >
+      {InputForms.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField
+                        label={fieldData.label}
+                        {...field}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {fieldData.unit}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
+               
+              
+            </Box>
 
-          <FormGroup row>
-
-          {formFields.map((item, idx) => (
-            <Grid item xs={6} key={idx}>
-              {item.field}
-            </Grid>
-          ))}
-        </FormGroup>
+            
+          </Card>
           </Grid>
+        </Paper>
 
-
-        </Grid>
-      </Paper>
 
     </div>
+
     </>
     )
 };

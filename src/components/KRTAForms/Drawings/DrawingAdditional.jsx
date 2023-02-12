@@ -1,58 +1,67 @@
-import { Button, Grid, Paper, } from '@mui/material'
-import { TextField } from "mui-rff";
-import React from 'react'
-import { Field } from 'react-final-form'
-import { FieldArray } from 'react-final-form-arrays'
+import { Button, Grid, Paper } from "@mui/material";
+import React from "react";
+// import { FieldArray } from 'react-final-form-arrays'
+// import FieldArray from "./fieldArray";
 import { Editor } from "@tinymce/tinymce-react";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { useFieldArray, useForm } from "react-hook-form";
+import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
 
+const DrawingAdditional = ({control}) => {
+  const { register, handleSubmit, getValues, errors, reset, setValue } =
+    useForm({
+      // defaultValues
+    });
 
-const DrawingAdditional = () => {
+  const { fields, append, remove, prepend } = useFieldArray({  
+    name: "test",
+  });
+
   return (
-              <FieldArray name="appendix">
-          {({ fields }) => (
-            <div>
-              <Paper elevation={2} style={{ padding: "5px" }}>
-              {fields.map((name, index) => (
-                <div key={name}>
-                            <Grid container alignItems="flex-start" spacing={2}>
-                            <Grid item xs={11}>
+    <>
+      <ul>
+        {fields.map((item, index) => {
+          return (
+            <li key={item.id}>
+              <input {...register(`test.${index}.name`)} />
+              <Controller
+            control={control}
+            name={`test.${index}.lastName`}
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
 
-                  <TextField name={`${name}.subItem`} label="자료 제목" />
-                </Grid>
-                <Grid item xs={1}
-                  // style={{ cursor: "pointer" }}
-                >
-                  <DeleteForeverIcon fontSize="large" style={{ cursor: "pointer" }} onClick={() => fields.remove(index)} />                  
-                </Grid>
-                  </Grid>
+              <button type="button" onClick={() => remove(index)}>
+                Delete
+              </button>
+            </li>
+          );
+        })}
+      </ul>
 
-                  <Field name={`${name}.subDrawing`}>
-                  {({ input: { onChange, value } }) => (
-                    <Editor
-                      tinymceScriptSrc="/tinymce/tinymce.min.js"
-                      value={value + ""}
-                      init={{ height: "320", resize: true, menubar: false }}
-                      onEditorChange={(e) => onChange(e)}
-                    />
-                  )}
-                </Field>
+      <section>
+        <button
+          type="button"
+          onClick={() => {
+            append({ name: "append" });
+          }}
+        >
+          append
+        </button>
 
-                </div>
-              ))}
-              </Paper>
-              
-              <Button
-                  variant="outlined"
-                  size="small"
-                onClick={() => fields.push({subItem: '', subDrawing: ''})}
-                >
-                  도면 추가
-                </Button>
-            </div>
-          )}
-        </FieldArray>
-  )
-}
+        <button
+          type="button"
+          onClick={() => {
+            prepend({ name: "append" });
+          }}
+        >
+          prepend
+        </button>
+      </section>
 
-export default DrawingAdditional
+    </>
+  );
+};
+
+export default DrawingAdditional;

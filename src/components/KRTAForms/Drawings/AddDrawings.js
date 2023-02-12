@@ -2,21 +2,32 @@ import React, { useState } from "react";
 // utils
 import useTabs from "@/hooks/useTabs";
 
-import { Box, Paper, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Paper, Tab, Tabs, Button } from "@mui/material";
+import Iconify from '@/components/Iconify';
+
+
 import { Editor } from "@tinymce/tinymce-react";
 import DrawingAdditional from "./DrawingAdditional";
 import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
-import { Controller } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import RHFEditor from "@/components/hook-form/RHFEditor";
 
-
-const AddDrawings = ({control}) => {
+const AddDrawings = ({ control }) => {
   const [tabValue, setTabValue] = useState(0);
   const { currentTab, onChangeTab } = useTabs("exterior");
 
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  const { register } = useForm({
+    // defaultValues
+  });
+  const { fields, append, remove, prepend } = useFieldArray({
+    control,
+    name: "appendix",
+  });
+
   const DRAWINGS_TABS = [
     {
       value: "exterior",
@@ -24,13 +35,13 @@ const AddDrawings = ({control}) => {
       component: (
         <>
           <Controller
-                  name="drawings.exterior"
-                  control={control}
-                  defaultValue=""
-                  render={({ field: { onChange, value } }) => (
-                    <TinyEditor onChange={onChange} value={value} />
-                  )}
-                />
+            name="drawings.exterior"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
         </>
       ),
     },
@@ -40,13 +51,13 @@ const AddDrawings = ({control}) => {
       component: (
         <>
           <Controller
-                  name="drawings.boom"
-                  control={control}
-                  defaultValue=""
-                  render={({ field: { onChange, value } }) => (
-                    <TinyEditor onChange={onChange} value={value} />
-                  )}
-                />
+            name="drawings.boom"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
         </>
       ),
     },
@@ -56,46 +67,112 @@ const AddDrawings = ({control}) => {
       component: (
         <>
           <Controller
-                  name="drawings.arm"
-                  control={control}
-                  defaultValue=""
-                  render={({ field: { onChange, value } }) => (
-                    <TinyEditor onChange={onChange} value={value} />
-                  )}
-                />
+            name="drawings.arm"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
+        </>
+      ),
+    },
+    {
+      value: "ETC",
+      title: "기타",
+      component: (
+        <>
+          <ul>
+            {fields.map((item, index) => {
+              return (
+                <li key={item.id}>
+                  {/* <input
+                    {...register(`appendix.${index}.subItem`, {
+                      required: true,
+                    })}
+                  /> */}
+                  
+            <Button size="small" startIcon={<Iconify icon="eva:plus-fill" />} onClick={() => {
+                prepend({});
+              }} sx={{ flexShrink: 0 }}>
+          Add Previous Item
+        </Button>
+                  <Controller
+                    render={({ field }) => <input {...field} />}
+                    name={`appendix.${index}.subItem`}
+                    control={control}
+                  />
+<Button
+              size="small"
+              color="error"
+              startIcon={<Iconify icon="eva:trash-2-outline" />}
+              onClick={() => remove(index)}
+            >
+              Remove
+            </Button>
+                  <Controller
+                    control={control}
+                    name={`appendix.${index}.subDrawing`}
+                    render={({ field: { onChange, value } }) => (
+                      <>
+                        <TinyEditor onChange={onChange} value={value} />
+                      </>
+                    )}
+                  />
+
+                  
+                </li>
+              );
+            })}
+          </ul>
+
+          <section>
+            
+            <Button size="small" startIcon={<Iconify icon="eva:plus-fill" />} onClick={() => {
+                append({});
+              }} sx={{ flexShrink: 0 }}>
+          Add Next Item
+        </Button>
+
+            <button
+              type="button"
+              onClick={() => {
+                prepend({});
+              }}
+            >
+              prepend
+            </button>
+          </section>
         </>
       ),
     },
   ];
   return (
     <>
-           <div className="input-group mb-1">
+      <div className="input-group mb-1">
         <Paper style={{ padding: 16 }}>
-        
-        
-
-<Tabs
-              allowScrollButtonsMobile
-              variant="scrollable"
-              scrollButtons="auto"
-              value={currentTab}
-              onChange={onChangeTab}
-            >
-              {DRAWINGS_TABS.map((tab) => (
-                <Tab
-                  disableRipple
-                  key={tab.value}
-                  value={tab.value}
-                  icon={tab.icon}
-                  label={tab.title}
-                />
-              ))}
-            </Tabs>
-            {DRAWINGS_TABS.map((tab) => {
-              const isMatched = tab.value === currentTab;
-              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
-            })}
-{/* 
+          <Tabs
+            allowScrollButtonsMobile
+            variant="scrollable"
+            scrollButtons="auto"
+            value={currentTab}
+            onChange={onChangeTab}
+          >
+            {DRAWINGS_TABS.map((tab) => (
+              <Tab
+                disableRipple
+                key={tab.value}
+                value={tab.value}
+                icon={tab.icon}
+                label={tab.title}
+              />
+            ))}
+          </Tabs>
+          {DRAWINGS_TABS.map((tab) => {
+            const isMatched = tab.value === currentTab;
+            return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+          })}
+          {/* 
         {({ input: { onChange, value } }) => (
             <Editor
               tinymceScriptSrc="/tinymce/tinymce.min.js"
@@ -104,7 +181,7 @@ const AddDrawings = ({control}) => {
               onEditorChange={(e) => onChange(e)}
             />
           )} */}
-{/* 
+          {/* 
         <Field name="drawings.exterior">
           {({ input: { onChange, value } }) => (
             <Editor
@@ -138,9 +215,8 @@ const AddDrawings = ({control}) => {
             })}
  */}
         </Paper>
-
       </div>
-    {/*   <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      {/*   <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={tabValue}
           onChange={handleChange}

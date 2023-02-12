@@ -1,15 +1,28 @@
-import React from "react";
-import {  
+import {
   Box,
   Card,
   Grid,
   InputAdornment,
   Paper,
+  TextField,
 } from "@mui/material";
-import { RHFTextField } from "../hook-form";
+import { Controller } from "react-hook-form";
 
-const DimensionsQC = () => {
-  
+const DimensionsQC = ({ control }) => {
+  const InputForms = [
+    { label: "퀵커플러(1)", name: "attachments.quick_coupler_1", type: "number", unit: "" },
+    { label: "커플러 중량", name: "attachments.quick_coupler_weight_1", type: "number", unit: "㎏" },
+    { label: "퀵커플러(2)", name: "attachments.quick_coupler_2", type: "number", unit: "" },
+    { label: "커플러 중량", name: "attachments.quick_coupler_weight_2", type: "number", unit: "㎏" },
+    { label: "높이 woQC", name: "overall_height_woQC", type: "number", unit: "㎜" },
+    { label: "길이 woQC", name: "overall_length_woQC", type: "number", unit: "㎜" },
+    { label: "최대굴착반경", name: "attachments.digging_reach", type: "number", unit: "㎜" },
+    { label: "최대굴착반경 woQC", name: "attachments.digging_reach_woqc", type: "number", unit: "㎜" },
+    { label: "최대굴착깊이", name: "attachments.digging_depth", type: "number", unit: "㎜" },
+    { label: "최대굴착깊이 woQC", name: "attachments.digging_depth_woqc", type: "number", unit: "㎜" },
+    { label: "최대덤프높이", name: "attachments.loading_height", type: "number", unit: "㎜" },
+    { label: "최대덤프높이 woQC", name: "attachments.loading_height_woqc", type: "number", unit: "㎜" },
+  ];
 
   return (
     <>
@@ -25,19 +38,27 @@ const DimensionsQC = () => {
                 gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
               }}
             >
-        <RHFTextField label="퀵커플러(1)" name="attachments.quick_coupler_1" margin="none" InputProps={{ endAdornment: <InputAdornment position="end"> </InputAdornment>, }} />
-        <RHFTextField label="커플러 중량" name="attachments.quick_coupler_weight_1" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎏</InputAdornment>, }} />
-        <RHFTextField label="퀵커플러(2)" name="attachments.quick_coupler_2" margin="none" InputProps={{ endAdornment: <InputAdornment position="end"></InputAdornment>, }} />
-        <RHFTextField label="커플러 중량" name="attachments.quick_coupler_weight_2" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎏</InputAdornment>, }} />
-        <RHFTextField label="높이 woQC" name="overall_height_woQC" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="길이 woQC" name="overall_length_woQC" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="최대굴착반경" name="attachments.digging_reach" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="최대굴착반경 woQC" name="attachments.digging_reach_woqc" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="최대굴착깊이" name="attachments.digging_depth" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="최대굴착깊이 woQC" name="attachments.digging_depth_woqc" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="최대덤프높이" name="attachments.loading_height" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-        <RHFTextField label="최대덤프높이 woQC" name="attachments.loading_height_woqc" margin="none" type="number" InputProps={{ endAdornment: <InputAdornment position="end">㎜</InputAdornment>, }} />
-               
+       {InputForms.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField
+                        label={fieldData.label}
+                        {...field}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {fieldData.unit}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
                
               
             </Box>
