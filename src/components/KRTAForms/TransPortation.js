@@ -1,251 +1,111 @@
-import { TextField } from "mui-rff";
 import {
-  FormGroup,
+  Box,
+  Button,
+  Card,
   Grid,
   InputAdornment,
   Paper,
+  TextField,
 } from "@mui/material";
+import Iconify from "@/components/Iconify";
+import { Controller, useFieldArray } from "react-hook-form";
 
-const TransPortation = (values) => {
-    // const transportation_1_weight = values.operating_weight - values.transportation.transportation_2_weight;
+const TransPortation = ({control}) => {
     
-    const formFields = [
-    {
-      size: 8,
-      field: (
-        <TextField
-          label="분해수송 (1)"
-          name="transport.transport_1"
-          margin="none"
-          placeholder="본체"
-          InputProps={{
-            endAdornment: <InputAdornment position="end"></InputAdornment>,
-          }}
-        />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
-          label="분해수송 높이"
-          name="transport.transport_1_height"
-          margin="none"
-          type="number"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">m</InputAdornment>,
-          }}
-        />
-      ),
-    },
-    {
-      size: 2,
-      field: (
-        <TextField
-          label="분해수송 중량"
-          name="transport.transport_1_weight"
-          margin="none"
-          type="number"
-          InputProps={{
-            endAdornment: <InputAdornment position="end">㎏</InputAdornment>,
-          }}
-          disabled
-        />
-      ),
-    },
-    {
-        size: 8,
-        field: (
-          <TextField
-            label="분해수송(2)"
-            name="transport.transport_2"
-            margin="none"
-            InputProps={{
-              endAdornment: <InputAdornment position="end"></InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 높이"
-            name="transport.transport_2_height"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">m</InputAdornment>,
-            }}
-            
-          />
-        ),
-      },
-  
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 중량"
-            name="transport.transport_2_weight"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">㎏</InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 8,
-        field: (
-          <TextField
-            label="분해수송(3)"
-            name="transport.transport_3"
-            margin="none"
-            InputProps={{
-              endAdornment: <InputAdornment position="end"></InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 높이"
-            name="transport.transport_3_height"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">m</InputAdornment>,
-            }}
-            
-          />
-        ),
-      },
-  
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 중량"
-            name="transport.transport_3_weight"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">㎏</InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 8,
-        field: (
-          <TextField
-            label="분해수송(4)"
-            name="transport.transport_4"
-            margin="none"
-            InputProps={{
-              endAdornment: <InputAdornment position="end"></InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 높이"
-            name="transport.transport_4_height"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">m</InputAdornment>,
-            }}
-            
-          />
-        ),
-      },
-  
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 중량"
-            name="transport.transport_4_weight"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">㎏</InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 8,
-        field: (
-          <TextField
-            label="분해수송(5)"
-            name="transport.transport_5"
-            margin="none"
-            InputProps={{
-              endAdornment: <InputAdornment position="end"></InputAdornment>,
-            }}
-          />
-        ),
-      },
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 높이"
-            name="transport.transport_5_height"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">m</InputAdornment>,
-            }}
-            
-          />
-        ),
-      },
-  
-      {
-        size: 2,
-        field: (
-          <TextField
-            label="분해수송 중량"
-            name="transport.transport_5_weight"
-            margin="none"
-            type="number"
-            InputProps={{
-              endAdornment: <InputAdornment position="end">㎏</InputAdornment>,
-            }}
-          />
-        ),
-      },
-  ];
+    
+    const InputForms = [
+      {label: "분해수송 (1)", name: "transport.transport_1", type: "", unit: "", placeholder:"본체"},
+      {label: "분해수송 높이", name: "transport.transport_1_height", type: "number", unit: "m"},
+      {label: "분해수송 중량", name: "transport.transport_1_weight", type: "number", unit: "㎏"},
+    ] 
 
   return (
     <>
       <div className="input-group mb-1">
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Paper style={{ padding: 10 }}>
-              <FormGroup row>
-                {formFields.map((item, idx) => (
-                  <Grid item xs={item.size} key={idx}>
-                    {item.field}
-                  </Grid>
-                ))}
-              </FormGroup>
-            </Paper>
-          </Grid>
+      <Paper style={{ padding: 16 }}>
+        <Grid container alignItems="flex-start" spacing={2}>
+        <Card sx={{ p: 3 }}>
+          <Box
+            sx={{
+              display: 'grid',
+              columnGap: 2,
+              // rowGap: 2,
+              gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
+            }}
+          >
+            
+{InputForms.map((fieldData) => (
+<Controller key={fieldData.name} render={({ field }) => <TextField label={fieldData.label} {...field} InputProps={{
+            endAdornment: <InputAdornment position="end">{fieldData.unit}</InputAdornment>,
+          }}
+  />} name={fieldData.name} type={fieldData.type} control={control} />
+))}
+{/* 
+<ul>
+            {fields.map((item, index) => {
+              return (
 
+<li key={item.id}>
+            <Controller
+              render={({ field }) => <TextField {...field} />}
+              name={`transport.transport_${index}`}
+              defaultValue=""
+              control={control}
+            />
+            <Controller
+              render={({ field }) => <TextField {...field} />}
+              name={`transport.transport_${index}_height`}
+              defaultValue=""
+              control={control}
+            />
+            <Controller
+              render={({ field }) => <TextField {...field} />}
+              name={`transport.transport_${index}_weight`}
+              defaultValue=""
+              control={control}
+            />
+            <Button
+              size="small"
+              color="error"
+              startIcon={<Iconify icon="eva:trash-2-outline" />}
+              onClick={() => remove(index)}
+            >
+              Remove
+            </Button>
+          </li>);
+            })}
+          </ul>
+          <section>
+          <Button
+                    size="small"
+                    startIcon={<Iconify icon="eva:plus-fill" />}
+                    onClick={() => {
+                      prepend({});
+                    }}
+                    sx={{ flexShrink: 0 }}
+                  >
+                    Add Previous Item
+                  </Button>
+            <Button
+              size="small"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+              onClick={() => {
+                append({});
+              }}
+              sx={{ flexShrink: 0 }}
+            >
+              Add Next Item
+            </Button>
+
+          </section> */}
+          </Box>
+
+          
+        </Card>
         </Grid>
-        중량1: { values.operating_weight - values.transport?.transport_2_weight}
-      </div>
+      </Paper>
+
+    </div>
     </>
   );
 };

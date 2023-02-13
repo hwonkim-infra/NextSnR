@@ -10,11 +10,10 @@ import { Controller, useForm } from "react-hook-form";
 // import { FormProvider, RHFTextField } from "@/components/hook-form";
 import TinyEditor from "./TinyEditor";
 import Summary from "@/components/KRTAForms/Summary";
-import { Box, Button, Card, Grid, Stack, Tab, Tabs } from "@mui/material";
+import { Box, Button, Card, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
-
 
 import HEXCalc from "@/components/KRTAForms/HEXCalc";
 import Dimensions from "@/components/KRTAForms/Dimensions";
@@ -25,7 +24,8 @@ import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
 import TravelHX from "@/components/KRTAForms/TravelHX";
 import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
 import EngineFields from "@/components/KRTAForms/EngineFields";
-
+import TransPortation from "@/components/KRTAForms/TransPortation";
+import TAResult from "@/components/KRTAForms/TAResult";
 
 const defaultValues = {
   ECN: null,
@@ -72,7 +72,6 @@ const HEXEditForm = ({
   const { currentTab, onChangeTab } = useTabs("dimensions");
 
   const values = watch();
-  
 
   useEffect(() => {
     reset(currentModel);
@@ -156,15 +155,14 @@ const HEXEditForm = ({
     }
   }
 
-  
   const FORM_TABS = [
     {
       value: "dimensions",
       title: "기본제원",
       component: (
         <>
-          <Dimensions control={control} /> 
-          <DimensionsTrack control={control} /> 
+          <Dimensions control={control} />
+          <DimensionsTrack control={control} />
           <DimensionsQC control={control} />
         </>
       ),
@@ -180,6 +178,15 @@ const HEXEditForm = ({
       ),
     },
     {
+      value: "engine",
+      title: "엔진 사양",
+      component: (
+        <>
+          <EngineFields control={control} />
+        </>
+      ),
+    },
+    {
       value: "drawings",
       title: "도면",
       component: (
@@ -189,16 +196,26 @@ const HEXEditForm = ({
       ),
     },
     {
-      value: "engine",
-      title: "엔진 사양",
+      value: "transportation",
+      title: "분해 수송",
       component: (
         <>
-          <EngineFields control={control} />
+          <TransPortation control={control} />
+          
+        </>
+      ),
+    },
+    {
+      value: "result",
+      title: "승인서",
+      component: (
+        <>
+          <TAResult control={control} />
+          
         </>
       ),
     },
   ];
-
 
   return (
     <div>
@@ -216,44 +233,28 @@ const HEXEditForm = ({
               >
                 {HEXCalc(values)}
                 <Summary control={control} />
-                
-                
-
-                {/* <Controller
-                  render={({ field }) => <TextField {...field} />}
-                  name="TextField"
-                  control={control}
-                /> */}
-                {/* <Controller
-                  name="drawings.exterior"
-                  control={control}
-                  defaultValue=""
-                  render={({ field: { onChange, value } }) => (
-                    <TinyEditor onChange={onChange} value={value} />
-                  )}
-                /> */}
               </Box>
               <Tabs
-              allowScrollButtonsMobile
-              variant="scrollable"
-              scrollButtons="auto"
-              value={currentTab}
-              onChange={onChangeTab}
-            >
-              {FORM_TABS.map((tab) => (
-                <Tab
-                  disableRipple
-                  key={tab.value}
-                  value={tab.value}
-                  icon={tab.icon}
-                  label={tab.title}
-                />
-              ))}
-            </Tabs>
-            {FORM_TABS.map((tab) => {
-              const isMatched = tab.value === currentTab;
-              return isMatched && <Box key={tab.value}>{tab.component}</Box>;
-            })}
+                allowScrollButtonsMobile
+                variant="scrollable"
+                scrollButtons="auto"
+                value={currentTab}
+                onChange={onChangeTab}
+              >
+                {FORM_TABS.map((tab) => (
+                  <Tab
+                    disableRipple
+                    key={tab.value}
+                    value={tab.value}
+                    icon={tab.icon}
+                    label={tab.title}
+                  />
+                ))}
+              </Tabs>
+              {FORM_TABS.map((tab) => {
+                const isMatched = tab.value === currentTab;
+                return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+              })}
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -279,8 +280,10 @@ const HEXEditForm = ({
           </Grid>
           <Grid item xs={12} md={4}>
             <Card sx={{ p: 1 }}>
+            <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
               Preview
-              {/* <SpecSheet values={values} /> */}
+            </Typography>
+              <SpecSheet values={values} />
               {JSON.stringify(values, 0, 2)}
             </Card>
           </Grid>

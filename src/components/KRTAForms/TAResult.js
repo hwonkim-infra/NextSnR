@@ -1,27 +1,35 @@
-import React, { useState, useEffect, useRef } from "react";
-// import { useDispatch } from "react-redux";
-import { Form, Field } from "react-final-form";
-import { Editor } from '@tinymce/tinymce-react';
+import {
+  Box,
+  Card,
+  Grid,
+  InputAdornment,
+  Paper,
+  TextField,
+} from "@mui/material";
+import { Controller } from "react-hook-form";
+import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
 
-
-const TAResult = () => {
+const TAResult = ({ control }) => {
   
 
 
   return (
     <>
 
-<Field name='approval_result'>
-        {({ input: {onChange, value}}) => (
-          <Editor tinymceScriptSrc='/tinymce/tinymce.min.js'
-          value={value + ''} init={{height: "960",
-          resize: true, menubar: false,
-        }} onEditorChange = {(e) => onChange(e)} />
-        )}
-      </Field>
-             
+<Paper style={{ padding: 16 }}>
 
+
+             
+      <Controller
+            name="approval_result"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+              )}
+              />
         
+              </Paper>
     </>
 
   );

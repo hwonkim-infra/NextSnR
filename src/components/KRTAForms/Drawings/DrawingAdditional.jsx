@@ -1,11 +1,7 @@
-import { Button, Grid, Paper } from "@mui/material";
-import React from "react";
 // import { FieldArray } from 'react-final-form-arrays'
 // import FieldArray from "./fieldArray";
-import { Editor } from "@tinymce/tinymce-react";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useFieldArray, useForm } from "react-hook-form";
 import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
+import { useFieldArray, useForm } from "react-hook-form";
 
 const DrawingAdditional = ({control}) => {
   const { register, handleSubmit, getValues, errors, reset, setValue } =

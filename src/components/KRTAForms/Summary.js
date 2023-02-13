@@ -8,6 +8,7 @@ const Summary = ({ control }) => {
     { label: "형식번호", name: "registration_no", type: "number" },
     { label: "변속기", name: "gearbox", type: "" },
     { label: "자체중량", name: "operating_weight", type: "number", unit: "㎏" },
+    { label: "규격", name: "machine_grade" },
     { label: "붐", name: "attachments.boom_length", type: "number", unit: "㎜" },
     { label: "암", name: "attachments.arm_length", type: "number", unit: "㎜" },
     {

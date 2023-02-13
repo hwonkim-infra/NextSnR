@@ -24,7 +24,7 @@ const EngineFields = ({ control }) => {
 
 
 <div className="input-group mb-1">
-        <Paper style={{ padding: 4 }}>
+        <Paper style={{ padding: 16 }}>
           <Grid container alignItems="flex-start" spacing={2}>
           <Card sx={{ p: 3 }}>
             <Box
