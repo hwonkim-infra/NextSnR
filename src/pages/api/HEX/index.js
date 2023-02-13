@@ -12,7 +12,8 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const hexes = await HEX.find();
+        // const hexes = await HEX.find();
+        const hexes = await HEX.aggregate([{ $project: { _id: 1, COG: 0 }}]);
         await runMiddleware(req, res, morgan);
         return res.status(200).json(hexes);
       } catch (err) {
