@@ -1,7 +1,7 @@
 import { Box, Card, Grid, InputAdornment, Paper, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const Summary = ({ control }) => {
+const Summary = ({ control,  }) => {
   const InputForms = [
     { label: "기종명", name: "model_name" },
     { label: "일련번호", name: "serial_no", type: "number" },
@@ -40,7 +40,7 @@ const Summary = ({ control }) => {
                   },
                 }}
               >
-                {/* <Controller render={({ field }) => <TextField label="기종명" {...field} />} name="model_name" control={control} /> */}
+         
 
                 {InputForms.map((fieldData) => (
                   <Controller
@@ -48,6 +48,7 @@ const Summary = ({ control }) => {
                     render={({ field }) => (
                       <TextField label={fieldData.label} {...field}
                       InputLabelProps={{ shrink: true }}
+                      value={field.value || ''}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">

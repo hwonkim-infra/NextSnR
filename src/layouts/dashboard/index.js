@@ -20,8 +20,8 @@ const MainStyle = styled('main', {
   shouldForwardProp: (prop) => prop !== 'collapseClick',
 })(({ collapseClick, theme }) => ({
   flexGrow: 1,
-  paddingTop: HEADER.MOBILE_HEIGHT + 24,
-  paddingBottom: HEADER.MOBILE_HEIGHT + 24,
+  // paddingTop: HEADER.MOBILE_HEIGHT + 24,
+  // paddingBottom: HEADER.MOBILE_HEIGHT + 24,
   [theme.breakpoints.up('lg')]: {
     paddingLeft: 16,
     paddingRight: 16,
@@ -58,13 +58,13 @@ export default function DashboardLayout({ children }) {
     return (
       <>
         <DashboardHeader onOpenSidebar={() => setOpen(true)} verticalLayout={verticalLayout} />
-
+{/* 
         {isDesktop ? (
           <NavbarHorizontal />
         ) : (
           <NavbarVertical isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
         )}
-
+ */}
         <Box
           component="main"
           sx={{

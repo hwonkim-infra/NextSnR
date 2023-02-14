@@ -10,37 +10,69 @@ import {
 import Iconify from "@/components/Iconify";
 import { Controller, useFieldArray } from "react-hook-form";
 
-const TransPortation = ({control}) => {
-    
-    
-    const InputForms = [
-      {label: "분해수송 (1)", name: "transport.transport_1", type: "", unit: "", placeholder:"본체"},
-      {label: "분해수송 높이", name: "transport.transport_1_height", type: "number", unit: "m"},
-      {label: "분해수송 중량", name: "transport.transport_1_weight", type: "number", unit: "㎏"},
-    ] 
+const TransPortation = ({ control }) => {
+  const InputForms = [
+    {
+      label: "분해수송 (1)",
+      name: "transport.transport_1",
+      type: "",
+      unit: "",
+      placeholder: "본체",
+    },
+    {
+      label: "분해수송 높이",
+      name: "transport.transport_1_height",
+      type: "number",
+      unit: "m",
+    },
+    {
+      label: "분해수송 중량",
+      name: "transport.transport_1_weight",
+      type: "number",
+      unit: "㎏",
+    },
+  ];
 
   return (
     <>
       <div className="input-group mb-1">
-      <Paper style={{ padding: 16 }}>
-        <Grid container alignItems="flex-start" spacing={2}>
-        <Card sx={{ p: 3 }}>
-          <Box
-            sx={{
-              display: 'grid',
-              columnGap: 2,
-              // rowGap: 2,
-              gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
-            }}
-          >
-            
-{InputForms.map((fieldData) => (
-<Controller key={fieldData.name} render={({ field }) => <TextField label={fieldData.label} {...field} InputProps={{
-            endAdornment: <InputAdornment position="end">{fieldData.unit}</InputAdornment>,
-          }}
-  />} name={fieldData.name} type={fieldData.type} control={control} />
-))}
-{/* 
+        <Paper style={{ padding: 16 }}>
+          <Grid container alignItems="flex-start" spacing={2}>
+            <Card sx={{ p: 3 }}>
+              <Box
+                sx={{
+                  display: "grid",
+                  columnGap: 2,
+                  // rowGap: 2,
+                  gridTemplateColumns: {
+                    xs: "repeat(4, 1fr)",
+                    sm: "repeat(4, 1fr)",
+                  },
+                }}
+              >
+                {InputForms.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField
+                        label={fieldData.label}
+                        {...field}
+                      value={field.value || ''}
+                      InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {fieldData.unit}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
+                {/* 
 <ul>
             {fields.map((item, index) => {
               return (
@@ -98,14 +130,11 @@ const TransPortation = ({control}) => {
             </Button>
 
           </section> */}
-          </Box>
-
-          
-        </Card>
-        </Grid>
-      </Paper>
-
-    </div>
+              </Box>
+            </Card>
+          </Grid>
+        </Paper>
+      </div>
     </>
   );
 };

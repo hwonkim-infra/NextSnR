@@ -232,7 +232,7 @@ const HEXEditForm = ({
                 }}
               >
                 {HEXCalc(values)}
-                <Summary control={control} />
+                <Summary control={control}  />
               </Box>
               <Tabs
                 allowScrollButtonsMobile

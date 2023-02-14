@@ -38,7 +38,8 @@ const Swivel = ({ control }) => {
                       <TextField
                         label={fieldData.label}
                         {...field}
-                        InputProps={{
+                      value={field.value || ''}
+                      InputProps={{
                           endAdornment: (
                             <InputAdornment position="end">
                               {fieldData.unit}
