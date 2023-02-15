@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Edit as EditIcon, PostAdd } from "@mui/icons-material/";
-import { Button, Box,  Grid, Stack, CircularProgress, IconButton, Paper } from "@mui/material";
+import {
+  Button,
+  Box,
+  Grid,
+  Stack,
+  CircularProgress,
+  IconButton,
+  Paper,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -16,8 +24,6 @@ import PSCDetailPrev from "@/components/PSC/PSCDetailPrev";
 
 // Preview
 
-
-
 PSCList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
@@ -26,17 +32,23 @@ export default function PSCList({ PSCs = [] }) {
   const router = useRouter();
   const [currentPSC, setCurrentPSC] = useState({});
 
-const columns = [
+  const columns = [
     // { field: "id", headerName: "ID", width: 70 },
     { field: "ITEM", headerName: "ITEM", width: 200 },
     { field: "reference", headerName: "reference", width: 200 },
-    { field: "requirements", headerName: "requirements", flex: 1, minWidth: 400 },
+    {
+      field: "requirements",
+      headerName: "requirements",
+      flex: 1,
+      minWidth: 400,
+    },
     {
       field: "Edit",
       headerName: "EDIT",
       width: 50,
       renderCell: () => (
-        <IconButton href={"PSC/" + currentPSC?.id+"/edit"} ><EditIcon />
+        <IconButton href={"PSC/" + currentPSC?.id + "/edit"}>
+          <EditIcon />
         </IconButton>
       ),
     },
@@ -55,13 +67,13 @@ const columns = [
 
   return (
     <div>
-
-
-<HeaderBreadcrumbs
+      <Grid container spacing={2}>
+        <Grid item xs={6} sx={{ height: 900 }}>
+          <HeaderBreadcrumbs
             heading="Product Safety Compliance"
             links={[{ name: "PVC" }, { name: "EU" }]}
             action={
-              <NextLink href="PSC/new">
+              <NextLink href="EU/new">
                 <Button
                   variant="contained"
                   startIcon={<Iconify icon={"eva:plus-fill"} />}
@@ -71,10 +83,7 @@ const columns = [
               </NextLink>
             }
           />
-        
-      <Grid container spacing={2}>
-        <Grid item xs={6} sx={{ height: 900 }}>
-          
+
           <DataGrid
             rows={rows}
             columns={columns}
@@ -89,33 +98,34 @@ const columns = [
           />
         </Grid>
         <Grid item xs={6}>
-        {currentPSC._id && (<><Paper elevation={2} style={{ padding: "5px", m:1 }}>
-
-            <PSCDetailPrev currentPSC={currentPSC}/>
-          </Paper>
-          <Box>
-            <Button
-              variant='compromised'
-              startIcon={<PostAdd />}
-              psc_id={currentPSC}
-            >
-              {/* <Link
+          {currentPSC._id && (
+            <>
+              <Paper elevation={2} style={{ padding: "5px", m: 1 }}>
+                <PSCDetailPrev currentPSC={currentPSC} />
+              </Paper>
+              <Box>
+                <Button
+                  variant="compromised"
+                  startIcon={<PostAdd />}
+                  psc_id={currentPSC}
+                >
+                  {/* <Link
                 to={{
                   pathname: `/PSC/` + currentPSC._id + '/newTCF',
                 }}
               >
                 Add TCF
               </Link> */}
-            </Button>
-          </Box>
+                </Button>
+              </Box>
 
-          <Paper elevation={2} style={{ padding: "5px" }}>
-            {/* <TCFList currentID={currentPSC._id} /> */}
-          </Paper>
-          </>)}
+              <Paper elevation={2} style={{ padding: "5px" }}>
+                {/* <TCFList currentID={currentPSC._id} /> */}
+              </Paper>
+            </>
+          )}
 
-{/* <SpecSheet values={currentPSC}></SpecSheet> */}
-
+          {/* <SpecSheet values={currentPSC}></SpecSheet> */}
         </Grid>
       </Grid>
     </div>

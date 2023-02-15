@@ -1,47 +1,20 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 // next
 import { useRouter } from "next/router";
 
 // utils
-import useTabs from "@/hooks/useTabs";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 // import { FormProvider, RHFTextField } from "@/components/hook-form";
-import TinyEditor from "./TinyEditor";
-import Summary from "@/components/PSCForms/Summary";
-import { Box, Button, Card, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
+import { Box, Button, Card, Grid, Stack, Typography } from "@mui/material";
 
 import PSCInputs from "./PSCInputs";
+import DetailInput from "./PSCdetailInputs";
 
-const defaultValues = {
-  ECN: null,
-  engine: { engine_name: null },
-  undercarriage: { ground_clearance: null },
-  attachments: { bucket_struck: null },
-  swivel: {
-    pump_flow: null,
-  },
-  travel: {
-    pump_displacement: null,
-  },
-  drawings: {
-    exterior: null,
-  },
-  description: {
-    swing_reduction: null,
-  },
-  COG: {
-    upperStructure_longitudinal: null,
-  },
-  transport: {
-    transport_1: "본체",
-    transport_1_weight: null,
-  },
-};
+
 
 const PSCEditForm = ({
   isEdit = false,
@@ -55,10 +28,10 @@ const PSCEditForm = ({
     reset,
     formState: { isSubmitting },
   } = useForm({
-    defaultValues: defaultValues,
+    // defaultValues: defaultValues,
   });
   const { push, query, pathname } = useRouter();
-  const { currentTab, onChangeTab } = useTabs("dimensions");
+  // const { currentTab, onChangeTab } = useTabs("dimensions");
 
   const values = watch();
 
@@ -66,7 +39,7 @@ const PSCEditForm = ({
     reset(currentPSC);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, isChangeModel, currentPSC]);
+  }, [isEdit,  currentPSC]);
 
   const onSubmit = async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
@@ -145,7 +118,7 @@ const PSCEditForm = ({
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
               <Box
                 sx={{
@@ -181,11 +154,13 @@ const PSCEditForm = ({
               </Stack>
             </Card>
           </Grid>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
             <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
               Preview
             </Typography>
+            <DetailInput control={control}  />
+            
               {/* <SpecSheet values={values} /> */}
               {JSON.stringify(values, 0, 2)}
             </Card>

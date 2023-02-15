@@ -9,7 +9,7 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import PSCEditForm from '@/sections/@dashboard/KRTA/PSCEditForm2';
+import PSCEditForm from '@/sections/@dashboard/PSC/PSCEditForm';
 
 // ----------------------------------------------------------------------
 

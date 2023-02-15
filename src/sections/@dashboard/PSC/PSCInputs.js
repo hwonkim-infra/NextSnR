@@ -1,49 +1,57 @@
-import { Grid, Paper } from "@mui/material";
-import { TextField } from "mui-rff";
-import React from "react";
+import { Box, Card, Grid, InputAdornment, Paper, TextField } from "@mui/material";
+import { Controller } from "react-hook-form";
 
-const PSCInput = (values = {}) => {
-  
-  const formFields = [
-    {
-      size: 5,
-      field: <TextField label="ITEM" name="item" margin="none" />,
-    },
-    {
-      size: 7,
-      field: <TextField label="Reference" name="reference" margin="none" />,
-    },
-
-    {
-      size: 12,
-      field: <TextField multiline label="requirements" name="requirements" margin="none" />,
-    },
-    {
-      size: 12,
-      field: <TextField multiline label="Compliance Statement" name="complyStatements" margin="none" />,
-    },
-        
+const PSCInput = ({ control }) => {
+  const InputForms = [
+    { label: "ITEM", name: "item", type: "" },
+    { label: "Reference", name: "reference", type: "" },
+    { label: "requirements", name: "requirements", type: "" },
+    { label: "Compliance Statement", name: "complyStatements", type: "" },
   ];
-  
+
   return (
     <>
       <div>
         <Paper style={{ padding: 16 }}>
-          <Grid container alignItems="flex-start" spacing={2}>
-            {formFields.map((item, idx) => (
-              <Grid item xs={item.size} key={idx}>
-                {item.field}
-              </Grid>
-            ))}
+        <Grid container alignItems="flex-start" spacing={2}>
+            <Card sx={{ p: 3 }}>
+              <Box
+                sx={{
+                  display: "grid",
+                  columnGap: 2,
+                  // rowGap: 2,
+                  gridTemplateColumns: {
+                    xs: "repeat(4, 1fr)",
+                    sm: "repeat(4, 1fr)",
+                  },
+                }}
+              >
+         
 
-            
+                {InputForms.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField label={fieldData.label} {...field}
+                      InputLabelProps={{ shrink: true }}
+                      value={field.value || ''}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {fieldData.unit}
+                          </InputAdornment>
+                        ),
+                      }} />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
+              </Box>
+            </Card>
           </Grid>
-
-          
-             
-
         </Paper>
-
       </div>
     </>
   );
