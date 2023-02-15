@@ -38,11 +38,11 @@ const navConfig = [
     subheader: 'management',
     items: [
       {
-        title: 'PVC',
-        path: '/dashboard/PVC',
+        title: 'PSC',
+        path: '/dashboard/PSC',
         icon: ICONS.dashboard,
         children: [
-          { title: 'EU ', path: '/dashboard/PVC/EU' },
+          { title: 'EU ', path: '/dashboard/PSC/EU' },
         ],
       },
     ],

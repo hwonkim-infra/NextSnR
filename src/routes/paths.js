@@ -7,6 +7,7 @@ function path(root, sublink) {
 const ROOTS_AUTH = '/auth';
 const ROOTS_DASHBOARD = '/dashboard';
 const ROOTS_DASHBOARD_KRTA = '/dashboard/KRTA';
+const ROOTS_DASHBOARD_PSC = '/dashboard/PSC';
 
 // ----------------------------------------------------------------------
 
@@ -62,6 +63,13 @@ export const PATH_DASHBOARD = {
     edit: (name) => path(ROOTS_DASHBOARD_KRTA, `/HEX/${name}/edit`),
     addChange: (name) => path(ROOTS_DASHBOARD_KRTA, `/HEX/${name}/addChange`),
   },
+  PSC: {
+    EU: path(ROOTS_DASHBOARD_PSC, '/EU'),
+    new: path(ROOTS_DASHBOARD_PSC, '/EU/new'),
+    edit: (name) => path(ROOTS_DASHBOARD_PSC, `/EU/${name}/edit`),
+  },
+
+
   user: {
     root: path(ROOTS_DASHBOARD, '/user'),
     new: path(ROOTS_DASHBOARD, '/user/new'),
