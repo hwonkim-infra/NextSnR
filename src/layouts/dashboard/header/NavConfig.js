@@ -25,7 +25,7 @@ const navConfig = [
         icon: ICONS.ecommerce,
         children: [
           { title: 'HEX', path: '/dashboard/KRTA/HEX' },
-          { title: 'WEX', path: '/dashboard/KRTA/four' },
+          { title: 'WEX', path: '/dashboard/KRTA/WEX' },
           { title: 'Six', path: '/dashboard/KRTA/six' },
         ],
       },

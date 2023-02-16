@@ -10,54 +10,52 @@ import Iconify from "@/components/Iconify";
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
 
 // Preview
 
 
 
-HEXList.getLayout = function getLayout(page) {
+WEXList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export default function HEXList({ HEXs = [] }) {
+export default function WEXList({ WEXs = [] }) {
   const router = useRouter();
-  const [currentHEX, setCurrentHEX] = useState({});
+  const [currentWEX, setCurrentWEX] = useState({});
 
   const columns = [
     // { field: "id", headerName: "ID", width: 70 },
     { field: "model_name", headerName: "기종명", width: 110 },
     { field: "registration_no", headerName: "형식", width: 70 },
     { field: "weight", headerName: "중량", width: 70 },
-    { field: "boom", headerName: "Boom", width: 60 },
-    { field: "arm", headerName: "Arm", width: 60 },
-    { field: "bucket", headerName: "버켓", width: 60 },
-    { field: "height", headerName: "높이", width: 60 },
-    { field: "width", headerName: "너비", width: 60 },
-    { field: "shoe", headerName: "shoe", width: 60 },
-    { field: "counterWeight", headerName: "CW", width: 50 },
-    { field: "updated", headerName: "수정", width: 60 },
+    { field: "boom", headerName: "Boom", width: 60,},
+    { field: "arm", headerName: "Arm", width: 60, },
+    { field: "bucket", headerName: "버켓", width: 60,},
+    { field: "height", headerName: "높이", width: 60, },
+    { field: "width", headerName: "너비", width: 60, },
+    { field: "counterWeight", headerName: "CW", width: 50, },
+    { field: "updated", headerName: "수정", width: 60 },    
     { field: "changeModel", headerName: "형식변경", width: 120 },
     { field: "result", headerName: "완료", width: 50 },
   ];
 
-  const rows = HEXs.map((HEX) => {
+  const rows = WEXs.map((WEX) => {
     return {
-      id: HEX._id,
-      model_name: HEX.model_name,
-      registration_no: HEX.registration_no,
-      weight: HEX.operating_weight,
-      boom: HEX.attachments?.boom_length,
-      arm: HEX.attachments?.arm_length,
-      bucket: HEX.attachments?.bucket_heap,
-      height: HEX.overall_height,
-      width: HEX.overall_width,
-      updated: new Date(HEX.updatedAt).toLocaleDateString("Ko-kr"),
-      shoe: HEX.undercarriage?.shoe_width,
-      changeModel: HEX.ChangeModel ? HEX.ECN + " 변경" : " ",
-      counterWeight: HEX.COG?.counterWeight_weight / 1000 || "",
-      result: HEX.approval_result ? "완료" : " ",
-      ...HEX,
+      id: WEX._id,
+      model_name: WEX.model_name,
+      registration_no: WEX.registration_no,
+      weight: WEX.operating_weight,
+      boom: WEX.attachments?.boom_length,
+      arm: WEX.attachments?.arm_length,
+      bucket: WEX.attachments?.bucket_heap,
+      height: WEX.overall_height,
+      width: WEX.overall_width,
+      updated: (new Date(WEX.updatedAt)).toLocaleDateString('Ko-kr'),
+      changeModel: WEX.ChangeModel ? WEX.ECN+" 변경" : " ",
+      counterWeight: WEX.COG?.counterWeight_weight/1000 || '',
+      result: WEX.approval_result ? "완료" : " ",
+      ...WEX,
     };
   });
 
@@ -66,10 +64,10 @@ export default function HEXList({ HEXs = [] }) {
       <Grid container spacing={2}>
         <Grid item xs={8} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
-            heading="Crawler Excavator"
-            links={[{ name: "형식승인" }, { name: "HEX" }]}
+            heading="Wheeled Excavator"
+            links={[{ name: "형식승인" }, { name: "WEX" }]}
             action={
-              <NextLink href="HEX/new">
+              <NextLink href="WEX/new">
                 <Button
                   variant="contained"
                   startIcon={<Iconify icon={"eva:plus-fill"} />}
@@ -88,7 +86,7 @@ export default function HEXList({ HEXs = [] }) {
               const selectedRowData = rows.filter((row) =>
                 selectedIDs.has(row.id.toString())
               );
-              setCurrentHEX(selectedRowData[0]);
+              setCurrentWEX(selectedRowData[0]);
             }}
           />
         </Grid>
@@ -100,18 +98,18 @@ export default function HEXList({ HEXs = [] }) {
             justifyContent="space-between"
           >
             <Box component="span" sx={{ fontSize: "h2.fontSize" }}>
-              {currentHEX?.model_name}
+              {currentWEX?.model_name}
             </Box>
             <Box component="span" sx={{ p: 1, border: "1px" }}>
-              {currentHEX?.serial_no}
+              {currentWEX?.serial_no}
             </Box>
 
-            {currentHEX.model_name && (
+            {currentWEX.model_name && (
               <Box>
                 <Button
                   sx={{m:1}}
                   variant="outlined"
-                  href={"HEX/" + currentHEX?.id+"/edit"}                  
+                  href={"WEX/" + currentWEX?.id+"/edit"}                  
                 >
                   수정
                 </Button>
@@ -119,7 +117,7 @@ export default function HEXList({ HEXs = [] }) {
                   sx={{m:1}}
                   variant="contained"
                   // startIcon={<PrintIcon />}
-                  href={"HEX/" + currentHEX?.id+"/print"}
+                  href={"WEX/" + currentWEX?.id+"/print"}
                   target="_blank"
                 >
                   출력
@@ -128,7 +126,7 @@ export default function HEXList({ HEXs = [] }) {
                   sx={{m:1}}
                   variant="text"
                   // startIcon={<TextSnippet />}
-                  href={"/HEX/specW/" + currentHEX?.id}
+                  href={"/WEX/specW/" + currentWEX?.id}
                   target="_blank"
                 >
                   제원표
@@ -138,12 +136,12 @@ export default function HEXList({ HEXs = [] }) {
           </Stack>
 
           
-          {(!currentHEX.ChangeModel && currentHEX.model_name) && (
+          {(!currentWEX.ChangeModel && currentWEX.model_name) && (
             <Box>
               <Button
                 variant="outlined"
                 // startIcon={<QueueIcon />}
-                href={"HEX/" + currentHEX?.id+"/addChange"}                  
+                href={"WEX/" + currentWEX?.id+"/addChange"}                  
                 
               > 변경형식
                 
@@ -151,7 +149,7 @@ export default function HEXList({ HEXs = [] }) {
             </Box>
           )}
 
-<SpecSheet values={currentHEX}></SpecSheet>
+<SpecSheet values={currentWEX}></SpecSheet>
 
         </Grid>
       </Grid>
@@ -160,12 +158,12 @@ export default function HEXList({ HEXs = [] }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/HEX/");
-  const HEXs = await response.json();
+  const response = await fetch("http://localhost:3000/api/WEX/");
+  const WEXs = await response.json();
 
   return {
     props: {
-      HEXs,
+      WEXs,
     },
   };
 }
