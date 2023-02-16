@@ -120,16 +120,9 @@ const PSCEditForm = ({
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
-              <Box
-                sx={{
-                  // display: 'grid',
-                  columnGap: 2,
-                  rowGap: 3,
-                  gridTemplateColumns: "repeat(8, 1fr)",
-                }}
-              >
+              {/* <Box sx={{ }} > */}
                 <PSCInputs control={control}  />
-              </Box>
+              {/* </Box> */}
               
               <Stack
                 direction="row"
@@ -157,7 +150,7 @@ const PSCEditForm = ({
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
             <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-              Preview
+              Actions Detail
             </Typography>
             <DetailInput control={control}  />
             

@@ -35,7 +35,6 @@ const navConfig = [
   // PVC
   // ----------------------------------------------------------------------
   {
-    subheader: 'management',
     items: [
       {
         title: 'PSC',
@@ -49,16 +48,33 @@ const navConfig = [
   },
 
 
-  // GENERAL
+  
+  // Blog
   // ----------------------------------------------------------------------
   {
+    items: [
+      {
+        title: 'Blog',
+        path: '/dashboard/Blog',
+        icon: ICONS.ecommerce,
+        children: [
+          { title: 'Posts ', path: '/dashboard/Blog/Posts' },
+        ],
+      },
+    ],
+  },
+
+
+  // GENERAL
+  // ----------------------------------------------------------------------
+  /* {
     subheader: 'general v3.5.0',
     items: [
       { title: 'One', path: '/dashboard/one', icon: ICONS.dashboard },
       { title: 'Two', path: '/dashboard/two', icon: ICONS.ecommerce },
       { title: 'Three', path: '/dashboard/three', icon: ICONS.analytics },
     ],
-  },
+  }, */
 ];
 
 export default navConfig;

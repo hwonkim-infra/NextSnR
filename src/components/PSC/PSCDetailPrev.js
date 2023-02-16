@@ -40,7 +40,7 @@ const PSCDetailPrev = ({ currentPSC }) => {
                   <Button
                   sx={{m:1}}
                   variant="outlined"
-                  href={"PSC/" + currentPSC?.id+"/edit"}                  
+                  href={"/dashboard/PSC/EU/" + currentPSC?.id+"/edit"}                  
                 >
                   수정
                 </Button>

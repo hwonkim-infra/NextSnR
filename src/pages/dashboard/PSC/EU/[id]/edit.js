@@ -9,48 +9,48 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm2';
+import PSCEditForm from '@/sections/@dashboard/PSC/PSCEditForm';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
-HEXEdit.getLayout = function getLayout(page) {
+PSCEdit.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
 
-export default function HEXEdit() {
-const [currentModel, setCurrentModel] = useState()
+export default function PSCEdit() {
+const [currentPSC, setCurrentPSC] = useState()
 
 const { query } = useRouter();
 
-  const getHEX = async () => {
-    const response = await fetch(`http://localhost:3000/api/HEX/${query.id}`);
+  const getPSC = async () => {
+    const response = await fetch(`http://localhost:3000/api/PSC/${query.id}`);
 
     const data = await response.json();
-    setCurrentModel(data);
+    setCurrentPSC(data);
     console.log(data);
   };
 
   useEffect(() => {
-    if (query.id) getHEX();
+    if (query.id) getPSC();
   }, [query.id]);
 
 //   const currentModel = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="HEX: Edit ">
+    <Page title="PSC: Edit ">
         <HeaderBreadcrumbs
-          heading="Edit HEX"
+          heading="Edit PSC"
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.KRTA },
-            { name: 'HEX', href: PATH_DASHBOARD.KRTA.HEX  },
-            { name: (currentModel?.model_name) },
+            { name: 'Dashboard', href: PATH_DASHBOARD.PSC },
+            { name: 'PSC', href: PATH_DASHBOARD.PSC.EU  },
+            { name: (currentPSC?.item) },
           ]}
         />
 
-        <HEXEditForm isEdit currentModel={currentModel} />
+        <PSCEditForm isEdit currentPSC={currentPSC} />
     </Page>
   );
 }

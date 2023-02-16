@@ -12,7 +12,7 @@ const PSCdetailInput = ({control} ) => {
 
     const { fields, append, remove, prepend } = useFieldArray({
         control,
-        name: "appendix",
+        name: "actions",
       });
 
   return (
@@ -23,7 +23,7 @@ const PSCdetailInput = ({control} ) => {
                 <li key={item.id}>
                   <Controller
                     render={({ field }) => <TextField {...field} />}
-                    name={`appendix.${index}.subItem`}
+                    name={`actions.${index}.subItem`}
                     defaultValue=""
                     control={control}
                   />
@@ -38,7 +38,7 @@ const PSCdetailInput = ({control} ) => {
                   <Controller
                     control={control}
                     defaultValue=""
-                    name={`appendix.${index}.subDrawing`}
+                    name={`actions.${index}.subAction`}
                     render={({ field: { onChange, value } }) => (
                       <>
                         <TinyEditor onChange={onChange} value={value} />
