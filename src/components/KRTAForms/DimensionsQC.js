@@ -9,13 +9,18 @@ import {
 import { Controller } from "react-hook-form";
 
 const DimensionsQC = ({ control }) => {
-  const InputForms = [
+  const InputFormsQC = [
     { label: "퀵커플러(1)", name: "attachments.quick_coupler_1", type: "number", unit: "" },
     { label: "커플러 중량", name: "attachments.quick_coupler_weight_1", type: "number", unit: "㎏" },
     { label: "퀵커플러(2)", name: "attachments.quick_coupler_2", type: "number", unit: "" },
     { label: "커플러 중량", name: "attachments.quick_coupler_weight_2", type: "number", unit: "㎏" },
     { label: "높이 woQC", name: "overall_height_woQC", type: "number", unit: "㎜" },
     { label: "길이 woQC", name: "overall_length_woQC", type: "number", unit: "㎜" },
+    
+  ];
+
+  const InputFormsWR = [
+   
     { label: "최대굴착반경", name: "attachments.digging_reach", type: "number", unit: "㎜" },
     { label: "최대굴착반경 woQC", name: "attachments.digging_reach_woqc", type: "number", unit: "㎜" },
     { label: "최대굴착깊이", name: "attachments.digging_depth", type: "number", unit: "㎜" },
@@ -27,26 +32,26 @@ const DimensionsQC = ({ control }) => {
   return (
     <>
       <div className="input-group mb-1">
-        <Paper style={{ padding: 4 }}>
-          <Grid container alignItems="flex-start" spacing={2}>
-          <Card sx={{ p: 3 }}>
-            <Box
-              sx={{
-                display: 'grid',
-                columnGap: 2,
-                // rowGap: 2,
-                gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
-              }}
-            >
-       {InputForms.map((fieldData) => (
+        <Grid container spacing={2}>
+          <Grid Item xs={6}>
+            <Card sx={{ p: 3 }}>
+              <Box
+                sx={{
+                  display: "grid",
+                  // columnGap: 2,
+                  // rowGap: 2,
+                  gridTemplateColumns: "2fr 2fr",
+                }}
+              >
+                {InputFormsQC.map((fieldData) => (
                   <Controller
                     key={fieldData.name}
                     render={({ field }) => (
                       <TextField
                         label={fieldData.label}
                         {...field}
-                      value={field.value || ''}
-                      InputProps={{
+                        value={field.value || ""}
+                        InputProps={{
                           endAdornment: (
                             <InputAdornment position="end">
                               {fieldData.unit}
@@ -60,14 +65,47 @@ const DimensionsQC = ({ control }) => {
                     control={control}
                   />
                 ))}
-               
-              
-            </Box>
-
-            
-          </Card>
+              </Box>
+            </Card>
           </Grid>
-        </Paper>
+          <Grid Item xs={6}>
+            <Card sx={{ p: 3 }}>
+              <Box
+                sx={{
+                  display: "grid",
+                  // columnGap: 2,
+                  // rowGap: 2,
+
+                  gridTemplateColumns: "2fr 2fr",
+                  // gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
+                }}
+              >
+                {InputFormsWR.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField
+                        label={fieldData.label}
+                        {...field}
+                        value={field.value || ""}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {fieldData.unit}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
+              </Box>
+            </Card>
+          </Grid>
+        </Grid>
 
       </div>
     </>

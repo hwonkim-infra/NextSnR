@@ -76,6 +76,70 @@ const AddDrawings = ({ control }) => {
       ),
     },
     {
+      value: "bucket",
+      title: "버켓",
+      component: (
+        <>
+          <Controller
+            name="drawings.bucket"
+            control={control}
+            defaultValue="버켓 도면"
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
+          <Controller
+            name="drawings.bucket_capa_struck"
+            control={control}
+            defaultValue="평적 용량 자료"
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
+          <Controller
+            name="drawings.bucket_capa_heap"
+            control={control}
+            defaultValue="산적 용량 자료"
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
+        </>
+      ),
+    },
+    {
+      value: "Qcouplr",
+      title: "퀵커플러",
+      component: (
+        <>
+          <Controller
+            name="drawings.Qcouplr"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
+        </>
+      ),
+    },
+    {
+      value: "dozer",
+      title: "배토판",
+      component: (
+        <>
+          <Controller
+            name="drawings.dozer"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <TinyEditor onChange={onChange} value={value} />
+            )}
+          />
+        </>
+      ),
+    },
+    {
       value: "ETC",
       title: "기타",
       component: (

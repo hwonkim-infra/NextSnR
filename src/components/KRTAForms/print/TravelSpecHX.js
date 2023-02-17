@@ -1,7 +1,5 @@
-import React from "react";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { Card } from "@mui/material";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 // 퀵커플러 탈착
 

@@ -163,6 +163,36 @@ const WEXSchema = new Schema({
         EngineCurve: String,
     },
 
+    // 무게중심 관련
+    COG: {
+        upperStructure_longitudinal: Number,
+        upperStructure_lateral: Number,
+        upperStructure_vertical: Number,
+        
+        counterWeight_weight: Number,
+        counterWeight_longitudinal: Number,
+        counterWeight_lateral: Number,
+        counterWeight_vertical: Number,
+        
+        underCarriage_weight: Number,
+        underCarriage_longitudinal: Number,
+        underCarriage_lateral: Number,
+        underCarriage_vertical: Number,
+        
+        attachments_weight: Number,
+        attachments_longitudinal: Number,
+        attachments_lateral: Number,
+        attachments_vertical: Number,
+        
+        attachments_load_longitudinal: Number,
+        attachments_load_lateral: Number,
+        attachments_load_vertical: Number,
+        
+        attachments_maxReach_longitudinal: Number,
+        attachments_maxReach_lateral: Number,
+        attachments_maxReach_vertical: Number,        
+    },
+    
     description: {
         swing_reduction: String,
         travel_reduction: String,

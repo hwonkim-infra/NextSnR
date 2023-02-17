@@ -1,10 +1,11 @@
 import React from "react";
+import styles from '@/components/KRTAForms/print/printPages.module.scss'
 
-const WEXSpec = (values ) => {
+const WEXSpec = ({values} ) => {
 
 
   return (
-    <div className="pages">
+    <div className={styles.pages}>
         
 
         [별지 제3호의2서식]

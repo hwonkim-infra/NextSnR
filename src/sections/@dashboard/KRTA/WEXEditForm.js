@@ -1,31 +1,38 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // next
 import { useRouter } from "next/router";
 
 // utils
 import useTabs from "@/hooks/useTabs";
+import { useForm } from "react-hook-form";
 
-import { Controller, useForm } from "react-hook-form";
-// import { FormProvider, RHFTextField } from "@/components/hook-form";
-import TinyEditor from "./TinyEditor";
 import Summary from "@/components/KRTAForms/Summary";
-import { Box, Button, Card, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  Snackbar,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 
-import HEXCalc from "@/components/KRTAForms/HEXCalc";
 import Dimensions from "@/components/KRTAForms/Dimensions";
-import Swivel from "@/components/KRTAForms/Swivel";
 import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
-import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
-import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
-import TravelHX from "@/components/KRTAForms/TravelHX";
+import DimensionsWheel from "@/components/KRTAForms/DimensionsWheel";
 import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
 import EngineFields from "@/components/KRTAForms/EngineFields";
-import TransPortation from "@/components/KRTAForms/TransPortation";
+import WEXCalc from "@/components/KRTAForms/WEXCalc";
+import Swivel from "@/components/KRTAForms/Swivel";
 import TAResult from "@/components/KRTAForms/TAResult";
+import TransPortation from "@/components/KRTAForms/TransPortation";
+import TravelWX from "@/components/KRTAForms/TravelWX";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
 
 const defaultValues = {
   ECN: null,
@@ -53,7 +60,7 @@ const defaultValues = {
   },
 };
 
-const HEXEditForm = ({
+const WEXEditForm = ({
   isEdit = false,
   isChangeModel = false,
   currentModel,
@@ -71,6 +78,18 @@ const HEXEditForm = ({
   const { push, query, pathname } = useRouter();
   const { currentTab, onChangeTab } = useTabs("dimensions");
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const snackbarClick = () => {
+    setSnackbarOpen(true);
+  };
+  const snackbarClose = (e, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
   const values = watch();
 
   useEffect(() => {
@@ -81,22 +100,22 @@ const HEXEditForm = ({
 
   const onSubmit = async (values) => {
     // if (Object.keys(errors).length) return setErrors(errors);
-    // HEXSave({values, HEXCalc})
+    // WEXSave({values, WEXCalc})
 
     if (isChangeModel) {
-      await createHEXChange(values);
-      await push("/dashboard/KRTA/HEX");
+      await createWEXChange(values);
+      await push("/dashboard/KRTA/WEX");
     } else if (isEdit) {
-      await updateHEX(values);
+      await updateWEX(values);
     } else {
-      await createHEX(values);
-      await push("/dashboard/KRTA/HEX");
+      await createWEX(values);
+      await push("/dashboard/KRTA/WEX");
     }
   };
 
-  const updateHEX = async (values) => {
+  const updateWEX = async (values) => {
     try {
-      await fetch(`http://localhost:3000/api/HEX/${query.id}`, {
+      await fetch(`http://localhost:3000/api/WEX/${query.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -108,10 +127,10 @@ const HEXEditForm = ({
     }
   };
 
-  const createHEX = async (values) => {
+  const createWEX = async (values) => {
     values._id = values.model_name + "_" + Date.now();
     try {
-      await fetch("http://localhost:3000/api/HEX/", {
+      await fetch("http://localhost:3000/api/WEX/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,12 +142,12 @@ const HEXEditForm = ({
     }
   };
 
-  const createHEXChange = async (values) => {
+  const createWEXChange = async (values) => {
     values.origin = values._id;
     delete values._id;
     values._id = values.model_name + "_" + Date.now();
     try {
-      await fetch("http://localhost:3000/api/HEX/", {
+      await fetch("http://localhost:3000/api/WEX/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -140,15 +159,15 @@ const HEXEditForm = ({
     }
   };
 
-  // const removeHEX = async () => {
-  async function removeHEX() {
+  // const removeWEX = async () => {
+  async function removeWEX() {
     const { id } = query;
     if (window.confirm("이 모델을 삭제하시겠습니까")) {
       try {
-        await fetch(`http://localhost:3000/api/HEX/${id}`, {
+        await fetch(`http://localhost:3000/api/WEX/${id}`, {
           method: "DELETE",
         });
-        await push("/dashboard/KRTA/HEX");
+        await push("/dashboard/KRTA/WEX");
       } catch (error) {
         console.log(error);
       }
@@ -162,7 +181,7 @@ const HEXEditForm = ({
       component: (
         <>
           <Dimensions control={control} />
-          <DimensionsTrack control={control} />
+          <DimensionsWheel control={control} />
           <DimensionsQC control={control} />
         </>
       ),
@@ -173,7 +192,7 @@ const HEXEditForm = ({
       component: (
         <>
           <Swivel control={control} />
-          <TravelHX control={control} />
+          <TravelWX control={control} />
         </>
       ),
     },
@@ -201,7 +220,6 @@ const HEXEditForm = ({
       component: (
         <>
           <TransPortation control={control} />
-          
         </>
       ),
     },
@@ -211,7 +229,6 @@ const HEXEditForm = ({
       component: (
         <>
           <TAResult control={control} />
-          
         </>
       ),
     },
@@ -231,8 +248,8 @@ const HEXEditForm = ({
                   gridTemplateColumns: "repeat(8, 1fr)",
                 }}
               >
-                {HEXCalc(values)}
-                <Summary control={control}  />
+                {WEXCalc(values)}
+                <Summary control={control} />
               </Box>
               <Tabs
                 allowScrollButtonsMobile
@@ -265,13 +282,21 @@ const HEXEditForm = ({
                   type="submit"
                   variant="contained"
                   loading={isSubmitting}
+                  onClick={snackbarClick}
                 >
                   {!isEdit ? "Create Model" : "Save Changes"}
                 </LoadingButton>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    message="This File was updated successfully"
+                    onClose={snackbarClose}
+                  />
+
                 <Button
                   variant="outlined"
                   startIcon={<DeleteIcon />}
-                  onClick={removeHEX}
+                  onClick={removeWEX}
                 >
                   삭제
                 </Button>
@@ -280,9 +305,13 @@ const HEXEditForm = ({
           </Grid>
           <Grid item xs={12} md={4}>
             <Card sx={{ p: 1 }}>
-            <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-              Preview
-            </Typography>
+              <Typography
+                paragraph
+                variant="overline"
+                sx={{ color: "text.disabled" }}
+              >
+                Preview
+              </Typography>
               <SpecSheet values={values} />
               {JSON.stringify(values, 0, 2)}
             </Card>
@@ -293,4 +322,4 @@ const HEXEditForm = ({
   );
 };
 
-export default HEXEditForm;
+export default WEXEditForm;

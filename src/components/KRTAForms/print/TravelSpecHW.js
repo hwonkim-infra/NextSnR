@@ -1,6 +1,5 @@
-import React from "react";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-
 // 퀵커플러 탈착
 
 const TravelSpecHW = ({ values, config }) => {
@@ -8,16 +7,16 @@ const TravelSpecHW = ({ values, config }) => {
   return (
     <>
       <MathJaxContext version={3} config={config}>
-        <div className="pages" id="Travel_Spec">
-          <table className="bordertable">
+      <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">주행 속도</td>
-              </tr>
+            <tr>
+              <th>주행 속도</th>
+            </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+              <td className={styles.head_description}>
                   <p>
                     “최고속도”란 평탄하고 건조한 아스팔트 포장노면에서 운전중량
                     상태의 건설기계가 주행할 수 있는 최고속도를 말한다.

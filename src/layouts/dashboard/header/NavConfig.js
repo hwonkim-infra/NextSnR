@@ -17,7 +17,7 @@ const navConfig = [
   // 한국형식승인
   // ----------------------------------------------------------------------
   {
-    subheader: 'management',
+    subheader: 'KRTA',
     items: [
       {
         title: '형식승인',
@@ -35,10 +35,11 @@ const navConfig = [
   // PVC
   // ----------------------------------------------------------------------
   {
+    subheader: 'PSC Checklist',
     items: [
       {
         title: 'PSC',
-        path: '/dashboard/PSC',
+    path: '/dashboard/PSC',
         icon: ICONS.dashboard,
         children: [
           { title: 'EU ', path: '/dashboard/PSC/EU' },
@@ -52,10 +53,11 @@ const navConfig = [
   // Blog
   // ----------------------------------------------------------------------
   {
+    subheader: 'PSC Blog',
     items: [
       {
         title: 'Blog',
-        path: '/dashboard/Blog',
+    path: '/dashboard/Blog',
         icon: ICONS.ecommerce,
         children: [
           { title: 'Posts ', path: '/dashboard/Blog/Posts' },

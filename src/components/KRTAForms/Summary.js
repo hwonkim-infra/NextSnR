@@ -21,23 +21,20 @@ const Summary = ({ control,  }) => {
       name: "attachments.bucket_heap",
       type: "number", unit: "㎥"
     },
+    { label: "카운터웨이트", name: "COG.counterWeight_weight", type: "number", unit: "㎏" },
   ];
 
   return (
     <>
       <div className="input-group mb-1">
-        <Paper style={{ padding: 16 }}>
-          <Grid container alignItems="flex-start" spacing={2}>
+          <Grid container  spacing={2}>
             <Card sx={{ p: 3 }}>
               <Box
                 sx={{
                   display: "grid",
                   columnGap: 2,
                   // rowGap: 2,
-                  gridTemplateColumns: {
-                    xs: "repeat(4, 1fr)",
-                    sm: "repeat(4, 1fr)",
-                  },
+                  gridTemplateColumns: "repeat(6, 1fr)"
                 }}
               >
          
@@ -65,7 +62,6 @@ const Summary = ({ control,  }) => {
               </Box>
             </Card>
           </Grid>
-        </Paper>
       </div>
     </>
   );
