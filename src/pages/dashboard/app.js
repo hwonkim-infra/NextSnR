@@ -23,12 +23,13 @@ GeneralApp.getLayout = function getLayout(page) {
 
 // ----------------------------------------------------------------------
 
-export default function GeneralApp() {
+export default function GeneralApp({HEXmodels =[], WEXmodels=[]}) {
   // const { user } = useAuth();
 
   const theme = useTheme();
 
   const { themeStretch } = useSettings();
+  console.log(HEXmodels)
 
   return (
     <Page title="General: App">
@@ -36,6 +37,16 @@ export default function GeneralApp() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={8}>
           AppWelcome
+          {
+            HEXmodels.map((models) => (
+              <div className="" key={models._id}><h3>{models._id}</h3> <h4>
+              {models.count}
+
+              </h4>
+              </div>
+            ))
+          }
+         
             {/* <AppWelcome
               title={`Welcome back! \n ${user?.displayName}`}
               description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
@@ -54,6 +65,16 @@ export default function GeneralApp() {
 
           <Grid item xs={12} md={4}>
           AppFeatured
+          {
+            WEXmodels.map((models) => (
+              <div className="" key={models._id}><h3>{models._id}</h3> <h4>
+              {models.count}
+
+              </h4>
+              </div>
+            ))
+          }
+         
             {/* <AppFeatured list={_appFeatured} /> */}
           </Grid>
 
@@ -175,4 +196,17 @@ export default function GeneralApp() {
       </Container>
     </Page>
   );
+}
+
+export async function getServerSideProps() {
+  const HEXresponse = await fetch("http://localhost:3000/api/HEXmodels/");
+  const WEXresponse = await fetch("http://localhost:3000/api/WEXmodels/");
+  const HEXmodels = await HEXresponse.json();
+  const WEXmodels = await WEXresponse.json();
+
+  return {
+    props: {
+      HEXmodels,WEXmodels
+    },
+  };
 }

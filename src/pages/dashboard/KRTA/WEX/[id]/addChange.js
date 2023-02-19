@@ -10,26 +10,26 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm';
+import WEXEditForm from '@/sections/@dashboard/KRTA/WEXEditForm';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
-HEXEdit.getLayout = function getLayout(page) {
+WEXEdit.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
 
-export default function HEXEdit() {
+export default function WEXEdit() {
 const [currentModel, setCurrentModel] = useState()
 
 
   const { query } = useRouter();
 
 
-  const getHEX = async () => {
-    const response = await fetch(`http://localhost:3000/api/HEX/${query.id}`);
+  const getWEX = async () => {
+    const response = await fetch(`http://localhost:3000/api/WEX/${query.id}`);
 
     const data = await response.json();
     setCurrentModel(data);
@@ -37,23 +37,23 @@ const [currentModel, setCurrentModel] = useState()
   };
 
   useEffect(() => {
-    if (query.id) getHEX();
+    if (query.id) getWEX();
   }, [query.id]);
 
 //   const currentModel = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="HEX: Changemodel ">
+    <Page title="WEX: Changemodel ">
         <HeaderBreadcrumbs
-          heading="Create HEXChange"
+          heading="Create WEXChange"
           links={[
             { name: 'Dashboard', href: '/dashboard/' },
-            { name: 'HEX', href: '/dashboard/KRTA/HEX'  },
+            { name: 'WEX', href: '/dashboard/KRTA/WEX'  },
             { name: (currentModel?.model_name) },
           ]}
         />
 
-        <HEXEditForm isChangeModel currentModel={currentModel} />
+        <WEXEditForm isChangeModel currentModel={currentModel} />
     </Page>
   );
 }
