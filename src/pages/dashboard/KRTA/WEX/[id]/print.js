@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
-import React from 'react'
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 // print Page components
-import WEXSpec from "@/components/KRTAForms/print/WEXSpec";
-import Drawings from "@/components/KRTAForms/print/Drawings";
-import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
-import QCouplr from "@/components/KRTAForms/print/QCouplr";
 import GrossWeights from "@/components/KRTAForms/print/GrossWeights";
-import GroundPressure from "@/components/KRTAForms/print/GroundPressure";
+import QCouplr from "@/components/KRTAForms/print/QCouplr";
 import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
-import TravelSpecHX from "@/components/KRTAForms/print/TravelSpecHX";
-import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
 import Transportation from "@/components/KRTAForms/print/Transportation";
+import TravelBrakingWX from "@/components/KRTAForms/print/TravelBrakingWX";
+import TravelSlopeWX from "@/components/KRTAForms/print/TravelSlopeWX";
+import TravelSpecHW from "@/components/KRTAForms/print/TravelSpecHW";
+import WEXSpec from "@/components/KRTAForms/print/WEXSpec";
+import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
 
 const WEXprint = () => {
     const { push, query } = useRouter();
@@ -47,18 +45,19 @@ const WEXprint = () => {
     
 
   return (
-    <div contentEditable="true">
+    <div contentEditable={true} suppressContentEditableWarning={true}
+    >
         <>
       <WEXSpec values={newWEX} />
       {/* <Drawings values={newWEX}  /> */}
       <WorkingRange values={newWEX} />
       <QCouplr values={newWEX} />
       <GrossWeights values={newWEX} />
-      {/* <GroundPressure values={newWEX} /> */}
       <SwivelSpeed values={newWEX} config={config} />
-      <TravelSpecHX values={newWEX} config={config} />
-      {/* <TravelSlope values={newWEX} config={config} /> */}
-      {/* <Transportation values={newWEX}  /> */}
+      <TravelSpecHW values={newWEX} config={config} />
+      <TravelSlopeWX values={newWEX} config={config} />
+      <TravelBrakingWX values={newWEX} config={config} />
+      <Transportation values={newWEX}  />
         </>
     </div>
   )

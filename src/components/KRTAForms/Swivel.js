@@ -33,25 +33,25 @@ const Swivel = ({ control }) => {
             >
                {InputForms.map((fieldData) => (
                   <Controller
-                    key={fieldData.name}
-                    render={({ field }) => (
-                      <TextField
-                        label={fieldData.label}
-                        {...field}
-                      value={field.value || ''}
+                  key={fieldData.name}
+                  render={({ field }) => (
+                    <TextField
+                      label={fieldData.label}
+                      {...field}
+                      value={field.value || ""}
                       InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {fieldData.unit}
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                    name={fieldData.name}
-                    type={fieldData.type}
-                    control={control}
-                  />
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {fieldData.unit}
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                  )}
+                  name={fieldData.name}
+                  type={fieldData.type}
+                  control={control}
+                />
                 ))}
               
             </Box>

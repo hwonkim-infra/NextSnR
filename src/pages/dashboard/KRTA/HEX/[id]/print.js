@@ -47,8 +47,9 @@ const HEXprint = () => {
     
 
   return (
-    <div contentEditable="true">
-        <>
+    <>    
+    <div contentEditable={true} suppressContentEditableWarning={true}>
+
       <HEXSpec values={newHEX} />
       {/* <Drawings values={newHEX}  /> */}
       <WorkingRange values={newHEX} />
@@ -59,8 +60,8 @@ const HEXprint = () => {
       <TravelSpecHX values={newHEX} config={config} />
       <TravelSlope values={newHEX} config={config} />
       <Transportation values={newHEX}  />
-        </>
     </div>
+        </>
   )
 }
 

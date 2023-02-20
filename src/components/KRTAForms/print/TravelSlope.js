@@ -1,7 +1,7 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
-
+import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 
 const TravelSlope = ({ values, config }) => {
   /* const TM_rev_1 =
@@ -57,30 +57,30 @@ const TravelSlope = ({ values, config }) => {
   ).toFixed(1);
   const theta_3 = values.travel?.greadability_ref;
 
-  
-
   return (
     <>
       <MathJaxContext version={3} config={config}>
-      <div className={styles.pages}>
-      <table className={styles.borderTable}>
+        <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">경사지 등판 및 제동 능력</td>
+              <tr>
+                <th>경사지 등판 및 제동 능력</th>
               </tr>
             </thead>{" "}
             <tbody>
               <tr>
-              <td className={styles.head_description}>
+                <td className={styles.head_description}>
                   <p>
                     굴착기는 100분의 25(무한궤도식 굴착기는 100분의 30을 말한다)
                     기울기의 견고한 건조 지면을 올라갈 수 있고, 정지상태를
                     유지할 수 있는 제동장치 및 제동장금장치를 갖추어야 한다.
                   </p>
                   <p>○ 견인력 관련 제원</p>
-                  <table className="innertable" width="80%" height="60%">
+                  <table
+                    style={{ width: "80%", height: "60%", margin: "auto" }}
+                  >
                     <thead>
-                      <tr height="20mm">
+                      <tr style={{ height: "20mm", margin: "auto" }}>
                         <th>항목</th>
                         <th style={{ textAlign: "center" }}>기호</th>
                         <th>단위</th>
@@ -182,9 +182,8 @@ const TravelSlope = ({ values, config }) => {
           </table>
         </div>
 
-        {values.travel?.pump_pressure && 
-      <div className={styles.pages}>
-      <table className={styles.borderTable}>
+        <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
               <tr>
                 <th>경사지 등판 및 제동 능력</th>
@@ -192,16 +191,19 @@ const TravelSlope = ({ values, config }) => {
             </thead>
             <tbody>
               <tr>
-              <td className={styles.head_description}>
-                  <p>▷ 아래 계산 결과에 따라 주행 견인력은 {values.travel?.DP} kgf</p>
-                  <div >주행 모터 토크 계산</div>
+                <td className={styles.head_description}>
+                  <p>
+                    ▷ 아래 계산 결과에 따라 주행 견인력은 {values.travel?.DP}{" "}
+                    kgf
+                  </p>
+                  <div>주행 모터 토크 계산</div>
 
                   <table>
                     <tbody>
                       <tr>
-                        <td className="item-headers" rowSpan="2">
+                        <TableCell rowSpan="2">
                           <MathJax>{`$$TM = \\frac{P \\times q}{200 \\pi}$$`}</MathJax>
-                        </td>
+                        </TableCell>
                         <td>
                           (1속)
                           <MathJax>{`$$TM_1 = \\frac{${values.travel?.pump_pressure} \\times ${values.travel?.TM_flow_1}}{200 \\pi}$$`}</MathJax>
@@ -224,16 +226,14 @@ const TravelSlope = ({ values, config }) => {
                     </tbody>
                   </table>
 
-                  <div className="head_description">
-                    견인력 (DP, kgf): 아래 중 작은 항목
-                  </div>
+                  <div>견인력 (DP, kgf): 아래 중 작은 항목</div>
 
-                  <table className="innertable" width="100%">
+                  <table>
                     <tbody>
                       <tr>
-                        <td className="item-headers" colSpan="3">
+                        <TableCell colSpan="3">
                           스프로켓 최대 구동력 TS(kgf)
-                        </td>
+                        </TableCell>
                       </tr>
                       <tr>
                         <td>
@@ -253,9 +253,7 @@ const TravelSlope = ({ values, config }) => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="item-headers" colSpan="3">
-                          점착력 (AF, kgf)
-                        </td>
+                        <TableCell colSpan="3">점착력 (AF, kgf)</TableCell>
                       </tr>
                       <tr>
                         <td>
@@ -275,10 +273,10 @@ const TravelSlope = ({ values, config }) => {
               </tr>
             </tbody>
           </table>
-        </div>}
-
-      <div className={styles.pages}>
-      <table className={styles.borderTable}>
+        </div>
+        
+        <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
               <tr>
                 <th>경사지 등판 및 제동 능력</th>
@@ -286,7 +284,7 @@ const TravelSlope = ({ values, config }) => {
             </thead>
             <tbody>
               <tr>
-              <td className={styles.head_description}>
+                <td className={styles.head_description}>
                   <p>
                     등판 및 정차 가능 경사각은 아래 사양 중 가장 작은 각에 해당:{" "}
                     <br />
@@ -296,12 +294,14 @@ const TravelSlope = ({ values, config }) => {
                     )}°$$`}</MathJax>
                   </p>
 
-                  <table className="innertable" width="90%">
+                  <table
+                    style={{ width: "90%", height: "30%", margin: "auto" }}
+                  >
                     <tbody>
                       <tr>
-                        <td className="item-headers" colSpan="3">
+                        <TableCell colSpan="3">
                           경사지에서 미끄러지지 않는 각도
-                        </td>
+                        </TableCell>
                       </tr>
                       <tr>
                         <td>
@@ -325,9 +325,9 @@ const TravelSlope = ({ values, config }) => {
                       </tr>
 
                       <tr>
-                        <td className="item-headers" colSpan="3">
+                        <TableCell colSpan="3">
                           견인력에 의한 등판 능력
-                        </td>
+                        </TableCell>
                       </tr>
                       <tr>
                         <td>
@@ -342,17 +342,27 @@ const TravelSlope = ({ values, config }) => {
                           <MathJax>{`$$\\theta_2 = \\sin^{-1}{\\frac{DP - \\xi W_T}{W_T}} $$`}</MathJax>
                         </td>
                         <td>
-                          <MathJax>{`$$\\sin^{-1}(\\frac{${DP || values.travel?.traction_force}  - ${values.travel?.surface_drag || values.travel?.friction_surface} \\times ${values.grossWeight}}{${values.grossWeight}}) $$`}</MathJax>
+                          <MathJax>{`$$\\sin^{-1}(\\frac{${
+                            DP || values.travel?.traction_force
+                          }  - ${
+                            values.travel?.surface_drag ||
+                            values.travel?.friction_surface
+                          } \\times ${values.grossWeight}}{${
+                            values.grossWeight
+                          }}) $$`}</MathJax>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${values.travel?.theta_2 || values.travel?.traction_slope} $$`}</MathJax>
+                          <MathJax>{`$$ ${
+                            values.travel?.theta_2 ||
+                            values.travel?.traction_slope
+                          } $$`}</MathJax>
                         </td>
                       </tr>
 
                       <tr>
-                        <td className="item-headers" colSpan="3">
+                        <TableCell colSpan="3">
                           엔진 오일 팬에 의한 최대 허용 경사
-                        </td>
+                        </TableCell>
                       </tr>
                       <tr>
                         <td>엔진 팬 제한 각 </td>
@@ -371,8 +381,9 @@ const TravelSlope = ({ values, config }) => {
           </table>
         </div>
 
-      <div className={styles.pages}>
-      <table className={styles.borderTable}>
+
+        <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
               <tr>
                 <th>경사지 등판 및 제동 능력</th>
@@ -380,24 +391,23 @@ const TravelSlope = ({ values, config }) => {
             </thead>
             <tbody>
               <tr>
-              <td className={styles.head_description}>
-                  <div className="head_description">
+                <td className={styles.head_description}>
+                  <div>
                     경사지에서의 제동 유지는 제동 토크와 밀려 내려가는 힘 간의
                     비교로 결정
                   </div>
                   {2 * values.travel?.brake_torque * values.travel?.reduc >
                     traction_downward && (
-                    <div className="head_description">
-                      {" "}
-                      ▷ slippery force 보다 큰 제동 토크 확보
-                    </div>
+                    <div>▷ slippery force 보다 큰 제동 토크 확보</div>
                   )}
 
                   <div>
                     <p>○ 제동능력 관련 사양</p>
                   </div>
 
-                    <table style={{width:"100%", height:"40%", margin: "auto"}} >
+                  <table
+                    style={{ width: "100%", height: "40%", margin: "auto" }}
+                  >
                     <thead>
                       <tr>
                         <th>항목</th>
@@ -458,16 +468,15 @@ const TravelSlope = ({ values, config }) => {
                     </tbody>
                   </table>
 
-                  <div>
-                    <br/>○ 주차 토크와 내려가는 힘 간의 비교<br/>
-                  </div>
+                    <br />○ 주차 토크와 내려가는 힘 간의 비교
+                    <br />
 
-                    <table style={{width:"100%", height:"30%", margin: "auto"}} >
+                  <table
+                    style={{ width: "100%", height: "30%", margin: "auto" }}
+                  >
                     <tbody>
                       <tr>
-                        <td className="head_description" colSpan="3">
-                          주차 토크 TP(kgm)
-                        </td>
+                        <TableCell colSpan="3">주차 토크 TP(kgm)</TableCell>
                       </tr>
                       <tr>
                         <td>
@@ -484,9 +493,12 @@ const TravelSlope = ({ values, config }) => {
                           }$$`}</MathJax>
                         </td>
                       </tr>
-                      <td className="head_description" colSpan="3">
+                      <tr>
+
+                      <TableCell colSpan="3">
                         기준 경사지 (16.7)에서 내려가는 힘 TS(kgm)
-                      </td>
+                      </TableCell>
+                      </tr>
                       <tr>
                         <td>
                           <MathJax>{`$$TS = R \\times W_t \\times \\sin \\theta$$`}</MathJax>
@@ -508,7 +520,7 @@ const TravelSlope = ({ values, config }) => {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> 
       </MathJaxContext>
     </>
   );

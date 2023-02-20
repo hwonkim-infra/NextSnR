@@ -1,4 +1,4 @@
-import { Edit as EditIcon } from "@mui/icons-material/";
+import EditIcon from '@mui/icons-material/Edit';
 import { Box, CircularProgress, IconButton, Paper } from "@mui/material";
 import parse from "html-react-parser";
 import React from "react";

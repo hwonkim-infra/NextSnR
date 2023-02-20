@@ -1,5 +1,7 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { TableCell } from "@mui/material";
 
 // 퀵커플러 탈착
 
@@ -26,34 +28,38 @@ const TravelBrakingWX = ({ values, config }) => {
     1
   );
   const decceleration = (decceleration_rate * 9.81).toFixed(1);
-  const braking_distance_max = Math.round(
-    (values.travel?.travel_speed ** 2 / (2 * decceleration)) *
-      (1000 / 3600) ** 2 +
-    idle_running * values.travel?.travel_speed * (1000 / 3600)
-  *100)/100;
-  const braking_distance_norm = Math.round(
-    (braking_speed_standard ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
-    idle_running * braking_speed_standard * (1000 / 3600)
-  *100)/100;
+  const braking_distance_max =
+    Math.round(
+      (values.travel?.travel_speed ** 2 / (2 * decceleration)) *
+        (1000 / 3600) ** 2 +
+        idle_running * values.travel?.travel_speed * (1000 / 3600) * 100
+    ) / 100;
+  const braking_distance_norm =
+    Math.round(
+      (braking_speed_standard ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
+        idle_running * braking_speed_standard * (1000 / 3600) * 100
+    ) / 100;
 
   return (
     <>
       <MathJaxContext version={3} config={config}>
-        <div className="pages" id="Braking_capability">
-          <table className="bordertable">
+      <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">주제동장치와 제동능력</td>
+              <tr>
+                <th>주제동장치와 제동능력</th>
               </tr>
-            </thead>{" "}
+            </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+                <td className={styles.head_description}>
                   <p>○ 타이어식 건설기계의 주제동장치</p>
 
-                  <table class="innertable" width="60%" height="250px">
+                  <table
+                    style={{ width: "60%", height: "30%", margin: "auto" }}
+                  >
                     <thead>
-                      <tr height="20mm">
+                      <tr>
                         <th>항목</th>
                         <th>기호</th>
                         <th>단위</th>
@@ -97,14 +103,16 @@ const TravelBrakingWX = ({ values, config }) => {
                         </td>
 
                         <td>cc/rev</td>
-                        <td>{values.travel?.tire_rolling_radius / 1000}</td>
+                        <td>{values.travel?.tire_rolling_radius / 1000 || ''}</td>
                       </tr>
                     </tbody>
                   </table>
-                  <p> </p>
+                  <br />
                   <p>○ 서비스 브레이크의 제동력 계산</p>
 
-                  <table class="innertable" width="90%" height="300px">
+                  <table
+                    style={{ width: "90%", height: "30%", margin: "auto" }}
+                  >
                     <thead>
                       <tr>
                         <th>항목</th>
@@ -123,7 +131,7 @@ const TravelBrakingWX = ({ values, config }) => {
                           <MathJax>{`$$ \\frac{${
                             values.travel?.brake_torque_axle
                           }}{9.8 \\cdot ${
-                            values.travel?.tire_rolling_radius / 1000
+                            (values.travel?.tire_rolling_radius / 1000 || '')
                           }} $$`}</MathJax>
                         </td>
                         <td>
@@ -164,150 +172,171 @@ const TravelBrakingWX = ({ values, config }) => {
           </table>
         </div>
 
-        <div className="pages" id="Braking_distance">
-          <table className="bordertable">
+        <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">제동 거리</td>
+              <tr>
+                <th>제동 거리</th>
               </tr>
-            </thead>{" "}
+            </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+                <td className={styles.head_description}>
                   <p>○ 제동거리 산정을 위한 기준 속도 </p>
-
-                  <table class="innertable" width="60%" height="250px">
+                  <table
+                    style={{ width: "60%", height: "30%", margin: "auto" }}
+                  >
                     <thead>
-                      <tr height="20mm">
+                      <tr>
                         <th>항목</th>
                         <th>기호</th>
                         <th>단위</th>
                         <th>제원</th>
-    <th>비고</th>
+                        <th>비고</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-    <td>장비 최고 속도</td>
+                        <td>장비 최고 속도</td>
 
                         <td>
-                          <strong><i>V<sub>0</sub></i></strong>
+                          <strong>
+                            <i>
+                              V<sub>0</sub>
+                            </i>
+                          </strong>
                         </td>
                         <td>㎞/h</td>
-                        <td>{values.travel_speed}</td>
-    <td></td>
+                        <td>{values.travel_speed || ''}</td>
+                        <td></td>
                       </tr>
                       <tr>
-    <td>규정 제동 속도</td>
+                        <td>규정 제동 속도</td>
                         <td>
-                        <strong><i>V<sub>1</sub></i></strong>
+                          <strong>
+                            <i>
+                              V<sub>1</sub>
+                            </i>
+                          </strong>
                         </td>
                         <td>㎞/h</td>
-                        <td>{ braking_speed_standard }</td>
-    <td>32 or 80% (greater)</td>
+                        <td>{braking_speed_standard || ''}</td>
+                        <td>32 or 80% (greater)</td>
                       </tr>
                       <tr>
-    <td>공주 시간</td>
+                        <td>공주 시간</td>
                         <td>
-                        <strong><i>t<sub></sub></i></strong>
+                          <strong>
+                            <i>
+                              t<sub></sub>
+                            </i>
+                          </strong>
                         </td>
                         <td>sec</td>
                         <td>0.5</td>
-    <td></td>
+                        <td></td>
                       </tr>
                     </tbody>
                   </table>
-                  <p> </p>
-            <p>○ 제동력과 감가속도 </p>
+                  <br />
+                  <p>○ 제동력과 감가속도 </p>
 
-            <table class="innertable" width="90%" height="250px">
-            <tbody>
-                <tr>
-                    <td>제동력과 감속도 (감속율)</td>
-                <td>
-                    <MathJax>{`$$ \\mu = \\frac {F_{SB}}{W} $$`}</MathJax>
-                </td>
-                <td>
-                    <MathJax>{`$$ \\frac {${braking_force_total}}{${values.grossWeight}} $$`}</MathJax>
-                </td>
-                <td>
-                    <MathJax>{`$$ ${decceleration_rate} $$`}</MathJax>
-                </td>
-                </tr>
+                  <table
+                    style={{ width: "100%", height: "20%", margin: "auto" }}
+                  >
+                    <tbody>
+                      <tr>
+                        <td>제동력과 감속도 (감속율)</td>
+                        <td>
+                          <MathJax>{`$$ \\mu = \\frac {F_{SB}}{W} $$`}</MathJax>
+                        </td>
+                        <td>
+                          <MathJax>{`$$ \\frac {${braking_force_total}}{${values.grossWeight}} $$`}</MathJax>
+                        </td>
+                        <td>
+                          <MathJax>{`$$ ${decceleration_rate} $$`}</MathJax>
+                        </td>
+                      </tr>
 
-                <tr>
-                    <td>감속</td>
-                <td>
-                    <MathJax>{`$$ a= \\mu \\times g $$`}</MathJax>
-                </td>
-                <td>
-                    <MathJax>{`$$ ${decceleration_rate} \\times 9.81 $$`}</MathJax>
-                </td>
-                <td>
-                    <MathJax>{`$$ ${decceleration} $$`}</MathJax>
-                </td>
-                </tr>
-
-
-            </tbody>
-            </table>
+                      <tr>
+                        <td>감속</td>
+                        <td>
+                          <MathJax>{`$$ a= \\mu \\times g $$`}</MathJax>
+                        </td>
+                        <td>
+                          <MathJax>{`$$ ${decceleration_rate} \\times 9.81 $$`}</MathJax>
+                        </td>
+                        <td>
+                          <MathJax>{`$$ ${decceleration} $$`}</MathJax>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div className="pages" id="Braking_distance_2">
-          <table className="bordertable">
-            <thead>
-              <tr className="borderheader">
-                <td height="30mm">제동 거리</td>
-              </tr>
-            </thead>{" "}
-            <tbody>
-              <tr>
-                <td className="head_description">
-                  <p>○ 제동거리 산정을 위한 기준 속도 </p>
-                  <img src="/images/braking_distance_standard.jpg" alt="제동거리"  />
+        <div className={styles.pages}>
+<table className={styles.borderTable}>
+  <thead>
+    <tr>
+      <th>제동 거리</th>
+    </tr>
+  </thead>{" "}
+  <tbody>
+    <tr>
+      <td className={styles.head_description}>
+        <p>○ 제동거리 산정을 위한 기준 속도 </p>
+        <img
+          src="/images/braking_distance_standard.jpg"
+          alt="제동거리"
+        />
 
-
-                  <p> </p>
+        <br />
         <p>○ 정지 거리 (최고 속도 / 기준 속도) </p>
 
-            <table class="innertable" width="90%" height="">
-            <tbody>
-                <tr>
-                <td>
-                    <MathJax>{`$$ S_{max} = \\frac{{V_0}^2}{2 \\times a} \\times (\\frac{1000}{3600})^2 + t \\times V_0 \\times (\\frac{1000}{3600}) $$`}</MathJax>
-                </td>
-    <td>정지거리 (최고속도)</td>                
-                </tr>
-                <tr>
-                <td>
-                    <MathJax>{`$$ \\frac{${values.travel?.travel_speed}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${values.travel?.travel_speed} \\times (\\frac{1000}{3600}) $$`}</MathJax>
-                </td>
-    <td><strong>{braking_distance_max}</strong> </td>                
-                </tr>
+        <table
+          style={{ width: "100%", height: "60%", margin: "auto" }}
+        >
+          <tbody>
+            <tr>
+              <td>
+                <MathJax>{`$$ S_{max} = \\frac{{V_0}^2}{2 \\times a} \\times (\\frac{1000}{3600})^2 + t \\times V_0 \\times (\\frac{1000}{3600}) $$`}</MathJax>
+              </td>
+              <td>정지거리 (최고속도)</td>
+            </tr>
+            <tr>
+              <td>
+                <MathJax>{`$$ \\frac{${values.travel?.travel_speed}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${values.travel?.travel_speed} \\times (\\frac{1000}{3600}) $$`}</MathJax>
+              </td>
+              <td>
+                <strong>{braking_distance_max || ''}</strong>{" "}
+              </td>
+            </tr>
 
-                <tr>
-                <td>
-                    <MathJax>{`$$ S_{ISO} = \\frac{{V_1}^2}{2 \\times a} \\times (\\frac{1000}{3600})^2 + t \\times V_1 \\times (\\frac{1000}{3600}) $$`}</MathJax>
-                </td>
-    <td>정지거리 (규정속도)</td>                
-                </tr>
-                <tr>
-                <td>
-                    <MathJax>{`$$ \\frac{${braking_speed_standard}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${braking_speed_standard} \\times (\\frac{1000}{3600}) $$`}</MathJax>
-                </td>
-    <td><strong>{braking_distance_norm}</strong> </td>                
-                </tr>
-            </tbody>
-            </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            <tr>
+              <td>
+                <MathJax>{`$$ S_{ISO} = \\frac{{V_1}^2}{2 \\times a} \\times (\\frac{1000}{3600})^2 + t \\times V_1 \\times (\\frac{1000}{3600}) $$`}</MathJax>
+              </td>
+              <td>정지거리 (규정속도)</td>
+            </tr>
+            <tr>
+              <td>
+                <MathJax>{`$$ \\frac{${braking_speed_standard}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${braking_speed_standard} \\times (\\frac{1000}{3600}) $$`}</MathJax>
+              </td>
+              <td>
+                <strong>{braking_distance_norm || ''}</strong>{" "}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
       </MathJaxContext>
     </>

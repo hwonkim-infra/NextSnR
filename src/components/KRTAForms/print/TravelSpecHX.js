@@ -1,4 +1,5 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { TableCell } from "@mui/material";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 // 퀵커플러 탈착
@@ -152,9 +153,9 @@ const TravelSpecHX = ({ values, config }) => {
                     <table style={{width:"100%", height:"70%", margin: "auto"}} >
                     <tbody>
                       <tr>
-                        <td className={styles.item_headers} colSpan="3">
+                        <TableCell colSpan="3">
                           주행모터 축 회전 SM(rpm)
-                        </td>
+                        </TableCell>
                       </tr>
                       <tr>
                         <td>
@@ -182,9 +183,9 @@ const TravelSpecHX = ({ values, config }) => {
                       </tr>
 
                       <tr>
-                        <td className="item-headers" colSpan="3">
+                        <TableCell colSpan="3">
                           주행속도 (km/hr)
-                        </td>
+                        </TableCell>
                       </tr>
                       <tr>
                         <td>

@@ -21,15 +21,14 @@ const GroundPressure = ({ values, config }) => {
             <tbody>
 
             <tr>
-              <td className="head_description">
+              <td className={styles.head_description}>
                 <img
                   src="/images/GroundPressure.png"
                   alt="groundPressure"
                   width="80%"
                 />
+                    <table style={{width:"100%", height:"90%", margin: "auto"}} >
 
-                <table className={styles.innerTable}>
-                  <thead></thead>
                   <tbody>
                     <tr>
                       <td colSpan="5">
@@ -40,7 +39,7 @@ const GroundPressure = ({ values, config }) => {
                       <td width="28%">텀블러 중심거리</td>
                       <td width="5%">l</td>
                       <td width="15%" id="">
-                        {values.undercarriage?.tumbler_distance / 10}
+                        {(values.undercarriage?.tumbler_distance / 10) ||'' }
                       </td>
                       <td width="10%">(㎝)</td>
                       <td> </td>
@@ -50,14 +49,14 @@ const GroundPressure = ({ values, config }) => {
                       <td>
                         L<sub>t</sub>{" "}
                       </td>
-                      <td>{(values.undercarriage?.track_length / 10)}</td>
+                      <td>{(values.undercarriage?.track_length / 10) || ''}</td>
                       <td>(㎝)</td>
                       <td>　</td>
                     </tr>
                     <tr>
                       <td>접지길이</td>
                       <td>L</td>
-                      <td>{values.undercarriage?.ground_Length}</td>
+                      <td>{values.undercarriage?.ground_Length  || ''}</td>
                       <td>(㎝)</td>
                       <td>
                       l+0.35×(L<sub>t</sub>-L<sub>c</sub>)
@@ -66,21 +65,21 @@ const GroundPressure = ({ values, config }) => {
                     <tr>
                       <td>장비전중량</td>
                       <td>W</td>
-                      <td>{values.grossWeight - quick_coupler_weight}</td>
+                      <td>{(values.grossWeight - quick_coupler_weight) || ''}</td>
                       <td>(㎏)</td>
                       <td>운전자 65㎏</td>
                     </tr>
                     <tr>
                       <td>슈폭</td>
                       <td>B</td>
-                      <td>{values.undercarriage?.shoe_width}</td>
+                      <td>{(values.undercarriage?.shoe_width) || ''}</td>
                       <td>(㎝)</td>
                       <td>　</td>
                     </tr>
                     <tr>
                       <td>접지압</td>
                       <td>P</td>
-                      <td>{values.undercarriage?.ground_pressure_woqc}</td>
+                      <td>{values.undercarriage?.ground_pressure_woqc || ''}</td>
                       <td>(kg/㎠)</td>
                       <td>
                         {" "}
@@ -99,7 +98,7 @@ const GroundPressure = ({ values, config }) => {
                       <td>
                         W<sub>qc</sub>
                       </td>
-                      <td>{values.grossWeight}</td>
+                      <td>{values.grossWeight || ''}</td>
                       <td>(㎏)</td>
                       <td>퀵 커플러 중량 포함</td>
                     </tr>
@@ -108,10 +107,9 @@ const GroundPressure = ({ values, config }) => {
                       <td>
                         P<sub>qc</sub>
                       </td>
-                      <td>{values.undercarriage?.ground_pressure}</td>
+                      <td>{values.undercarriage?.ground_pressure || ''}</td>
                       <td>(kg/㎠)</td>
                       <td>
-                        　 <br />{" "}
                       </td>
                     </tr>
                   </tbody>

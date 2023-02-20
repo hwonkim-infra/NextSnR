@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Edit as EditIcon, PostAdd } from "@mui/icons-material/";
+
+import EditIcon from '@mui/icons-material/Edit';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 import {
   Button,
   Box,
@@ -106,7 +108,7 @@ export default function PSCList({ PSCs = [] }) {
               <Box>
                 <Button
                   variant="compromised"
-                  startIcon={<PostAdd />}
+                  startIcon={<PostAddIcon />}
                   psc_id={currentPSC}
                 >
                   {/* <Link

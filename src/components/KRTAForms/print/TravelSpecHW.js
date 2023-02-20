@@ -1,26 +1,27 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { TableCell } from "@mui/material";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 // 퀵커플러 탈착
 
 const TravelSpecHW = ({ values, config }) => {
-
   return (
     <>
       <MathJaxContext version={3} config={config}>
-      <div className={styles.pages}>
-      <table className={styles.borderTable}>
+        <div className={styles.pages}>
+          <table className={styles.borderTable}>
             <thead>
-            <tr>
-              <th>주행 속도</th>
-            </tr>
+              <tr>
+                <th>주행 속도</th>
+              </tr>
             </thead>
             <tbody>
               <tr>
-              <td className={styles.head_description}>
+                <td className={styles.head_description}>
                   <p>
                     “최고속도”란 평탄하고 건조한 아스팔트 포장노면에서 운전중량
                     상태의 건설기계가 주행할 수 있는 최고속도를 말한다.
                   </p>
+                  <br />
                   <p>
                     ▷ 아래 계산 결과에 따라{" "}
                     <strong>
@@ -28,8 +29,11 @@ const TravelSpecHW = ({ values, config }) => {
                       최고 주행 속도는 {values.travel?.travel_speed}㎞/h
                     </strong>
                   </p>
+                  <br />
                   <p>○ 주행 성능 관련 사양</p>
-                  <table className="innertable" width="80%" height="300px">
+                  <table
+                    style={{ width: "80%", height: "30%", margin: "auto" }}
+                  >
                     <thead>
                       <tr>
                         <th>항목</th>
@@ -105,51 +109,52 @@ const TravelSpecHW = ({ values, config }) => {
                       </tr>
                     </tbody>
                   </table>
+                  <br />
                   <p>○ 주행모터 회전속도에 따른 주행속도 계산</p>
-                    <table className="innertable" width="100%" height="200px">
-                      <tbody>
-                        <tr>
-                          <td className="item-headers" colSpan="3">
-                            주행모터 축 회전수(rpm)
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <MathJax>{`$$SM = \\frac{\\Q \\times \\mu_{mv}}{q} \\times 1,000$$`}</MathJax>
-                          </td>
-                          <td>
-                            <MathJax>{`$$ \\frac{ ${values.travel?.pump_displacement_travel} \\times ${values.travel?.motor_eff_travel}}{${values.travel?.motor_displacement_travel} } \\times 1,000$$`}</MathJax>
-                          </td>
-                          <td>
-                            <MathJax>{`$$${values.travel?.axle_motor_rev}$$`}</MathJax>
-                          </td>
-                        </tr>
+                  <table
+                    style={{ width: "100%", height: "30%", margin: "auto" }}
+                  >
+                    <tbody>
+                      <tr>
+                        <TableCell colSpan="3">
+                          주행모터 축 회전수(rpm)
+                        </TableCell>
+                      </tr>
+                      <tr>
+                        <td>
+                          <MathJax>{`$$SM = \\frac{\Q \\times \\mu_{mv}}{q} \\times 1,000$$`}</MathJax>
+                        </td>
+                        <td>
+                          <MathJax>{`$$ \\frac{ ${values.travel?.pump_displacement_travel} \\times ${values.travel?.motor_eff_travel}}{${values.travel?.motor_displacement_travel} } \\times 1,000$$`}</MathJax>
+                        </td>
+                        <td>
+                          <MathJax>{`$$${values.travel?.axle_motor_rev}$$`}</MathJax>
+                        </td>
+                      </tr>
 
-                        <tr>
-                          <td className="item-headers" colSpan="3">
-                            주행속도 (km/hr)
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <MathJax>{`$$V = \\frac {SM \\times 2\\pi R \\times 60}{I_t \\times I_r \\times 10^3}$$`}</MathJax>
-                          </td>
-                          <MathJax>{`$$V = \\frac {${values.travel?.axle_motor_rev} \\times 2\\pi \\cdot ${values.travel?.tire_rolling_radius} \\times 60}{${values.travel?.TM_reduction} \\times ${values.travel?.axle_reduction} \\times 10^3}$$`}</MathJax>
+                      <tr>
+                        <TableCell colSpan="3">주행속도 (km/hr)</TableCell>
+                      </tr>
+                      <tr style={{ background: "#e6e6e6" }}>
+                        <td>
+                          <MathJax>{`$$V = \\frac {SM \\times 2\\pi R \\times 60}{I_t \\times I_r \\times 10^3}$$`}</MathJax>
+                        </td>
+                        <td>
 
-                          <td>
-                            <MathJax>{`$$${values.travel?.travel_speed}$$`}</MathJax>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                        <MathJax>{`$$V = \\frac {${values.travel?.axle_motor_rev} \\times 2\\pi \\cdot ${values.travel?.tire_rolling_radius} \\times 60}{${values.travel?.TM_reduction} \\times ${values.travel?.axle_reduction} \\times 10^3}$$`}</MathJax>
+                        </td>
 
+                        <td>
+                          <MathJax>{`$$${values.travel?.travel_speed}$$`}</MathJax>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </td>
-                
               </tr>
             </tbody>
           </table>
         </div>
-
       </MathJaxContext>
     </>
   );

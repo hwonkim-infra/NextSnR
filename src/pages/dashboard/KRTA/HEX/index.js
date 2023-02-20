@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Box,  Grid, Stack } from "@mui/material";
+import { Button, Box, Grid, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 
@@ -13,8 +13,6 @@ import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
 
 // Preview
-
-
 
 HEXList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
@@ -67,9 +65,12 @@ export default function HEXList({ HEXs = [] }) {
         <Grid item xs={8} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
             heading="Crawler Excavator"
-            links={[{ name: "형식승인" }, { name: "HEX" }]}
+            links={[
+              { name: "Dashboard"  },
+              { name: "형식승인: HEX"  },
+            ]}
             action={
-              <NextLink href="HEX/new">
+              <NextLink href="/dashboard/KRTA/HEX/new">
                 <Button
                   variant="contained"
                   startIcon={<Iconify icon={"eva:plus-fill"} />}
@@ -93,7 +94,7 @@ export default function HEXList({ HEXs = [] }) {
           />
         </Grid>
         <Grid item xs={4}>
-        <Stack
+          <Stack
             direction="row"
             spacing={3}
             alignItems="flex-start"
@@ -109,23 +110,23 @@ export default function HEXList({ HEXs = [] }) {
             {currentHEX.model_name && (
               <Box>
                 <Button
-                  sx={{m:1}}
+                  sx={{ m: 1 }}
                   variant="outlined"
-                  href={"HEX/" + currentHEX?.id+"/edit"}                  
+                  href={"HEX/" + currentHEX?.id + "/edit"}
                 >
                   수정
                 </Button>
                 <Button
-                  sx={{m:1}}
+                  sx={{ m: 1 }}
                   variant="contained"
                   // startIcon={<PrintIcon />}
-                  href={"HEX/" + currentHEX?.id+"/print"}
+                  href={"HEX/" + currentHEX?.id + "/print"}
                   target="_blank"
                 >
                   출력
                 </Button>
                 <Button
-                  sx={{m:1}}
+                  sx={{ m: 1 }}
                   variant="text"
                   // startIcon={<TextSnippet />}
                   href={"/HEX/specW/" + currentHEX?.id}
@@ -137,22 +138,20 @@ export default function HEXList({ HEXs = [] }) {
             )}
           </Stack>
 
-          
-          {(!currentHEX.ChangeModel && currentHEX.model_name) && (
+          {!currentHEX.ChangeModel && currentHEX.model_name && (
             <Box>
               <Button
                 variant="outlined"
                 // startIcon={<QueueIcon />}
-                href={"HEX/" + currentHEX?.id+"/addChange"}                  
-                
-              > 변경형식
-                
+                href={"HEX/" + currentHEX?.id + "/addChange"}
+              >
+                {" "}
+                변경형식
               </Button>
             </Box>
           )}
 
-<SpecSheet values={currentHEX}></SpecSheet>
-
+          <SpecSheet values={currentHEX}></SpecSheet>
         </Grid>
       </Grid>
     </div>

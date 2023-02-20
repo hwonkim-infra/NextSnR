@@ -23,8 +23,6 @@ const InputForms = [
   return (
     <>
 
-<div className="input-group mb-1">
-        <Paper style={{ padding: 4 }}>
           <Grid container alignItems="flex-start" spacing={2}>
           <Card sx={{ p: 3 }}>
             <Box
@@ -65,10 +63,6 @@ const InputForms = [
             
           </Card>
           </Grid>
-        </Paper>
-
-
-    </div>
 
     </>
   );

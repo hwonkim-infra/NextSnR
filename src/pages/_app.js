@@ -22,7 +22,7 @@ import ThemeProvider from '../theme';
 import ThemeSettings from '../components/settings';
 import ProgressBar from '../components/ProgressBar';
 import MotionLazyContainer from '../components/animate/MotionLazyContainer';
-import NotistackProvider from '@/components/NotistackProvider';
+// import NotistackProvider from '@/components/NotistackProvider';
 
 
 
@@ -46,18 +46,18 @@ export default function MyApp(props) {
       </Head>
 
       <CollapseDrawerProvider>
-        <SettingsProvider defaultSettings={settings}>
+        {/* <SettingsProvider defaultSettings={settings}> */}
           <MotionLazyContainer>
             <ThemeProvider>
               {/* <ThemeSettings> */}
-                <NotistackProvider>
+                {/* <NotistackProvider> */}
                   <ProgressBar />
                   {getLayout(<Component {...pageProps} />)}
-                </NotistackProvider>
+                {/* </NotistackProvider> */}
               {/* </ThemeSettings> */}
             </ThemeProvider>
           </MotionLazyContainer>
-        </SettingsProvider>
+        {/* </SettingsProvider> */}
       </CollapseDrawerProvider>
     </>
   );
@@ -65,7 +65,7 @@ export default function MyApp(props) {
 
 // ----------------------------------------------------------------------
 
-MyApp.getInitialProps = async (context) => {
+/* MyApp.getInitialProps = async (context) => {
   const appProps = await App.getInitialProps(context);
 
   const cookies = cookie.parse(context.ctx.req ? context.ctx.req.headers.cookie || '' : document.cookie);
@@ -76,4 +76,4 @@ MyApp.getInitialProps = async (context) => {
     ...appProps,
     settings,
   };
-};
+}; */

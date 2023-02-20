@@ -29,8 +29,8 @@ export default function HEXCreate() {
         <HeaderBreadcrumbs
           heading="Create a new HEX"
           links={[
-            { name: 'Dashboard', },
-            { name: 'HEX', href: PATH_DASHBOARD.KRTA.HEX },
+            { name: 'Dashboard', href: "/dashboard/app" },
+            { name: 'HEX', href: "/dashboard/KRTA/HEX" },
             { name: 'New HEX' },
           ]}
         /> 

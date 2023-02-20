@@ -1,6 +1,7 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-// import { Box } from "@mui/material";
+import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { TableCell } from "@mui/material";
 
 // 퀵커플러 탈착
 
@@ -9,9 +10,6 @@ const TravelSlopeWX = ({ values, config }) => {
     return radians * (180 / Math.PI);
   };
 
-  /* const degrees_to_radians = (degrees) => {
-    return degrees / (180 / Math.PI);
-  }; */
 
   const noslip_slope = radians_to_degrees(
     Math.atan(values.travel?.friction_surface)
@@ -32,25 +30,28 @@ const TravelSlopeWX = ({ values, config }) => {
   return (
     <>
       <MathJaxContext version={3} config={config}>
-        <div className="pages" id="Greadability_Spec">
-          <table className="bordertable">
+    <div className={styles.pages}>
+      <table className={styles.borderTable}>
             <thead>
-              <tr className="borderheader">
-                <td height="30mm">경사지 등판 및 제동 능력</td>
+              <tr>
+                  <th>
+                  경사지 등판 및 제동 능력
+                  </th>
               </tr>
-            </thead>{" "}
+            </thead>
             <tbody>
               <tr>
-                <td className="head_description">
+              <td className={styles.head_description}>
                   <p>
                     굴착기는 100분의 25(무한궤도식 굴착기는 100분의 30을 말한다)
                     기울기의 견고한 건조 지면을 올라갈 수 있고, 정지상태를
                     유지할 수 있는 제동장치 및 제동장금장치를 갖추어야 한다.
                   </p>
+                  <br />
                   <p>○ 등판능력 관련 제원</p>
-                  <table class="innertable" width="60%" height="250px">
+                    <table style={{width:"60%", height:"30%", margin: "auto"}} >
                     <thead>
-                      <tr height="20mm">
+                      <tr>
                         <th>항목</th>
                         <th>기호</th>
                         <th>단위</th>
@@ -102,13 +103,13 @@ const TravelSlopeWX = ({ values, config }) => {
                       </tr>
                     </tbody>
                   </table>
-                  <p> </p>
+                  <br />
                   <p>○ 등판 및 유지 경사각 계산</p>
 
-                  <table class="innertable" width="90%" height="300px">
+                    <table style={{width:"90%", height:"30%", margin: "auto"}} >
 <tbody>
     <tr>
-        <td colspan="3">미끄러지지 않는 최대 경사각 (마찰력)</td>
+        <TableCell colSpan="3">미끄러지지 않는 최대 경사각 (마찰력)</TableCell>
     </tr>
     <tr>
         <td><MathJax>{`$$ \\mu \\cdot W_T \\cdot \\cos \\theta_1 = W_T \\cdot \\sin \\theta_1 $$`}</MathJax></td>
@@ -116,7 +117,7 @@ const TravelSlopeWX = ({ values, config }) => {
         <td><MathJax>{`$$ ${noslip_slope} $$`}</MathJax></td>
     </tr>
     <tr>
-        <td colspan="3">흘러내리지 않는 최대 경사각 (견인력)</td>
+        <TableCell colSpan="3">흘러내리지 않는 최대 경사각 (견인력)</TableCell>
 
     </tr>
     <tr>
@@ -128,7 +129,7 @@ const TravelSlopeWX = ({ values, config }) => {
         
     </tr>
     <tr>
-        <td colspan="3">엔진 오일 팬 기준 경사각</td>
+        <TableCell colSpan="3">엔진 오일 팬 기준 경사각</TableCell>
 
     </tr>
     <tr>
@@ -138,10 +139,10 @@ const TravelSlopeWX = ({ values, config }) => {
         <td><MathJax>{`$$ ${values.travel?.engine_slope} $$`}</MathJax></td>
     </tr>
     <tr>
-        <td colspan="3">최종 경사각</td>
+        <TableCell colSpan="3">최종 경사각</TableCell>
     </tr>
-    <tr>
-        <td colspan="2" height="100px">위 3 가지 경사각 사양 중 가장 작은 값</td>
+    <tr style={{ background: "#e6e6e6" }}>
+        <TableCell  colSpan="2" >위 3 가지 경사각 사양 중 가장 작은 값</TableCell>
         <td><MathJax>{`$$ ${min_slope} $$`}</MathJax></td>
     </tr>
 </tbody>

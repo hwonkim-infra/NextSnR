@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 // @mui
-import { Box, Typography, Link } from '@mui/material';
+import { Box, Typography, Link, Breadcrumbs } from '@mui/material';
 //
-import Breadcrumbs from './Breadcrumbs';
+// import Breadcrumbs from './Breadcrumbs';
 
 // ----------------------------------------------------------------------
 
-/* HeaderBreadcrumbs.propTypes = {
+HeaderBreadcrumbs.propTypes = {
   links: PropTypes.array,
   action: PropTypes.node,
   heading: PropTypes.string.isRequired,
   moreLink: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   sx: PropTypes.object,
-}; */
+};
 
 export default function HeaderBreadcrumbs({ links, action, heading, moreLink = '' || [], sx, ...other }) {
   return (
@@ -35,7 +35,7 @@ export default function HeaderBreadcrumbs({ links, action, heading, moreLink = '
           </Link>
         ) : (
           moreLink.map((href) => (
-            <Link noWrap key={links.name} href={href} variant="body2" target="_blank" sx={{ display: 'table' }}>
+            <Link noWrap key={href} href={href} variant="body2" target="_blank" sx={{ display: 'table' }}>
               {href}
             </Link>
           ))

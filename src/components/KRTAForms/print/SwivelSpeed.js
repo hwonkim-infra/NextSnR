@@ -1,6 +1,7 @@
 import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { TableCell } from "@mui/material";
 
 // 퀵커플러 탈착
 
@@ -23,7 +24,6 @@ const swing_reduction_rev =  Math.round((values.swivel?.pump_flow * values.swive
                 </tr>
                 </thead>
                 <tbody>
-
                 <tr>
               <td className={styles.head_description}>
                     <p>▷ 아래 계산 결과에 따라 <strong> 최고 선회 속도는 { values.swivel?.swing_rev } rpm </strong></p>
@@ -72,12 +72,13 @@ const swing_reduction_rev =  Math.round((values.swivel?.pump_flow * values.swive
                         
                       </tbody>
                     </table>
+                    <br />
                     <p>○ 선회 속도 계산</p>
                     <table style={{width:"100%", height:"30%", margin: "auto"}} >
                       
                       <tbody>
                         <tr>
-                          <td className="item-headers" colSpan="3">선회감속기 축 회전수 SM(rpm)</td>
+                          <TableCell colSpan="3">선회감속기 축 회전수 SM(rpm)</TableCell>
                         </tr>
                         <tr>
                           <td><MathJax>{`$$\\frac{Q \\times \\eta_{mv}}{q_m \\times 1000}$$`}</MathJax></td>
@@ -87,9 +88,9 @@ const swing_reduction_rev =  Math.round((values.swivel?.pump_flow * values.swive
                           
                         </tr>
                         <tr>
-                          <td className="item-headers" colSpan="3">선회속도 S(rpm)</td>
+                          <TableCell colSpan="3">선회속도 S(rpm)</TableCell>
                         </tr>
-                        <tr>
+                        <tr style={{ background: "#e6e6e6" }}>
                           <td><MathJax>{`$$ S=\\frac{SM}{i} $$`}</MathJax></td>
                           <td><MathJax>{`$$\\frac{${swing_reduction_rev}}{${values.swivel?.reduction}} $$`}</MathJax></td>
                 <td><strong><i>{values.swivel?.swing_rev} </i></strong></td>
