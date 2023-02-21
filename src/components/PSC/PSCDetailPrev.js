@@ -56,7 +56,7 @@ const PSCDetailPrev = ({ currentPSC }) => {
               <TableRow key={row?.subItem}>
                 <TableCell>
                   <Accordion>
-                    <AccordionSummary variant="subtitle1" expandIcon={<Iconify icon={'eva:arrow-ios-downward-fill'} width={20} height={20} />}
+                    <AccordionSummary variant="subtitle1" style={{ background: "#f2f2f2" }} expandIcon={<Iconify icon={'eva:arrow-ios-downward-fill'} width={20} height={20} />}
 >
                       <Typography>{row?.subItem}</Typography>
                     </AccordionSummary>

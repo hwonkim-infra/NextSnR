@@ -14,6 +14,8 @@ import Page from '@/components/Page';
 // import { AppWidget, AppWelcome, AppFeatured, AppNewInvoice, AppTopAuthors, AppTopRelated, AppAreaInstalled, AppWidgetSummary, AppCurrentDownload, AppTopInstalledCountries, } from '../../sections/@dashboard/general/app';
 // assets
 import { SeoIllustration } from '../../assets';
+import AnalyticsKRTAByModel from '@/sections/@dashboard/analytics/AnalyticsKRTAByModel';
+import PSCFeatured from '@/sections/@dashboard/analytics/PSCFeatured';
 
 // ----------------------------------------------------------------------
 
@@ -23,30 +25,27 @@ GeneralApp.getLayout = function getLayout(page) {
 
 // ----------------------------------------------------------------------
 
-export default function GeneralApp({HEXmodels =[], WEXmodels=[]}) {
+export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[]}) {
   // const { user } = useAuth();
-
-  const theme = useTheme();
-
-  const { themeStretch } = useSettings();
-  console.log(HEXmodels)
 
   return (
     <Page title="General: App">
-      <Container >
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-          AppWelcome
-          {
-            HEXmodels.map((models) => (
-              <div className="" key={models._id}><h3>{models._id}</h3> <h4>
-              {models.count}
-
-              </h4>
-              </div>
-            ))
-          }
+      <Container maxWidth={'xl'} >
+        <Grid container spacing={3} xs={12}>
+          <Grid item xs={6} >
          
+          <AnalyticsKRTAByModel title="한국형식승인 Crawler" list={HEXmodels}  />
+            
+          </Grid>
+          <Grid item xs={6}  href="/KRTA/WEX" >
+         
+          <AnalyticsKRTAByModel title="한국형식승인 Wheel Exca" list={WEXmodels}   />
+            
+          </Grid>
+          <Grid item xs={12}>
+          AppWelcome
+          <PSCFeatured  list={PSCsummary}  />
+
             {/* <AppWelcome
               title={`Welcome back! \n ${user?.displayName}`}
               description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
@@ -63,20 +62,7 @@ export default function GeneralApp({HEXmodels =[], WEXmodels=[]}) {
             /> */}
           </Grid>
 
-          <Grid item xs={12} md={4}>
-          AppFeatured
-          {
-            WEXmodels.map((models) => (
-              <div className="" key={models._id}><h3>{models._id}</h3> <h4>
-              {models.count}
-
-              </h4>
-              </div>
-            ))
-          }
-         
-            {/* <AppFeatured list={_appFeatured} /> */}
-          </Grid>
+          
 
           <Grid item xs={12} md={4}>
           AppWidgetSummary
@@ -155,35 +141,7 @@ export default function GeneralApp({HEXmodels =[], WEXmodels=[]}) {
             /> */}
           </Grid>
 
-          <Grid item xs={12} lg={8}>
-          AppNewInvoice
-            {/* <AppNewInvoice
-              title="New Invoice"
-              tableData={_appInvoices}
-              tableLabels={[
-                { id: 'id', label: 'Invoice ID' },
-                { id: 'category', label: 'Category' },
-                { id: 'price', label: 'Price' },
-                { id: 'status', label: 'Status' },
-                { id: '' },
-              ]}
-            /> */}
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-          AppTopRelated
-            {/* <AppTopRelated title="Top Related Applications" list={_appRelated} /> */}
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-          AppTopInstalledCountries
-            {/* <AppTopInstalledCountries title="Top Installed Countries" list={_appInstalled} /> */}
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-          AppTopAuthors
-            {/* <AppTopAuthors title="Top Authors" list={_appAuthors} /> */}
-          </Grid>
+         
 
           <Grid item xs={12} md={6} lg={4}>
             <Stack spacing={3}>
@@ -201,12 +159,14 @@ export default function GeneralApp({HEXmodels =[], WEXmodels=[]}) {
 export async function getServerSideProps() {
   const HEXresponse = await fetch("http://localhost:3000/api/HEXmodels/");
   const WEXresponse = await fetch("http://localhost:3000/api/WEXmodels/");
+  const PSCresponse = await fetch("http://localhost:3000/api/PSCfeatured/");
   const HEXmodels = await HEXresponse.json();
   const WEXmodels = await WEXresponse.json();
+  const PSCsummary = await PSCresponse.json();
 
   return {
     props: {
-      HEXmodels,WEXmodels
+      HEXmodels,WEXmodels, PSCsummary
     },
   };
 }

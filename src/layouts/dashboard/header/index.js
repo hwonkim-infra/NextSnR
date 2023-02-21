@@ -10,7 +10,7 @@ import cssStyles from '../../../utils/cssStyles';
 // config
 import { HEADER, NAVBAR } from '../../../config';
 // components
-import Logo from '../../../components/Logo';
+import Logo from '@/components/Logo';
 import Iconify from '../../../components/Iconify';
 import { IconButtonAnimate } from '../../../components/animate';
 //
@@ -74,7 +74,7 @@ export default function DashboardHeader({ onOpenSidebar, isCollapse = false, ver
           minHeight: '100% !important',
           px: { lg: 5 },
         }}
-      >
+      ><Logo sx={{ mr: 2.5 }} />
         <NavSectionHorizontal navConfig={navConfig} />
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
         </Stack>
