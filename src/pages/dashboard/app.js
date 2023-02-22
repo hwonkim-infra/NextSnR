@@ -16,7 +16,10 @@ import Page from '@/components/Page';
 import { SeoIllustration } from '../../assets';
 import AnalyticsKRTAByModel from '@/sections/@dashboard/analytics/AnalyticsKRTAByModel';
 import PSCFeatured from '@/sections/@dashboard/analytics/PSCFeatured';
-
+import SnRMapChart from '@/sections/@dashboard/analytics/SnRMapChart';
+import { Tooltip } from "react-tooltip";
+import MapChart from '@/sections/@dashboard/analytics/MapChart';
+import { useState } from 'react';
 // ----------------------------------------------------------------------
 
 GeneralApp.getLayout = function getLayout(page) {
@@ -27,11 +30,22 @@ GeneralApp.getLayout = function getLayout(page) {
 
 export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[]}) {
   // const { user } = useAuth();
+  const [content, setContent] = useState("");
+
 
   return (
     <Page title="General: App">
       <Container maxWidth={'xl'} >
-        <Grid container spacing={3} xs={12}>
+        <Grid container spacing={3} >
+          <Grid item xs={8}>
+          <MapChart  setTooltipContent={setContent} />
+          
+          </Grid>
+          <Grid item xs={4} >
+          <Tooltip style={{ backgroundColor: "rgb(0, 255, 30)", color: "#222" }} id="my-tooltip" ><>Datas: {content}</> </Tooltip>
+
+          </Grid>
+
           <Grid item xs={6} >
          
           <AnalyticsKRTAByModel title="한국형식승인 Crawler" list={HEXmodels}  />
@@ -41,25 +55,6 @@ export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[]})
          
           <AnalyticsKRTAByModel title="한국형식승인 Wheel Exca" list={WEXmodels}   />
             
-          </Grid>
-          <Grid item xs={12}>
-          AppWelcome
-          <PSCFeatured  list={PSCsummary}  />
-
-            {/* <AppWelcome
-              title={`Welcome back! \n ${user?.displayName}`}
-              description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
-              img={
-                <SeoIllustration
-                  sx={{
-                    p: 3,
-                    width: 360,
-                    margin: { xs: 'auto', md: 'inherit' },
-                  }}
-                />
-              }
-              action={<Button variant="contained">Go Now</Button>}
-            /> */}
           </Grid>
 
           
