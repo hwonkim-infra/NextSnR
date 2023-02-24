@@ -9,48 +9,48 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import PSCEditForm from '@/sections/@dashboard/PSC/PSCEditForm';
+import GLOBALEditForm from '@/sections/@dashboard/PSC/GLOBALEditForm';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
-PSCEdit.getLayout = function getLayout(page) {
+GLOBALEdit.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
 
-export default function PSCEdit() {
-const [currentPSC, setCurrentPSC] = useState()
+export default function GLOBALEdit() {
+const [currentGLOBAL, setCurrentGLOBAL] = useState()
 
 const { query } = useRouter();
 
-  const getPSC = async () => {
-    const response = await fetch(`http://localhost:3000/api/PSC/EU/${query.id}`);
+  const getGLOBAL = async () => {
+    const response = await fetch(`http://localhost:3000/api/PSC/Global/${query.id}`);
 
     const data = await response.json();
-    setCurrentPSC(data);
+    setCurrentGLOBAL(data);
     console.log(data);
   };
 
   useEffect(() => {
-    if (query.id) getPSC();
+    if (query.id) getGLOBAL();
   }, [query.id]);
 
 //   const currentModel = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="PSC: Edit ">
+    <Page title="GLOBALmap: Edit ">
         <HeaderBreadcrumbs
-          heading="Edit PSC"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.PSC },
-            { name: 'PSC', href: PATH_DASHBOARD.PSC.EU  },
-            { name: (currentPSC?.item) },
-          ]}
+          heading="Edit National Information "
+          /* links={[
+            { name: 'Dashboard', href: PATH_DASHBOARD.GLOBAL },
+            { name: 'GLOBAL', href: PATH_DASHBOARD.GLOBAL.EU  },
+            { name: (currentGLOBAL?.item) },
+          ]} */
         />
 
-        <PSCEditForm isEdit currentPSC={currentPSC} />
+        <GLOBALEditForm isEdit currentGLOBAL={currentGLOBAL} />
     </Page>
   );
 }

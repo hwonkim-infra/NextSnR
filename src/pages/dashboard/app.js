@@ -1,6 +1,6 @@
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Stack, Button } from '@mui/material';
+import { Container, Grid, Stack, Button, Card, CardHeader, Typography } from '@mui/material';
 // hooks
 // import useAuth from '@/hooks/useAuth';
 import useSettings from '@/hooks/useSettings';
@@ -28,7 +28,7 @@ GeneralApp.getLayout = function getLayout(page) {
 
 // ----------------------------------------------------------------------
 
-export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[]}) {
+export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[], geometries=[]}) {
   // const { user } = useAuth();
   const [content, setContent] = useState("");
 
@@ -38,15 +38,25 @@ export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[]})
       <Container maxWidth={'xl'} >
         <Grid container spacing={3} >
           <Grid item xs={8}>
-          <MapChart  setTooltipContent={setContent} />
+          <Card >
+      <CardHeader title="Global Regulation map" subheader="Interactive chart" />
+
+          <MapChart  setTooltipContent={setContent} geometries={geometries}  />
+      
+    </Card>
           
           </Grid>
           <Grid item xs={4} >
-          <Tooltip style={{ backgroundColor: "rgb(0, 255, 30)", color: "#222" }} id="my-tooltip" ><>
-          <p>State: {content[0]}</p>
+          <Card sx={{ p:2, mt: 15 }}>
+
+          <Tooltip  id="my-tooltip" ><>
+      
+<Typography variant='h5' sx={{ backgroundColor: "#e6e6e6" }}>{content[0]}</Typography>
+
           <p>Emission: {content[1]}</p>
           <p>Safety: {content[2]}</p>
            </> </Tooltip>
+          </Card>
 
           </Grid>
 
@@ -159,13 +169,17 @@ export async function getServerSideProps() {
   const HEXresponse = await fetch("http://localhost:3000/api/HEXmodels/");
   const WEXresponse = await fetch("http://localhost:3000/api/WEXmodels/");
   const PSCresponse = await fetch("http://localhost:3000/api/PSCfeatured/");
+  const GEOresponse = await fetch("http://localhost:3000/api/PSC/Global");
+
   const HEXmodels = await HEXresponse.json();
   const WEXmodels = await WEXresponse.json();
   const PSCsummary = await PSCresponse.json();
+  const geometries = await GEOresponse.json();
 
   return {
     props: {
-      HEXmodels,WEXmodels, PSCsummary
+      HEXmodels,WEXmodels, PSCsummary, geometries
     },
   };
 }
+
