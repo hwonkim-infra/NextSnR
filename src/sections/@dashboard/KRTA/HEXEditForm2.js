@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 // next
 import { useRouter } from "next/router";
@@ -6,26 +7,34 @@ import { useRouter } from "next/router";
 // utils
 import useTabs from "@/hooks/useTabs";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 // import { FormProvider, RHFTextField } from "@/components/hook-form";
-import TinyEditor from "./TinyEditor";
 import Summary from "@/components/KRTAForms/Summary";
-import { Box, Button, Card, Grid, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { TextField } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
+import {
+  Box,
+  Button,
+  Card,
+  Grid, Snackbar,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 
-import HEXCalc from "@/components/KRTAForms/HEXCalc";
 import Dimensions from "@/components/KRTAForms/Dimensions";
-import Swivel from "@/components/KRTAForms/Swivel";
 import DimensionsQC from "@/components/KRTAForms/DimensionsQC";
 import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
-import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
-import TravelHX from "@/components/KRTAForms/TravelHX";
 import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
 import EngineFields from "@/components/KRTAForms/EngineFields";
-import TransPortation from "@/components/KRTAForms/TransPortation";
+import HEXCalc from "@/components/KRTAForms/HEXCalc";
+import Swivel from "@/components/KRTAForms/Swivel";
 import TAResult from "@/components/KRTAForms/TAResult";
+import TransPortation from "@/components/KRTAForms/TransPortation";
+import TravelHX from "@/components/KRTAForms/TravelHX";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+
 
 const defaultValues = {
   ECN: null,
@@ -71,6 +80,18 @@ const HEXEditForm = ({
   const { push, query, pathname } = useRouter();
   const { currentTab, onChangeTab } = useTabs("dimensions");
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const snackbarClick = () => {
+    setSnackbarOpen(true);
+  };
+  const snackbarClose = (e, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
   const values = watch();
 
   useEffect(() => {
@@ -95,59 +116,56 @@ const HEXEditForm = ({
   };
 
   const updateHEX = async (values) => {
-    try {
-      await fetch(`http://localhost:3000/api/HEX/${query.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+    axios
+      .put(`/api/HEX/${query.id}`, values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const createHEX = async (values) => {
     values._id = values.model_name + "_" + Date.now();
-    try {
-      await fetch("http://localhost:3000/api/HEX/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+
+    axios
+      .post("/api/HEX/", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const createHEXChange = async (values) => {
     values.origin = values._id;
     delete values._id;
     values._id = values.model_name + "_" + Date.now();
-    try {
-      await fetch("http://localhost:3000/api/HEX/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+
+    axios
+      .post("/api/HEX/", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
-  // const removeHEX = async () => {
   async function removeHEX() {
     const { id } = query;
     if (window.confirm("이 모델을 삭제하시겠습니까")) {
       try {
-        await fetch(`http://localhost:3000/api/HEX/${id}`, {
-          method: "DELETE",
-        });
+        await axios
+          .delete(`/api/HEX/${id}`)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         await push("/dashboard/KRTA/HEX");
       } catch (error) {
         console.log(error);
@@ -201,7 +219,6 @@ const HEXEditForm = ({
       component: (
         <>
           <TransPortation control={control} />
-          
         </>
       ),
     },
@@ -211,7 +228,6 @@ const HEXEditForm = ({
       component: (
         <>
           <TAResult control={control} />
-          
         </>
       ),
     },
@@ -232,7 +248,7 @@ const HEXEditForm = ({
                 }}
               >
                 {HEXCalc(values)}
-                <Summary control={control}  />
+                <Summary control={control} />
               </Box>
               <Tabs
                 allowScrollButtonsMobile
@@ -265,9 +281,16 @@ const HEXEditForm = ({
                   type="submit"
                   variant="contained"
                   loading={isSubmitting}
+                  onClick={snackbarClick}
                 >
                   {!isEdit ? "Create Model" : "Save Changes"}
                 </LoadingButton>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    message="This File was updated successfully"
+                    onClose={snackbarClose}
+                  />
                 <Button
                   variant="outlined"
                   startIcon={<DeleteIcon />}
@@ -280,11 +303,15 @@ const HEXEditForm = ({
           </Grid>
           <Grid item xs={12} md={4}>
             <Card sx={{ p: 1 }}>
-            <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-              Preview
-            </Typography>
+              <Typography
+                paragraph
+                variant="overline"
+                sx={{ color: "text.disabled" }}
+              >
+                Preview
+              </Typography>
               <SpecSheet values={values} />
-              {JSON.stringify(values, 0, 2)}
+              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>

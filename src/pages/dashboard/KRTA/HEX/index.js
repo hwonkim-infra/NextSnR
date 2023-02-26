@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Box, Grid, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import axios from "axios";
 
 // components
 import Layout from "@/layouts";
@@ -158,13 +159,11 @@ export default function HEXList({ HEXs = [] }) {
   );
 }
 
-export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/HEX/");
-  const HEXs = await response.json();
 
+export async function getServerSideProps() {
+  const res = await axios.get("http://127.0.0.1:3000/api/HEX/");
+  const HEXs = res.data;
   return {
-    props: {
-      HEXs,
-    },
+    props: { HEXs }, 
   };
 }

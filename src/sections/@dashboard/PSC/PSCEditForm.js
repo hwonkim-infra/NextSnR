@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // next
 import { useRouter } from "next/router";
@@ -9,17 +9,13 @@ import { useForm } from "react-hook-form";
 // import { FormProvider, RHFTextField } from "@/components/hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Card, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Card, Grid, Snackbar, Stack, Typography } from "@mui/material";
 
 import PSCInputs from "./PSCInputs";
 import DetailInput from "./PSCdetailInputs";
+import axios from "axios";
 
-
-
-const PSCEditForm = ({
-  isEdit = false,
-  currentPSC,
-}) => {
+const PSCEditForm = ({ isEdit = false, currentPSC }) => {
   const {
     control,
     handleSubmit,
@@ -27,24 +23,28 @@ const PSCEditForm = ({
     watch,
     reset,
     formState: { isSubmitting },
-  } = useForm({
-    // defaultValues: defaultValues,
-  });
+  } = useForm({});
   const { push, query, pathname } = useRouter();
-  // const { currentTab, onChangeTab } = useTabs("dimensions");
 
   const values = watch();
 
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const snackbarClick = () => {
+    setSnackbarOpen(true);
+  };
+  const snackbarClose = (e, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
   useEffect(() => {
     reset(currentPSC);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit,  currentPSC]);
+  }, [isEdit, currentPSC]);
 
   const onSubmit = async (values) => {
-    // if (Object.keys(errors).length) return setErrors(errors);
-    // PSCSave({values, PSCCalc})
-
     if (isEdit) {
       await updatePSC(values);
     } else {
@@ -54,49 +54,26 @@ const PSCEditForm = ({
   };
 
   const updatePSC = async (values) => {
-    try {
-      await fetch(`http://localhost:3000/api/PSC/${query.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+    axios
+      .put(`/api/PSC/EU/${query.id}`, values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const createPSC = async (values) => {
-    values._id = values.model_name + "_" + Date.now();
-    try {
-      await fetch("http://localhost:3000/api/PSC/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+    // values._id = values.item + "_" + Date.now();
+    axios
+      .post("/api/PSC/EU", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const createPSCChange = async (values) => {
-    values.origin = values._id;
-    delete values._id;
-    values._id = values.model_name + "_" + Date.now();
-    try {
-      await fetch("http://localhost:3000/api/PSC/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   // const removePSC = async () => {
@@ -104,10 +81,16 @@ const PSCEditForm = ({
     const { id } = query;
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
       try {
-        await fetch(`http://localhost:3000/api/PSC/${id}`, {
-          method: "DELETE",
-        });
-        await push("/dashboard/PSC/PSC");
+        axios
+          .delete(`/api/PSC/EU/${query.id}`, values)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+        await push("/dashboard/PSC/EU");
       } catch (error) {
         console.log(error);
       }
@@ -121,9 +104,9 @@ const PSCEditForm = ({
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
               {/* <Box sx={{ }} > */}
-                <PSCInputs control={control}  />
+              <PSCInputs control={control} />
               {/* </Box> */}
-              
+
               <Stack
                 direction="row"
                 justifyContent="space-between"
@@ -134,9 +117,16 @@ const PSCEditForm = ({
                   type="submit"
                   variant="contained"
                   loading={isSubmitting}
+                  onClick={snackbarClick}
                 >
-                  {!isEdit ? "Create Model" : "Save Changes"}
+                  {!isEdit ? "Create File" : "Save Changes"}
                 </LoadingButton>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    message="This File was updated successfully"
+                    onClose={snackbarClose}
+                  />
                 <Button
                   variant="outlined"
                   startIcon={<DeleteIcon />}
@@ -149,13 +139,17 @@ const PSCEditForm = ({
           </Grid>
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
-            <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-              Actions Detail
-            </Typography>
-            <DetailInput control={control}  />
-            
+              <Typography
+                paragraph
+                variant="overline"
+                sx={{ color: "text.disabled" }}
+              >
+                Actions Detail
+              </Typography>
+              <DetailInput control={control} />
+
               {/* <SpecSheet values={values} /> */}
-              {JSON.stringify(values, 0, 2)}
+              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>

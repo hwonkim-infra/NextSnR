@@ -7,22 +7,12 @@ import {
 } from "react-simple-maps";
 
 import geoData from "./mapWidget/mapData.json";
+import axios from "axios";
 
-const MapChart = ({ setTooltipContent, geometries  }) => {
-  // const countryName = (geo) => (`${geo.properties.name}, ${geo.id} `)
-  // const countryName = (geo) => ({geo.properties})
-  // const geoMetries = geoData.objects.world.geometries
-  // console.log("geoMetries: ", geoData.objects.world.geometries);
-  console.log("geoMetries: ", geoData.objects);
-  // geoData.objects.geometries = geometries;
-  /* 
-  // const {}
-  let CHNprop = geoMetries.find(element => element.id ==="CHN")
-  CHNprop.properties.emission="lv4";
 
-  geoMetries.find(element => element.id ==="KOR").properties={name: "South Korea", emission: "Stage V", safety: "안전기준"}
-  geoMetries.find(element => element.id ==="DEU").properties.emission="Stage V"
-  geoMetries.find(element => element.id ==="DEU").properties.safety="MD" */
+const MapChart = ({ setTooltipContent, geometries }) => {
+ 
+  
   useEffect(() => {
     geoData.objects.world.geometries = geometries;
   }, [geometries])
@@ -30,7 +20,8 @@ const MapChart = ({ setTooltipContent, geometries  }) => {
 
   return (
     <div>
-      <ComposableMap>
+      <ComposableMap       
+>
         <Geographies data-tooltip-id="my-tooltip" geography={geoData}>
           {({ geographies }) =>
             geographies.map((geo) => (
@@ -42,10 +33,12 @@ const MapChart = ({ setTooltipContent, geometries  }) => {
                   setTooltipContent([
                     geo.properties.name,
                     geo.properties.emission,
+                    geo.properties.noise,
                     geo.properties.safety,
+                    geo.properties.typeApproval,
+                    geo.properties.remarks,
                   ]);
-                  console.log(geo);
-                  // setTooltipContent(`${geo.properties.name}, ${geo.id} `);
+                  
                 }}
                 /* onMouseLeave={() => {
         // setTooltipContent("");
@@ -74,15 +67,14 @@ const MapChart = ({ setTooltipContent, geometries  }) => {
 };
 
 export default memo(MapChart);
-/* 
-export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/PSC/Global");
-  const geometries = await response.json();
 
+export async function getServerSideProps() {
+  const response = await axios.get("http://127.0.0.1:3000/api/PSC/Global");
+  const geometries = response.data;
   return {
     props: {
       geometries,
     },
   };
 }
- */
+ 

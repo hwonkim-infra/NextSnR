@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import React from 'react'
 import { useRouter } from "next/router";
+import axios from "axios";
 
 // print Page components
 import HEXSpec from "@/components/KRTAForms/print/HEXSpec";
@@ -19,11 +20,9 @@ const HEXprint = () => {
     const [newHEX, setNewHEX] = useState({});
 
     const getHEX = async () => {
-        const response = await fetch(`http://localhost:3000/api/HEX/${query.id}`);
-    
-        const data = await response.json();
+    const response = await axios.get(`/api/HEX/${query.id}`);
+        const data = response.data;
         setNewHEX(data);
-        console.log(data);
       };
     
       useEffect(() => {

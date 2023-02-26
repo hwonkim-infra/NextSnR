@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 import EditIcon from '@mui/icons-material/Edit';
 import PostAddIcon from '@mui/icons-material/PostAdd';
@@ -21,8 +22,7 @@ import Iconify from "@/components/Iconify";
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar } from "@mui/x-data-grid";
-// import GLOBALDetailPrev from "@/components/GLOBAL/GLOBALDetailPrev";
-// import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+import GLOBALDetailPrev from "@/sections/@dashboard/PSC/GLOBALDetailPrev";
 
 // Preview
 
@@ -46,7 +46,8 @@ export default function GLOBALList({ GLOBALs = [] }) {
       minWidth: 200,
     },
     { field: "remarks", headerName: "remarks", width: 200 },
-    {
+    { field: "recent", headerName: "recent", width: 20 },
+    /* {
       field: "Edit",
       headerName: "EDIT",
       width: 50,
@@ -55,7 +56,7 @@ export default function GLOBALList({ GLOBALs = [] }) {
           <EditIcon />
         </IconButton>
       ),
-    },
+    }, */
   ];
   if (!GLOBALs) return <CircularProgress />;
 
@@ -68,6 +69,7 @@ export default function GLOBALList({ GLOBALs = [] }) {
       safety: GLOBAL.properties.safety,
       typeApproval: GLOBAL.properties.typeApproval,
       remarks: GLOBAL.properties.remarks,
+      recent: GLOBAL.updatedAt,
       ...GLOBAL,
     };
   });
@@ -75,7 +77,7 @@ export default function GLOBALList({ GLOBALs = [] }) {
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={8} sx={{ height: 900 }}>
+        <Grid item xs={6} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
             heading="Global Regulation Map"
             // links={[{ name: "PVC" }, { name: "EU" }]}
@@ -97,7 +99,7 @@ export default function GLOBALList({ GLOBALs = [] }) {
             components={{ Toolbar: GridToolbar }} 
             initialState={{
               sorting: {
-                sortModel: [{ field: 'numbers', sort: 'asc' }],
+                sortModel: [{ field: 'recent', sort: 'desc' }],
               },
             }}
             disableMultipleSelection={true}
@@ -110,25 +112,15 @@ export default function GLOBALList({ GLOBALs = [] }) {
             }}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           {currentGLOBAL._id && (
             <>
               <Paper elevation={2} style={{ padding: "5px", m: 1 }}>
-                {/* <GLOBALDetailPrev currentGLOBAL={currentGLOBAL} /> */}
+                <GLOBALDetailPrev currentReport={currentGLOBAL} />
               </Paper>
-              <Box>
-                <Button
-                  variant="compromised"
-                  startIcon={<PostAddIcon />}
-                  psc_id={currentGLOBAL}
-                >
+              
 
-                </Button>
-              </Box>
-
-              <Paper elevation={2} style={{ padding: "5px" }}>
-                {/* <TCFList currentID={currentGLOBAL._id} /> */}
-              </Paper>
+             
             </>
           )}
 
@@ -139,8 +131,8 @@ export default function GLOBALList({ GLOBALs = [] }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/PSC/Global");
-  const GLOBALs = await response.json();
+  const response = await axios.get("http://127.0.0.1:3000/api/PSC/Global");
+  const GLOBALs = response.data;
 
   return {
     props: {

@@ -1,5 +1,7 @@
 // next
 import { useRouter } from 'next/router';
+import axios from "axios";
+
 // @mui
 // routes
 import { PATH_DASHBOARD } from '@/routes/paths';
@@ -26,11 +28,10 @@ const [currentPSC, setCurrentPSC] = useState()
 const { query } = useRouter();
 
   const getPSC = async () => {
-    const response = await fetch(`http://localhost:3000/api/PSC/EU/${query.id}`);
+    const response = await axios.get(`/api/PSC/EU/${query.id}`);
 
-    const data = await response.json();
+    const data = response.data;
     setCurrentPSC(data);
-    console.log(data);
   };
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect } from "react";
 
 // next
@@ -7,11 +8,11 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 // import { FormProvider, RHFTextField } from "@/components/hook-form";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Card, Grid, Stack, Typography } from "@mui/material";
+import { Card, Grid, Stack } from "@mui/material";
 
 import GLOBALInputs from "./GLOBALInputs";
+
 
 
 
@@ -48,30 +49,28 @@ const GLOBALEditForm = ({
     }
   };
 
-  const updateGLOBAL = async (values) => {
-    try {
-      await fetch(`http://localhost:3000/api/PSC/Global/${query.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
  
+  const updateGLOBAL = async (values) => {
+    await axios
+      .put(`/api/PSC/Global/${query.id}`, values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+      await push("/dashboard/PSC/Global");
+
+  };
 
   // const removeGLOBAL = async () => {
   async function removeGLOBAL() {
     const { id } = query;
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
       try {
-        await fetch(`http://localhost:3000/api/GLOBAL/${id}`, {
-          method: "DELETE",
-        });
+        await axios.delete(`/api/Global/${id}`).then((response) => {
+          console.log(response)
+        }).catch((error) => {console.error(error)});
         await push("/dashboard/GLOBAL/GLOBAL");
       } catch (error) {
         console.log(error);
@@ -83,11 +82,11 @@ const GLOBALEditForm = ({
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} >
             <Card sx={{ p: 1 }}>
-              {/* <Box sx={{ }} > */}
+              
                 <GLOBALInputs control={control}  />
-              {/* </Box> */}
+              
               
               <Stack
                 direction="row"
@@ -102,25 +101,14 @@ const GLOBALEditForm = ({
                 >
                   {!isEdit ? "Create Model" : "Save Changes"}
                 </LoadingButton>
-                {/* <Button
-                  variant="outlined"
-                  startIcon={<DeleteIcon />}
-                  onClick={removeGLOBAL}
-                >
-                  삭제
-                </Button> */}
               </Stack>
             </Card>
           </Grid>
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
-            <Typography paragraph variant="overline" sx={{ color: 'text.disabled' }}>
-              Actions Detail
-            </Typography>
-            {/* <DetailInput control={control}  /> */}
             
               {/* <SpecSheet values={values} /> */}
-              {JSON.stringify(values, 0, 2)}
+              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>

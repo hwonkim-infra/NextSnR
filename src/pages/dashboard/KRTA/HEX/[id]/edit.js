@@ -1,5 +1,6 @@
 // next
 import { useRouter } from 'next/router';
+import axios from "axios";
 // @mui
 // routes
 import { PATH_DASHBOARD } from '@/routes/paths';
@@ -26,9 +27,9 @@ const [currentModel, setCurrentModel] = useState()
 const { query } = useRouter();
 
   const getHEX = async () => {
-    const response = await fetch(`http://localhost:3000/api/HEX/${query.id}`);
+    const response = await axios.get(`/api/HEX/${query.id}`);
 
-    const data = await response.json();
+    const data = response.data;
     setCurrentModel(data);
     console.log(data);
   };

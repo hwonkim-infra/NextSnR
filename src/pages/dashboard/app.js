@@ -1,25 +1,25 @@
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Container, Grid, Stack, Button, Card, CardHeader, Typography } from '@mui/material';
+// import { useTheme } from '@mui/material/styles';
+import { Container, Grid } from "@mui/material";
 // hooks
 // import useAuth from '@/hooks/useAuth';
-import useSettings from '@/hooks/useSettings';
+// import useSettings from '@/hooks/useSettings';
 // layouts
-import Layout from '@/layouts';
+import Layout from "@/layouts";
+import axios from "axios";
 // _mock_
-import { _appFeatured, _appAuthors, _appInstalled, _appRelated, _appInvoices } from '@/_mock';
+// import { _appFeatured, _appAuthors, _appInstalled, _appRelated, _appInvoices } from '@/_mock';
 // components
-import Page from '@/components/Page';
+import Page from "@/components/Page";
 // sections
 // import { AppWidget, AppWelcome, AppFeatured, AppNewInvoice, AppTopAuthors, AppTopRelated, AppAreaInstalled, AppWidgetSummary, AppCurrentDownload, AppTopInstalledCountries, } from '../../sections/@dashboard/general/app';
 // assets
-import { SeoIllustration } from '../../assets';
-import AnalyticsKRTAByModel from '@/sections/@dashboard/analytics/AnalyticsKRTAByModel';
-import PSCFeatured from '@/sections/@dashboard/analytics/PSCFeatured';
-import SnRMapChart from '@/sections/@dashboard/analytics/SnRMapChart';
-import { Tooltip } from "react-tooltip";
-import MapChart from '@/sections/@dashboard/analytics/MapChart';
-import { useState } from 'react';
+// import { SeoIllustration } from '../../assets';
+import AnalyticsKRTAByModel from "@/sections/@dashboard/analytics/AnalyticsKRTAByModel";
+// import PSCFeatured from '@/sections/@dashboard/analytics/PSCFeatured';
+
+import WorldMapWidget from "@/sections/@dashboard/analytics/WorldMapWidget";
+// import geoData from "@/sections/@dashboard/analytics/mapWidget/mapData.json";
 // ----------------------------------------------------------------------
 
 GeneralApp.getLayout = function getLayout(page) {
@@ -28,136 +28,31 @@ GeneralApp.getLayout = function getLayout(page) {
 
 // ----------------------------------------------------------------------
 
-export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[], geometries=[]}) {
-  // const { user } = useAuth();
-  const [content, setContent] = useState("");
-
-
+export default function GeneralApp({
+  HEXmodels = [],
+  WEXmodels = [],
+  geometries = [],
+}) {
+  
   return (
     <Page title="General: App">
-      <Container maxWidth={'xl'} >
-        <Grid container spacing={3} >
-          <Grid item xs={8}>
-          <Card >
-      <CardHeader title="Global Regulation map" subheader="Interactive chart" />
-
-          <MapChart  setTooltipContent={setContent} geometries={geometries}  />
-      
-    </Card>
+      <Container maxWidth={"xl"}>
+      <WorldMapWidget geometries={geometries} />
+        <Grid container spacing={3}>
           
-          </Grid>
-          <Grid item xs={4} >
-          <Card sx={{ p:2, mt: 15 }}>
-
-          <Tooltip  id="my-tooltip" ><>
-      
-<Typography variant='h5' sx={{ backgroundColor: "#e6e6e6" }}>{content[0]}</Typography>
-
-          <p>Emission: {content[1]}</p>
-          <p>Safety: {content[2]}</p>
-           </> </Tooltip>
-          </Card>
-
-          </Grid>
-
-          <Grid item xs={6} >
-         
-          <AnalyticsKRTAByModel title="한국형식승인 Crawler" list={HEXmodels}  />
-            
-          </Grid>
-          <Grid item xs={6}  href="/KRTA/WEX" >
-         
-          <AnalyticsKRTAByModel title="한국형식승인 Wheel Exca" list={WEXmodels}   />
-            
-          </Grid>
-
           
 
-          <Grid item xs={12} md={4}>
-          AppWidgetSummary
-            {/* <AppWidgetSummary
-              title="Total Active Users"
-              percent={2.6}
-              total={18765}
-              chartColor={theme.palette.primary.main}
-              chartData={[5, 18, 12, 51, 68, 11, 39, 37, 27, 20]}
-            /> */}
+          <Grid item xs={6}>
+            <AnalyticsKRTAByModel
+              title="한국형식승인 Crawler"
+              list={HEXmodels}
+            />
           </Grid>
-
-          <Grid item xs={12} md={4}>
-          AppWidgetSummary
-            {/* <AppWidgetSummary
-              title="Total Installed"
-              percent={0.2}
-              total={4876}
-              chartColor={theme.palette.chart.blue[0]}
-              chartData={[20, 41, 63, 33, 28, 35, 50, 46, 11, 26]}
-            /> */}
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-          AppWidgetSummary
-            {/* <AppWidgetSummary
-              title="Total Downloads"
-              percent={-0.1}
-              total={678}
-              chartColor={theme.palette.chart.red[0]}
-              chartData={[8, 9, 31, 8, 16, 37, 8, 33, 46, 31]}
-            /> */}
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={4}>
-          AppCurrentDownload
-            {/* <AppCurrentDownload
-              title="Current Download"
-              chartColors={[
-                theme.palette.primary.lighter,
-                theme.palette.primary.light,
-                theme.palette.primary.main,
-                theme.palette.primary.dark,
-              ]}
-              chartData={[
-                { label: 'Mac', value: 12244 },
-                { label: 'Window', value: 53345 },
-                { label: 'iOS', value: 44313 },
-                { label: 'Android', value: 78343 },
-              ]}
-            /> */}
-          </Grid>
-
-          <Grid item xs={12} md={6} lg={8}>
-          AppAreaInstalled
-            {/* <AppAreaInstalled
-              title="Area Installed"
-              subheader="(+43%) than last year"
-              chartLabels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']}
-              chartData={[
-                {
-                  year: '2019',
-                  data: [
-                    { name: 'Asia', data: [10, 41, 35, 51, 49, 62, 69, 91, 148] },
-                    { name: 'America', data: [10, 34, 13, 56, 77, 88, 99, 77, 45] },
-                  ],
-                },
-                {
-                  year: '2020',
-                  data: [
-                    { name: 'Asia', data: [148, 91, 69, 62, 49, 51, 35, 41, 10] },
-                    { name: 'America', data: [45, 77, 99, 88, 77, 56, 13, 34, 10] },
-                  ],
-                },
-              ]}
-            /> */}
-          </Grid>
-
-         
-
-          <Grid item xs={12} md={6} lg={4}>
-            <Stack spacing={3}>
-            AppWidget
-              {/* <AppWidget title="Conversion" total={38566} icon={'eva:person-fill'} chartData={48} />
-              <AppWidget title="Applications" total={55566} icon={'eva:email-fill'} color="warning" chartData={75} /> */}
-            </Stack>
+          <Grid item xs={6} href="/KRTA/WEX">
+            <AnalyticsKRTAByModel
+              title="한국형식승인 Wheel Exca"
+              list={WEXmodels}
+            />
           </Grid>
         </Grid>
       </Container>
@@ -166,20 +61,19 @@ export default function GeneralApp({HEXmodels =[], WEXmodels=[], PSCsummary=[], 
 }
 
 export async function getServerSideProps() {
-  const HEXresponse = await fetch("http://localhost:3000/api/HEXmodels/");
-  const WEXresponse = await fetch("http://localhost:3000/api/WEXmodels/");
-  const PSCresponse = await fetch("http://localhost:3000/api/PSCfeatured/");
-  const GEOresponse = await fetch("http://localhost:3000/api/PSC/Global");
+  const HEXresponse = await axios.get("http://127.0.0.1:3000/api/HEXmodels/");
+  const WEXresponse = await axios.get("http://127.0.0.1:3000/api/WEXmodels/");
+  const GEOresponse = await axios.get("http://127.0.0.1:3000/api/PSC/Global");
 
-  const HEXmodels = await HEXresponse.json();
-  const WEXmodels = await WEXresponse.json();
-  const PSCsummary = await PSCresponse.json();
-  const geometries = await GEOresponse.json();
+  const HEXmodels = HEXresponse.data;
+  const WEXmodels = WEXresponse.data;
+  const geometries = GEOresponse.data;
 
   return {
     props: {
-      HEXmodels,WEXmodels, PSCsummary, geometries
+      HEXmodels,
+      WEXmodels,
+      geometries,
     },
   };
 }
-

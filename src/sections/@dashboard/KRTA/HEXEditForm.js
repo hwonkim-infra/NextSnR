@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 // next
 import { useRouter } from "next/router";
+import axios from "axios";
 // form
+
 import { Controller, useForm } from "react-hook-form";
 // @mui
 import { LoadingButton } from "@mui/lab";
@@ -109,8 +111,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
 
   const updateHEX = async (values) => {
     try {
-      await fetch(`http://localhost:3000/api/HEX/${query.id}`, {
-        method: "PUT",
+      await axios.put(`http://localhost:3000/api/HEX/${query.id}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -124,8 +125,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
   const createHEX = async (values) => {
     values._id = values.model_name + "_" + Date.now();
     try {
-      await fetch("http://localhost:3000/api/HEX/", {
-        method: "POST",
+      await axios.post("http://localhost:3000/api/HEX/", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -141,8 +141,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     delete values._id;
     values._id = values.model_name + "_" + Date.now();
     try {
-      await fetch("http://localhost:3000/api/HEX/", {
-        method: "POST",
+      await axios.post("http://localhost:3000/api/HEX/", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -158,7 +157,7 @@ export default function HEXEditForm({ isEdit = false, isChangeModel = false, cur
     const { id } = query;
     if (window.confirm("이 모델을 삭제하시겠습니까")) {
       try {
-        await fetch(`http://localhost:3000/api/HEX/${id}`, {
+        await axios.delete(`http://localhost:3000/api/HEX/${id}`, {
           method: "DELETE",
         });
         await push("/dashboard/KRTA/HEX");

@@ -25,11 +25,11 @@ export default function PSCCreate() {
     <Page title="PSC: Create a new PSC">
         <HeaderBreadcrumbs
           heading="Create a new PSC"
-          links={[
+          /* links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.PSC  },
             { name: 'PSC', href: PATH_DASHBOARD.PSC.EU },
             { name: 'New PSC' },
-          ]}
+          ]} */
         /> 
         <PSCEditForm />
     </Page>

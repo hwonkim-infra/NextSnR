@@ -9,23 +9,24 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
+import TinyEditor from "../KRTA/TinyEditor";
 
 const TAGS_OPTION = ["MD", "EU", "NA", "China", "Korea"];
 
 const GLOBALInput = ({ control }) => {
   const InputForms = [
     { label: "emission", name: "properties.emission", type: "" },
+    { label: "noise", name: "properties.noise", type: "" },
     { label: "safety", name: "properties.safety", type: "" },
     { label: "typeApproval", name: "properties.typeApproval", type: "" },
-    { label: "remarks", name: "properties.remarks", type: "" },
-    { label: "numbers", name: "numbers", type: "number" },
-    // { label: "requirements", name: "requirements", type: "" },
-    // { label: "Compliance Statement", name: "complyStatements", type: "" },
+    // { label: "remarks", name: "properties.remarks", type: "" },
+    
   ];
 
   return (
     <>
       <div>
+
               <Box
                 sx={{
                   display: "grid",
@@ -40,6 +41,7 @@ const GLOBALInput = ({ control }) => {
                     key={fieldData.name}
                     render={({ field }) => (
                       <TextField
+                      multiline
                         label={fieldData.label}
                         {...field}
                         InputLabelProps={{ shrink: true }}
@@ -59,6 +61,16 @@ const GLOBALInput = ({ control }) => {
                   />
                 ))}
               </Box>
+              <Controller
+                    control={control}
+                    defaultValue=""
+                    name="properties.remarks"
+                    render={({ field: { onChange, value } }) => (
+                      <>
+                        <TinyEditor onChange={onChange} value={value} />
+                      </>
+                    )}
+                  />
               
       </div>
     </>

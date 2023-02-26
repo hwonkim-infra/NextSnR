@@ -1,16 +1,17 @@
 // next
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 // @mui
 // routes
-import { PATH_DASHBOARD } from '@/routes/paths';
 // layouts
-import Layout from '@/layouts';
+import Layout from "@/layouts";
 // components
-import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
-import Page from '@/components/Page';
+import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs";
+import Page from "@/components/Page";
 // sections
-import GLOBALEditForm from '@/sections/@dashboard/PSC/GLOBALEditForm';
-import { useEffect, useState } from 'react';
+import GLOBALEditForm from "@/sections/@dashboard/PSC/GLOBALEditForm";
+import { Divider, Grid, Typography } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -21,14 +22,14 @@ GLOBALEdit.getLayout = function getLayout(page) {
 // ----------------------------------------------------------------------
 
 export default function GLOBALEdit() {
-const [currentGLOBAL, setCurrentGLOBAL] = useState()
+  const [currentGLOBAL, setCurrentGLOBAL] = useState();
 
-const { query } = useRouter();
+  const { query } = useRouter();
 
   const getGLOBAL = async () => {
-    const response = await fetch(`http://localhost:3000/api/PSC/Global/${query.id}`);
+    const response = await axios.get(`/api/PSC/Global/${query.id}`);
 
-    const data = await response.json();
+    const data = response.data;
     setCurrentGLOBAL(data);
     console.log(data);
   };
@@ -37,20 +38,24 @@ const { query } = useRouter();
     if (query.id) getGLOBAL();
   }, [query.id]);
 
-//   const currentModel = _userList.find((user) => paramCase(user.name) === name);
+  //   const currentModel = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="GLOBALmap: Edit ">
-        <HeaderBreadcrumbs
-          heading="Edit National Information "
-          /* links={[
+    <Page title="WorldData: Edit ">
+      <HeaderBreadcrumbs
+        heading="Edit National Information "
+        /* links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.GLOBAL },
             { name: 'GLOBAL', href: PATH_DASHBOARD.GLOBAL.EU  },
             { name: (currentGLOBAL?.item) },
           ]} */
-        />
+      />
 
-        <GLOBALEditForm isEdit currentGLOBAL={currentGLOBAL} />
+
+      <Typography variant="h5">{currentGLOBAL?.properties.name}</Typography>
+      <Divider sx={{ mt: 5 }} />
+
+      <GLOBALEditForm isEdit currentGLOBAL={currentGLOBAL} />
     </Page>
   );
 }

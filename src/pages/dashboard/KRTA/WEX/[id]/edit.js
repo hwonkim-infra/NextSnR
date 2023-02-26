@@ -1,4 +1,5 @@
 // next
+import axios from "axios";
 import { useRouter } from 'next/router';
 // @mui
 // routes
@@ -26,9 +27,9 @@ const [currentModel, setCurrentModel] = useState()
 const { query } = useRouter();
 
   const getWEX = async () => {
-    const response = await fetch(`http://localhost:3000/api/WEX/${query.id}`);
+    const response = await axios.get(`/api/WEX/${query.id}`);
 
-    const data = await response.json();
+    const data = response.data;
     setCurrentModel(data);
     console.log(data);
   };

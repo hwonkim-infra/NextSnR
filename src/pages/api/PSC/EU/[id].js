@@ -1,6 +1,6 @@
 import PSC from "@/model/PSC";
 import Morgan from "morgan";
-import { dbConnect, runMiddleware } from "../../../utils/index";
+import { dbConnect, runMiddleware } from "@/utils/index";
 
 dbConnect();
 

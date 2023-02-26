@@ -26,7 +26,6 @@ const navConfig = [
         children: [
           { title: 'HEX', path: '/dashboard/KRTA/HEX' },
           { title: 'WEX', path: '/dashboard/KRTA/WEX' },
-          { title: 'Six', path: '/dashboard/KRTA/six' },
         ],
       },
     ],
@@ -43,6 +42,7 @@ const navConfig = [
         icon: ICONS.dashboard,
         children: [
           { title: 'EU ', path: '/dashboard/PSC/EU' },
+          { title: 'worldData ', path: '/dashboard/PSC/Global' },
         ],
       },
     ],

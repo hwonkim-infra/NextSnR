@@ -10,6 +10,7 @@ const GLOBALSchema = new Schema({
         properties: {
             name: String,
             emission: String,
+            noise: String,
             safety: String,
             typeApproval: String,
             remarks: String,

@@ -85,10 +85,10 @@ const DimensionsWheel = ({ control }) => {
 
   return (
     <>
-      <div className="input-group mb-1">
+     <Card sx={{ p: 3 }}>
         <Grid container spacing={2}>
-          <Grid Item xs={6}>
-            <Card sx={{ p: 3 }}>
+            <Grid item xs={6}>
+
               <Box
                 sx={{
                   display: "grid",
@@ -120,18 +120,14 @@ const DimensionsWheel = ({ control }) => {
                   />
                 ))}
               </Box>
-            </Card>
-          </Grid>
-          <Grid Item xs={6}>
-            <Card sx={{ p: 3 }}>
+            </Grid>
+            <Grid item xs={6}>
               <Box
                 sx={{
                   display: "grid",
                   // columnGap: 2,
                   // rowGap: 2,
-
-                  gridTemplateColumns: "2fr 2fr",
-                  // gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
+                  gridTemplateColumns: "2fr 2fr ",
                 }}
               >
                 {formFieldsTire.map((fieldData) => (
@@ -157,10 +153,10 @@ const DimensionsWheel = ({ control }) => {
                   />
                 ))}
               </Box>
-            </Card>
-          </Grid>
+            </Grid>
+          
         </Grid>
-      </div>
+            </Card>
     </>
   );
 };

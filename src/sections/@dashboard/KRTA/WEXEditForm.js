@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 // next
 import { useRouter } from "next/router";
@@ -99,9 +100,7 @@ const WEXEditForm = ({
   }, [isEdit, isChangeModel, currentModel]);
 
   const onSubmit = async (values) => {
-    // if (Object.keys(errors).length) return setErrors(errors);
-    // WEXSave({values, WEXCalc})
-
+    
     if (isChangeModel) {
       await createWEXChange(values);
       await push("/dashboard/KRTA/WEX");
@@ -114,59 +113,56 @@ const WEXEditForm = ({
   };
 
   const updateWEX = async (values) => {
-    try {
-      await fetch(`http://localhost:3000/api/WEX/${query.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+    axios
+      .put(`/api/WEX/${query.id}`, values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const createWEX = async (values) => {
     values._id = values.model_name + "_" + Date.now();
-    try {
-      await fetch("http://localhost:3000/api/WEX/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+
+    axios
+      .post("/api/WEX/", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const createWEXChange = async (values) => {
     values.origin = values._id;
     delete values._id;
     values._id = values.model_name + "_" + Date.now();
-    try {
-      await fetch("http://localhost:3000/api/WEX/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
+
+    axios
+      .post("/api/WEX/", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
-  // const removeWEX = async () => {
   async function removeWEX() {
     const { id } = query;
     if (window.confirm("이 모델을 삭제하시겠습니까")) {
       try {
-        await fetch(`http://localhost:3000/api/WEX/${id}`, {
-          method: "DELETE",
-        });
+        await axios
+          .delete(`/api/WEX/${id}`)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
         await push("/dashboard/KRTA/WEX");
       } catch (error) {
         console.log(error);
@@ -313,7 +309,7 @@ const WEXEditForm = ({
                 Preview
               </Typography>
               <SpecSheet values={values} />
-              {JSON.stringify(values, 0, 2)}
+              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>

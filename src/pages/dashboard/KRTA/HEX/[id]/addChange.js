@@ -1,5 +1,6 @@
 // next
 import { useRouter } from 'next/router';
+import axios from "axios";
 // @mui
 // routes
 // hooks
@@ -10,7 +11,7 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm';
+import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm2';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
@@ -29,9 +30,8 @@ const [currentModel, setCurrentModel] = useState()
 
 
   const getHEX = async () => {
-    const response = await fetch(`http://localhost:3000/api/HEX/${query.id}`);
-
-    const data = await response.json();
+    const response = await axios.get(`/api/HEX/${query.id}`);
+    const data = response.data;
     setCurrentModel(data);
     console.log(data);
   };

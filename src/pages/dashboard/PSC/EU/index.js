@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 import EditIcon from '@mui/icons-material/Edit';
 import PostAddIcon from '@mui/icons-material/PostAdd';
@@ -135,8 +136,8 @@ export default function PSCList({ PSCs = [] }) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("http://localhost:3000/api/PSC/EU/");
-  const PSCs = await response.json();
+  const response = await axios.get("http://127.0.0.1:3000/api/PSC/EU/");
+  const PSCs = response.data;
 
   return {
     props: {

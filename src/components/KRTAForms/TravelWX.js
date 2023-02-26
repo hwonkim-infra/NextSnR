@@ -37,10 +37,10 @@ const TravelWX = ({control}) => {
 
   return (
     <>
-      <div className="input-group mb-1">
-      <Grid container spacing={2}>
-          <Grid Item xs={6}>
-            <Card sx={{ p: 3 }}>
+      <Card sx={{ p: 3 }}>
+        <Grid container spacing={2}>
+            <Grid item xs={6}>
+
               <Box
                 sx={{
                   display: "grid",
@@ -72,17 +72,14 @@ const TravelWX = ({control}) => {
                   />
                 ))}
               </Box>
-            </Card>
-          </Grid>
-          <Grid Item xs={6}>
-            <Card sx={{ p: 3 }}>
+            </Grid>
+            <Grid item xs={6}>
               <Box
                 sx={{
                   display: "grid",
                   // columnGap: 2,
                   // rowGap: 2,
-
-                  gridTemplateColumns: "2fr 2fr",
+                  gridTemplateColumns: "2fr 2fr ",
                 }}
               >
                 {formFieldsTravelSlope.map((fieldData) => (
@@ -108,19 +105,14 @@ const TravelWX = ({control}) => {
                   />
                 ))}
               </Box>
-            </Card>
-          </Grid>
-
-          <Grid Item xs={6}>
-            <Card sx={{ p: 3 }}>
+            </Grid>
+            <Grid item xs={6}>
               <Box
                 sx={{
                   display: "grid",
                   // columnGap: 2,
                   // rowGap: 2,
-
-                  gridTemplateColumns: "2fr 2fr",
-                  // gridTemplateColumns: { xs: 'repeat(4, 1fr)', sm: 'repeat(4, 1fr)' },
+                  gridTemplateColumns: "2fr 2fr ",
                 }}
               >
                 {formFieldsTravelRadius.map((fieldData) => (
@@ -146,10 +138,9 @@ const TravelWX = ({control}) => {
                   />
                 ))}
               </Box>
-            </Card>
-          </Grid>
+            </Grid>
         </Grid>
-      </div>
+            </Card>
     </>
   );
 };
