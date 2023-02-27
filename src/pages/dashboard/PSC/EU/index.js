@@ -23,6 +23,7 @@ import Iconify from "@/components/Iconify";
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import PSCDetailPrev from "@/components/PSC/PSCDetailPrev";
+import Page from "@/components/Page";
 // import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
 
 // Preview
@@ -69,7 +70,7 @@ export default function PSCList({ PSCs = [] }) {
   });
 
   return (
-    <div>
+    <Page title="PSC List">
       <Grid container spacing={2}>
         <Grid item xs={6} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
@@ -131,7 +132,7 @@ export default function PSCList({ PSCs = [] }) {
           {/* <SpecSheet values={currentPSC}></SpecSheet> */}
         </Grid>
       </Grid>
-    </div>
+    </Page>
   );
 }
 

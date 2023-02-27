@@ -23,6 +23,7 @@ import Iconify from "@/components/Iconify";
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import GLOBALDetailPrev from "@/sections/@dashboard/PSC/GLOBALDetailPrev";
+import Page from "@/components/Page";
 
 // Preview
 
@@ -75,7 +76,7 @@ export default function GLOBALList({ GLOBALs = [] }) {
   });
 
   return (
-    <div>
+    <Page title="WorldData">
       <Grid container spacing={2}>
         <Grid item xs={6} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
@@ -126,7 +127,7 @@ export default function GLOBALList({ GLOBALs = [] }) {
 
         </Grid>
       </Grid>
-    </div>
+    </Page>
   );
 }
 

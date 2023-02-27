@@ -8,6 +8,7 @@ import axios from "axios";
 import Layout from "@/layouts";
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs";
 import Iconify from "@/components/Iconify";
+import Page from "@/components/Page";
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
@@ -62,7 +63,8 @@ export default function HEXList({ HEXs = [] }) {
   });
 
   return (
-    <div>
+    <Page title="형식승인: HEX">
+
       <Grid container spacing={2}>
         <Grid item xs={8} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
@@ -156,7 +158,8 @@ export default function HEXList({ HEXs = [] }) {
               <CertPrev values={currentHEX}></CertPrev>
         </Grid>
       </Grid>
-    </div>
+    </Page>
+
   );
 }
 

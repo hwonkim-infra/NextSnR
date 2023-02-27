@@ -8,6 +8,7 @@ import axios from "axios";
 import Layout from "@/layouts";
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs";
 import Iconify from "@/components/Iconify";
+import Page from "@/components/Page";
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
@@ -60,7 +61,7 @@ export default function WEXList({ WEXs = [] }) {
   });
 
   return (
-    <div>
+    <Page title="형식승인: WEX">
       <Grid container spacing={2}>
         <Grid item xs={8} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
@@ -152,7 +153,7 @@ export default function WEXList({ WEXs = [] }) {
               <CertPrev values={currentWEX}></CertPrev>
         </Grid>
       </Grid>
-    </div>
+    </Page>
   );
 }
 

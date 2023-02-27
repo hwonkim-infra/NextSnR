@@ -51,7 +51,7 @@ const GLOBALDetailPrev = ({ currentReport }) => {
             >
               Emission Level
             </Typography>
-            <Typography variant="body2">{currentReport.emission}</Typography>
+            <Typography variant="body2">{currentReport.properties.emission}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={6} sx={{ mb: 2 }}>
@@ -73,7 +73,7 @@ const GLOBALDetailPrev = ({ currentReport }) => {
             >
               Safety Standard
             </Typography>
-            <Typography variant="body2">{currentReport.safety}</Typography>
+            <Typography variant="body2">{currentReport.properties.safety}</Typography>
           </Grid>
           <Grid item xs={12} sm={12} sx={{ mb: 2 }}>
             <Typography
@@ -84,7 +84,7 @@ const GLOBALDetailPrev = ({ currentReport }) => {
               Type Approval
             </Typography>
             <Typography variant="body2">
-              {currentReport.typeApproval}
+              {currentReport.properties.typeApproval}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} sx={{ mb: 2 }}>

@@ -2,24 +2,16 @@
 // import { useTheme } from '@mui/material/styles';
 import { Container, Grid } from "@mui/material";
 // hooks
-// import useAuth from '@/hooks/useAuth';
-// import useSettings from '@/hooks/useSettings';
 // layouts
 import Layout from "@/layouts";
 import axios from "axios";
-// _mock_
-// import { _appFeatured, _appAuthors, _appInstalled, _appRelated, _appInvoices } from '@/_mock';
 // components
 import Page from "@/components/Page";
 // sections
-// import { AppWidget, AppWelcome, AppFeatured, AppNewInvoice, AppTopAuthors, AppTopRelated, AppAreaInstalled, AppWidgetSummary, AppCurrentDownload, AppTopInstalledCountries, } from '../../sections/@dashboard/general/app';
 // assets
-// import { SeoIllustration } from '../../assets';
 import AnalyticsKRTAByModel from "@/sections/@dashboard/analytics/AnalyticsKRTAByModel";
-// import PSCFeatured from '@/sections/@dashboard/analytics/PSCFeatured';
 
 import WorldMapWidget from "@/sections/@dashboard/analytics/WorldMapWidget";
-// import geoData from "@/sections/@dashboard/analytics/mapWidget/mapData.json";
 // ----------------------------------------------------------------------
 
 GeneralApp.getLayout = function getLayout(page) {
@@ -35,7 +27,7 @@ export default function GeneralApp({
 }) {
   
   return (
-    <Page title="General: App">
+    <Page title="Dashboard">
       <Container maxWidth={"xl"}>
       <WorldMapWidget geometries={geometries} />
         <Grid container spacing={3}>
