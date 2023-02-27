@@ -48,7 +48,7 @@ const WEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
       <>
         <WEXSpec values={newWEX} />
-        {/* <Drawings values={newWEX}  /> */}
+        <Drawings values={newWEX}  />
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />
         <GrossWeights values={newWEX} />

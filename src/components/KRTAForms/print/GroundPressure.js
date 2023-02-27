@@ -26,8 +26,9 @@ const GroundPressure = ({ values, config }) => {
                   src="/images/GroundPressure.png"
                   alt="groundPressure"
                   width="80%"
+                  margin= "auto"
                 />
-                    <table style={{width:"100%", height:"90%", margin: "auto"}} >
+                    <table style={{width:"100%", height:"80%", margin: "auto"}} >
 
                   <tbody>
                     <tr>

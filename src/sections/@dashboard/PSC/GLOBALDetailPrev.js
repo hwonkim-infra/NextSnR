@@ -62,7 +62,7 @@ const GLOBALDetailPrev = ({ currentReport }) => {
             >
               Noise Level
             </Typography>
-            <Typography variant="body2">{currentReport.noise}</Typography>
+            <Typography variant="body2">{currentReport.properties.noise}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={12} sx={{ mb: 2 }}>

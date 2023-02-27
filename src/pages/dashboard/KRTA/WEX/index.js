@@ -12,6 +12,7 @@ import Iconify from "@/components/Iconify";
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
+import CertPrev from "@/components/KRTAForms/previews/CertPrev";
 
 // Preview
 
@@ -148,6 +149,7 @@ export default function WEXList({ WEXs = [] }) {
           )}
 
           <SpecSheet values={currentWEX}></SpecSheet>
+              <CertPrev values={currentWEX}></CertPrev>
         </Grid>
       </Grid>
     </div>

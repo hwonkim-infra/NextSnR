@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import Image from "next/image";
 
 // 작업반경
 
@@ -17,9 +18,9 @@ const WorkingRange = ({ values }) => {
       <tbody>
 
 
-        <tr>
-          <td>
-            <img src={"/images/workingRange_HX.png"} alt="workingRange" srcSet="" />
+        <tr style={{margin: "auto"}}>
+          <td >
+            <img src={"/images/workingRange_HX.png"} alt="workingRange" srcSet="" height="60%" layout="fill" objectFit="position" />
             <table style={{width:"50%", height:"30%", margin: "auto"}} >
               <thead></thead>
               <tbody>

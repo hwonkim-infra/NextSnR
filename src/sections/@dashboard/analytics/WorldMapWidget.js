@@ -27,17 +27,34 @@ import parse from "html-react-parser";
 export default function WorldMapWidget({ geometries }) {
   const [content, setContent] = useState("");
 
-  {content[5]}
 
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3}  >
+                
+
       <Grid item xs={8}>
         <Card>
+        <Stack
+            direction="row"
+            spacing={3}
+            alignItems="center"
+            justifyContent="space-between"
+          >
+
           <CardHeader
             title="Global Regulation map"
             subheader="Interactive chart"
-          />
+            href="/dashboard/PSC/Global"
+            />
+          <Button
+                variant="outlined"
+                // startIcon={<QueueIcon />}
+                href="/dashboard/PSC/Global"
+                >
+                WorldData
+              </Button>
+                </Stack>
 
           <MapChart setTooltipContent={setContent} geometries={geometries} />
         </Card>

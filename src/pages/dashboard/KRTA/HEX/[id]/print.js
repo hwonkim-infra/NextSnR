@@ -50,7 +50,7 @@ const HEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
 
       <HEXSpec values={newHEX} />
-      {/* <Drawings values={newHEX}  /> */}
+      <Drawings values={newHEX}  />
       <WorkingRange values={newHEX} />
       <QCouplr values={newHEX} />
       <GrossWeights values={newHEX} />

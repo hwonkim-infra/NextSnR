@@ -12,6 +12,7 @@ import Iconify from "@/components/Iconify";
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+import CertPrev from "@/components/KRTAForms/previews/CertPrev";
 
 // Preview
 
@@ -146,13 +147,13 @@ export default function HEXList({ HEXs = [] }) {
                 // startIcon={<QueueIcon />}
                 href={"HEX/" + currentHEX?.id + "/addChange"}
               >
-                {" "}
                 변경형식
               </Button>
             </Box>
           )}
 
           <SpecSheet values={currentHEX}></SpecSheet>
+              <CertPrev values={currentHEX}></CertPrev>
         </Grid>
       </Grid>
     </div>
