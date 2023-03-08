@@ -12,10 +12,10 @@ const PostCard = ({ post }) => {
   return (
     <div>
       <CardActionArea  >
-        <Card sx={{height: '30vw'}}>
+        <Card sx={{height: '20vw'}}>
           <Link color="inherit" href={"/dashboard/Blog/post/" + post._id}>
           <CardContent sx={{ m: 1, width: 1 }}>
-          <TextMaxLine variant={'h4'} line={2} sx={{ height:60}} persistent>
+          <TextMaxLine variant={'h4'} line={2} sx={{ height:100}} persistent>
             {post.title}
           </TextMaxLine>
             
@@ -31,7 +31,7 @@ const PostCard = ({ post }) => {
             </Typography>
 
             <Typography component="div">
-              <div>{parse(post.description || "")}</div>
+              {/* <div>{parse(post.description || "")}</div> */}
             </Typography>
           </CardContent>
               </Link>

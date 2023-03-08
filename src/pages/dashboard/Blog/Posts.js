@@ -117,9 +117,10 @@ export default function BlogPosts({BLOGs=[]}) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const response = await axios.get("http://127.0.0.1:3000/api/BLOG/");
   const BLOGs = response.data;
+  console.log("🚀 ~ file: posts.js:123 ~ getStaticProps ~ BLOGs:", BLOGs)
 
   return {
     props: {

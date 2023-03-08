@@ -12,7 +12,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const Blogs = await Blog.find().sort({date: -1});
+        const Blogs = await Blog.aggregate([{ $project: {_id: 1, description: 0}}]).sort({date: -1});
         // const Blogs = await Blog.aggregate([{ $project: { _id: 1, Drawings: 0 }}]);
         await runMiddleware(req, res, morgan);
         return res.status(200).json(Blogs);
@@ -33,3 +33,8 @@ export default async (req, res) => {
     //   break;
   }
 };
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}
