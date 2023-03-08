@@ -36,18 +36,13 @@ export default function BlogPosts({ POSTs = [] }) {
             { name: 'Posts' },
           ]}
           action={
-            // <NextLink href={PATH_DASHBOARD.blog.new} passHref>
-              <Button variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
+              <Button href={'/dashboard/Blog/post/new'} variant="contained" startIcon={<Iconify icon={'eva:plus-fill'} />}>
                 New Post
               </Button>
-            // </NextLink>
           }
         />
 
-        <Stack mb={5} direction="row" alignItems="center" justifyContent="space-between">
-          {/* <BlogPostsSearch /> */}
-          {/* <BlogPostsSort query={filters} options={SORT_OPTIONS} onSort={handleChangeSort} /> */}
-        </Stack>
+        
 
         <Grid container spacing={3}>
           {/* {(!posts.length ? [...Array(12)] : sortedPosts).map((post, index) =>

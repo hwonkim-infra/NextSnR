@@ -1,5 +1,5 @@
-import { Box, Button, Paper, Tab, Tabs, TextField } from "@mui/material";
-import React from "react";
+import { Box, Button, Paper, Tab, Stack, TextField } from "@mui/material";
+import React, {Fragment} from "react";
 
 import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
@@ -16,13 +16,21 @@ const PSCdetailInput = ({control} ) => {
       });
 
   return (
-    <>
+    <Fragment>
+      
           <ul>
             {fields.map((item, index) => {
               return (
                 <li key={item.id}>
+                  <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="flex-center"
+                sx={{ mt: 3 }}
+              >
+
                   <Controller
-                    render={({ field }) => <TextField {...field} />}
+                    render={({ field }) => <TextField sx={{width: "80%"}} {...field} />}
                     name={`actions.${index}.subItem`}
                     defaultValue=""
                     control={control}
@@ -32,9 +40,10 @@ const PSCdetailInput = ({control} ) => {
                     color="error"
                     startIcon={<Iconify icon="eva:trash-2-outline" />}
                     onClick={() => remove(index)}
-                  >
+                    >
                     Remove
                   </Button>
+                    </Stack>
                   <Controller
                     control={control}
                     defaultValue=""
@@ -72,7 +81,7 @@ const PSCdetailInput = ({control} ) => {
               Add Next Item
             </Button>
           </section>
-        </>
+        </Fragment>
   );
 };
 

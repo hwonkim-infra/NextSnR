@@ -6,20 +6,12 @@ import {
   Geography,
 } from "react-simple-maps";
 
-import geoData from "./mapWidget/mapData.json";
-import axios from "axios";
 
-
-const MapChart = ({ setTooltipContent, geometries }) => {
+const MapChart = ({ setTooltipContent, geoData }) => {
  
-  
-  useEffect(() => {
-    geoData.objects.world.geometries = geometries;
-  }, [geometries])
   
 
   return (
-    <div>
       <ComposableMap       
 >
         <Geographies data-tooltip-id="my-tooltip" geography={geoData}>
@@ -34,8 +26,9 @@ const MapChart = ({ setTooltipContent, geometries }) => {
                     geo.properties.name,
                     geo.properties.emission,
                     geo.properties.noise,
-                    geo.properties.safety,
+                    geo.properties.roadLimit,
                     geo.properties.typeApproval,
+                    geo.properties.safety,
                     geo.properties.remarks,
                   ]);
                   
@@ -62,19 +55,7 @@ const MapChart = ({ setTooltipContent, geometries }) => {
           }
         </Geographies>
       </ComposableMap>
-    </div>
   );
 };
 
 export default memo(MapChart);
-
-export async function getServerSideProps() {
-  const response = await axios.get("http://127.0.0.1:3000/api/PSC/Global");
-  const geometries = response.data;
-  return {
-    props: {
-      geometries,
-    },
-  };
-}
- 

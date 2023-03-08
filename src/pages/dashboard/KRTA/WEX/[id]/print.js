@@ -12,6 +12,7 @@ import TravelSlopeWX from "@/components/KRTAForms/print/TravelSlopeWX";
 import TravelSpecHW from "@/components/KRTAForms/print/TravelSpecHW";
 import WEXSpec from "@/components/KRTAForms/print/WEXSpec";
 import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
+import Drawings from "@/components/KRTAForms/print/Drawings";
 
 const WEXprint = () => {
   const { push, query } = useRouter();

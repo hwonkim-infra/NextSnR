@@ -12,7 +12,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const Blogs = await Blog.find();
+        const Blogs = await Blog.find().sort({date: -1});
         // const Blogs = await Blog.aggregate([{ $project: { _id: 1, Drawings: 0 }}]);
         await runMiddleware(req, res, morgan);
         return res.status(200).json(Blogs);

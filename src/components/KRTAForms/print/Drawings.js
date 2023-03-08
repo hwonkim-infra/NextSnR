@@ -26,7 +26,7 @@ const Drawings = ({ values }) => {
   return (
     <>
       {drawingsPages.map((drawingPage) => (
-        <div className={styles.pages}>
+        <div className={styles.pages} key={drawingPage.title}>
           <table className={styles.borderTable}>
             <thead>
               <tr>

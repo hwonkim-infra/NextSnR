@@ -1,15 +1,13 @@
 import {
-  Autocomplete,
   Box,
-  Card,
-  Chip,
-  Grid,
   InputAdornment,
-  Paper,
   TextField,
+  Typography
 } from "@mui/material";
+import { Fragment } from "react";
 import { Controller } from "react-hook-form";
 import TinyEditor from "../KRTA/TinyEditor";
+
 
 const TAGS_OPTION = ["MD", "EU", "NA", "China", "Korea"];
 
@@ -17,15 +15,15 @@ const GLOBALInput = ({ control }) => {
   const InputForms = [
     { label: "emission", name: "properties.emission", type: "" },
     { label: "noise", name: "properties.noise", type: "" },
+    { label: "수송규격", name: "properties.roadLimit", type: "" },
+    { label: "type Approval", name: "properties.typeApproval", type: "" },
     { label: "safety", name: "properties.safety", type: "" },
-    { label: "typeApproval", name: "properties.typeApproval", type: "" },
     // { label: "remarks", name: "properties.remarks", type: "" },
     
   ];
 
   return (
-    <>
-      <div>
+      <Fragment>
 
               <Box
                 sx={{
@@ -61,9 +59,11 @@ const GLOBALInput = ({ control }) => {
                   />
                 ))}
               </Box>
+              <Typography>Remark</Typography>
               <Controller
                     control={control}
                     defaultValue=""
+                    label="remark" 
                     name="properties.remarks"
                     render={({ field: { onChange, value } }) => (
                       <>
@@ -72,8 +72,7 @@ const GLOBALInput = ({ control }) => {
                     )}
                   />
               
-      </div>
-    </>
+      </Fragment>
   );
 };
 

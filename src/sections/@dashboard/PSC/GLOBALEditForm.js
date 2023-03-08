@@ -54,7 +54,7 @@ const GLOBALEditForm = ({
     await axios
       .put(`/api/PSC/Global/${query.id}`, values)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -69,7 +69,7 @@ const GLOBALEditForm = ({
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
       try {
         await axios.delete(`/api/Global/${id}`).then((response) => {
-          console.log(response)
+          console.log(response.data)
         }).catch((error) => {console.error(error)});
         await push("/dashboard/GLOBAL/GLOBAL");
       } catch (error) {
@@ -106,9 +106,6 @@ const GLOBALEditForm = ({
           </Grid>
           <Grid item xs={12} md={6}>
             <Card sx={{ p: 1 }}>
-            
-              {/* <SpecSheet values={values} /> */}
-              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>

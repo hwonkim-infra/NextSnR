@@ -12,6 +12,7 @@ import Page from "@/components/Page";
 import AnalyticsKRTAByModel from "@/sections/@dashboard/analytics/AnalyticsKRTAByModel";
 
 import WorldMapWidget from "@/sections/@dashboard/analytics/WorldMapWidget";
+import { loadPosts } from "@/contexts/load-posts";
 // ----------------------------------------------------------------------
 
 GeneralApp.getLayout = function getLayout(page) {
@@ -23,13 +24,13 @@ GeneralApp.getLayout = function getLayout(page) {
 export default function GeneralApp({
   HEXmodels = [],
   WEXmodels = [],
-  geometries = [],
+  worldData = [],
 }) {
   
   return (
     <Page title="Dashboard">
       <Container maxWidth={"xl"}>
-      <WorldMapWidget geometries={geometries} />
+      <WorldMapWidget worldData={worldData}  />
         <Grid container spacing={3}>
           
           
@@ -52,20 +53,28 @@ export default function GeneralApp({
   );
 }
 
-export async function getServerSideProps() {
+
+
+
+export async function getServerSideProps({ req, res }) {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+
   const HEXresponse = await axios.get("http://127.0.0.1:3000/api/HEXmodels/");
   const WEXresponse = await axios.get("http://127.0.0.1:3000/api/WEXmodels/");
   const GEOresponse = await axios.get("http://127.0.0.1:3000/api/PSC/Global");
 
   const HEXmodels = HEXresponse.data;
   const WEXmodels = WEXresponse.data;
-  const geometries = GEOresponse.data;
+  const worldData = GEOresponse.data;
 
   return {
     props: {
       HEXmodels,
       WEXmodels,
-      geometries,
+      worldData,
     },
   };
 }

@@ -13,6 +13,7 @@ const GLOBALSchema = new Schema({
             noise: String,
             safety: String,
             typeApproval: String,
+            roadLimit: String,
             remarks: String,
             description: String,
             tags: Array,

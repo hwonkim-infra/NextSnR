@@ -22,7 +22,6 @@ const PSCInput = ({ control }) => {
 
   return (
     <>
-      <div>
               <Box
                 sx={{
                   display: "grid",
@@ -117,7 +116,6 @@ const PSCInput = ({ control }) => {
                   )}
                 />
               </Box>
-      </div>
     </>
   );
 };

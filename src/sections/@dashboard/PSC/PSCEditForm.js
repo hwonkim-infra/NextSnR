@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // next
 import { useRouter } from "next/router";
@@ -6,14 +6,14 @@ import { useRouter } from "next/router";
 // utils
 
 import { useForm } from "react-hook-form";
-// import { FormProvider, RHFTextField } from "@/components/hook-form";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Card, Grid, Snackbar, Stack, Typography } from "@mui/material";
+import { Button, Card, Grid, Snackbar, Stack, Typography } from "@mui/material";
 
+import axios from "axios";
 import PSCInputs from "./PSCInputs";
 import DetailInput from "./PSCdetailInputs";
-import axios from "axios";
 
 const PSCEditForm = ({ isEdit = false, currentPSC }) => {
   const {
@@ -64,8 +64,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
       });
   };
 
-  const createPSC = async (values) => {
-    // values._id = values.item + "_" + Date.now();
+  const createPSC = async (values) => {    
     axios
       .post("/api/PSC/EU", values)
       .then((response) => {
@@ -76,7 +75,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
       });
   };
 
-  // const removePSC = async () => {
+  
   async function removePSC() {
     const { id } = query;
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
@@ -101,11 +100,9 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={5}>
             <Card sx={{ p: 1 }}>
-              {/* <Box sx={{ }} > */}
               <PSCInputs control={control} />
-              {/* </Box> */}
 
               <Stack
                 direction="row"
@@ -137,7 +134,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
               </Stack>
             </Card>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={7}>
             <Card sx={{ p: 1 }}>
               <Typography
                 paragraph
@@ -147,9 +144,6 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
                 Actions Detail
               </Typography>
               <DetailInput control={control} />
-
-              {/* <SpecSheet values={values} /> */}
-              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>

@@ -65,17 +65,21 @@ const GLOBALDetailPrev = ({ currentReport }) => {
             <Typography variant="body2">{currentReport.properties.noise}</Typography>
           </Grid>
 
-          <Grid item xs={12} sm={12} sx={{ mb: 2 }}>
+          <Grid item xs={12} sm={6} sx={{ mb: 2 }}>
             <Typography
               paragraph
               variant="overline"
               sx={{ color: "text.disabled" }}
             >
-              Safety Standard
+              수송규격
             </Typography>
-            <Typography variant="body2">{currentReport.properties.safety}</Typography>
+            <Typography variant="body2">
+              {currentReport.properties.roadLimit}
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} sx={{ mb: 2 }}>
+
+
+          <Grid item xs={12} sm={6} sx={{ mb: 2 }}>
             <Typography
               paragraph
               variant="overline"
@@ -87,6 +91,18 @@ const GLOBALDetailPrev = ({ currentReport }) => {
               {currentReport.properties.typeApproval}
             </Typography>
           </Grid>
+
+          <Grid item xs={12} sm={12} sx={{ mb: 2 }}>
+            <Typography
+              paragraph
+              variant="overline"
+              sx={{ color: "text.disabled" }}
+            >
+              Safety Standard
+            </Typography>
+            <Typography variant="body2">{currentReport.properties.safety}</Typography>
+          </Grid>
+          
           <Grid item xs={12} sm={12} sx={{ mb: 2 }}>
             <Typography
               paragraph
