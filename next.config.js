@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  largePageDataBytes: 128 * 100000,
+
   async rewrites() {
     return [
       {
