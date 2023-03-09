@@ -35,14 +35,7 @@ const PSCDetailPrev = ({ currentPSC }) => {
     <Card sx={{ p: 3 }}>
       <Stack direction="row" spacing={3} justifyContent="space-between" sx={{ p:1, background: "#f2f2f2" }}>
         <Box sx={{ fontSize: "h5.fontSize" }}>{currentPSC.item}</Box>
-        <Button
-          sx={{ m: 1 }}
-          variant="outlined"
-          startIcon={<EditIcon />}
-          href={"/dashboard/PSC/EU/" + currentPSC?.id + "/edit"}
-        >
-          Edit
-        </Button>
+        
         <Button
           sx={{ m: 1 }}
           variant="outlined"

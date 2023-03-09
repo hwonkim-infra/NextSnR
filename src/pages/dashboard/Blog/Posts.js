@@ -1,23 +1,16 @@
 // import orderBy from 'lodash/orderBy';
-import { useEffect, useCallback, useState } from "react";
 // next
 import NextLink from "next/link";
 // @mui
 import {
-  Grid,
   Button,
   Container,
-  Stack,
-  CircularProgress,
-  Box,
+  Grid
 } from "@mui/material";
 // hooks
-import useSettings from "../../../hooks/useSettings";
-import useIsMountedRef from "../../../hooks/useIsMountedRef";
 // utils
 import axios from "axios";
 // routes
-import { PATH_DASHBOARD } from "../../../routes/paths";
 // layouts
 import Layout from "../../../layouts";
 // components
@@ -29,11 +22,7 @@ import PostCard from "@/sections/@dashboard/blog/PostCard";
 
 // ----------------------------------------------------------------------
 
-const SORT_OPTIONS = [
-  { value: "latest", label: "Latest" },
-  { value: "popular", label: "Popular" },
-  { value: "oldest", label: "Oldest" },
-];
+
 
 // ----------------------------------------------------------------------
 
@@ -57,11 +46,7 @@ const applySort = (posts, sortBy) => {
 }; */
 
 export default function BlogPosts({BLOGs=[]}) {
-  const { themeStretch } = useSettings();
 
-  const [posts, setPosts] = useState([]);
-
-  const [filters, setFilters] = useState("latest");
 
   /* const getAllPosts = useCallback(async () => {
     try {
@@ -117,10 +102,9 @@ export default function BlogPosts({BLOGs=[]}) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const response = await axios.get("http://127.0.0.1:3000/api/BLOG/");
   const BLOGs = response.data;
-  console.log("🚀 ~ file: posts.js:123 ~ getStaticProps ~ BLOGs:", BLOGs)
 
   return {
     props: {

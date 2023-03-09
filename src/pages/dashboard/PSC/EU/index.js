@@ -108,20 +108,20 @@ export default function PSCList({ PSCs = [] }) {
                 <PSCDetailPrev currentPSC={currentPSC} />
               </Paper>
               <Box>
-                <Button
+                 {/* <Button
                   variant="compromised"
                   startIcon={<PostAddIcon />}
                   psc_id={currentPSC}
                 >
                   
-                  {/* <Link
+                  <Link
                 to={{
                   pathname: `/PSC/` + currentPSC._id + '/newTCF',
                 }}
               >
                 Add TCF
-              </Link> */}
-                </Button>
+              </Link> 
+                </Button>*/}
                 <Button
           sx={{ m: 1 }}
           variant="outlined"

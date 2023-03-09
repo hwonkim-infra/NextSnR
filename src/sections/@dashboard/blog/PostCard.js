@@ -1,5 +1,6 @@
 import React from "react";
 import { CardActionArea, Card, CardContent, Typography, Box, Button, } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import TextMaxLine from '@/components/TextMaxLine';
 
@@ -9,13 +10,13 @@ import Link from "next/link";
 
 
 const PostCard = ({ post }) => {
+  if (!post) return <CircularProgress />
   return (
-    <div>
       <CardActionArea  >
-        <Card sx={{height: '16vw'}}>
+        <Card sx={{height: '25vw'}}>
           <Link color="inherit" href={"/dashboard/Blog/post/" + post._id}>
           <CardContent sx={{ m: 1, width: 1 }}>
-          <TextMaxLine variant={'h4'} line={2} sx={{ height:'12vw'}} persistent>
+          <TextMaxLine variant={'h4'} line={2} sx={{ height:'5vw'}} persistent>
             {post.title}
           </TextMaxLine>
             
@@ -37,7 +38,6 @@ const PostCard = ({ post }) => {
           
         </Card>
       </CardActionArea>
-    </div>
   );
 };
 
