@@ -1,5 +1,5 @@
 // import Task from '../../../model/Task'
-import PSC from '@/model/PSC'
+import PSC from "@/model/PSC";
 import Morgan from "morgan";
 import { dbConnect, runMiddleware } from "@/utils";
 
@@ -7,13 +7,29 @@ dbConnect();
 
 export default async (req, res) => {
   const { method, body } = req;
-  const morgan = Morgan('combined');
+  const morgan = Morgan("combined");
 
   switch (method) {
     case "GET":
       try {
-        const PSCs = await PSC.find();
-        // const PSCs = await PSC.aggregate([{ $project: { _id: 1, Drawings: 0 }}]);
+        // const PSCs = await PSC.find();
+        const PSCs = await PSC.aggregate([
+          {
+            $project: {
+              _id: 1,
+              item: 1,
+              date: 1,
+              reference: 1,
+              requirements: 1,
+              riskReduct: 1,
+              complyStatements: 1,
+              hazardDescript: 1,
+              description: 1,
+              tags: 1,
+              actions: { subItem: 1 },
+            },
+          },
+        ]);
         await runMiddleware(req, res, morgan);
         return res.status(200).json(PSCs);
       } catch (err) {

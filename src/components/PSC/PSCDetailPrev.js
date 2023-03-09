@@ -5,73 +5,89 @@ import {
   AccordionSummary,
   Box,
   Button,
+  Card,
   CircularProgress,
+  Stack,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
 } from "@mui/material";
 import parse from "html-react-parser";
 
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
-
+import FolderIcon from "@mui/icons-material/Folder";
+import EditIcon from '@mui/icons-material/Edit';
+import PageviewIcon from "@mui/icons-material/Pageview";
 
 const PSCDetailPrev = ({ currentPSC }) => {
   if (!currentPSC) return <CircularProgress />;
 
   return (
-    <div>
-      <TableContainer sx={{ "table, tr, td, th": { border: 0 } }}>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <Box sx={{ fontSize: "h5.fontSize" }}>
-                  {currentPSC.item}
-                  
-                  <Button
-                  sx={{m:1}}
-                  variant="outlined"
-                  href={"/dashboard/PSC/EU/" + currentPSC?.id+"/edit"}                  
-                >
-                  수정
-                </Button>
-                </Box>
-              </TableCell>
-              <TableCell align="right">
-                <Box sx={{ fontSize: "h8.fontSize" }}>
-                  {currentPSC.reference}
-                </Box>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell>{currentPSC.requirements}</TableCell>
-            </TableRow>
-            {currentPSC.actions?.map((row) => (
-              <TableRow key={row?.subItem}>
-                <TableCell>
-                  <Accordion>
-                    <AccordionSummary variant="subtitle1" style={{ background: "#f2f2f2" }} expandIcon={<Iconify icon={'eva:arrow-ios-downward-fill'} width={20} height={20} />}
->
-                      <Typography>{row?.subItem}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      {parse(row?.subAction || "")}
-                    </AccordionDetails>
-                  </Accordion>
-                  
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <Card sx={{ p: 3 }}>
+      <Stack direction="row" spacing={3} justifyContent="space-between" sx={{ p:1, background: "#f2f2f2" }}>
+        <Box sx={{ fontSize: "h5.fontSize" }}>{currentPSC.item}</Box>
+        <Button
+          sx={{ m: 1 }}
+          variant="outlined"
+          startIcon={<EditIcon />}
+          href={"/dashboard/PSC/EU/" + currentPSC?.id + "/edit"}
+        >
+          Edit
+        </Button>
+        <Button
+          sx={{ m: 1 }}
+          variant="outlined"
+          startIcon={<PageviewIcon />}
+          href={"/dashboard/PSC/EU/" + currentPSC?.id + "/view"}
+        >
+          View
+        </Button>
+      </Stack>
+        
+        <Box sx={{ p: 2 }}>
+        <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+          Reference
+        </Typography>
+      <Typography variant="body2" >
+      {currentPSC.reference}
+      </Typography>
+
+      </Box>
+      <Box sx={{ p: 2 }}>
+      <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+      requirements
+        </Typography>
+      <Typography variant="body2" >
+      {currentPSC.requirements}
+      </Typography>
+
+      </Box>
+      <Box sx={{ p: 2 }}>
+      {currentPSC.actions?.map((row) => (
+                <ListItem sx={{  }} key={row?.subItem}>
+                  <ListItemIcon>
+                    <FolderIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={row?.subItem}
+                    // secondary={secondary ? 'Secondary text' : null}
+                  />
+                  </ListItem>
+              ))}
+
+      </Box>
+
+     
+    </Card>
   );
 };
 

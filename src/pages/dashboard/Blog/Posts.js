@@ -85,7 +85,7 @@ export default function BlogPosts({BLOGs=[]}) {
 
   return (
     <Page title="Blog: Posts">
-      <Container maxWidth={themeStretch ? false : "lg"}>
+      <Container maxWidth={false }>
         <HeaderBreadcrumbs
           heading="Tech Blog"
           /*  links={[

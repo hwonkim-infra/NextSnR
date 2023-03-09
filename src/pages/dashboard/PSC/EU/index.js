@@ -113,6 +113,7 @@ export default function PSCList({ PSCs = [] }) {
                   startIcon={<PostAddIcon />}
                   psc_id={currentPSC}
                 >
+                  
                   {/* <Link
                 to={{
                   pathname: `/PSC/` + currentPSC._id + '/newTCF',
@@ -121,6 +122,14 @@ export default function PSCList({ PSCs = [] }) {
                 Add TCF
               </Link> */}
                 </Button>
+                <Button
+          sx={{ m: 1 }}
+          variant="outlined"
+          startIcon={<EditIcon />}
+          href={"/dashboard/PSC/EU/" + currentPSC?.id + "/edit"}
+        >
+          Edit
+        </Button>
               </Box>
 
               <Paper elevation={2} style={{ padding: "5px" }}>
@@ -129,7 +138,7 @@ export default function PSCList({ PSCs = [] }) {
             </>
           )}
 
-          {/* <SpecSheet values={currentPSC}></SpecSheet> */}
+          
         </Grid>
       </Grid>
     </Page>
