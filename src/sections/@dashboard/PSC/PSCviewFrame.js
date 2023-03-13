@@ -61,12 +61,10 @@ const PSCviewFrame = ({ currentPSC }) => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={12}>
-        <Box sx={{ fontSize: "h4.fontSize" }}>{currentPSC.item}</Box>
-      </Grid>
+
 
       <Grid item xs={12} md={5}>
-        <Card sx={{ p: 3 }}>
+        <Card sx={{ p: 1 }}>
           <Box sx={{ p: 2 }}>
             <Typography variant="overline" sx={{ color: "text.secondary" }}>
               Reference

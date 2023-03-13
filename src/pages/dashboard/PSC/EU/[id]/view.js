@@ -43,7 +43,7 @@ const { query } = useRouter();
   return (
     <Page title="PSC: View Item ">
         <HeaderBreadcrumbs
-          heading="View PSC"
+          heading={"View PSC: "+ currentPSC.item}
           links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.PSC },
             { name: 'PSC', href: PATH_DASHBOARD.PSC.EU  },
