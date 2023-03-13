@@ -309,7 +309,7 @@ const WEXEditForm = ({
                 Preview
               </Typography>
               <SpecSheet values={values} />
-              {/* {JSON.stringify(values, 0, 2)} */}
+              {JSON.stringify(values, 0, 2)}
             </Card>
           </Grid>
         </Grid>

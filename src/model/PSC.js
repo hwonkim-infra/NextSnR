@@ -12,6 +12,15 @@ const PSCSchema = new Schema({
         description: String,
         tags: Array,
         actions: Array,
+        region: {
+                northAmerica: String,
+                australia: String,
+                CUTR: String,     
+                CUTRs: String,     
+                brazil: String,     
+                otherRegion: String,
+        },
+        regions: String,
         date: Date,
     
     

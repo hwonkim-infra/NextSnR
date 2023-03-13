@@ -1,4 +1,4 @@
-import { connect, connection } from "mongoose";
+import { connect, connection, mongoose } from "mongoose";
 
 
 const conn = {
@@ -6,6 +6,9 @@ const conn = {
 }
 export async function dbConnect() {
     if(conn.isConnected) return;
+
+    mongoose.set("strictQuery", false);
+
 
     const db = await connect(process.env.MONGODB_URI);
     conn.isConnected = db.connections[0].readyState;

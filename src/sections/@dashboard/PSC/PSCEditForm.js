@@ -14,6 +14,7 @@ import { Button, Card, Grid, Snackbar, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import PSCInputs from "./PSCInputs";
 import DetailInput from "./PSCdetailInputs";
+import PSCRegionInputs from "./PSCRegionInputs";
 
 const PSCEditForm = ({ isEdit = false, currentPSC }) => {
   const {
@@ -57,7 +58,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
     axios
       .put(`/api/PSC/EU/${query.id}`, values)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -97,12 +98,12 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
   }
 
   return (
-    <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={5}>
             <Card sx={{ p: 1 }}>
               <PSCInputs control={control} />
+              <PSCRegionInputs control={control} />
 
               <Stack
                 direction="row"
@@ -144,11 +145,11 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
                 Actions Detail
               </Typography>
               <DetailInput control={control} />
+        {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
             </Card>
           </Grid>
         </Grid>
       </form>
-    </div>
   );
 };
 
