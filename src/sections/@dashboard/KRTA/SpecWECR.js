@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "@/components/KRTAForms/print/ECR.module.scss";
 import HEXSpecTable from "./HEXSpecTable";
 import WEXSpecTable from "./WEXSpecTable";
-import { useDownloadExcel } from "react-export-table-to-excel";
+// import { useDownloadExcel } from "react-export-table-to-excel";
 
 
 
@@ -11,10 +11,10 @@ const SpecWECR = ({ values, type }) => {
   const [originData, setOriginData] = useState({});
   const tableRef = useRef(null);
 
-  const {onDownload} = useDownloadExcel({
+  /* const {onDownload} = useDownloadExcel({
     currentTableRef: tableRef.current,
     filename: "SpecTableECR",
-  })
+  }) */
 
   const getOrigin = async () => {
     if (type==="HEX") {
