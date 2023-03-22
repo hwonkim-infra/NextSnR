@@ -133,7 +133,7 @@ export default function HEXList({ HEXs = [] }) {
                   sx={{ m: 1 }}
                   variant="text"
                   // startIcon={<TextSnippet />}
-                  href={"/HEX/specW/" + currentHEX?.id}
+                  href={"HEX/" + currentHEX?.id + "/specECR"}
                   target="_blank"
                 >
                   제원표

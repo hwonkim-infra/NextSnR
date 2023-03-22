@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import HEXService from "../../services/HEXServices";
-import { Box, Grid, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import parse from "html-react-parser";
+import { useEffect, useState } from "react";
+import HEXService from "../../services/HEXServices";
 
 const CompareChange = ({ values }) => {
   

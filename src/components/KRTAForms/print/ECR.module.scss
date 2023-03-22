@@ -1,0 +1,161 @@
+
+.table {
+    width: 70vw;
+    margin-bottom: 1rem;
+    vertical-align: top;
+    border-color: #dee2e6;
+    border: 1px solid black;
+    border-collapse: collapse;
+    page-break-inside: auto;
+    thead {
+        border: 1px solid black;
+
+    }
+    tbody {
+        tr td {
+            border: 1px solid black;
+            page-break-inside: avoid;
+            page-break-after: auto;
+            background: "#e6e6e6";
+            .vertical_cell {
+                text-align: center;
+                
+            }
+        }
+    }
+}
+.item {
+    background: "#e6e6e6"; 
+    width: "7%";
+}
+
+
+    
+    .borderTable {
+        border: 3px solid black;
+        width: 100%;
+        height: 270mm;
+        max-height: 280mm;
+        display: table;
+        thead {
+            height: 15mm;
+            text-align: center;
+            font: 20px bold;        
+            th {
+                border-bottom: 1px solid black;
+                }
+        }
+        .borderheader {
+            height: 15mm;
+            text-align: center;
+            font: 20px bold;
+            border: 1px solid black;
+    
+        }
+    }
+    
+    .innerTable {
+        margin: 0 auto;
+        width: 80%;
+        height: 80%;
+        // padding-inline: 10% 10%;
+    }
+
+    .head_description {
+        // display: inline;
+        padding: 50px;
+        
+        vertical-align: baseline;
+        // padding-top: 10px;
+        // padding-right: 20px;
+        // padding-bottom: 20px;
+        // padding-left: 20px;
+    }
+    .item_headers {
+        padding: 10px;
+        font-style: bold;
+    }
+
+
+
+
+
+/* 
+.th {
+    border: 1px solid black;
+    border-collapse: collapse;
+};    
+.tr {
+    border: 1px solid black;
+    border-collapse: collapse;
+    page-break-inside: avoid;
+    page-break-after: auto;
+} */
+
+
+
+
+
+@media print {
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.img {
+    display: block;
+    margin: auto;
+    max-width: 600px;
+    max-height: 900px;
+}
+
+.vertical_cell {
+    text-align: center;
+}
+
+
+.input-file-button {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#inputExcelRead {
+    display: none;
+}
+
+
+
+.headline {
+    padding-top: 10px;
+    font-size: 25px;
+    text-align: center;
+}

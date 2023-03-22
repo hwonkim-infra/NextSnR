@@ -46,7 +46,7 @@ export default function PSCList({ PSCs = [] }) {
       flex: 1,
       minWidth: 400,
     },
-    {
+    /* {
       field: "Edit",
       headerName: "EDIT",
       width: 50,
@@ -55,7 +55,7 @@ export default function PSCList({ PSCs = [] }) {
           <EditIcon />
         </IconButton>
       ),
-    },
+    }, */
   ];
   if (!PSCs) return <CircularProgress />;
 
@@ -108,20 +108,7 @@ export default function PSCList({ PSCs = [] }) {
                 <PSCDetailPrev currentPSC={currentPSC} />
               </Paper>
               <Box>
-                 {/* <Button
-                  variant="compromised"
-                  startIcon={<PostAddIcon />}
-                  psc_id={currentPSC}
-                >
-                  
-                  <Link
-                to={{
-                  pathname: `/PSC/` + currentPSC._id + '/newTCF',
-                }}
-              >
-                Add TCF
-              </Link> 
-                </Button>*/}
+                 
                 <Button
           sx={{ m: 1 }}
           variant="outlined"

@@ -127,7 +127,7 @@ export default function WEXList({ WEXs = [] }) {
                   sx={{ m: 1 }}
                   variant="text"
                   // startIcon={<TextSnippet />}
-                  href={"/WEX/specW/" + currentWEX?.id}
+                  href={"WEX/" + currentWEX?.id + "/specECR"}
                   target="_blank"
                 >
                   제원표

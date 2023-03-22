@@ -1307,6 +1307,7 @@ __metadata:
     prettier: ^2.7.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-export-table-to-excel: ^1.0.6
     react-hook-form: ^7.43.0
     react-lazy-load-image-component: ^1.5.4
     react-select: ^5.7.0
@@ -5603,6 +5604,13 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
   checksum: 7d323310bea3a91be2965f9468d552f201b1c27891e45ddc2d6b8f717680c95a75ae0bc1e3f5cf41472446a2589a75aed4483aee8169287909fcd59ad149e8cc
+  languageName: node
+  linkType: hard
+
+"react-export-table-to-excel@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "react-export-table-to-excel@npm:1.0.6"
+  checksum: a9c69ccbae1ce6b39e4436334211f381a2dac81361f6ef397ad00a2452d2057de15104c32ec8be98f6673d5bc8e35b0cb0b59d3e1327eb0e69fa8cf5bf03eb3a
   languageName: node
   linkType: hard
 

@@ -31,42 +31,9 @@ BlogPosts.getLayout = function getLayout(page) {
 };
 
 // ----------------------------------------------------------------------
-/* 
-const applySort = (posts, sortBy) => {
-  if (sortBy === 'latest') {
-    return orderBy(posts, ['createdAt'], ['desc']);
-  }
-  if (sortBy === 'oldest') {
-    return orderBy(posts, ['createdAt'], ['asc']);
-  }
-  if (sortBy === 'popular') {
-    return orderBy(posts, ['view'], ['desc']);
-  }
-  return posts;
-}; */
 
 export default function BlogPosts({BLOGs=[]}) {
 
-
-  /* const getAllPosts = useCallback(async () => {
-    try {
-      const response = await axios.get("/api/BLOG");
-
-      setPosts(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    getAllPosts();
-  }, [getAllPosts]);
-
-  const handleChangeSort = (value) => {
-    if (value) {
-      setFilters(value);
-    }
-  }; */
 
   return (
     <Page title="Blog: Posts">
