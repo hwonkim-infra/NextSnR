@@ -37,7 +37,7 @@ const SpecWECR = ({ values, type }) => {
 
   return (
     <div >
-      <button onClick={onDownload} >Export Excel</button>
+      {/* <button onClick={onDownload} >Export Excel</button> */}
       <table className={styles.table}>
         <thead>
           <tr>
