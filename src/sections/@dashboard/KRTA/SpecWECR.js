@@ -50,7 +50,7 @@ const SpecWECR = ({ values, type }) => {
           <tr>
             <td style={{ background: "#e6e6e6", width: "7%" }}>ECR No.</td>
             <td width="15%"></td>
-            <td width="10%">요청부서</td>
+            <td width="10%" style={{ background: "#e6e6e6",  }}>요청부서</td>
             <td width="18%">의장설계팀</td>
             <td style={{ background: "#e6e6e6", width: "7%"  }}>요청자</td>
             <td width="15%"></td>

@@ -1,12 +1,12 @@
 
-import { Table } from "@mui/material";
+import { Table, Card } from "@mui/material";
 import parse from "html-react-parser";
 
 const WEXSpecTable = ({ values }) => {
   const approval = values.approval_result || ""
   return (
    
-            <Table style={{ width: "70%", height: "80%", margin: "auto" }}>
+            <Table style={{ width: "90%", height: "", margin: "auto" }}>
                 <thead>
                   <tr>
                     <th
@@ -110,7 +110,10 @@ const WEXSpecTable = ({ values }) => {
                   </tr>
                   <tr>
                     <td colSpan="6">
+                    <Card sx={{height: '65vh'}}>
                     {parse(approval)}
+
+                      </Card>
                     </td>
                   </tr>
                 </tbody>
