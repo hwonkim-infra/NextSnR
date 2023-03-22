@@ -50,3 +50,8 @@ export default async (req, res) => {
 
   }
 };
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}
