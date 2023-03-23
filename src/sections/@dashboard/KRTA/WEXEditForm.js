@@ -125,6 +125,7 @@ const WEXEditForm = ({
 
   const createWEX = async (values) => {
     values._id = values.model_name + "_" + Date.now();
+    console.log(values._id);
 
     axios
       .post("/api/WEX/", values)
@@ -309,7 +310,7 @@ const WEXEditForm = ({
                 Preview
               </Typography>
               <SpecSheet values={values} />
-              {/* {JSON.stringify(values, 0, 2)} */}
+              {JSON.stringify(values, 0, 2)}
             </Card>
           </Grid>
         </Grid>

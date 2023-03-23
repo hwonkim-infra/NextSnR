@@ -48,3 +48,8 @@ export default async (req, res) => {
       break;
   }
 };
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}

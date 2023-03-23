@@ -30,6 +30,7 @@ const WEXSchema = new Schema({
     // 하부체와 액슬
     undercarriage: {
         ground_clearance: Number,
+        dozer_size: String,
         wheel_base: Number,
         axle_track_front: Number,
         axle_track_rear: Number,

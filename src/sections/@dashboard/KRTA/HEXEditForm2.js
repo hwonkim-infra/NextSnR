@@ -16,7 +16,8 @@ import {
   Box,
   Button,
   Card,
-  Grid, Snackbar,
+  Grid,
+  Snackbar,
   Stack,
   Tab,
   Tabs,
@@ -34,7 +35,6 @@ import TAResult from "@/components/KRTAForms/TAResult";
 import TransPortation from "@/components/KRTAForms/TransPortation";
 import TravelHX from "@/components/KRTAForms/TravelHX";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
-
 
 const defaultValues = {
   ECN: null,
@@ -128,8 +128,9 @@ const HEXEditForm = ({
 
   const createHEX = async (values) => {
     values._id = values.model_name + "_" + Date.now();
+    console.log("posting values: ", values);
 
-    axios
+    await axios
       .post("/api/HEX/", values)
       .then((response) => {
         console.log(response);
@@ -144,7 +145,7 @@ const HEXEditForm = ({
     delete values._id;
     values._id = values.model_name + "_" + Date.now();
 
-    axios
+    await axios
       .post("/api/HEX/", values)
       .then((response) => {
         console.log(response);
@@ -286,11 +287,11 @@ const HEXEditForm = ({
                   {!isEdit ? "Create Model" : "Save Changes"}
                 </LoadingButton>
                 <Snackbar
-                    open={snackbarOpen}
-                    autoHideDuration={3000}
-                    message="This File was updated successfully"
-                    onClose={snackbarClose}
-                  />
+                  open={snackbarOpen}
+                  autoHideDuration={3000}
+                  message="This File was updated successfully"
+                  onClose={snackbarClose}
+                />
                 <Button
                   variant="outlined"
                   startIcon={<DeleteIcon />}
