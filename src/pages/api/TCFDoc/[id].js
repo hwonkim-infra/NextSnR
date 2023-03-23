@@ -1,4 +1,4 @@
-import TCF from "@/model/TCF";
+import TCFDoc from "@/model/TCFDoc";
 import Morgan from "morgan";
 import { dbConnect, runMiddleware } from "@/utils/index";
 
@@ -15,9 +15,9 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        await TCF.findById(id);
-        const task = await TCF.findById(id);
-        if (!task) return res.status(400).json({ msg: "TCF does Not exits " });
+        await TCFDoc.findById(id);
+        const task = await TCFDoc.findById(id);
+        if (!task) return res.status(400).json({ msg: "TCFDoc does Not exits " });
         await runMiddleware(req, res, morgan);
         return res.status(200).json(task);
       } catch (err) {
@@ -25,9 +25,9 @@ export default async (req, res) => {
       }
     case "DELETE":
       try {
-        const deletedTCF = await TCF.findByIdAndDelete(id);
-        if (!deletedTCF)
-          return res.status(404).json({ msg: "TCF does Not exits " });
+        const deletedTCFDoc = await TCFDoc.findByIdAndDelete(id);
+        if (!deletedTCFDoc)
+          return res.status(404).json({ msg: "TCFDoc does Not exits " });
         await runMiddleware(req, res, morgan);
         return res.status(200).json();
       } catch (err) {
@@ -35,13 +35,13 @@ export default async (req, res) => {
       }
     case "PUT":
       try {
-        const updatedTCF = await TCF.findByIdAndUpdate(id, body, {
+        const updatedTCFDoc = await TCFDoc.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
-        if (!updatedTCF)
-          return res.status(404).json({ msg: "TCF does Not exits " });
-        return res.status(200).json(updatedTCF);
+        if (!updatedTCFDoc)
+          return res.status(404).json({ msg: "TCFDoc does Not exits " });
+        return res.status(200).json(updatedTCFDoc);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

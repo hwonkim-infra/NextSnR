@@ -1,5 +1,5 @@
 // import Task from '../../../model/Task'
-import TCF from "@/model/TCF";
+import TCFDoc from "@/model/TCFDoc";
 import Morgan from "morgan";
 import { dbConnect, runMiddleware } from "@/utils";
 
@@ -12,7 +12,7 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const TCFs = await TCF.find()
+        const TCFDocs = await TCFDoc.find()
         /* .exec().then(docs => {
           const response = {
             count: docs.length,
@@ -23,14 +23,14 @@ export default async (req, res) => {
                 _id: doc._id,
                 request: {
                   type: "GET",
-                  url: "http://127.0.0.1:3000/api/TCF/" + doc._id
+                  url: "http://127.0.0.1:3000/api/TCFDoc/" + doc._id
                 }
               }
             })
           }
           res.status(200).json(response);
         }); */
-        /* const TCFs = await TCF.aggregate([
+        /* const TCFDocs = await TCFDoc.aggregate([
           {
             $project: {
               _id: 1,
@@ -48,16 +48,16 @@ export default async (req, res) => {
         ]); */
         
         await runMiddleware(req, res, morgan);
-        return res.status(200).json(TCFs);
+        return res.status(200).json(TCFDocs);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
     case "POST":
       try {
-        const newTCF = new TCF(body);
-        const savedTCF = await newTCF.save();
+        const newTCFDoc = new TCFDoc(body);
+        const savedTCFDoc = await newTCFDoc.save();
         await runMiddleware(req, res, morgan);
-        return res.status(200).json(savedTCF);
+        return res.status(200).json(savedTCFDoc);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }
