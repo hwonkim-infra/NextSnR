@@ -101,8 +101,7 @@ const HEXEditForm = ({
   }, [isEdit, isChangeModel, currentModel]);
 
   const onSubmit = async (values) => {
-    // if (Object.keys(errors).length) return setErrors(errors);
-    // HEXSave({values, HEXCalc})
+    {HEXCalc(values)}
 
     if (isChangeModel) {
       await createHEXChange(values);
@@ -116,7 +115,7 @@ const HEXEditForm = ({
   };
 
   const updateHEX = async (values) => {
-    axios
+    await axios
       .put(`/api/HEX/${query.id}`, values)
       .then((response) => {
         console.log(response);
@@ -312,10 +311,10 @@ const HEXEditForm = ({
                 Preview
               </Typography>
               <SpecSheet values={values} />
-              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>
+              {JSON.stringify(values, 0, 2)}
       </form>
     </div>
   );

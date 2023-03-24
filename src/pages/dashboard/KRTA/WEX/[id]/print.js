@@ -13,6 +13,7 @@ import TravelSpecHW from "@/components/KRTAForms/print/TravelSpecHW";
 import WEXSpec from "@/components/KRTAForms/print/WEXSpec";
 import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
 import Drawings from "@/components/KRTAForms/print/Drawings";
+import AxleAndLoad from "@/components/KRTAForms/print/AxleAndLoad";
 
 const WEXprint = () => {
   const { push, query } = useRouter();
@@ -53,6 +54,7 @@ const WEXprint = () => {
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />
         <GrossWeights values={newWEX} />
+      <AxleAndLoad values={newWEX} config={config} />
         <SwivelSpeed values={newWEX} config={config} />
         <TravelSpecHW values={newWEX} config={config} />
         <TravelSlopeWX values={newWEX} config={config} />

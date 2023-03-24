@@ -100,6 +100,7 @@ const WEXEditForm = ({
   }, [isEdit, isChangeModel, currentModel]);
 
   const onSubmit = async (values) => {
+    {WEXCalc(values)}
     
     if (isChangeModel) {
       await createWEXChange(values);
@@ -113,10 +114,12 @@ const WEXEditForm = ({
   };
 
   const updateWEX = async (values) => {
-    axios
+    console.log("🚀 ~ file: WEXEditForm.js:116 ~ updateWEX ~ values:", values)
+    
+    await axios
       .put(`/api/WEX/${query.id}`, values)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -127,7 +130,7 @@ const WEXEditForm = ({
     values._id = values.model_name + "_" + Date.now();
     console.log(values._id);
 
-    axios
+    await axios
       .post("/api/WEX/", values)
       .then((response) => {
         console.log(response);
@@ -245,7 +248,6 @@ const WEXEditForm = ({
                   gridTemplateColumns: "repeat(8, 1fr)",
                 }}
               >
-                {WEXCalc(values)}
                 <Summary control={control} />
               </Box>
               <Tabs
@@ -310,10 +312,11 @@ const WEXEditForm = ({
                 Preview
               </Typography>
               <SpecSheet values={values} />
-              {/* {JSON.stringify(values, 0, 2)} */}
             </Card>
           </Grid>
         </Grid>
+                {WEXCalc(values)}
+              {JSON.stringify(values, 0, 2)}
       </form>
     </div>
   );

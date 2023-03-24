@@ -23,23 +23,23 @@ function HEXCalc (values) {
     console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values)
 
     // values.attachments ?? {};
-//   values.attachments ?? {};
+  values.attachments ??= {};
 
-    /* values.undercarriage ?? {};
-    values.engine ?? {};
-    values.swivel ?? {};
-    values.travel ?? {};
-    values.drawings ?? {};
-    values.description ?? {};
-    values.COG ?? {};
-    values.transport ?? {
-        transport_1_weight: ''
-    }; */
+    values.undercarriage ??= {};
+    values.engine ??= {};
+    values.swivel ??= {};
+    values.travel ??= {};
+    values.drawings ??= {};
+    values.description ??= {};
+    values.COG ??= {};
+    values.transport ??= { }; 
+   
     // HEXinit(values)
 
     // console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values.attachments", values.attachments)
     
     // console.log("🚀 ~ file: HEXCalc.jsx:21 ~ HEXCalc ~ values", values.attachments)
+    
 
     const grossWeight = Number(values.operating_weight) + 65; // 총중량
     const bucket_exca_capa = Number(values.attachments?.bucket_heap) * 1500; // 산적 시 버켓 중량

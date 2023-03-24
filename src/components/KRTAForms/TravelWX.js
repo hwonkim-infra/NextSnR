@@ -35,6 +35,11 @@ const TravelWX = ({control}) => {
     
   ];
 
+  const manualFieldsTravel = [
+    { label: "주행속도 (직접입력)", name: "travel.travel_speed", type: "number", unit: "km/hr", },
+    
+  ];
+
   return (
     <>
       <Card sx={{ p: 3 }}>
@@ -116,6 +121,40 @@ const TravelWX = ({control}) => {
                 }}
               >
                 {formFieldsTravelRadius.map((fieldData) => (
+                  <Controller
+                    key={fieldData.name}
+                    render={({ field }) => (
+                      <TextField
+                        label={fieldData.label}
+                        {...field}
+                        value={field.value || ""}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              {fieldData.unit}
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                    )}
+                    name={fieldData.name}
+                    type={fieldData.type}
+                    control={control}
+                  />
+                ))}
+              </Box>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Box
+                sx={{
+                  display: "grid",
+                  // columnGap: 2,
+                  // rowGap: 2,
+                  gridTemplateColumns: "2fr 2fr ",
+                }}
+              >
+                {manualFieldsTravel.map((fieldData) => (
                   <Controller
                     key={fieldData.name}
                     render={({ field }) => (

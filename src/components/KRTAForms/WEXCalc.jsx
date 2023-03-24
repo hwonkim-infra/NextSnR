@@ -14,7 +14,7 @@ const radians_to_degrees = (radians) => {
 };
 
 const WEXCalc = (values) => {
-  values.undercarriage ??= {};
+  /* values.undercarriage ??= {};
   values.engine ??= {};
   values.attachments ??= {};
   values.swivel ??= {};
@@ -22,9 +22,9 @@ const WEXCalc = (values) => {
   values.drawings ??= {};
   values.description ??= {};
   values.COG ??= {};
-  values.transport ??= {};
+  */
+ values.transport ??= {}; 
 
-  // console.log("🚀 ~ file: WEXCalc.jsx ~ line 11 ~ WEXCalc ~ values", values)
   const grossWeight = Number(values.operating_weight) + 65; // 총중량
   const bucket_exca_capa = Number(values.attachments.bucket_heap) * 1500; // 산적 시 버켓 중량
   const quick_coupler_weight = Math.max(
@@ -73,7 +73,7 @@ const WEXCalc = (values) => {
       values.travel.motor_displacement_travel) *
     1000
   ));
-  const travel_speed = Math.round(Number(
+  const travel_speed = values.travel.travel_speed || Math.round(Number(
     (((2 * Math.PI * axle_motor_rev * values.travel.tire_rolling_radius) /
       1000) *
       60) /
@@ -116,6 +116,7 @@ const WEXCalc = (values) => {
   ).toFixed(1);
   const idle_running = 0.5;
 
+  /* 제동력과 감가속도 */
   const decceleration_rate = (braking_force_total / grossWeight).toFixed(1);
   const decceleration = (decceleration_rate * 9.81).toFixed(1);
   const braking_distance_max = roundOne(Number(
@@ -171,6 +172,7 @@ const WEXCalc = (values) => {
     (values.transport.transport_8_weight || 0) -
     (values.transport.transport_9_weight || 0);
 
+    console.log("🚀 ~ file: WEXCalc.jsx:177 ~ WEXCalc ~ grossWeight:", grossWeight)
   return (
     (values.grossWeight = grossWeight),
     (values.attachments.bucket_exca_capa = bucket_exca_capa),

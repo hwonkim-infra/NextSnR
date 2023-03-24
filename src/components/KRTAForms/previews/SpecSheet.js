@@ -116,7 +116,7 @@ const SpecSheet = ({values}) => {
   </tr>
   <tr>
     <td>퀵 커플러 </td>
-    <td>{values.attachments?.quick_coupler_1} {Math.max(values.attachments?.quick_coupler_weight_1, values.attachments?.quick_coupler_weight_2)}㎏</td>
+    <td>{values.attachments?.quick_coupler_1} {Math.max(values.attachments?.quick_coupler_weight_1, (values.attachments?.quick_coupler_weight_2 || ''))}㎏</td>
     <td> </td>
     <td> </td>
   </tr>

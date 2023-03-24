@@ -312,7 +312,7 @@ const TravelBrakingWX = ({ values, config }) => {
                 <MathJax>{`$$ \\frac{${values.travel?.travel_speed}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${values.travel?.travel_speed} \\times (\\frac{1000}{3600}) $$`}</MathJax>
               </td>
               <td>
-                <strong>{braking_distance_max || ''}</strong>{" "}
+                <strong>{values.travel?.braking_distance_max || ''}</strong>{" "}
               </td>
             </tr>
 
@@ -327,7 +327,7 @@ const TravelBrakingWX = ({ values, config }) => {
                 <MathJax>{`$$ \\frac{${braking_speed_standard}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${braking_speed_standard} \\times (\\frac{1000}{3600}) $$`}</MathJax>
               </td>
               <td>
-                <strong>{braking_distance_norm || ''}</strong>{" "}
+                <strong>{values.travel?.braking_distance_norm || ''}</strong>{" "}
               </td>
             </tr>
           </tbody>
