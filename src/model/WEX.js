@@ -108,6 +108,7 @@ const WEXSchema = new Schema({
         motor_eff: Number,
 
         swing_rev: Number,
+        swing_description: String,
     },
 
     // 주행성능 관련
@@ -122,6 +123,7 @@ const WEXSchema = new Schema({
         /* 주행속도 */
         axle_motor_rev: Number,
         travel_speed: Number,
+        travel_speed_description: String,
 
         // 등판능력 계산
         traction_force: Number,
@@ -129,6 +131,7 @@ const WEXSchema = new Schema({
         running_resist: Number,
         engine_slope: Number,
         greadability: Number,
+        greadability_description: String,
 
         // 최소회전반경
         kingpin_gap: Number,
@@ -136,6 +139,7 @@ const WEXSchema = new Schema({
         wheel_angle: Number,
 
         turning_radius: Number,
+        turning_radius_description: String,
 
         // 서비스 브레이크 제동력
         brake_pressure: Number,

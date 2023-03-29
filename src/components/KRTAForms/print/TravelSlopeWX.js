@@ -2,8 +2,9 @@ import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { TableCell } from "@mui/material";
+import parse from "html-react-parser";
 
-// 퀵커플러 탈착
+// 등판능력
 
 const TravelSlopeWX = ({ values, config }) => {
   const radians_to_degrees = (radians) => {
@@ -26,6 +27,9 @@ const TravelSlopeWX = ({ values, config }) => {
     noslip_slope,
     traction_slope
   ).toFixed();
+
+  const greadability_description = values.travel?.greadability_description || ''
+
 
   return (
     <>
@@ -149,6 +153,21 @@ const TravelSlopeWX = ({ values, config }) => {
 </table>
 
                 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className={styles.pages} >
+          <table className={styles.borderTable}>
+            <thead>
+              <tr>
+                <th>{"등판능력 관련 자료"}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{parse(greadability_description)}</td>
               </tr>
             </tbody>
           </table>

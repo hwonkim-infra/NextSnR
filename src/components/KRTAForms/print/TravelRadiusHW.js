@@ -3,11 +3,22 @@ import { TableCell } from "@mui/material";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import parse from "html-react-parser";
 
+/* 최소회전반경 */
 
-const TravelSpecHW = ({ values, config }) => {
+const TravelRadiusHW = ({ values, config }) => {
 
-  const travel_speed_description = values.travel?.travel_speed_description || ''
+  const turning_radius_description = values.travel?.turning_radius_description || ''
 
+  const degrees_to_radians = (degrees) => {
+    return degrees / (180 / Math.PI);
+  };
+  const radians_to_degrees = (radians) => {
+    return radians * (180 / Math.PI);
+  };
+  const innerKingpin_COS = Math.round(
+    values.undercarriage?.wheel_base /
+      Math.sin(degrees_to_radians(values.travel?.wheel_angle))
+  );
 
   return (
     <>
@@ -16,26 +27,24 @@ const TravelSpecHW = ({ values, config }) => {
           <table className={styles.borderTable}>
             <thead>
               <tr>
-                <th>주행 속도</th>
+                <th>최소 회전 반경</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td className={styles.head_description}>
                   <p>
-                    “최고속도”란 평탄하고 건조한 아스팔트 포장노면에서 운전중량
-                    상태의 건설기계가 주행할 수 있는 최고속도를 말한다.
+                  “최소회전반경”이란 수평면에 놓인 건설기계가 선회할 때 바퀴 또는 기동륜의 중심이 그리는 원형 궤적 가운데 가장 큰 반지름을 가지는 궤적의 반지름을 말한다.
                   </p>
                   <br />
                   <p>
                     ▷ 아래 계산 결과에 따라{" "}
                     <strong>
-                      {" "}
-                      최고 주행 속도는 {values.travel?.travel_speed}㎞/h
+                      최소 회전 반경은 {values.travel?.turning_radius}㎜
                     </strong>
                   </p>
                   <br />
-                  <p>○ 주행 성능 관련 사양</p>
+                  <p>○ 회전반경 관련 사양</p>
                   <table
                     style={{ width: "80%", height: "30%", margin: "auto" }}
                   >
@@ -50,107 +59,95 @@ const TravelSpecHW = ({ values, config }) => {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>주행 펌프 유량</td>
+                        <td>축간거리</td>
                         <td>
                           <strong>
-                            <i>Q</i>
-                          </strong>
-                        </td>
-                        <td>l/min</td>
-                        <td>{values.travel?.pump_displacement_travel}</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>주행 모터 용적 효율</td>
-                        <td>
-                          <strong>
-                            <i>
-                              mu<sub>mv</sub>
-                            </i>
-                          </strong>
-                        </td>
-                        <td></td>
-                        <td>{values.travel?.motor_eff_travel}</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>트랜스미션 감속비</td>
-                        <td>
-                          <strong>
-                            <i>
-                              I<sub>t</sub>
-                            </i>
-                          </strong>
-                        </td>
-                        <td></td>
-                        <td>{values.travel?.TM_reduction}</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>액슬 감속비</td>
-                        <td>
-                          <strong>
-                            <i>
-                              I<sub>r</sub>
-                            </i>
-                          </strong>
-                        </td>
-                        <td></td>
-                        <td>{values.travel?.axle_reduction}</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>타이어 동하중 반경</td>
-                        <td>
-                          <strong>
-                            <i>
-                              R<sub></sub>
-                            </i>
+                            <i>A</i>
                           </strong>
                         </td>
                         <td>㎜</td>
-                        <td>{values.travel?.tire_rolling_radius}</td>
+                        <td>{values.undercarriage?.wheel_base}</td>
                         <td></td>
                       </tr>
+                      <tr>
+                        <td>킹핀(스티어링핀)간 거리</td>
+                        <td>
+                          <strong>
+                            <i>
+                              L
+                            </i>
+                          </strong>
+                        </td>
+                        <td></td>
+                        <td>{values.travel?.kingpin_gap}</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>킹핀에서 타이어 중심까지의 거리</td>
+                        <td>
+                          <strong>
+                            <i>
+                              d
+                            </i>
+                          </strong>
+                        </td>
+                        <td></td>
+                        <td>{values.travel?.kingpin_offset}</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>외륜최대조향각</td>
+                        <td>
+                          <strong>
+                            <i>
+                            α
+                            </i>
+                          </strong>
+                        </td>
+                        <td>deg</td>
+                        <td>{values.travel?.wheel_angle}</td>
+                        <td></td>
+                      </tr>
+                      
                     </tbody>
                   </table>
                   <br />
-                  <p>○ 주행모터 회전속도에 따른 주행속도 계산</p>
+                  <p>○ 내륜 킹핀과 선회 중심과의 거리 계산</p>
                   <table
                     style={{ width: "100%", height: "30%", margin: "auto" }}
                   >
                     <tbody>
                       <tr>
                         <TableCell colSpan="3">
-                          주행모터 축 회전수(rpm)
+                        내륜 킹핀과 선회 중심과의 거리 계산
                         </TableCell>
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$SM = \\frac{\Q \\times \\mu_{mv}}{q} \\times 1,000$$`}</MathJax>
+                          <MathJax>{`$$ X = \\frac{A }{\sin \α} $$`}</MathJax>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.travel?.pump_displacement_travel} \\times ${values.travel?.motor_eff_travel}}{${values.travel?.motor_displacement_travel} } \\times 1,000$$`}</MathJax>
+                          <MathJax>{`$$ \\frac{${values.undercarriage?.wheel_base} }{\sin ${values.travel?.wheel_angle}} $$`}</MathJax>
                         </td>
-                        <td>
-                          <MathJax>{`$$${values.travel?.axle_motor_rev}$$`}</MathJax>
+                        <td width="15%">
+                          <MathJax>{`$$${innerKingpin_COS}$$`}</MathJax>
                         </td>
                       </tr>
 
                       <tr>
-                        <TableCell colSpan="3">주행속도 (km/hr)</TableCell>
+                        <TableCell colSpan="3">외륜 최소 회전 반경 (㎜)</TableCell>
                       </tr>
                       <tr style={{ background: "#e6e6e6" }}>
                         <td>
-                          <MathJax>{`$$V = \\frac {SM \\times 2\\pi R \\times 60}{I_t \\times I_r \\times 10^3}$$`}</MathJax>
+                          <MathJax>{`$$ R = X + d $$`}</MathJax>
                         </td>
                         <td>
 
-                        <MathJax>{`$$V = \\frac {${values.travel?.axle_motor_rev} \\times 2\\pi \\cdot ${values.travel?.tire_rolling_radius} \\times 60}{${values.travel?.TM_reduction} \\times ${values.travel?.axle_reduction} \\times 10^3}$$`}</MathJax>
+                        <MathJax>{`$$ ${innerKingpin_COS} + ${values.travel?.kingpin_offset} $$`}</MathJax>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${values.travel?.travel_speed}$$`}</MathJax>
+                          <MathJax>{`$$${values.travel?.turning_radius}$$`}</MathJax>
                         </td>
                       </tr>
                     </tbody>
@@ -165,12 +162,12 @@ const TravelSpecHW = ({ values, config }) => {
           <table className={styles.borderTable}>
             <thead>
               <tr>
-                <th>{"주행속도 관련 자료"}</th>
+                <th>{"회전반경 관련 자료"}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{parse(travel_speed_description)}</td>
+                <td>{parse(turning_radius_description)}</td>
               </tr>
             </tbody>
           </table>
@@ -180,4 +177,4 @@ const TravelSpecHW = ({ values, config }) => {
   );
 };
 
-export default TravelSpecHW;
+export default TravelRadiusHW;

@@ -34,6 +34,7 @@ import TAResult from "@/components/KRTAForms/TAResult";
 import TransPortation from "@/components/KRTAForms/TransPortation";
 import TravelWX from "@/components/KRTAForms/TravelWX";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
+import StabilityCOG from "@/components/KRTAForms/StabilityCOG";
 
 const defaultValues = {
   ECN: null,
@@ -192,7 +193,16 @@ const WEXEditForm = ({
       component: (
         <>
           <Swivel control={control} />
-          <TravelWX control={control} />
+          <TravelWX control={control} values={values} />
+        </>
+      ),
+    },
+    {
+      value: "stabilityCOG",
+      title: "축중 안정도",
+      component: (
+        <>
+          <StabilityCOG control={control} values={values} />
         </>
       ),
     },

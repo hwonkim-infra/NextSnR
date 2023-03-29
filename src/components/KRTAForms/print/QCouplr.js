@@ -27,9 +27,9 @@ const QCouplr = ({ values }) => {
                 className={styles.innerTable}
                 // style={{width:"80%", height:"80%", margin: "auto"}}
               >
-                <thead>
-                  <tr>
-                    <th width="30%">구분</th>
+                <thead height="15%">
+                  <tr >
+                    <th width="30%" >구분</th>
                     <th width="20%">
                       커플러 장착 <br />
                       <h6>
@@ -45,7 +45,7 @@ const QCouplr = ({ values }) => {
                   <tr>
                     <td>자체중량 (㎏)</td>
                     <td id=""> {values.grossWeight} </td>
-                    <td id=""> {values.grossWeight - quick_coupler_weight} </td>
+                    <td id=""> {values.grossWeight - (quick_coupler_weight || '')} </td>
                     <td>운전자 65kg</td>
                   </tr>
                   <tr>
@@ -66,22 +66,7 @@ const QCouplr = ({ values }) => {
                     <td id="">{values.attachments?.digging_depth_woqc}</td>
                     <td> </td>
                   </tr>
-                  <tr>
-                    <td>전축중(공차시) (kg)</td>
-                    <td id="">
-                      {values.undercarriage?.axle_weight_front_unload}
-                    </td>
-                    <td id="">{values.undercarriage?.front_axle_load_woqc}</td>
-                    <td> </td>
-                  </tr>
-                  <tr>
-                    <td>후축중(공차시) (kg)</td>
-                    <td id="">
-                      {values.undercarriage?.axle_weight_rear_unload}
-                    </td>
-                    <td id="">{values.undercarriage?.rear_axle_load_woqc}</td>
-                    <td> </td>
-                  </tr>
+                  
                   <tr>
                     <td>접지압 (㎏/㎠)</td>
                     <td id=""> {values.undercarriage?.ground_pressure} </td>

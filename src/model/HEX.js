@@ -87,6 +87,7 @@ const HEXSchema = new Schema({
         motor_eff: Number,
 
         swing_rev: Number,
+        swing_description: String,
     },
 
     // 주행성능 관련
@@ -119,6 +120,10 @@ const HEXSchema = new Schema({
 
         travel_speed: Number,        
         greadability: Number,        
+        
+        travel_speed_description: String,
+        greadability_description: String,
+
     },
 
     // 외관도 및 도면 관련

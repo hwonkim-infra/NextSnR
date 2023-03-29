@@ -38,21 +38,27 @@ const WEXCalc = (values) => {
   /* 주행성능 */
   const rearAxle_center =
     values.undercarriage.wheel_base - values.undercarriage.frontAxle_center;
+    
+  
+    const axle_weight_rear_unload =
+    Math.round(
+      Number(
+        values.operating_weight *
+          (values.undercarriage.rearAxle_center -
+            Number(values.undercarriage.COG_center_unload))
+      ) / values.undercarriage.wheel_base
+    ) || ""; // 공차하중 2축
+
   const axle_weight_front_unload =
-    Math.round(Number(
-      (values.operating_weight *
-        (rearAxle_center - values.undercarriage.COG_center_unload)) /
-        values.undercarriage.wheel_base
-    )) || ""; // 공차하중 1축
-  const axle_weight_rear_unload =
-    Math.round(Number(
-      (values.operating_weight *
-        (values.undercarriage.frontAxle_center +
-          values.undercarriage.COG_center_unload)) /
-        values.undercarriage.wheel_base
-    )) || ""; // 공차하중 2축
+    values.operating_weight - axle_weight_rear_unload;  // 공차하중 1축
 
   /* 적재하중 1,2축 */
+const axle_weight_rear_load =
+  Math.round(Number( (grossWeight_load * ((values.undercarriage.rearAxle_center) - Number(values.undercarriage.COG_center_load))) / values.undercarriage.wheel_base )) || "";
+
+  const axle_weight_front_load = grossWeight_load - axle_weight_rear_load;  
+
+  /* 
   const axle_weight_front_load =
     Math.round(Number(
       (grossWeight_load *
@@ -65,7 +71,7 @@ const WEXCalc = (values) => {
         (values.undercarriage.frontAxle_center +
           values.undercarriage.COG_center_load)) /
         values.undercarriage.wheel_base
-    )) || "";
+    )) || ""; */
 
     /* 주행속도 */
   const axle_motor_rev = Math.round(Number(
@@ -73,12 +79,12 @@ const WEXCalc = (values) => {
       values.travel.motor_displacement_travel) *
     1000
   ));
-  const travel_speed = values.travel.travel_speed || Math.round(Number(
+  const travel_speed = Math.round(Number(
     (((2 * Math.PI * axle_motor_rev * values.travel.tire_rolling_radius) /
       1000) *
       60) /
     (values.travel.TM_reduction * values.travel.axle_reduction * 10 ** 3)
-  ));
+  )) || values.travel.travel_speed ;
 
   const noslip_slope = radians_to_degrees(
     Math.atan(values.travel.friction_surface)
@@ -103,7 +109,7 @@ const WEXCalc = (values) => {
   const outer_rim_minRadius = Math.round(
     innerKingpin_COS + values.travel.kingpin_offset
   );
-  const turning_radius = Math.ceil((outer_rim_minRadius * 1.05) / 1000) * 1000;
+  const turning_radius = values.travel.turning_radius || Math.ceil((outer_rim_minRadius * 1.05) / 1000);
 
   const braking_speed_standard = Math.max(travel_speed * 0.8, 32);
   const braking_force_axle = (
@@ -174,6 +180,7 @@ const WEXCalc = (values) => {
 
     console.log("🚀 ~ file: WEXCalc.jsx:177 ~ WEXCalc ~ grossWeight:", grossWeight)
   return (
+    innerKingpin_COS,
     (values.grossWeight = grossWeight),
     (values.attachments.bucket_exca_capa = bucket_exca_capa),
     (values.grossWeight_load = grossWeight_load),

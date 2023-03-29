@@ -2,8 +2,9 @@ import React from "react";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { TableCell } from "@mui/material";
+import parse from "html-react-parser";
 
-// 퀵커플러 탈착
+// 제동거리
 
 const TravelBrakingWX = ({ values, config }) => {
   const radians_to_degrees = (radians) => {
@@ -39,6 +40,10 @@ const TravelBrakingWX = ({ values, config }) => {
       (braking_speed_standard ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
         idle_running * braking_speed_standard * (1000 / 3600) * 100
     ) / 100;
+
+
+    const braking_description = values.travel?.braking_description || ''
+
 
   return (
     <>
@@ -184,7 +189,7 @@ const TravelBrakingWX = ({ values, config }) => {
                 <td className={styles.head_description}>
                   <p>○ 제동거리 산정을 위한 기준 속도 </p>
                   <table
-                    style={{ width: "60%", height: "30%", margin: "auto" }}
+                    style={{ width: "60%", height: "20%", margin: "auto" }}
                   >
                     <thead>
                       <tr>
@@ -210,19 +215,7 @@ const TravelBrakingWX = ({ values, config }) => {
                         <td>{values.travel_speed || ''}</td>
                         <td></td>
                       </tr>
-                      <tr>
-                        <td>규정 제동 속도</td>
-                        <td>
-                          <strong>
-                            <i>
-                              V<sub>1</sub>
-                            </i>
-                          </strong>
-                        </td>
-                        <td>㎞/h</td>
-                        <td>{braking_speed_standard || ''}</td>
-                        <td>32 or 80% (greater)</td>
-                      </tr>
+                      
                       <tr>
                         <td>공주 시간</td>
                         <td>
@@ -272,33 +265,12 @@ const TravelBrakingWX = ({ values, config }) => {
                       </tr>
                     </tbody>
                   </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className={styles.pages}>
-<table className={styles.borderTable}>
-  <thead>
-    <tr>
-      <th>제동 거리</th>
-    </tr>
-  </thead>{" "}
-  <tbody>
-    <tr>
-      <td className={styles.head_description}>
-        <p>○ 제동거리 산정을 위한 기준 속도 </p>
-        <img
-          src="/images/braking_distance_standard.jpg"
-          alt="제동거리"
-        />
-
-        <br />
+                  <br />
+                
         <p>○ 정지 거리 (최고 속도 / 기준 속도) </p>
 
         <table
-          style={{ width: "100%", height: "60%", margin: "auto" }}
+          style={{ width: "100%", height: "30%", margin: "auto" }}
         >
           <tbody>
             <tr>
@@ -316,28 +288,32 @@ const TravelBrakingWX = ({ values, config }) => {
               </td>
             </tr>
 
-            <tr>
-              <td>
-                <MathJax>{`$$ S_{ISO} = \\frac{{V_1}^2}{2 \\times a} \\times (\\frac{1000}{3600})^2 + t \\times V_1 \\times (\\frac{1000}{3600}) $$`}</MathJax>
-              </td>
-              <td>정지거리 (규정속도)</td>
-            </tr>
-            <tr>
-              <td>
-                <MathJax>{`$$ \\frac{${braking_speed_standard}^2}{2 \\times ${decceleration}} \\times (\\frac{1000}{3600})^2 + ${idle_running} \\times ${braking_speed_standard} \\times (\\frac{1000}{3600}) $$`}</MathJax>
-              </td>
-              <td>
-                <strong>{values.travel?.braking_distance_norm || ''}</strong>{" "}
-              </td>
-            </tr>
+           
           </tbody>
         </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
+                
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
 
+        <div className={styles.pages} >
+          <table className={styles.borderTable}>
+            <thead>
+              <tr>
+                <th>{"제동거리 관련 자료"}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{parse(braking_description)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+       
       </MathJaxContext>
     </>
   );

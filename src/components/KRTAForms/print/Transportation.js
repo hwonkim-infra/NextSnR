@@ -8,6 +8,14 @@ const Transportation = ({ values }) => {
   const trailer_width = 2.49;
   const trailer_height = 0.7;
 
+  const roundOne = (num) => {
+    return +(Math.round(num + "e+1") + "e-1");
+  };
+  const roundTwo = (num) => {
+    return +(Math.round(num + "e+2") + "e-2");
+  };
+  
+
   // const transport = values.keys(transport).map(keys =>  )
 
   /* 적재중량 */
@@ -84,10 +92,10 @@ const Transportation = ({ values }) => {
                       <td>높이(m)</td>
                       <td>{values.overall_height / 1000 || ''}</td>
                       <td>{0.7} </td>
-                      <td>{values.overall_height / 1000 + 0.7 || ''}</td>
+                      <td>{ roundTwo(values.overall_height / 1000 + trailer_height) || ''}</td>
                       <td>4.0</td>
                       <td>
-                        {values.overall_height / 1000 + 0.7 > 4.0
+                        {values.overall_height / 1000 + trailer_height > 4.0
                           ? "초과"
                           : "적합"}
                       </td>
@@ -96,7 +104,7 @@ const Transportation = ({ values }) => {
                       <td>총중량(ton)</td>
                       <td>{values.operating_weight / 1000 || ''}</td>
                       <td> {trailer_weight} </td>
-                      <td>{values.operating_weight / 1000 + trailer_weight || ''}</td>
+                      <td>{roundOne(values.operating_weight / 1000 + trailer_weight) || ''}</td>
                       <td>40</td>
                       <td>
                         {values.operating_weight / 1000 + trailer_weight > 40

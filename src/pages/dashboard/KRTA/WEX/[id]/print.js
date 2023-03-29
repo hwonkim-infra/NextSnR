@@ -14,6 +14,7 @@ import WEXSpec from "@/components/KRTAForms/print/WEXSpec";
 import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
 import Drawings from "@/components/KRTAForms/print/Drawings";
 import AxleAndLoad from "@/components/KRTAForms/print/AxleAndLoad";
+import TravelRadiusHW from "@/components/KRTAForms/print/TravelRadiusHW";
 
 const WEXprint = () => {
   const { push, query } = useRouter();
@@ -21,7 +22,7 @@ const WEXprint = () => {
 
   const getWEX = async () => {
     const response = await axios.get(`/api/WEX/${query.id}`);
-    
+
     const data = response.data;
     setNewWEX(data);
     console.log(data);
@@ -50,13 +51,14 @@ const WEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
       <>
         <WEXSpec values={newWEX} />
-        <Drawings values={newWEX}  />
+        <Drawings values={newWEX} />
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />
         <GrossWeights values={newWEX} />
-      <AxleAndLoad values={newWEX} config={config} />
+        <AxleAndLoad values={newWEX} config={config} />
         <SwivelSpeed values={newWEX} config={config} />
         <TravelSpecHW values={newWEX} config={config} />
+        <TravelRadiusHW values={newWEX} config={config} />
         <TravelSlopeWX values={newWEX} config={config} />
         <TravelBrakingWX values={newWEX} config={config} />
         <Transportation values={newWEX} />
