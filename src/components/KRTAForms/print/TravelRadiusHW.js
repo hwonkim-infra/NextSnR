@@ -38,11 +38,13 @@ const TravelRadiusHW = ({ values, config }) => {
                   </p>
                   <br />
                   <p>
-                    ▷ 아래 계산 결과에 따라{" "}
+                    ▷ 아래 계산 결과 및 보정 결과에 따라 
+                  </p>
+                  <br />
                     <strong>
                       최소 회전 반경은 {values.travel?.turning_radius}㎜
                     </strong>
-                  </p>
+                  <br />
                   <br />
                   <p>○ 회전반경 관련 사양</p>
                   <table
@@ -147,7 +149,7 @@ const TravelRadiusHW = ({ values, config }) => {
                         </td>
 
                         <td>
-                          <MathJax>{`$$${values.travel?.turning_radius}$$`}</MathJax>
+                          <MathJax>{`$$${innerKingpin_COS + values.travel?.kingpin_offset}$$`}</MathJax>
                         </td>
                       </tr>
                     </tbody>

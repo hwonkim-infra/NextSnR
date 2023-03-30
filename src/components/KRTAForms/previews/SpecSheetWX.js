@@ -44,19 +44,19 @@ const SpecSheet = ({ values }) => {
               <td>최고속도 (㎞/hr)</td>
               <td> {values.travel?.travel_speed} </td>
               <td>회전반경</td>
-              <td> {values.travel.turning_radius} </td>
+              <td> {values.travel?.turning_radius} </td>
             </TableRow>
             <TableRow>
               <td>등판능력 (무부하)</td>
-              <td> {values.travel.greadability} </td>
+              <td> {values.travel?.greadability} </td>
               <td>제동거리</td>
-              <td> {values.travel.braking_distance_max} </td>
+              <td> {values.travel?.braking_distance_max} </td>
             </TableRow>
             <TableRow>
               <td>길이 (㎜)</td>
               <td>{values.overall_length}</td>
               <td>축거(1)</td>
-              <td>{values.undercarriage.wheel_base}</td>
+              <td>{values.undercarriage?.wheel_base}</td>
             </TableRow>
             <TableRow>
               <td>너비 (㎜)</td>
@@ -68,7 +68,7 @@ const SpecSheet = ({ values }) => {
               <td>높이 (㎜)</td>
               <td>{values.overall_height} </td>
               <td>타이어(1축)</td>
-              <td>{values.undercarriage.tire_frontAxle}  </td>
+              <td>{values.undercarriage?.tire_frontAxle}  </td>
             </TableRow>
             <TableRow>
               <td>최저지상고 (㎜)</td>
@@ -79,9 +79,9 @@ const SpecSheet = ({ values }) => {
 
             <TableRow>
               <td>엔진 형식</td>
-              <td>{values.engine.engine_name} </td>
+              <td>{values.engine?.engine_name} </td>
               <td>공차 하중 (1축)</td>
-              <td>{values.undercarriage.axle_weight_front_unload} </td>
+              <td>{values.undercarriage?.axle_weight_front_unload} </td>
             </TableRow>
             <TableRow>
               <td>출력 (정격)</td>

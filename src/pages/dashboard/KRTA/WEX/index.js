@@ -35,10 +35,11 @@ export default function WEXList({ WEXs = [] }) {
     { field: "bucket", headerName: "버켓", width: 60 },
     { field: "height", headerName: "높이", width: 60 },
     { field: "width", headerName: "너비", width: 60 },
+    { field: "tire", headerName: "타이어", width: 130 },
     { field: "counterWeight", headerName: "CW", width: 50 },
     { field: "updated", headerName: "수정", width: 60 },
     { field: "changeModel", headerName: "형식변경", width: 120 },
-    { field: "result", headerName: "완료", width: 50 },
+    { field: "result", headerName: "확인검사", width: 50 },
   ];
 
   const rows = WEXs.map((WEX) => {
@@ -52,6 +53,7 @@ export default function WEXList({ WEXs = [] }) {
       bucket: WEX.attachments?.bucket_heap,
       height: WEX.overall_height,
       width: WEX.overall_width,
+      tire: WEX.undercarriage?.tire_frontAxle,
       updated: new Date(WEX.updatedAt).toLocaleDateString("Ko-kr"),
       changeModel: WEX.ChangeModel ? WEX.ECN + " 변경" : " ",
       counterWeight: WEX.COG?.counterWeight_weight / 1000 || "",

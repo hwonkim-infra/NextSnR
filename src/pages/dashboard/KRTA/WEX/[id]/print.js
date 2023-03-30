@@ -15,6 +15,7 @@ import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
 import Drawings from "@/components/KRTAForms/print/Drawings";
 import AxleAndLoad from "@/components/KRTAForms/print/AxleAndLoad";
 import TravelRadiusHW from "@/components/KRTAForms/print/TravelRadiusHW";
+import CompareChange from "@/components/KRTAForms/print/CompareChange";
 
 const WEXprint = () => {
   const { push, query } = useRouter();
@@ -51,6 +52,8 @@ const WEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
       <>
         <WEXSpec values={newWEX} />
+        {newWEX.ChangeModel && 
+        <CompareChange values={newWEX} type={"WEX"} /> }
         <Drawings values={newWEX} />
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />
