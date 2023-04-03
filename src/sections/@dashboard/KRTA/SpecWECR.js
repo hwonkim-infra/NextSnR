@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "@/components/KRTAForms/print/ECR.module.scss";
 import HEXSpecTable from "./HEXSpecTable";
 import WEXSpecTable from "./WEXSpecTable";
+import LargeDecal from "./LargeDecal";
 // import { useDownloadExcel } from "react-export-table-to-excel";
 
 
@@ -84,17 +85,19 @@ const SpecWECR = ({ values, type }) => {
             <td colSpan="4">As Is</td>
             <td colSpan="4">To be</td>
           </tr>
-          <tr>
-            <td style={{ background: "#e6e6e6",  }}>현행</td>
+          <tr >
+            <td rowSpan={2} style={{ background: "#e6e6e6",  }}>현행</td>
             <td colSpan={3}>
+
               {(type ==="HEX") && 
                 <HEXSpecTable values={originData} />
               }
               {(type ==="WEX") && 
                 <WEXSpecTable values={originData} />
               }
+              <LargeDecal values={originData} />
             </td>
-            <td style={{ background: "#e6e6e6",  }}>변경</td>
+            <td  rowSpan={2} style={{ background: "#e6e6e6",  }}>변경</td>
             <td colSpan={3}>
             {(type ==="HEX") && 
                 <HEXSpecTable values={values} />
@@ -102,11 +105,27 @@ const SpecWECR = ({ values, type }) => {
               {(type ==="WEX") && 
                 <WEXSpecTable values={values} />
               }
+
             </td>
           </tr>
+          
+          <tr>
+            <td  colSpan={3}>
+            <LargeDecal values={originData} />
+            </td>
+            <td colSpan={3}>
+            <LargeDecal values={values} />
+
+            </td>
+          </tr>
+          
+
+          
+
           <tr>
             <td style={{ background: "#e6e6e6",  }} rowSpan={2}>특이사항</td>
-            <td rowSpan={2} colSpan={3}></td>
+            <td rowSpan={2} colSpan={3}>
+            </td>
             <td style={{ background: "#e6e6e6",  }}>기대효과</td>
             <td colSpan={3}>건설기계 관리법 준수</td>
           </tr>

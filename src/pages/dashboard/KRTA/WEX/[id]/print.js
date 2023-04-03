@@ -52,8 +52,7 @@ const WEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
       <>
         <WEXSpec values={newWEX} />
-        {newWEX.ChangeModel && 
-        <CompareChange values={newWEX} type={"WEX"} /> }
+        {newWEX.ChangeModel && <CompareChange values={newWEX} type={"WEX"} /> }
         <Drawings values={newWEX} />
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />

@@ -14,6 +14,7 @@ import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
 import TravelSpecHX from "@/components/KRTAForms/print/TravelSpecHX";
 import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
 import Transportation from "@/components/KRTAForms/print/Transportation";
+import CompareChange from "@/components/KRTAForms/print/CompareChange";
 
 const HEXprint = () => {
     const { push, query } = useRouter();
@@ -50,6 +51,7 @@ const HEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
 
       <HEXSpec values={newHEX} />
+        {newHEX.ChangeModel && <CompareChange values={newHEX} type={"WEX"} /> }
       <Drawings values={newHEX}  />
       <WorkingRange values={newHEX} />
       <QCouplr values={newHEX} />

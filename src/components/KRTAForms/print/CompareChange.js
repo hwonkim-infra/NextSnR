@@ -235,7 +235,7 @@ const CompareChange = ({ values, type }) => {
                 {specDataSet.map(
                   (data) =>
                     data.origin !== data.current && (
-                      <tr>
+                      <tr key={data.label}>
                         <td>{data.label}</td>
                         <td>{data.origin}</td>
                         <td>{data.current}</td>
