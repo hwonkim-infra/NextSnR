@@ -21,7 +21,7 @@ const roundOne = (num) => {
 const LargeDecal = ({ values }) => {
   let LargeMachineSpecs = [];
 
-  values.grossWeight_load > 4000 &&
+  values.grossWeight_load > 40000 &&
     LargeMachineSpecs.push({
       label: "총중량",
       dimension: roundOne(values.grossWeight_load / 1000),
@@ -54,10 +54,10 @@ const LargeDecal = ({ values }) => {
 
         <tr key={item.label} >
           <td style={{  width: "40%", background: " #e6e6e6 "  }}>
-            <Typography variant="subtitle1">{item.label}</Typography>
+            <Typography variant="h4" sx={{m:2}}>{item.label}</Typography>
           </td>
           <td>
-            <Typography>{item.dimension}</Typography>
+            <Typography variant="h4" sx={{m:2}}>{item.dimension}</Typography>
           </td>
         </tr>
       ))}
