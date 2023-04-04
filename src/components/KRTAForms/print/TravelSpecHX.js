@@ -203,10 +203,10 @@ const TravelSpecHX = ({ values, config }) => {
                           <MathJax>{`$$V_2=\\frac{SM_2 \\times 2\\pi R \\times 60}{10^6} $$`}</MathJax>
                         </td>
                         <td>
-                          <MathJax>{`$$\\frac{${TM_rev_2} \\times 2\\pi \\times ${values.travel?.sprocket_radius} \\times 60}{10^6} $$`}</MathJax>
+                          <MathJax>{`$$ \\frac{${TM_rev_2} \\times 2\\pi \\times ${values.travel?.sprocket_radius} \\times 60}{10^6} $$`}</MathJax>
                         </td>
                         <td>
-                          <MathJax>{`$$${travel_speed_2}$$`}</MathJax>
+                          <MathJax>{`$$ ${travel_speed_2} $$`}</MathJax>
                         </td>
                       </tr>
                     </tbody>

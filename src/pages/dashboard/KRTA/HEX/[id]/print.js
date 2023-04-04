@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import React from 'react'
 import { useRouter } from "next/router";
 import axios from "axios";
+import dynamic from 'next/dynamic'
 
 // print Page components
 import HEXSpec from "@/components/KRTAForms/print/HEXSpec";
@@ -15,6 +16,7 @@ import TravelSpecHX from "@/components/KRTAForms/print/TravelSpecHX";
 import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
 import Transportation from "@/components/KRTAForms/print/Transportation";
 import CompareChange from "@/components/KRTAForms/print/CompareChange";
+import TravelSpecHXKatex from "@/components/KRTAForms/print/TravelSpecHXKATEX";
 
 const HEXprint = () => {
     const { push, query } = useRouter();
@@ -50,7 +52,8 @@ const HEXprint = () => {
     <>    
     <div contentEditable={true} suppressContentEditableWarning={true}>
 
-      <HEXSpec values={newHEX} />
+      <TravelSpecHXKatex values={newHEX}  />
+      {/* <HEXSpec values={newHEX} />
         {newHEX.ChangeModel && <CompareChange values={newHEX} type={"HEX"} /> }
       <Drawings values={newHEX}  />
       <WorkingRange values={newHEX} />
@@ -60,10 +63,15 @@ const HEXprint = () => {
       <SwivelSpeed values={newHEX} config={config} />
       <TravelSpecHX values={newHEX} config={config} />
       <TravelSlope values={newHEX} config={config} />
-      <Transportation values={newHEX}  />
+      <Transportation values={newHEX}  /> */}
     </div>
         </>
   )
 }
 
-export default HEXprint
+
+const HEXprintNoSSR = dynamic(() => Promise.resolve(HEXprint), {
+  ssr: false,
+})
+
+  export default HEXprintNoSSR
