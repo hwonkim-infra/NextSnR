@@ -88,16 +88,27 @@ const SpecWECR = ({ values, type }) => {
           <tr >
             <td rowSpan={2} style={{ background: "#e6e6e6",  }}>현행</td>
             <td colSpan={3}>
+            <LargeDecal values={originData} />
 
-              {(type ==="HEX") && 
+              
+            </td>
+            <td  rowSpan={2} style={{ background: "#e6e6e6",  }}>변경</td>
+            <td colSpan={3}>
+            <LargeDecal values={values} />
+            
+
+            </td>
+          </tr>
+          
+          <tr>
+            <td  colSpan={3}>
+            {(type ==="HEX") && 
                 <HEXSpecTable values={originData} />
               }
               {(type ==="WEX") && 
                 <WEXSpecTable values={originData} />
               }
-              <LargeDecal values={originData} />
             </td>
-            <td  rowSpan={2} style={{ background: "#e6e6e6",  }}>변경</td>
             <td colSpan={3}>
             {(type ==="HEX") && 
                 <HEXSpecTable values={values} />
@@ -105,17 +116,6 @@ const SpecWECR = ({ values, type }) => {
               {(type ==="WEX") && 
                 <WEXSpecTable values={values} />
               }
-
-            </td>
-          </tr>
-          
-          <tr>
-            <td  colSpan={3}>
-            <LargeDecal values={originData} />
-            </td>
-            <td colSpan={3}>
-            <LargeDecal values={values} />
-
             </td>
           </tr>
           

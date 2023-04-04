@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 
-import { Typography } from "@mui/material";
+import { Box, Table, Typography } from "@mui/material";
 const roundOne = (num) => {
     return +(Math.round(num + "e+1") + "e-1");
 };
@@ -46,18 +45,15 @@ const LargeDecal = ({ values }) => {
       dimension: roundOne(values.overall_length / 1000),
     });
 
-  console.log(
-    "🚀 ~ file: LargeDecal.js:10 ~ LargeDecal ~ LargeMachineSpecs:",
-    LargeMachineSpecs
-  );
+
 
   return (
-    <>
-        <table style={{  width: "90%", height: "120px",  margin: "auto" }}>
+    <Box sx={{p:3, elevation: 3}} >
+        <Table style={{  width: "80%", height: "100px",  margin: "auto" }}>
       {LargeMachineSpecs.slice(0, 2).map((item) => (
 
         <tr key={item.label} >
-          <td style={{  width: "40%",  }}>
+          <td style={{  width: "40%", background: " #e6e6e6 "  }}>
             <Typography variant="subtitle1">{item.label}</Typography>
           </td>
           <td>
@@ -65,8 +61,8 @@ const LargeDecal = ({ values }) => {
           </td>
         </tr>
       ))}
-      </table>
-    </>
+      </Table>
+    </Box>
   );
 };
 

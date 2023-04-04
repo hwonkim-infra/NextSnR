@@ -11,7 +11,7 @@ const WEXSpecTable = ({ values }) => {
                   <tr>
                     <th
                       colSpan="6"
-                      style={{ textAlign: "center", height: "20mm" }}
+                      style={{ textAlign: "center", height: "20mm",background: " #e6e6e6 "  }}
                     >
                       {values.model_name}
                     </th>
