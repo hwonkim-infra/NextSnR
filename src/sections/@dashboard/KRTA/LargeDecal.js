@@ -21,7 +21,7 @@ const roundOne = (num) => {
 const LargeDecal = ({ values }) => {
   let LargeMachineSpecs = [];
 
-  values.grossWeight_load > 40000 &&
+  values.operating_weight > 40000 &&
     LargeMachineSpecs.push({
       label: "총중량",
       dimension: roundOne(values.grossWeight_load / 1000),

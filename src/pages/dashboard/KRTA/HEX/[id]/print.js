@@ -51,7 +51,7 @@ const HEXprint = () => {
     <div contentEditable={true} suppressContentEditableWarning={true}>
 
       <HEXSpec values={newHEX} />
-        {newHEX.ChangeModel && <CompareChange values={newHEX} type={"WEX"} /> }
+        {newHEX.ChangeModel && <CompareChange values={newHEX} type={"HEX"} /> }
       <Drawings values={newHEX}  />
       <WorkingRange values={newHEX} />
       <QCouplr values={newHEX} />
