@@ -387,15 +387,15 @@ const TravelWX = ({ control, values }) => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Controller
+          <Controller
               render={({ field }) => (
                 <TextField
-                  label="주행 속도"
+                  label="등판능력"
                   {...field}
                   value={field.value || ""}
                   InputProps={{
                     endAdornment: (
-                      <InputAdornment position="end">{"km/hr"}</InputAdornment>
+                      <InputAdornment position="end">{"deg"}</InputAdornment>
                     ),
                   }}
                 />
@@ -404,6 +404,7 @@ const TravelWX = ({ control, values }) => {
               type={"number"}
               control={control}
             />
+            
             <Controller
               name="travel.greadability_description"
               control={control}

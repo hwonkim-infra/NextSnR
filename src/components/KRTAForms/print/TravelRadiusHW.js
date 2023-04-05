@@ -1,6 +1,7 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { TableCell } from "@mui/material";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath  } from 'react-katex';
 import parse from "html-react-parser";
 
 /* 최소회전반경 */
@@ -22,7 +23,6 @@ const TravelRadiusHW = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
         <div className={styles.pages}>
           <table className={styles.borderTable}>
             <thead>
@@ -63,9 +63,7 @@ const TravelRadiusHW = ({ values, config }) => {
                       <tr>
                         <td>축간거리</td>
                         <td>
-                          <strong>
-                            <i>A</i>
-                          </strong>
+                        <BlockMath >{`\A`}</BlockMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.wheel_base}</td>
@@ -74,11 +72,7 @@ const TravelRadiusHW = ({ values, config }) => {
                       <tr>
                         <td>킹핀(스티어링핀)간 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L
-                            </i>
-                          </strong>
+                        <BlockMath >{`\L`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.travel?.kingpin_gap}</td>
@@ -87,11 +81,7 @@ const TravelRadiusHW = ({ values, config }) => {
                       <tr>
                         <td>킹핀에서 타이어 중심까지의 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              d
-                            </i>
-                          </strong>
+                        <BlockMath >{`\d`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.travel?.kingpin_offset}</td>
@@ -100,11 +90,7 @@ const TravelRadiusHW = ({ values, config }) => {
                       <tr>
                         <td>외륜최대조향각</td>
                         <td>
-                          <strong>
-                            <i>
-                            α
-                            </i>
-                          </strong>
+                        <BlockMath >{`\α`}</BlockMath>
                         </td>
                         <td>deg</td>
                         <td>{values.travel?.wheel_angle}</td>
@@ -116,40 +102,40 @@ const TravelRadiusHW = ({ values, config }) => {
                   <br />
                   <p>○ 내륜 킹핀과 선회 중심과의 거리 계산</p>
                   <table
-                    style={{ width: "100%", height: "30%", margin: "auto" }}
+                    style={{ width: "100%", height: "40%", margin: "auto" }}
                   >
                     <tbody>
-                      <tr>
+                      <tr >
                         <TableCell colSpan="3">
                         내륜 킹핀과 선회 중심과의 거리 계산
                         </TableCell>
                       </tr>
-                      <tr>
+                      <tr style={{ height: "40%" }}>
                         <td>
-                          <MathJax>{`$$ X = \\frac{A }{\sin \α} $$`}</MathJax>
+                          <InlineMath>{` X = \\cfrac{A }{\sin \α} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.wheel_base} }{\sin ${values.travel?.wheel_angle}} $$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.wheel_base} }{\sin ${values.travel?.wheel_angle}} `}</InlineMath>
                         </td>
                         <td width="15%">
-                          <MathJax>{`$$${innerKingpin_COS}$$`}</MathJax>
+                          <BlockMath>{`${innerKingpin_COS}`}</BlockMath>
                         </td>
                       </tr>
 
                       <tr>
                         <TableCell colSpan="3">외륜 최소 회전 반경 (㎜)</TableCell>
                       </tr>
-                      <tr style={{ background: "#e6e6e6" }}>
+                      <tr style={{ height: "40%", background: "#e6e6e6"  }}>
                         <td>
-                          <MathJax>{`$$ R = X + d $$`}</MathJax>
+                          <InlineMath>{` R = X + d `}</InlineMath>
                         </td>
                         <td>
 
-                        <MathJax>{`$$ ${innerKingpin_COS} + ${values.travel?.kingpin_offset} $$`}</MathJax>
+                        <InlineMath>{` ${innerKingpin_COS} + ${values.travel?.kingpin_offset} `}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${innerKingpin_COS + values.travel?.kingpin_offset}$$`}</MathJax>
+                          <BlockMath>{`${innerKingpin_COS + values.travel?.kingpin_offset}`}</BlockMath>
                         </td>
                       </tr>
                     </tbody>
@@ -174,7 +160,6 @@ const TravelRadiusHW = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-      </MathJaxContext>
     </>
   );
 };

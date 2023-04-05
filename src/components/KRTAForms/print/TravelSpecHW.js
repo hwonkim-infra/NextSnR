@@ -1,6 +1,7 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { TableCell } from "@mui/material";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath  } from 'react-katex';
 import parse from "html-react-parser";
 
 
@@ -11,7 +12,6 @@ const TravelSpecHW = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
         <div className={styles.pages}>
           <table className={styles.borderTable}>
             <thead>
@@ -52,9 +52,7 @@ const TravelSpecHW = ({ values, config }) => {
                       <tr>
                         <td>주행 펌프 유량</td>
                         <td>
-                          <strong>
-                            <i>Q</i>
-                          </strong>
+                        <BlockMath >{`\Q`}</BlockMath>
                         </td>
                         <td>l/min</td>
                         <td>{values.travel?.pump_displacement_travel}</td>
@@ -63,11 +61,7 @@ const TravelSpecHW = ({ values, config }) => {
                       <tr>
                         <td>주행 모터 용적 효율</td>
                         <td>
-                          <strong>
-                            <i>
-                              mu<sub>mv</sub>
-                            </i>
-                          </strong>
+                        <BlockMath >{`\η_{mv}`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.travel?.motor_eff_travel}</td>
@@ -76,11 +70,7 @@ const TravelSpecHW = ({ values, config }) => {
                       <tr>
                         <td>트랜스미션 감속비</td>
                         <td>
-                          <strong>
-                            <i>
-                              I<sub>t</sub>
-                            </i>
-                          </strong>
+                        <BlockMath >{`\I_t`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.travel?.TM_reduction}</td>
@@ -89,11 +79,7 @@ const TravelSpecHW = ({ values, config }) => {
                       <tr>
                         <td>액슬 감속비</td>
                         <td>
-                          <strong>
-                            <i>
-                              I<sub>r</sub>
-                            </i>
-                          </strong>
+                        <BlockMath >{`\I_r`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.travel?.axle_reduction}</td>
@@ -102,11 +88,7 @@ const TravelSpecHW = ({ values, config }) => {
                       <tr>
                         <td>타이어 동하중 반경</td>
                         <td>
-                          <strong>
-                            <i>
-                              R<sub></sub>
-                            </i>
-                          </strong>
+                        <BlockMath >{`\R`}</BlockMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.travel?.tire_rolling_radius}</td>
@@ -117,7 +99,7 @@ const TravelSpecHW = ({ values, config }) => {
                   <br />
                   <p>○ 주행모터 회전속도에 따른 주행속도 계산</p>
                   <table
-                    style={{ width: "100%", height: "30%", margin: "auto" }}
+                    style={{ width: "100%", height: "40%", margin: "auto" }}
                   >
                     <tbody>
                       <tr>
@@ -125,32 +107,32 @@ const TravelSpecHW = ({ values, config }) => {
                           주행모터 축 회전수(rpm)
                         </TableCell>
                       </tr>
-                      <tr>
+                      <tr style={{ height: "40%" }}>
                         <td>
-                          <MathJax>{`$$SM = \\frac{\Q \\times \\mu_{mv}}{q} \\times 1,000$$`}</MathJax>
+                          <InlineMath>{`SM = \\cfrac{\Q \\times \\mu_{mv}}{q} \\times 1,000`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.travel?.pump_displacement_travel} \\times ${values.travel?.motor_eff_travel}}{${values.travel?.motor_displacement_travel} } \\times 1,000$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.travel?.pump_displacement_travel} \\times ${values.travel?.motor_eff_travel}}{${values.travel?.motor_displacement_travel} } \\times 1,000`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$${values.travel?.axle_motor_rev}$$`}</MathJax>
+                          <BlockMath>{`${values.travel?.axle_motor_rev}`}</BlockMath>
                         </td>
                       </tr>
 
                       <tr>
                         <TableCell colSpan="3">주행속도 (km/hr)</TableCell>
                       </tr>
-                      <tr style={{ background: "#e6e6e6" }}>
+                      <tr style={{ background: "#e6e6e6", height: "40%" }}>
                         <td>
-                          <MathJax>{`$$V = \\frac {SM \\times 2\\pi R \\times 60}{I_t \\times I_r \\times 10^3}$$`}</MathJax>
+                          <InlineMath>{`V = \\cfrac {SM \\times 2\\pi R \\times 60}{I_t \\times I_r \\times 10^3}`}</InlineMath>
                         </td>
                         <td>
 
-                        <MathJax>{`$$V = \\frac {${values.travel?.axle_motor_rev} \\times 2\\pi \\cdot ${values.travel?.tire_rolling_radius} \\times 60}{${values.travel?.TM_reduction} \\times ${values.travel?.axle_reduction} \\times 10^3}$$`}</MathJax>
+                        <InlineMath>{`V = \\cfrac {${values.travel?.axle_motor_rev} \\times 2\\pi \\cdot ${values.travel?.tire_rolling_radius} \\times 60}{${values.travel?.TM_reduction} \\times ${values.travel?.axle_reduction} \\times 10^3}`}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${values.travel?.travel_speed}$$`}</MathJax>
+                          <BlockMath>{`${values.travel?.travel_speed}`}</BlockMath>
                         </td>
                       </tr>
                     </tbody>
@@ -175,7 +157,6 @@ const TravelSpecHW = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-      </MathJaxContext>
     </>
   );
 };

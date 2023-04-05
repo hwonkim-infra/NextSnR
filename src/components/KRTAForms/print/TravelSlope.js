@@ -1,5 +1,6 @@
 import React from "react";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 
@@ -59,7 +60,6 @@ const TravelSlope = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
         <div className={styles.pages}>
           <table className={styles.borderTable}>
             <thead>
@@ -198,29 +198,31 @@ const TravelSlope = ({ values, config }) => {
                   </p>
                   <div>주행 모터 토크 계산</div>
 
-                  <table>
+                  <table
+                    style={{ width: "90%", height: "30%", margin: "auto" }}
+                    >
                     <tbody>
                       <tr>
                         <TableCell rowSpan="2">
-                          <MathJax>{`$$TM = \\frac{P \\times q}{200 \\pi}$$`}</MathJax>
+                          <InlineMath>{`TM = \\cfrac{P \\times q}{200 \\pi}`}</InlineMath>
                         </TableCell>
                         <td>
                           (1속)
-                          <MathJax>{`$$TM_1 = \\frac{${values.travel?.pump_pressure} \\times ${values.travel?.TM_flow_1}}{200 \\pi}$$`}</MathJax>
+                          <InlineMath>{`TM_1 = \\cfrac{${values.travel?.pump_pressure} \\times ${values.travel?.TM_flow_1}}{200 \\pi}`}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${values.travel?.TM_1}$$`}</MathJax>
+                          <InlineMath>{`${values.travel?.TM_1}`}</InlineMath>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           (2속)
-                          <MathJax>{`$$TM_2 = \\frac{${values.travel?.pump_pressure} \\times ${values.travel?.TM_flow_2}}{200 \\pi}$$`}</MathJax>
+                          <InlineMath>{`TM_2 = \\cfrac{${values.travel?.pump_pressure} \\times ${values.travel?.TM_flow_2}}{200 \\pi}`}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${values.travel?.TM_2}$$`}</MathJax>
+                          <InlineMath>{`${values.travel?.TM_2}`}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -228,7 +230,9 @@ const TravelSlope = ({ values, config }) => {
 
                   <div>견인력 (DP, kgf): 아래 중 작은 항목</div>
 
-                  <table>
+                  <table
+                    style={{ width: "90%", height: "50%", margin: "auto" }}
+                    >
                     <tbody>
                       <tr>
                         <TableCell colSpan="3">
@@ -237,19 +241,19 @@ const TravelSlope = ({ values, config }) => {
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$TS = \\frac{2 \\times \TM_{max} \\times 1,000}{R} \\times \\mu_r$$`}</MathJax>
+                          <InlineMath>{`TS = \\cfrac{2 \\times \TM_{max} \\times 1,000}{R} \\times \\mu_r`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{2 \\times ${Math.max(
+                          <InlineMath>{` \\cfrac{2 \\times ${Math.max(
                             TM_1,
                             TM_2
                           )} \\times 1,000}{${
                             values.travel?.sprocket_radius
-                          }} \\times ${values.travel?.TM_r}$$`}</MathJax>
+                          }} \\times ${values.travel?.TM_r}`}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${TS}$$`}</MathJax>
+                          <InlineMath>{`${TS}`}</InlineMath>
                         </td>
                       </tr>
                       <tr>
@@ -257,14 +261,14 @@ const TravelSlope = ({ values, config }) => {
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$AF = \\mu \\times W_t$$`}</MathJax>
+                          <InlineMath>{`AF = \\mu \\times W_t`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$${values.travel?.surface_drag} \\times ${values.grossWeight}$$`}</MathJax>
+                          <InlineMath>{`${values.travel?.surface_drag} \\times ${values.grossWeight}`}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${AF}$$`}</MathJax>
+                          <InlineMath>{`${AF}`}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -289,13 +293,13 @@ const TravelSlope = ({ values, config }) => {
                     등판 및 정차 가능 경사각은 아래 사양 중 가장 작은 각에 해당:{" "}
                     <br />
                     아래 계산 결과에 따라 등판 가능 경사각:{" "}
-                    <MathJax>{`$$ ${Math.min(
+                    <InlineMath>{` ${Math.min(
                       values.travel?.greadability
-                    )}°$$`}</MathJax>
+                    )}°`}</InlineMath>
                   </p>
 
                   <table
-                    style={{ width: "90%", height: "30%", margin: "auto" }}
+                    style={{ width: "90%", height: "80%", margin: "auto" }}
                   >
                     <tbody>
                       <tr>
@@ -303,24 +307,28 @@ const TravelSlope = ({ values, config }) => {
                           경사지에서 미끄러지지 않는 각도
                         </TableCell>
                       </tr>
-                      <tr>
+                      <tr
+                    style={{  height: "10%"}}
+                    >
                         <td>
-                          <MathJax>{`$$ \\mu \\cdot W_T \\cdot \\cos \\theta_1 = W_T \\cdot \\sin \\theta_1
-                                $$`}</MathJax>
+                          <InlineMath>{` \\mu \\cdot W_T \\cdot \\cos \\theta_1 = W_T \\cdot \\sin \\theta_1
+                                `}</InlineMath>
                         </td>
                         <td></td>
                         <td></td>
                       </tr>
-                      <tr>
+                      <tr 
+                    style={{  height: "10%"}}
+                    >
                         <td>
-                          <MathJax>{`$$\\theta_1 = \\tan^{-1}\\mu$$`}</MathJax>
+                          <InlineMath>{`\\theta_1 = \\tan^{-1}\\mu`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$\\tan^{-1}${values.travel?.surface_drag}$$`}</MathJax>
+                          <InlineMath>{`\\tan^{-1}${values.travel?.surface_drag}`}</InlineMath>
                         </td>
 
                         <td>
-                          <MathJax>{`$$${theta_1}$$`}</MathJax>
+                          <InlineMath>{`${theta_1}`}</InlineMath>
                         </td>
                       </tr>
 
@@ -329,9 +337,11 @@ const TravelSlope = ({ values, config }) => {
                           견인력에 의한 등판 능력
                         </TableCell>
                       </tr>
-                      <tr>
+                      <tr
+                    style={{  height: "10%"}}
+                    >
                         <td>
-                          <MathJax>{`$$DP - \\xi W_T = W_T \\cdot \\sin \\theta_2$$`}</MathJax>
+                          <InlineMath>{`DP - \\xi W_T = W_T \\cdot \\sin \\theta_2`}</InlineMath>
                         </td>
                         <td></td>
                         <td></td>
@@ -339,23 +349,23 @@ const TravelSlope = ({ values, config }) => {
 
                       <tr>
                         <td>
-                          <MathJax>{`$$\\theta_2 = \\sin^{-1}{\\frac{DP - \\xi W_T}{W_T}} $$`}</MathJax>
+                          <InlineMath>{`\\theta_2 = \\sin^{-1}{\\cfrac{DP - \\xi W_T}{W_T}} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$\\sin^{-1}(\\frac{${
+                          <InlineMath>{`\\sin^{-1}(\\cfrac{${
                             DP || values.travel?.traction_force
                           }  - ${
                             values.travel?.surface_drag ||
                             values.travel?.friction_surface
                           } \\times ${values.grossWeight}}{${
                             values.grossWeight
-                          }}) $$`}</MathJax>
+                          }}) `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${
+                          <InlineMath>{` ${
                             values.travel?.theta_2 ||
                             values.travel?.traction_slope
-                          } $$`}</MathJax>
+                          } `}</InlineMath>
                         </td>
                       </tr>
 
@@ -367,10 +377,10 @@ const TravelSlope = ({ values, config }) => {
                       <tr>
                         <td>엔진 팬 제한 각 </td>
                         <td>
-                          <MathJax>{`$$ ${values.travel?.greadability_ref} $$`}</MathJax>
+                          <InlineMath>{` ${values.travel?.greadability_ref} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${theta_3} $$`}</MathJax>
+                          <InlineMath>{` ${theta_3} `}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -480,17 +490,17 @@ const TravelSlope = ({ values, config }) => {
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$TP=2 \\times T_b \\times I$$`}</MathJax>
+                          <InlineMath>{`TP=2 \\times T_b \\times I`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$2 \\times ${values.travel?.brake_torque} \\times ${values.travel?.reduc}$$`}</MathJax>
+                          <InlineMath>{`2 \\times ${values.travel?.brake_torque} \\times ${values.travel?.reduc}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${
+                          <InlineMath>{` ${
                             2 *
                             values.travel?.brake_torque *
                             values.travel?.reduc
-                          }$$`}</MathJax>
+                          }`}</InlineMath>
                         </td>
                       </tr>
                       <tr>
@@ -501,17 +511,17 @@ const TravelSlope = ({ values, config }) => {
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$TS = R \\times W_t \\times \\sin \\theta$$`}</MathJax>
+                          <InlineMath>{`TS = R \\times W_t \\times \\sin \\theta`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${
+                          <InlineMath>{` ${
                             values.travel?.sprocket_radius / 1000
                           } \\times ${
                             values?.grossWeight
-                          } \\times \\sin 16.7 $$`}</MathJax>
+                          } \\times \\sin 16.7 `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${traction_downward}$$`}</MathJax>
+                          <InlineMath>{` ${traction_downward}`}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -521,7 +531,6 @@ const TravelSlope = ({ values, config }) => {
             </tbody>
           </table>
         </div> 
-      </MathJaxContext>
     </>
   );
 };

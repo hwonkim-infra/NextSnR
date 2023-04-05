@@ -57,12 +57,12 @@ const WEXprint = () => {
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />
         <GrossWeights values={newWEX} />
-        <AxleAndLoad values={newWEX} config={config} />
-        <SwivelSpeed values={newWEX} config={config} />
-        <TravelSpecHW values={newWEX} config={config} />
-        <TravelRadiusHW values={newWEX} config={config} />
-        <TravelSlopeWX values={newWEX} config={config} />
-        <TravelBrakingWX values={newWEX} config={config} />
+        <AxleAndLoad values={newWEX}  />
+        <SwivelSpeed values={newWEX}  />
+        <TravelSpecHW values={newWEX}  />
+        <TravelRadiusHW values={newWEX}  />
+        <TravelSlopeWX values={newWEX} />
+        <TravelBrakingWX values={newWEX}  />
         <Transportation values={newWEX} />
       </>
     </div>

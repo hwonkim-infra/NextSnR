@@ -1,10 +1,10 @@
 import React from "react";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import parse from "html-react-parser";
 import { TableCell } from "@mui/material";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath  } from 'react-katex';
 
-// 퀵커플러 탈착
 
 const SwivelSpeed = ({ values, config }) => {
   const swing_reduction_rev =
@@ -19,7 +19,6 @@ const SwivelSpeed = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
         <div className={styles.pages}>
           <table className={styles.borderTable}>
             <thead>
@@ -56,9 +55,7 @@ const SwivelSpeed = ({ values, config }) => {
                       <tr>
                         <td>선회 펌프 유량</td>
                         <td>
-                          <strong>
-                            <i>Q</i>
-                          </strong>
+                        <BlockMath >{`\Q`}</BlockMath>
                         </td>
                         <td>l/min</td>
                         <td>{values.swivel?.pump_flow}</td>
@@ -67,11 +64,7 @@ const SwivelSpeed = ({ values, config }) => {
                       <tr>
                         <td>모터이론용적</td>
                         <td>
-                          <strong>
-                            <i>
-                              q<sub>m</sub>{" "}
-                            </i>
-                          </strong>
+                        <BlockMath >{`\q_m`}</BlockMath>
                         </td>
                         <td>cc/rev</td>
                         <td>{values.swivel?.motor_displacement}</td>
@@ -80,11 +73,7 @@ const SwivelSpeed = ({ values, config }) => {
                       <tr>
                         <td>감속기의 감속비</td>
                         <td>
-                          <strong>
-                            <i>
-                              i<sub></sub>{" "}
-                            </i>
-                          </strong>
+                        <BlockMath >{`\i`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.swivel?.reduction}</td>
@@ -93,11 +82,7 @@ const SwivelSpeed = ({ values, config }) => {
                       <tr>
                         <td>선회모터용적효율</td>
                         <td>
-                          <strong>
-                            <i>
-                              η<sub>mv</sub>{" "}
-                            </i>
-                          </strong>
+                        <BlockMath >{`\η_{mv}`}</BlockMath>
                         </td>
                         <td></td>
                         <td>{values.swivel?.motor_eff}</td>
@@ -116,33 +101,29 @@ const SwivelSpeed = ({ values, config }) => {
                           선회감속기 축 회전수 SM(rpm)
                         </TableCell>
                       </tr>
-                      <tr>
+                      <tr style={{ height: "40%" }}>
                         <td>
-                          <MathJax>{`$$\\frac{Q \\times \\eta_{mv}}{q_m \\times 1000}$$`}</MathJax>
+                          <InlineMath>{`\\cfrac{Q \\times \\eta_{mv}}{q_m \\times 1000}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$\\frac{ ${values.swivel?.pump_flow} \\times ${values.swivel?.motor_eff} }{ ${values.swivel?.motor_displacement} \\times 1000}$$`}</MathJax>
+                          <InlineMath>{`\\cfrac{ ${values.swivel?.pump_flow} \\times ${values.swivel?.motor_eff} }{ ${values.swivel?.motor_displacement} \\times 1000}`}</InlineMath>
                         </td>
                         <td>
-                          <strong>
-                            <i>{swing_reduction_rev} </i>
-                          </strong>
+                          <BlockMath>{`\{ ${swing_reduction_rev} }`}</BlockMath>
                         </td>
                       </tr>
                       <tr>
                         <TableCell colSpan="3">선회속도 S(rpm)</TableCell>
                       </tr>
-                      <tr style={{ background: "#e6e6e6" }}>
+                      <tr style={{ height: "40%", background: "#e6e6e6" }}>
                         <td>
-                          <MathJax>{`$$ S=\\frac{SM}{i} $$`}</MathJax>
+                          <InlineMath>{` S=\\cfrac{SM}{i} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$\\frac{${swing_reduction_rev}}{${values.swivel?.reduction}} $$`}</MathJax>
+                          <InlineMath>{`\\cfrac{${swing_reduction_rev}}{${values.swivel?.reduction}} `}</InlineMath>
                         </td>
                         <td>
-                          <strong>
-                            <i>{values.swivel?.swing_rev} </i>
-                          </strong>
+                          <BlockMath>{`\{ ${values.swivel?.swing_rev} }`}</BlockMath>
                         </td>
                       </tr>
                     </tbody>
@@ -167,7 +148,6 @@ const SwivelSpeed = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-      </MathJaxContext>
     </>
   );
 };

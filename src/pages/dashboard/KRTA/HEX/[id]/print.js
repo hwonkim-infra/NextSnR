@@ -52,26 +52,28 @@ const HEXprint = () => {
     <>    
     <div contentEditable={true} suppressContentEditableWarning={true}>
 
-      <TravelSpecHXKatex values={newHEX}  />
-      {/* <HEXSpec values={newHEX} />
+      <HEXSpec values={newHEX} />
         {newHEX.ChangeModel && <CompareChange values={newHEX} type={"HEX"} /> }
       <Drawings values={newHEX}  />
       <WorkingRange values={newHEX} />
-      <QCouplr values={newHEX} />
       <GrossWeights values={newHEX} />
       <GroundPressure values={newHEX} />
-      <SwivelSpeed values={newHEX} config={config} />
-      <TravelSpecHX values={newHEX} config={config} />
-      <TravelSlope values={newHEX} config={config} />
-      <Transportation values={newHEX}  /> */}
+      <QCouplr values={newHEX} />
+      <SwivelSpeed values={newHEX}  />
+      {/* <TravelSpecHXKatex values={newHEX}  /> */}
+      <TravelSpecHX values={newHEX}  />
+      <TravelSlope values={newHEX}  />
+      <Transportation values={newHEX}  /> 
+      {/* 
+      */}
     </div>
         </>
   )
 }
 
 
-const HEXprintNoSSR = dynamic(() => Promise.resolve(HEXprint), {
+/* const HEXprintNoSSR = dynamic(() => Promise.resolve(HEXprint), {
   ssr: false,
-})
+}) */
 
-  export default HEXprintNoSSR
+  export default HEXprint

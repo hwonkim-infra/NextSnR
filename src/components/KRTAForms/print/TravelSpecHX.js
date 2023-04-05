@@ -1,6 +1,8 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { TableCell } from "@mui/material";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
+
 
 // 퀵커플러 탈착
 
@@ -35,7 +37,6 @@ const TravelSpecHX = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
       <div className={styles.pages}>
       <table className={styles.borderTable}>
             <thead>
@@ -160,25 +161,25 @@ const TravelSpecHX = ({ values, config }) => {
                       <tr>
                         <td>
                           (1속)
-                          <MathJax>{`$$SM = \\frac{\Q_{m1} \\times \\mu_{mv}}{q \\times i} \\times 1,000$$`}</MathJax>
+                          <InlineMath>{`SM = \\cfrac{\Q_{m1} \\times \\mu_{mv}}{q \\times i} \\times 1,000`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.travel?.pump_displacement} \\times ${values.travel?.TM_mv}}{${values.travel?.TM_flow_1} \\times ${values.travel?.reduc}} \\times 1,000$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.travel?.pump_displacement} \\times ${values.travel?.TM_mv}}{${values.travel?.TM_flow_1} \\times ${values.travel?.reduc}} \\times 1,000`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$${TM_rev_1}$$`}</MathJax>
+                          <InlineMath>{`${TM_rev_1}`}</InlineMath>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           (2속)
-                          <MathJax>{`$$SM = \\frac{\Q_{m2} \\times \\mu_{mv}}{q \\times i} \\times 1,000$$`}</MathJax>
+                          <InlineMath>{`SM = \\cfrac{\Q_{m2} \\times \\mu_{mv}}{q \\times i} \\times 1,000`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.travel?.pump_displacement} \\times ${values.travel?.TM_mv}}{${values.travel?.TM_flow_2} \\times ${values.travel?.reduc}} \\times 1,000$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.travel?.pump_displacement} \\times ${values.travel?.TM_mv}}{${values.travel?.TM_flow_2} \\times ${values.travel?.reduc}} \\times 1,000`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$${TM_rev_2}$$`}</MathJax>
+                          <InlineMath>{`${TM_rev_2}`}</InlineMath>
                         </td>
                       </tr>
 
@@ -189,24 +190,24 @@ const TravelSpecHX = ({ values, config }) => {
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$V_1=\\frac{SM_1 \\times 2\\pi R \\times 60}{10^6} $$`}</MathJax>
+                          <InlineMath>{`V_1=\\cfrac{SM_1 \\times 2\\pi R \\times 60}{10^6} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$\\frac{${TM_rev_1} \\times 2\\pi \\times ${values.travel?.sprocket_radius} \\times 60}{10^6} $$`}</MathJax>
+                          <InlineMath>{`\\cfrac{${TM_rev_1} \\times 2\\pi \\times ${values.travel?.sprocket_radius} \\times 60}{10^6} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$${travel_speed_1}$$`}</MathJax>
+                          <InlineMath>{`${travel_speed_1}`}</InlineMath>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <MathJax>{`$$V_2=\\frac{SM_2 \\times 2\\pi R \\times 60}{10^6} $$`}</MathJax>
+                          <InlineMath>{`V_2=\\cfrac{SM_2 \\times 2\\pi R \\times 60}{10^6} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${TM_rev_2} \\times 2\\pi \\times ${values.travel?.sprocket_radius} \\times 60}{10^6} $$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${TM_rev_2} \\times 2\\pi \\times ${values.travel?.sprocket_radius} \\times 60}{10^6} `}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${travel_speed_2} $$`}</MathJax>
+                          <InlineMath>{` ${travel_speed_2} `}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -216,7 +217,6 @@ const TravelSpecHX = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-      </MathJaxContext>
     </>
   );
 };

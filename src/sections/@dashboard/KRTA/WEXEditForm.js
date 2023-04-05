@@ -326,7 +326,7 @@ const WEXEditForm = ({
           </Grid>
         </Grid>
                 {WEXCalc(values)}
-              {/* {JSON.stringify(values, 0, 2)} */}
+              {JSON.stringify(values.travel, 0, 2)}
       </form>
     </div>
   );

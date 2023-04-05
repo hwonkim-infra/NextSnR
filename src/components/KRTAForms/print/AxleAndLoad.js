@@ -1,8 +1,8 @@
 import React from "react";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import 'katex/dist/katex.min.css';
+import { InlineMath } from 'react-katex';
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
-// 퀵커플러 탈착
 
 const AxleAndLoad = ({ values, config }) => {
   const tire_load_front_unload_ratio = (
@@ -44,7 +44,6 @@ const AxleAndLoad = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
         {/* ===============================================
         축별 하중    
     =============================================== */}
@@ -75,11 +74,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>장비 총 중량</td>
                         <td>
-                          <strong>
-                            <i>
-                              W<sub>T</sub>
-                            </i>
-                          </strong>
+                        <InlineMath>{`\W_T`}</InlineMath>
                         </td>
                         <td>㎏</td>
                         <td>{values.operating_weight}</td>
@@ -88,11 +83,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>장비 무게 중심 (전후 방향)</td>
                         <td>
-                          <strong>
-                            <i>
-                              X<sub>T</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\X_T`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.COG_center_unload}</td>
@@ -101,11 +92,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>축간 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L<sub></sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\L`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.wheel_base}</td>
@@ -114,11 +101,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>1축에서 선회중심까지 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L<sub>1</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\L_1`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.frontAxle_center}</td>
@@ -127,11 +110,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>2축에서 선회중심까지 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L<sub>2</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\L_2`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.rearAxle_center}</td>
@@ -155,26 +134,26 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>1축 하중</td>
                         <td>
-                          <MathJax>{`$$F_1 = \\frac{W_T \\cdot (L_2-X_T)}{L}$$`}</MathJax>
+                          <InlineMath>{`F_1 = \\cfrac{W_T \\cdot (L_2-X_T)}{L}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.operating_weight} \\cdot (${values.undercarriage?.rearAxle_center}-${values.undercarriage?.COG_center_unload})}{${values.undercarriage?.wheel_base}}$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.operating_weight} \\cdot (${values.undercarriage?.rearAxle_center}-${values.undercarriage?.COG_center_unload})}{${values.undercarriage?.wheel_base}}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${values.undercarriage?.axle_weight_front_unload}$$`}</MathJax>
+                          <InlineMath>{` ${values.undercarriage?.axle_weight_front_unload}`}</InlineMath>
                         </td>
                       </tr>
 
                       <tr>
                         <td>2축 하중</td>
                         <td>
-                          <MathJax>{`$$F_2 = \\frac{W_T \\cdot (L_1+X_T)}{L}$$`}</MathJax>
+                          <InlineMath>{`F_2 = \\cfrac{W_T \\cdot (L_1+X_T)}{L}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.operating_weight} \\cdot (${values.undercarriage?.frontAxle_center}+${values.undercarriage?.COG_center_unload})}{${values.undercarriage?.wheel_base}}$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.operating_weight} \\cdot (${values.undercarriage?.frontAxle_center}+${values.undercarriage?.COG_center_unload})}{${values.undercarriage?.wheel_base}}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${values.undercarriage?.axle_weight_rear_unload}$$`}</MathJax>
+                          <InlineMath>{` ${values.undercarriage?.axle_weight_rear_unload}`}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -211,11 +190,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>장비 총 중량</td>
                         <td>
-                          <strong>
-                            <i>
-                              W<sub>T</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\W_T`}</InlineMath>
                         </td>
                         <td>㎏</td>
                         <td>{values.grossWeight_load}</td>
@@ -224,11 +199,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>장비 무게 중심 (전후 방향)</td>
                         <td>
-                          <strong>
-                            <i>
-                              X<sub>T</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\X_T`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.COG_center_unload}</td>
@@ -237,11 +208,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>축간 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L<sub></sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\L`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.wheel_base}</td>
@@ -250,11 +217,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>1축에서 선회중심까지 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L<sub>1</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\L_1`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.frontAxle_center}</td>
@@ -263,11 +226,7 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>2축에서 선회중심까지 거리</td>
                         <td>
-                          <strong>
-                            <i>
-                              L<sub>2</sub>{" "}
-                            </i>
-                          </strong>
+                        <InlineMath>{`\L_2`}</InlineMath>
                         </td>
                         <td>㎜</td>
                         <td>{values.undercarriage?.rearAxle_center}</td>
@@ -291,26 +250,26 @@ const AxleAndLoad = ({ values, config }) => {
                       <tr>
                         <td>1축 하중</td>
                         <td>
-                          <MathJax>{`$$F_1 = \\frac{W_T \\cdot (L_2-X_T)}{L}$$`}</MathJax>
+                          <InlineMath>{`F_1 = \\cfrac{W_T \\cdot (L_2-X_T)}{L}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.operating_weight} \\cdot (${values.undercarriage?.rearAxle_center}-${values.undercarriage?.COG_center_load})}{${values.undercarriage?.wheel_base}}$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.operating_weight} \\cdot (${values.undercarriage?.rearAxle_center}-${values.undercarriage?.COG_center_load})}{${values.undercarriage?.wheel_base}}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${values.undercarriage?.axle_weight_front_load}$$`}</MathJax>
+                          <InlineMath>{` ${values.undercarriage?.axle_weight_front_load}`}</InlineMath>
                         </td>
                       </tr>
 
                       <tr>
                         <td>2축 하중</td>
                         <td>
-                          <MathJax>{`$$F_2 = \\frac{W_T \\cdot (L_1+X_T)}{L}$$`}</MathJax>
+                          <InlineMath>{`F_2 = \\cfrac{W_T \\cdot (L_1+X_T)}{L}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{ ${values.operating_weight} \\cdot (${values.undercarriage?.frontAxle_center}+${values.undercarriage?.COG_center_load})}{${values.undercarriage?.wheel_base}}$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{ ${values.operating_weight} \\cdot (${values.undercarriage?.frontAxle_center}+${values.undercarriage?.COG_center_load})}{${values.undercarriage?.wheel_base}}`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${values.undercarriage?.axle_weight_rear_load}$$`}</MathJax>
+                          <InlineMath>{` ${values.undercarriage?.axle_weight_rear_load}`}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -344,62 +303,62 @@ const AxleAndLoad = ({ values, config }) => {
                     축의 타이어의 경우에는 120퍼센트 이하이어야 한다.{" "}
                   </p>
                   <p> ○ 축별 하중값 계산 (공차)</p>
-                  <table class="innertable" width="90%" height="150px">
+                    <table style={{width:"90%", height:"200px", margin: "auto"}} >
                     <tbody>
                       <tr>
                         <td>타이어 부하율 (전축. %)</td>
                         <td>
-                          <MathJax>{`$$\\epsilon_f = \\frac{R_f}{N \\times P} \\times 100$$`}</MathJax>
+                          <InlineMath>{`\\epsilon_f = \\cfrac{R_f}{N \\times P} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.axle_weight_front_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.axle_weight_front_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${tire_load_front_unload_ratio} $$`}</MathJax>
+                          <InlineMath>{` ${tire_load_front_unload_ratio} `}</InlineMath>
                         </td>
                       </tr>
 
                       <tr>
                         <td>타이어 부하율 (후축. %)</td>
                         <td>
-                          <MathJax>{`$$\\epsilon_r = \\frac{R_f}{N \\times P} \\times 100$$`}</MathJax>
+                          <InlineMath>{`\\epsilon_r = \\cfrac{R_f}{N \\times P} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.axle_weight_rear_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.axle_weight_rear_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${tire_load_rear_unload_ratio} $$`}</MathJax>
+                          <InlineMath>{` ${tire_load_rear_unload_ratio} `}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   <p> </p>
                   <p>○ 축별 하중값 계산 (적재)</p>
-                  <table class="innertable" width="90%" height="150px">
+                    <table style={{width:"90%", height:"200px", margin: "auto"}} >
                     <tbody>
                       <tr>
                         <td>타이어 부하율 (전축. %)</td>
                         <td>
-                          <MathJax>{`$$\\epsilon_f = \\frac{R_f}{N \\times P} \\times 100$$`}</MathJax>
+                          <InlineMath>{`\\epsilon_f = \\cfrac{R_f}{N \\times P} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.axle_weight_front_load}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.axle_weight_front_load}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${tire_load_front_load_ratio} $$`}</MathJax>
+                          <InlineMath>{` ${tire_load_front_load_ratio} `}</InlineMath>
                         </td>
                       </tr>
 
                       <tr>
                         <td>타이어 부하율 (후축. %)</td>
                         <td>
-                          <MathJax>{`$$\\epsilon_r = \\frac{R_f}{N \\times P} \\times 100$$`}</MathJax>
+                          <InlineMath>{`\\epsilon_r = \\cfrac{R_f}{N \\times P} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.axle_weight_rear_load}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.axle_weight_rear_load}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit}} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${tire_load_rear_load_ratio} $$`}</MathJax>
+                          <InlineMath>{` ${tire_load_rear_load_ratio} `}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -407,31 +366,32 @@ const AxleAndLoad = ({ values, config }) => {
 
                   <p> </p>
                   <p>○ 축별 하중값 계산 (주행)</p>
-                  <table class="innertable" width="90%" height="150px">
+                  
+                    <table style={{width:"90%", height:"200px", margin: "auto"}} >
                     <tbody>
                       <tr>
                         <td>타이어 부하율 (전축. %)</td>
                         <td>
-                          <MathJax>{`$$\\epsilon_f = \\frac{R_f}{N \\times P} \\times 100$$`}</MathJax>
+                          <InlineMath>{`\\epsilon_f = \\cfrac{R_f}{N \\times P} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.axle_weight_front_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit_running}} \\times 100$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.axle_weight_front_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit_running}} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${tire_load_front_unload_running_ratio} $$`}</MathJax>
+                          <InlineMath>{` ${tire_load_front_unload_running_ratio} `}</InlineMath>
                         </td>
                       </tr>
 
                       <tr>
                         <td>타이어 부하율 (후축. %)</td>
                         <td>
-                          <MathJax>{`$$\\epsilon_r = \\frac{R_f}{N \\times P} \\times 100$$`}</MathJax>
+                          <InlineMath>{`\\epsilon_r = \\cfrac{R_f}{N \\times P} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ \\frac{${values.undercarriage?.axle_weight_rear_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit_running}} \\times 100$$`}</MathJax>
+                          <InlineMath>{` \\cfrac{${values.undercarriage?.axle_weight_rear_unload}}{${values.undercarriage?.no_tires} \\times ${values.undercarriage?.tire_load_limit_running}} \\times 100`}</InlineMath>
                         </td>
                         <td>
-                          <MathJax>{`$$ ${tire_load_rear_unload_running_ratio} $$`}</MathJax>
+                          <InlineMath>{` ${tire_load_rear_unload_running_ratio} `}</InlineMath>
                         </td>
                       </tr>
                     </tbody>
@@ -441,7 +401,6 @@ const AxleAndLoad = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-      </MathJaxContext>
     </>
   );
 };

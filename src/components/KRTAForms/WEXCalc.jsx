@@ -23,7 +23,7 @@ const WEXCalc = (values) => {
   values.description ??= {};
   values.COG ??= {};
   */
- values.transport ??= {}; 
+  values.transport ??= {};
 
   const grossWeight = Number(values.operating_weight) + 65; // 총중량
   const bucket_exca_capa = Number(values.attachments.bucket_heap) * 1500; // 산적 시 버켓 중량
@@ -38,9 +38,8 @@ const WEXCalc = (values) => {
   /* 주행성능 */
   const rearAxle_center =
     values.undercarriage.wheel_base - values.undercarriage.frontAxle_center;
-    
-  
-    const axle_weight_rear_unload =
+
+  const axle_weight_rear_unload =
     Math.round(
       Number(
         values.operating_weight *
@@ -50,13 +49,20 @@ const WEXCalc = (values) => {
     ) || ""; // 공차하중 2축
 
   const axle_weight_front_unload =
-    values.operating_weight - axle_weight_rear_unload;  // 공차하중 1축
+    values.operating_weight - axle_weight_rear_unload; // 공차하중 1축
 
   /* 적재하중 1,2축 */
-const axle_weight_rear_load =
-  Math.round(Number( (grossWeight_load * ((values.undercarriage.rearAxle_center) - Number(values.undercarriage.COG_center_load))) / values.undercarriage.wheel_base )) || "";
+  const axle_weight_rear_load =
+    Math.round(
+      Number(
+        (grossWeight_load *
+          (values.undercarriage.rearAxle_center -
+            Number(values.undercarriage.COG_center_load))) /
+          values.undercarriage.wheel_base
+      )
+    ) || "";
 
-  const axle_weight_front_load = grossWeight_load - axle_weight_rear_load;  
+  const axle_weight_front_load = grossWeight_load - axle_weight_rear_load;
 
   /* 
   const axle_weight_front_load =
@@ -73,22 +79,30 @@ const axle_weight_rear_load =
         values.undercarriage.wheel_base
     )) || ""; */
 
-    /* 주행속도 */
-  const axle_motor_rev = Math.round(Number(
-    ((values.travel.pump_displacement_travel * values.travel.motor_eff_travel) /
-      values.travel.motor_displacement_travel) *
-    1000
-  ));
-  const travel_speed = Math.round(Number(
-    (((2 * Math.PI * axle_motor_rev * values.travel.tire_rolling_radius) /
-      1000) *
-      60) /
-    (values.travel.TM_reduction * values.travel.axle_reduction * 10 ** 3)
-  )) || values.travel.travel_speed ;
+  /* 주행속도 */
+  const axle_motor_rev = Math.round(
+    Number(
+      ((values.travel.pump_displacement_travel *
+        values.travel.motor_eff_travel) /
+        values.travel.motor_displacement_travel) *
+        1000
+    )
+  );
+  const travel_speed =
+    Math.round(
+      Number(
+        (((2 * Math.PI * axle_motor_rev * values.travel.tire_rolling_radius) /
+          1000) *
+          60) /
+          (values.travel.TM_reduction * values.travel.axle_reduction * 10 ** 3)
+      )
+    ) || values.travel.travel_speed;
 
+  /* 등판능력 */
   const noslip_slope = radians_to_degrees(
     Math.atan(values.travel.friction_surface)
   ).toFixed(1);
+  
   const traction_slope = radians_to_degrees(
     Math.asin(
       (values.travel.traction_force -
@@ -96,20 +110,22 @@ const axle_weight_rear_load =
         grossWeight
     )
   ).toFixed(1);
-  const greadability = Math.round(Number(Math.min(
-    values.travel.engine_slope,
-    noslip_slope,
-    traction_slope
-  )));
+  
+  const greadability = Math.round(
+    Number(Math.min(values.travel.engine_slope, noslip_slope, traction_slope))
+  );
+  
+  
 
-  const innerKingpin_COS = Math.round(
+  /* 회전반경 */
+
+  const innerKingpin_COS =
     values.undercarriage.wheel_base /
-      Math.sin(degrees_to_radians(values.travel.wheel_angle))
-  );
-  const outer_rim_minRadius = Math.round(
-    innerKingpin_COS + values.travel.kingpin_offset
-  );
-  const turning_radius = values.travel.turning_radius || Math.ceil((outer_rim_minRadius * 1.05) / 1000);
+    Math.sin(degrees_to_radians(values.travel.wheel_angle));
+  const outer_rim_minRadius = +innerKingpin_COS + +values.travel.kingpin_offset;
+  const turning_radius = Math.ceil(outer_rim_minRadius * 1.05);
+
+  /* 제동거리 */
 
   const braking_speed_standard = Math.max(travel_speed * 0.8, 32);
   const braking_force_axle = (
@@ -125,14 +141,18 @@ const axle_weight_rear_load =
   /* 제동력과 감가속도 */
   const decceleration_rate = (braking_force_total / grossWeight).toFixed(1);
   const decceleration = (decceleration_rate * 9.81).toFixed(1);
-  const braking_distance_max = roundOne(Number(
-    (travel_speed ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
-    idle_running * travel_speed * (1000 / 3600)
-  ));
-  const braking_distance_norm = roundOne(Number(
-    (braking_speed_standard ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
-    idle_running * braking_speed_standard * (1000 / 3600)
-  ));
+  const braking_distance_max = roundOne(
+    Number(
+      (travel_speed ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
+        idle_running * travel_speed * (1000 / 3600)
+    )
+  );
+  const braking_distance_norm = roundOne(
+    Number(
+      (braking_speed_standard ** 2 / (2 * decceleration)) * (1000 / 3600) ** 2 +
+        idle_running * braking_speed_standard * (1000 / 3600)
+    )
+  );
 
   /* 전도안정도 */
 
@@ -178,29 +198,25 @@ const axle_weight_rear_load =
     (values.transport.transport_8_weight || 0) -
     (values.transport.transport_9_weight || 0);
 
-    console.log("🚀 ~ file: WEXCalc.jsx:177 ~ WEXCalc ~ grossWeight:", grossWeight)
   return (
-    innerKingpin_COS,
     (values.grossWeight = grossWeight),
     (values.attachments.bucket_exca_capa = bucket_exca_capa),
     (values.grossWeight_load = grossWeight_load),
-    
     (values.undercarriage.rearAxle_center = rearAxle_center),
     (values.undercarriage.axle_weight_front_unload = axle_weight_front_unload),
     (values.undercarriage.axle_weight_rear_unload = axle_weight_rear_unload),
     (values.undercarriage.axle_weight_front_load = axle_weight_front_load),
     (values.undercarriage.axle_weight_rear_load = axle_weight_rear_load),
-
     (values.travel.axle_motor_rev = axle_motor_rev),
-    (values.travel.travel_speed = travel_speed),
-    (values.travel.greadability = greadability),
-
-    (values.travel.braking_distance_max = braking_distance_max),
+    values.travel.travel_speed || (values.travel.travel_speed = travel_speed),
+    values.travel.greadability || (values.travel.greadability = greadability),
+    //  (values.travel.greadability = greadability),
+    (values.travel.braking_distance_max ||
+      (values.travel.braking_distance_max = braking_distance_max)),
     (values.travel.braking_distance_norm = braking_distance_norm),
-
-
-    (values.travel.turning_radius = turning_radius),
-    (values.swivel.swing_rev = swing_rev),
+    (values.travel.turning_radius ||
+      (values.travel.turning_radius = turning_radius)),
+    (values.swivel.swing_rev || (values.swivel.swing_rev = swing_rev)),
     (values.transport.transport_1_weight = transport_1_weight),
     (values.COG.COG_longitudinal = COG_longitudinal),
     (values.COG.COG_lateral = COG_lateral),

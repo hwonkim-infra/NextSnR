@@ -1,5 +1,7 @@
 import React from "react";
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath  } from 'react-katex';
+
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import { TableCell } from "@mui/material";
 import parse from "html-react-parser";
@@ -33,7 +35,6 @@ const TravelSlopeWX = ({ values, config }) => {
 
   return (
     <>
-      <MathJaxContext version={3} config={config}>
     <div className={styles.pages}>
       <table className={styles.borderTable}>
             <thead>
@@ -67,9 +68,7 @@ const TravelSlopeWX = ({ values, config }) => {
                         <td>장비 총 중량</td>
 
                         <td>
-                          <strong>
-                            <i>W<sub>t</sub></i>
-                          </strong>
+                        <InlineMath >{`\W_t`}</InlineMath>
                         </td>
                         <td>㎏</td>
                         <td>{values.grossWeight}</td>
@@ -77,9 +76,7 @@ const TravelSlopeWX = ({ values, config }) => {
                       <tr>
                         <td>견인력</td>
                         <td>
-                          <strong>
-                            <i>DP<sub></sub></i>
-                          </strong>
+                        <InlineMath >{`\DP`}</InlineMath>
                         </td>
                         <td>㎏/㎠</td>
                         <td>{values.travel?.traction_force}</td>
@@ -87,9 +84,7 @@ const TravelSlopeWX = ({ values, config }) => {
                       <tr>
                         <td>지면마찰계수</td>
                         <td>
-                          <strong>
-                            <i>μ<sub></sub></i>
-                          </strong>
+                        <InlineMath >{`\μ`}</InlineMath>
                         </td>
 
                         <td>cc/rev</td>
@@ -98,9 +93,7 @@ const TravelSlopeWX = ({ values, config }) => {
                       <tr>
                         <td>주행 저항 계수</td>
                         <td>
-                          <strong>
-                            <i>ξ<sub></sub></i>
-                          </strong>
+                        <InlineMath >{`\ξ`}</InlineMath>
                         </td>
                         <td></td>
                         <td>{values.travel?.running_resist}</td>
@@ -116,20 +109,20 @@ const TravelSlopeWX = ({ values, config }) => {
         <TableCell colSpan="3">미끄러지지 않는 최대 경사각 (마찰력)</TableCell>
     </tr>
     <tr>
-        <td><MathJax>{`$$ \\mu \\cdot W_T \\cdot \\cos \\theta_1 = W_T \\cdot \\sin \\theta_1 $$`}</MathJax></td>
-        <td><MathJax>{`$$ \\theta_1 = \\tan^{-1} 0.90 $$`}</MathJax></td>
-        <td><MathJax>{`$$ ${noslip_slope} $$`}</MathJax></td>
+        <td><InlineMath>{` \\mu \\cdot W_T \\cdot \\cos \\theta_1 = W_T \\cdot \\sin \\theta_1 `}</InlineMath></td>
+        <td><InlineMath>{` \\theta_1 = \\tan^{-1} 0.90 `}</InlineMath></td>
+        <td><BlockMath>{` ${noslip_slope} `}</BlockMath></td>
     </tr>
     <tr>
         <TableCell colSpan="3">흘러내리지 않는 최대 경사각 (견인력)</TableCell>
 
     </tr>
     <tr>
-        <td><MathJax>{`$$ DP-\\xi W_T = W_T \\cdot \\sin \\theta_2 $$`}</MathJax></td>
-        <td><MathJax>{`$$ \\theta_2 = \\sin ^{-1} \\frac{${ values.travel?.traction_force } - ${
-                    values.travel?.running_resist } \\cdot ${ values.grossWeight }}{${ values.grossWeight }} $$`}</MathJax></td>
+        <td><InlineMath>{` DP-\\xi W_T = W_T \\cdot \\sin \\theta_2 `}</InlineMath></td>
+        <td><InlineMath>{` \\theta_2 = \\sin ^{-1} \\cfrac{${ values.travel?.traction_force } - ${
+                    values.travel?.running_resist } \\cdot ${ values.grossWeight }}{${ values.grossWeight }} `}</InlineMath></td>
 
-        <td><MathJax>{`$$ ${traction_slope} $$`}</MathJax></td>
+        <td><BlockMath>{` ${traction_slope} `}</BlockMath></td>
         
     </tr>
     <tr>
@@ -140,14 +133,14 @@ const TravelSlopeWX = ({ values, config }) => {
         <td>엔진 제원 사양</td>
         <td>
         </td>
-        <td><MathJax>{`$$ ${values.travel?.engine_slope} $$`}</MathJax></td>
+        <td><BlockMath>{` ${values.travel?.engine_slope} `}</BlockMath></td>
     </tr>
     <tr>
         <TableCell colSpan="3">최종 경사각</TableCell>
     </tr>
     <tr style={{ background: "#e6e6e6" }}>
         <TableCell  colSpan="2" >위 3 가지 경사각 사양 중 가장 작은 값</TableCell>
-        <td><MathJax>{`$$ ${min_slope} $$`}</MathJax></td>
+        <td><BlockMath>{` ${min_slope} `}</BlockMath></td>
     </tr>
 </tbody>
 </table>
@@ -172,7 +165,6 @@ const TravelSlopeWX = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-      </MathJaxContext>
     </>
   );
 };
