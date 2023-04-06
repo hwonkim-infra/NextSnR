@@ -19,6 +19,7 @@ const CompareChangeData = ({ values, type }) => {
       setOriginData(data);
     }
   };
+  console.log(values.ECN);
 
   useEffect(() => {
     if (values.origin) getOrigin();
@@ -199,7 +200,7 @@ const CompareChangeData = ({ values, type }) => {
 
   return (
     <>
-    <CompareChangePrint specDataSet={specDataSet} originExterior={originExterior}  />
+    <CompareChangePrint specDataSet={specDataSet} originExterior={originExterior} ECN={values.ECN} />
       
     </>
   );

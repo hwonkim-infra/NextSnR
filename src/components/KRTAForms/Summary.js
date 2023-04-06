@@ -59,6 +59,25 @@ const Summary = ({ control,  }) => {
                     control={control}
                   />
                 ))}
+                
+              </Box>
+              <Box>
+              <Controller
+                    render={({ field }) => (
+                      <TextField sx={{width: "100%"}} label={"주요 형식변경"} {...field}
+                      InputLabelProps={{ shrink: true }}
+                      value={field.value || ''}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                          </InputAdornment>
+                        ),
+                      }} />
+                    )}
+                    name={"ECN"}
+                    type={"string"}
+                    control={control}
+                  />
               </Box>
             </Card>
           </Grid>

@@ -1,10 +1,11 @@
-import { Grid, Paper } from "@mui/material";
+import { Box, Grid, Paper } from "@mui/material";
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
 const CompareChangePrint = ({ specDataSet, originExterior, ECN }) => {
+    console.log(ECN);
   
 
   return (
@@ -21,14 +22,20 @@ const CompareChangePrint = ({ specDataSet, originExterior, ECN }) => {
             <Paper
               variant="outlined"
               elevation={1}
-              style={{
-                padding: "15px",
+              sx={{
+                p: 2,
                 width: "80%",
               }}
               
             >
+                <Box>
               주요 형식 변경 사양:
+
+                </Box>
+              <Box sx={{m:3}}>
+
               {ECN}
+              </Box>
             </Paper>
 
             <table style={{ width: "70%", margin: "auto" }}>

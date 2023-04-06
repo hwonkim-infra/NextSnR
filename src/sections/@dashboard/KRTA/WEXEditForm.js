@@ -328,13 +328,13 @@ const WEXEditForm = ({
               >
                 Preview
               </Typography>
-                  {values.ChangeModel && <CompareSheet values={values} />}
+                  {/* {values.ChangeModel && <CompareSheet values={values} />} */}
               <SpecSheet values={values} />
             </Card>
           </Grid>
         </Grid>
                 {WEXCalc(values)}
-              {JSON.stringify(values.travel, 0, 2)}
+              {/* {JSON.stringify(values.travel, 0, 2)} */}
       </form>
     </div>
   );
