@@ -131,6 +131,8 @@ const WEXEditForm = ({
     values._id = values.model_name + "_" + Date.now();
     console.log(values._id);
 
+   
+
     await axios
       .post("/api/WEX/", values)
       .then((response) => {
@@ -144,9 +146,14 @@ const WEXEditForm = ({
   const createWEXChange = async (values) => {
     values.origin = values._id;
     delete values._id;
+   
     values._id = values.model_name + "_" + Date.now();
+    values.ChangeModel = true;
+    values.ECN = "";
+    values.approval_result = '';
 
-    axios
+
+    await axios
       .post("/api/WEX/", values)
       .then((response) => {
         console.log(response);
@@ -298,7 +305,7 @@ const WEXEditForm = ({
                 <Snackbar
                     open={snackbarOpen}
                     autoHideDuration={3000}
-                    message="This File was updated successfully"
+                    message= {!isEdit ? "This File was updated successfully" : "This File was created successfully"}
                     onClose={snackbarClose}
                   />
 
@@ -321,6 +328,7 @@ const WEXEditForm = ({
               >
                 Preview
               </Typography>
+                  {values.ChangeModel && <CompareSheet values={values} />}
               <SpecSheet values={values} />
             </Card>
           </Grid>

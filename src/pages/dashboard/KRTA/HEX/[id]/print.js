@@ -15,8 +15,7 @@ import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
 import TravelSpecHX from "@/components/KRTAForms/print/TravelSpecHX";
 import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
 import Transportation from "@/components/KRTAForms/print/Transportation";
-import CompareChange from "@/components/KRTAForms/print/CompareChange";
-import TravelSpecHXKatex from "@/components/KRTAForms/print/TravelSpecHXKATEX";
+import CompareChangeData from "@/sections/@dashboard/KRTA/CompareChangeData";
 
 const HEXprint = () => {
     const { push, query } = useRouter();
@@ -32,28 +31,13 @@ const HEXprint = () => {
         if (query.id) getHEX();
       }, [query.id]);
 
-      const config = {
-        loader: { load: ["[tex]/html"] },
-        tex: {
-          packages: { "[+]": ["html"] },
-          inlineMath: [
-            ["$$", "$$"],
-            ["\\(", "\\)"]
-          ],
-          displayMath: [
-            ["$$", "$$"],
-            ["\\[", "\\]"]
-          ]
-        }
-      };
-    
-
+      
   return (
     <>    
     <div contentEditable={true} suppressContentEditableWarning={true}>
 
       <HEXSpec values={newHEX} />
-        {newHEX.ChangeModel && <CompareChange values={newHEX} type={"HEX"} /> }
+        {newHEX.ChangeModel && <CompareChangeData values={newHEX} type={"HEX"} /> }
       <Drawings values={newHEX}  />
       <WorkingRange values={newHEX} />
       <GrossWeights values={newHEX} />

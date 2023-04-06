@@ -142,8 +142,12 @@ const HEXEditForm = ({
   const createHEXChange = async (values) => {
     values.origin = values._id;
     delete values._id;
-    values._id = values.model_name + "_" + Date.now();
 
+    values._id = values.model_name + "_" + Date.now();
+    values.ChangeModel = true;
+    values.ECN = "";
+    values.approval_result = '';
+    
     await axios
       .post("/api/HEX/", values)
       .then((response) => {
