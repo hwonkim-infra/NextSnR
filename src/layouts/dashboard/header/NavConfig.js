@@ -49,6 +49,21 @@ const navConfig = [
   },
 
 
+    // TCF
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'TCF archieve',
+    items: [
+      {
+        title: 'TCF',
+    path: '/dashboard/TCF',
+        icon: ICONS.dashboard,
+        children: [
+          { title: 'NoiseCerti ', path: '/dashboard/TCF/NoiseCerti' },
+        ],
+      },
+    ],
+  },
   
   // Blog
   // ----------------------------------------------------------------------

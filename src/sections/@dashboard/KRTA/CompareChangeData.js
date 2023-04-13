@@ -19,7 +19,6 @@ const CompareChangeData = ({ values, type }) => {
       setOriginData(data);
     }
   };
-  console.log(values.ECN);
 
   useEffect(() => {
     if (values.origin) getOrigin();

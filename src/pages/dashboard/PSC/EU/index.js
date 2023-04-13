@@ -1,32 +1,27 @@
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
 
 import EditIcon from '@mui/icons-material/Edit';
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import {
-  Button,
   Box,
-  Grid,
-  Stack,
+  Button,
   CircularProgress,
-  IconButton,
-  Paper,
+  Grid,
+  Paper
 } from "@mui/material";
-import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 // components
-import Layout from "@/layouts";
 import HeaderBreadcrumbs from "@/components/HeaderBreadcrumbs";
 import Iconify from "@/components/Iconify";
+import Layout from "@/layouts";
 
 // DataGrid
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
 import PSCDetailPrev from "@/components/PSC/PSCDetailPrev";
 import Page from "@/components/Page";
-// import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
+import { DataGrid } from "@mui/x-data-grid";
 
-// Preview
 
 PSCList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
@@ -46,16 +41,6 @@ export default function PSCList({ PSCs = [] }) {
       flex: 1,
       minWidth: 400,
     },
-    /* {
-      field: "Edit",
-      headerName: "EDIT",
-      width: 50,
-      renderCell: () => (
-        <IconButton href={"PSC/" + currentPSC?.id + "/edit"}>
-          <EditIcon />
-        </IconButton>
-      ),
-    }, */
   ];
   if (!PSCs) return <CircularProgress />;
 

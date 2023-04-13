@@ -13,8 +13,7 @@ import { Button, Card, Grid, Snackbar, Stack, Typography } from "@mui/material";
 
 import axios from "axios";
 import NoiseCertiInputs from "./NoiseCertiInputs";
-import DetailInput from "./NoiseCertidetailInputs";
-import NoiseCertiRegionInputs from "./NoiseCertiRegionInputs";
+import NoiseCertiModelInputs from "./NoiseCertiModelInputs";
 
 const NoiseCertiEditForm = ({ isEdit = false, currentNoiseCerti }) => {
   const {
@@ -46,17 +45,18 @@ const NoiseCertiEditForm = ({ isEdit = false, currentNoiseCerti }) => {
   }, [isEdit, currentNoiseCerti]);
 
   const onSubmit = async (values) => {
+    
     if (isEdit) {
       await updateNoiseCerti(values);
     } else {
       await createNoiseCerti(values);
-      await push("/dashboard/NoiseCerti/EU");
+      await push("/dashboard/TCF/NoiseCerti");
     }
   };
 
   const updateNoiseCerti = async (values) => {
     axios
-      .put(`/api/NoiseCerti/EU/${query.id}`, values)
+      .put(`/api/TCF/NoiseCerti/${query.id}`, values)
       .then((response) => {
         console.log(response.data);
       })
@@ -67,7 +67,7 @@ const NoiseCertiEditForm = ({ isEdit = false, currentNoiseCerti }) => {
 
   const createNoiseCerti = async (values) => {    
     axios
-      .post("/api/NoiseCerti/EU", values)
+      .post("/api/TCF/NoiseCerti", values)
       .then((response) => {
         console.log(response);
       })
@@ -82,7 +82,7 @@ const NoiseCertiEditForm = ({ isEdit = false, currentNoiseCerti }) => {
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
       try {
         axios
-          .delete(`/api/NoiseCerti/EU/${query.id}`, values)
+          .delete(`/api/TCF/NoiseCerti/${query.id}`, values)
           .then((response) => {
             console.log(response);
           })
@@ -90,7 +90,7 @@ const NoiseCertiEditForm = ({ isEdit = false, currentNoiseCerti }) => {
             console.error(error);
           });
 
-        await push("/dashboard/NoiseCerti/EU");
+        await push("/dashboard/TCF/NoiseCerti");
       } catch (error) {
         console.log(error);
       }
@@ -141,12 +141,12 @@ const NoiseCertiEditForm = ({ isEdit = false, currentNoiseCerti }) => {
                 variant="overline"
                 sx={{ color: "text.disabled" }}
               >
-                Actions Detail
+                Noise Guaranteed Tested
               </Typography>
-              <DetailInput control={control} />
-        {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
+              <NoiseCertiModelInputs control={control} />
             </Card>
           </Grid>
+        <pre>{JSON.stringify(values, 0, 2)}</pre>
         </Grid>
       </form>
   );
