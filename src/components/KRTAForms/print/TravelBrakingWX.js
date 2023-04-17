@@ -255,7 +255,7 @@ const TravelBrakingWX = ({ values, config }) => {
                       </td>
                       <td>
                         <BlockMath>{`${
-                          values.travel?.braking_distance_max || ""
+                          values.travel?.braking_distance_max_tested || values.travel?.braking_distance_max || ""
                         }`}</BlockMath>{" "}
                       </td>
                     </tr>
@@ -266,6 +266,7 @@ const TravelBrakingWX = ({ values, config }) => {
           </tbody>
         </table>
       </div>
+      {values.travel?.braking_distance_max_tested && 
 
       <div className={styles.pages}>
         <table className={styles.borderTable}>
@@ -276,11 +277,18 @@ const TravelBrakingWX = ({ values, config }) => {
           </thead>
           <tbody>
             <tr>
+            <Box  sx={{p:1}}>
+          
+          <Typography variant="h7">아래 검증 결과에 따라 최종 체동거리는:{"  "}   { values.travel?.braking_distance_max_tested} m  </Typography>
+  
+                
+  
+          </Box>
               <td>{parse(braking_description)}</td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </div>}
     </>
   );
 };

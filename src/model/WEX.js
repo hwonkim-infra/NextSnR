@@ -123,6 +123,7 @@ const WEXSchema = new Schema({
         /* 주행속도 */
         axle_motor_rev: Number,
         travel_speed: Number,
+        travel_speed_tested: Number,
         travel_speed_description: String,
 
         // 등판능력 계산
@@ -131,6 +132,7 @@ const WEXSchema = new Schema({
         running_resist: Number,
         engine_slope: Number,
         greadability: Number,
+        greadability_tested: Number,
         greadability_description: String,
 
         // 최소회전반경
@@ -139,6 +141,7 @@ const WEXSchema = new Schema({
         wheel_angle: Number,
 
         turning_radius: Number,
+        turning_radius_tested: Number,
         turning_radius_description: String,
 
         // 서비스 브레이크 제동력
@@ -149,6 +152,7 @@ const WEXSchema = new Schema({
 
         braking_distance_max: Number,
         braking_distance_norm: Number,
+        braking_distance_max_tested: Number,
 
         braking_description: String,
     },

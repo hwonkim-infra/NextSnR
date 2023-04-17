@@ -42,15 +42,15 @@ const SpecSheet = ({ values }) => {
             </TableRow>
             <TableRow>
               <td>최고속도 (㎞/hr)</td>
-              <td> {values.travel?.travel_speed} </td>
+              <td> {values.travel?.travel_speed_tested || values.travel?.travel_speed} </td>
               <td>회전반경</td>
-              <td> {values.travel?.turning_radius} </td>
+              <td> {values.travel?.turning_radius_tested || values.travel?.turning_radius} </td>
             </TableRow>
             <TableRow>
               <td>등판능력 (무부하)</td>
-              <td> {values.travel?.greadability} </td>
+              <td> {values.travel?.greadability_tested || values.travel?.greadability} </td>
               <td>제동거리</td>
-              <td> {values.travel?.braking_distance_max} </td>
+              <td> {values.travel?.braking_distance_max_tested || values.travel?.braking_distance_max} </td>
             </TableRow>
             <TableRow>
               <td>길이 (㎜)</td>

@@ -96,7 +96,7 @@ const WEXCalc = (values) => {
           60) /
           (values.travel.TM_reduction * values.travel.axle_reduction * 10 ** 3)
       )
-    ) || values.travel.travel_speed;
+    ) ;
 
   /* 등판능력 */
   const noslip_slope = radians_to_degrees(
@@ -123,7 +123,7 @@ const WEXCalc = (values) => {
     values.undercarriage.wheel_base /
     Math.sin(degrees_to_radians(values.travel.wheel_angle));
   const outer_rim_minRadius = +innerKingpin_COS + +values.travel.kingpin_offset;
-  const turning_radius = Math.ceil(outer_rim_minRadius * 1.05);
+  const turning_radius = roundTwo(outer_rim_minRadius /1000 );
 
   /* 제동거리 */
 
@@ -208,14 +208,14 @@ const WEXCalc = (values) => {
     (values.undercarriage.axle_weight_front_load = axle_weight_front_load),
     (values.undercarriage.axle_weight_rear_load = axle_weight_rear_load),
     (values.travel.axle_motor_rev = axle_motor_rev),
-    values.travel.travel_speed || (values.travel.travel_speed = travel_speed),
-    values.travel.greadability || (values.travel.greadability = greadability),
+    (values.travel.travel_speed = travel_speed),
+    (values.travel.greadability = greadability),
     //  (values.travel.greadability = greadability),
-    (values.travel.braking_distance_max ||
-      (values.travel.braking_distance_max = braking_distance_max)),
+    
+      (values.travel.braking_distance_max = braking_distance_max),
     (values.travel.braking_distance_norm = braking_distance_norm),
-    (values.travel.turning_radius ||
-      (values.travel.turning_radius = turning_radius)),
+    
+      (values.travel.turning_radius = turning_radius),
     (values.swivel.swing_rev || (values.swivel.swing_rev = swing_rev)),
     (values.transport.transport_1_weight = transport_1_weight),
     (values.COG.COG_longitudinal = COG_longitudinal),

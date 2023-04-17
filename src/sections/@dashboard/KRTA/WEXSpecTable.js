@@ -32,13 +32,13 @@ const WEXSpecTable = ({ values }) => {
                   </tr>
                   <tr>
                     <td colSpan="2">최고속도</td>
-                    <td> {values.travel?.travel_speed}㎞/hr </td>
+                    <td> {values.travel?.travel_speed_tested || values.travel?.travel_speed}㎞/hr </td>
                     <td>윤간거리</td>
                     <td>{ values.undercarriage?.axle_track_front } / { values.undercarriage?.axle_track_rear } </td>
                   </tr>
                   <tr>
                     <td colSpan="2">등판능력</td>
-                    <td> {values.travel?.greadability} </td>
+                    <td> {values.travel?.greadability_tested || values.travel?.greadability} </td>
                     <td>타이어치수</td>
                     <td>{values.undercarriage?.tire_frontAxle} </td>
                   </tr>
@@ -49,13 +49,13 @@ const WEXSpecTable = ({ values }) => {
                     <td>길이</td>
                     <td>{values.overall_length}</td>
                     <td>최소회전반경</td>
-                    <td>{values.travel?.turning_radius} </td>
+                    <td>{values.travel?.turning_radius_tested || values.travel?.turning_radius} </td>
                   </tr>
                   <tr>
                     <td>너비</td>
                     <td>{values.overall_width} </td>
                     <td>제동거리</td>
-                    <td> {values.travel?.braking_distance_max} </td>
+                    <td> {values.travel?.braking_distance_max_tested || values.travel?.braking_distance_max} </td>
                   </tr>
                   <tr>
                     <td>높이</td>

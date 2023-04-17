@@ -1,5 +1,5 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
-import { TableCell } from "@mui/material";
+import { Box, TableCell, Typography } from "@mui/material";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath  } from 'react-katex';
 import parse from "html-react-parser";
@@ -142,6 +142,7 @@ const TravelSpecHW = ({ values, config }) => {
             </tbody>
           </table>
         </div>
+        {values.travel?.travel_speed_tested && 
 
         <div className={styles.pages} >
           <table className={styles.borderTable}>
@@ -152,11 +153,17 @@ const TravelSpecHW = ({ values, config }) => {
             </thead>
             <tbody>
               <tr>
+              <Box sx={{ p: 1 }}>
+                  <Typography variant="h7">
+                    아래 검증 결과에 따라 최종 주행속도는: 
+                    {values.travel?.travel_speed_tested} km/h
+                  </Typography>
+                </Box>
                 <td>{parse(travel_speed_description)}</td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </div>}
     </>
   );
 };

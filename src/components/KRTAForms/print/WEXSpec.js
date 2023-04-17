@@ -39,17 +39,17 @@ const WEXSpec = ({values} ) => {
           <td>{ values.gearbox }</td>
         </tr>
         <tr>
-            <td colSpan="2">최고속도</td>
-            <td> {values.travel?.travel_speed} </td>
+            <td colSpan="2">최고속도(㎞/h)</td>
+            <td> {values.travel?.travel_speed_tested || values.travel?.travel_speed} </td>
             <td rowSpan="12" width="4%" className="vertical_cell">타이어식</td>
-            <td>회전반경</td>
-            <td> {values.travel?.turning_radius} </td>
+            <td>회전반경 (m)</td>
+            <td> {values.travel?.turning_radius_tested || values.travel?.turning_radius} </td>
           </tr>
           <tr>
-            <td colSpan="2">등판능력</td>
-              <td> {values.travel?.greadability} </td>
-            <td>제동거리</td>
-              <td> {values.travel?.braking_distance_max} </td>
+            <td colSpan="2">등판능력(˚)</td>
+              <td> {values.travel?.greadability_tested || values.travel?.greadability}˚ </td>
+            <td>제동거리 (m)</td>
+              <td> {values.travel?.braking_distance_max_tested || values.travel?.braking_distance_max} </td>
           </tr>
           <tr>
             <td rowSpan="4" width="4%" className="vertical_cell">외 관</td>

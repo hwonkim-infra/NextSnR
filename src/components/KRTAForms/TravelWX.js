@@ -222,7 +222,7 @@ const TravelWX = ({ control, values }) => {
                   }}
                 />
               )}
-              name={"travel.travel_speed"}
+              name={"travel.travel_speed_tested"}
               type={"number"}
               control={control}
             />
@@ -311,10 +311,10 @@ const TravelWX = ({ control, values }) => {
                   }}
                 />
               )}
-              name={"travel.turning_radius"}
+              name={"travel.turning_radius_tested"}
               type={"number"}
               control={control}
-            />
+            />                                                                                              
             <Controller
               name="travel.turning_radius_description"
               control={control}
@@ -400,7 +400,7 @@ const TravelWX = ({ control, values }) => {
                   }}
                 />
               )}
-              name={"travel.greadability"}
+              name={"travel.greadability_tested"}
               type={"number"}
               control={control}
             />
@@ -490,7 +490,7 @@ const TravelWX = ({ control, values }) => {
                   }}
                 />
               )}
-              name={"travel.braking_distance_max"}
+              name={"travel.braking_distance_max_tested"}
               type={"number"}
               control={control}
             />
@@ -508,141 +508,7 @@ const TravelWX = ({ control, values }) => {
 
 
 
-        {/* <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                display: "grid",
-                // columnGap: 2,
-                // rowGap: 2,
-                gridTemplateColumns: "2fr 2fr",
-              }}
-            >
-              {formFieldsSpeed.map((fieldData) => (
-                <Controller
-                  key={fieldData.name}
-                  render={({ field }) => (
-                    <TextField
-                      label={fieldData.label}
-                      {...field}
-                      value={field.value || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {fieldData.unit}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                  name={fieldData.name}
-                  type={fieldData.type}
-                  control={control}
-                />
-              ))}
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                display: "grid",
-                // columnGap: 2,
-                // rowGap: 2,
-                gridTemplateColumns: "2fr 2fr ",
-              }}
-            >
-              {formFieldsTravelSlope.map((fieldData) => (
-                <Controller
-                  key={fieldData.name}
-                  render={({ field }) => (
-                    <TextField
-                      label={fieldData.label}
-                      {...field}
-                      value={field.value || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {fieldData.unit}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                  name={fieldData.name}
-                  type={fieldData.type}
-                  control={control}
-                />
-              ))}
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                display: "grid",
-                // columnGap: 2,
-                // rowGap: 2,
-                gridTemplateColumns: "2fr 2fr ",
-              }}
-            >
-              {formFieldsTravelRadius.map((fieldData) => (
-                <Controller
-                  key={fieldData.name}
-                  render={({ field }) => (
-                    <TextField
-                      label={fieldData.label}
-                      {...field}
-                      value={field.value || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {fieldData.unit}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                  name={fieldData.name}
-                  type={fieldData.type}
-                  control={control}
-                />
-              ))}
-            </Box>
-          </Grid>
 
-          <Grid item xs={6}>
-            <Box
-              sx={{
-                display: "grid",
-                // columnGap: 2,
-                // rowGap: 2,
-                gridTemplateColumns: "2fr 2fr ",
-              }}
-            >
-              {manualFieldsTravel.map((fieldData) => (
-                <Controller
-                  key={fieldData.name}
-                  render={({ field }) => (
-                    <TextField
-                      label={fieldData.label}
-                      {...field}
-                      value={field.value || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {fieldData.unit}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                  name={fieldData.name}
-                  type={fieldData.type}
-                  control={control}
-                />
-              ))}
-            </Box>
-          </Grid>
-        </Grid> */}
       </Paper>
     </>
   );
