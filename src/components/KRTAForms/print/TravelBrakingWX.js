@@ -4,7 +4,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
-import { TableCell } from "@mui/material";
+import { Box, TableCell, Typography } from "@mui/material";
 import parse from "html-react-parser";
 
 // 제동거리
@@ -255,7 +255,9 @@ const TravelBrakingWX = ({ values, config }) => {
                       </td>
                       <td>
                         <BlockMath>{`${
-                          values.travel?.braking_distance_max_tested || values.travel?.braking_distance_max || ""
+                          values.travel?.braking_distance_max_tested ||
+                          values.travel?.braking_distance_max ||
+                          ""
                         }`}</BlockMath>{" "}
                       </td>
                     </tr>
@@ -266,7 +268,6 @@ const TravelBrakingWX = ({ values, config }) => {
           </tbody>
         </table>
       </div>
-      {values.travel?.braking_distance_max_tested && 
 
       <div className={styles.pages}>
         <table className={styles.borderTable}>
@@ -277,18 +278,20 @@ const TravelBrakingWX = ({ values, config }) => {
           </thead>
           <tbody>
             <tr>
-            <Box  sx={{p:1}}>
-          
-          <Typography variant="h7">아래 검증 결과에 따라 최종 체동거리는:{"  "}   { values.travel?.braking_distance_max_tested} m  </Typography>
-  
-                
-  
-          </Box>
-              <td>{parse(braking_description)}</td>
+                <td>
+              <Box sx={{ p: 1 }}>
+                <Typography variant="h7">
+                  아래 검증 결과에 따라 최종 체동거리는:{"  "}{" "}
+                  {values.travel?.braking_distance_max_tested} m{" "}
+                </Typography>
+
+                  {parse(braking_description)}
+              </Box>
+                  </td>
             </tr>
           </tbody>
         </table>
-      </div>}
+      </div>
     </>
   );
 };

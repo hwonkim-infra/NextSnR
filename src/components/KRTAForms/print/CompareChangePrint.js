@@ -5,8 +5,7 @@ import axios from "axios";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 
 const CompareChangePrint = ({ specDataSet, originExterior, ECN }) => {
-    console.log(ECN);
-  
+  console.log(ECN);
 
   return (
     <>
@@ -18,53 +17,53 @@ const CompareChangePrint = ({ specDataSet, originExterior, ECN }) => {
             </tr>
           </thead>
 
+          <tbody>
+            <tr>
+              <td className={styles.head_description}>
+          <Paper
+            elevation={1}
+            sx={{
+              p: 1,
+              width: "80%",
+            }}
+          >
+            <Box>주요 형식 변경 사양:</Box>
+            <Box sx={{ m: 2 }}>{ECN}</Box>
+          </Paper>
+                
 
-            <Paper
-              variant="outlined"
-              elevation={1}
-              sx={{
-                p: 2,
-                width: "80%",
-              }}
-              
-            >
-                <Box>
-              주요 형식 변경 사양:
 
-                </Box>
-              <Box sx={{m:3}}>
+          <table style={{ width: "70%", margin: "auto" }}>
+            <thead>
+              <tr>
+                <th width="40%">제원 항목</th>
+                <th width="30%">변경 전</th>
+                <th>변경 후</th>
+              </tr>
+            </thead>
+            <tbody>
+              {specDataSet.map(
+                (data) =>
+                  data.origin !== data.current && (
+                    <tr style={{ height: "60px" }} key={data.label}>
+                      <td>{data.label}</td>
+                      <td>{data.origin}</td>
+                      <td>{data.current}</td>
+                    </tr>
+                  )
+              )}
 
-              {ECN}
-              </Box>
-            </Paper>
-
-            <table style={{ width: "70%", margin: "auto" }}>
-              <thead>
-                <tr>
-                  <th width="40%">제원 항목</th>
-                  <th width="30%">변경 전</th>
-                  <th>변경 후</th>
-                </tr>
-              </thead>
-              <tbody>
-                {specDataSet.map(
-                  (data) =>
-                    data.origin !== data.current && (
-                      <tr style={{height: "70px"}} key={data.label}>
-                        <td>{data.label}</td>
-                        <td>{data.origin}</td>
-                        <td>{data.current}</td>
-                      </tr>
-                    )
-                )}
-
-                <tr contenteditable="true" height="50">
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
+              <tr height="50">
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className={styles.pages}>

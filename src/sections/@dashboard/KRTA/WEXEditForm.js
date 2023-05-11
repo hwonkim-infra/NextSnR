@@ -35,6 +35,7 @@ import TransPortation from "@/components/KRTAForms/TransPortation";
 import TravelWX from "@/components/KRTAForms/TravelWX";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
 import StabilityCOG from "@/components/KRTAForms/StabilityCOG";
+import CompareChangeData from "./CompareChangeData";
 
 const defaultValues = {
   ECN: null,
@@ -305,7 +306,7 @@ const WEXEditForm = ({
                 <Snackbar
                     open={snackbarOpen}
                     autoHideDuration={3000}
-                    message= {!isEdit ? "This File was updated successfully" : "This File was created successfully"}
+                    message= {!isEdit ? "This File was created successfully" : "This File was updated successfully"}
                     onClose={snackbarClose}
                   />
 
@@ -328,7 +329,7 @@ const WEXEditForm = ({
               >
                 Preview
               </Typography>
-                  {/* {values.ChangeModel && <CompareSheet values={values} />} */}
+                  {/* {values.ChangeModel && <CompareChangeData values={values} type={"WEX"} />} */}
               <SpecSheet values={values} />
             </Card>
           </Grid>

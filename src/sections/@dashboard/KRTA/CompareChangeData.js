@@ -26,7 +26,8 @@ const CompareChangeData = ({ values, type }) => {
 
   const originExterior = originData.drawings?.exterior || "";
 
-  const specDataSet = [
+  const specDataSet =
+   [
     {
       label: "자체중량 (㎏)",
       current: values.operating_weight,

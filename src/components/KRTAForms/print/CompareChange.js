@@ -3,6 +3,7 @@ import parse from "html-react-parser";
 import { useEffect, useState } from "react";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import axios from "axios";
+import CompareChangeTable from "./CompareChangeTable";
 
 const CompareChange = ({ values, type }) => {
   const [originData, setOriginData] = useState({});
@@ -249,6 +250,34 @@ const CompareChange = ({ values, type }) => {
                   <td></td>
                 </tr>
               </tbody>
+            </table>
+        </table>
+      </div>
+
+      <div className={styles.pages}>
+        <table className={styles.borderTable}>
+          <thead>
+            <tr>
+              <th>형식 변경에 따른 변경 제원 비교</th>
+            </tr>
+          </thead>
+
+
+            <Paper
+              variant="outlined"
+              elevation={1}
+              style={{
+                padding: "15px",
+                width: "80%",
+              }}
+              
+            >
+              주요 형식 변경 사양:
+              {values.ECN}
+            </Paper>
+
+            <table style={{ width: "70%", height: "70%", margin: "auto" }}>
+              <CompareChangeTable values={values} originData={originData}  />
             </table>
         </table>
       </div>

@@ -63,8 +63,8 @@ export default function NoiseCertiList({ NoiseCertis = [] }) {
       obj.certiNumber = certiNumber,
       obj.certiFactory = certiFactory,
       obj.conformityAssessment = conformityAssessment,
-      obj.certiIssue = certiIssue,
-      obj.certiExpire = certiExpire,
+      obj.certiIssue = certiIssue.split('T')[0],
+      obj.certiExpire = certiExpire.split('T')[0],
       obj.certification = certification,
 
       obj.model_name = model_name;

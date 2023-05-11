@@ -145,7 +145,7 @@ const TravelRadiusHW = ({ values, config }) => {
             </tbody>
           </table>
         </div>
-        {values.travel?.turning_radius_tested && 
+        
 
         <div className={styles.pages} >
           <table className={styles.borderTable}>
@@ -156,17 +156,19 @@ const TravelRadiusHW = ({ values, config }) => {
             </thead>
             <tbody>
               <tr>
+                <td>
               <Box sx={{ p: 1 }}>
                   <Typography variant="h7">
-                    아래 검증 결과에 따라 최종 등판각도는:{"  "}{" "}
-                    {values.travel?.turning_radius_tested} 도{" "}
+                    
+                    {values.travel?.turning_radius_tested}
                   </Typography>
                 </Box>
-                <td>{parse(turning_radius_description)}</td>
+                  {parse(turning_radius_description)}
+                  </td>
               </tr>
             </tbody>
           </table>
-        </div>}
+        </div>
     </>
   );
 };

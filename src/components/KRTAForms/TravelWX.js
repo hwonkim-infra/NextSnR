@@ -87,12 +87,12 @@ const TravelWX = ({ control, values }) => {
   ]
 
   const formFieldsTravelRadius = [
-    {
+/*     {
       label: "킹핀 간격",
       name: "travel.kingpin_gap",
       type: "number",
       unit: "㎜",
-    },
+    }, */
     {
       label: "킹핀 - 타이어 간격",
       name: "travel.kingpin_offset",
