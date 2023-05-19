@@ -1,14 +1,13 @@
 import {
   Box,
-  Button,
   Card,
   Grid,
   InputAdornment,
   Paper,
-  TextField,
+  TextField
 } from "@mui/material";
-import Iconify from "@/components/Iconify";
-import { Controller, useFieldArray } from "react-hook-form";
+import { Controller } from "react-hook-form";
+import TextFieldInput from "./TextFieldInput";
 
 const TransPortation = ({ control }) => {
   const InputForms = [
@@ -105,7 +104,7 @@ const TransPortation = ({ control }) => {
                   control={control}
                   render={({ field }) => (
                     <TextField
-                    placeholder="본체"
+                      placeholder="본체"
                       label="분해수송 (1)"
                       {...field}
                       value={field.value || ""}
@@ -138,7 +137,7 @@ const TransPortation = ({ control }) => {
                   control={control}
                   render={({ field }) => (
                     <TextField
-                    disabled
+                      disabled
                       // label="분해수송 중량"
                       {...field}
                       value={field.value || ""}
@@ -152,85 +151,8 @@ const TransPortation = ({ control }) => {
                 />
 
                 {InputForms.map((fieldData) => (
-                  <Controller
-                    key={fieldData.name}
-                    render={({ field }) => (
-                      <TextField
-                        label={fieldData.label}
-                        {...field}
-                        value={field.value || ""}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {fieldData.unit}
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                    name={fieldData.name}
-                    type={fieldData.type}
-                    control={control}
-                  />
+                  <TextFieldInput fieldData={fieldData} control={control} />
                 ))}
-                {/* 
-<ul>
-            {fields.map((item, index) => {
-              return (
-
-<li key={item.id}>
-            <Controller
-              render={({ field }) => <TextField {...field} />}
-              name={`transport.transport_${index}`}
-              defaultValue=""
-              control={control}
-            />
-            <Controller
-              render={({ field }) => <TextField {...field} />}
-              name={`transport.transport_${index}_height`}
-              defaultValue=""
-              control={control}
-            />
-            <Controller
-              render={({ field }) => <TextField {...field} />}
-              name={`transport.transport_${index}_weight`}
-              defaultValue=""
-              control={control}
-            />
-            <Button
-              size="small"
-              color="error"
-              startIcon={<Iconify icon="eva:trash-2-outline" />}
-              onClick={() => remove(index)}
-            >
-              Remove
-            </Button>
-          </li>);
-            })}
-          </ul>
-          <section>
-          <Button
-                    size="small"
-                    startIcon={<Iconify icon="eva:plus-fill" />}
-                    onClick={() => {
-                      prepend({});
-                    }}
-                    sx={{ flexShrink: 0 }}
-                  >
-                    Add Previous Item
-                  </Button>
-            <Button
-              size="small"
-              startIcon={<Iconify icon="eva:plus-fill" />}
-              onClick={() => {
-                append({});
-              }}
-              sx={{ flexShrink: 0 }}
-            >
-              Add Next Item
-            </Button>
-
-          </section> */}
               </Box>
             </Card>
           </Grid>

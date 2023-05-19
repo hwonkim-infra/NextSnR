@@ -7,6 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
+import TextFieldInput from "./TextFieldInput";
 
 const Dimensions = ({ control }) => {
   const InputForms = [
@@ -28,7 +29,7 @@ const Dimensions = ({ control }) => {
     {
       label: "배토판너비x높이",
       name: "undercarriage.dozer_size",
-      type: "number",
+      type: "",
       unit: "㎜x㎜",
     },
   ];
@@ -51,26 +52,7 @@ const Dimensions = ({ control }) => {
                 }}
               >
                 {InputForms.map((fieldData) => (
-                  <Controller
-                    key={fieldData.name}
-                    render={({ field }) => (
-                      <TextField
-                        label={fieldData.label}
-                        {...field}
-                      value={field.value || ''}
-                      InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {fieldData.unit}
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                    name={fieldData.name}
-                    type={fieldData.type}
-                    control={control}
-                  />
+                  <TextFieldInput fieldData={fieldData} control={control} />
                 ))}
               </Box>
             </Card>

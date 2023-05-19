@@ -7,6 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
+import TextFieldInput from "./TextFieldInput";
 
 const DimensionsWheel = ({ control }) => {
   const formFieldsAxle = [
@@ -48,19 +49,17 @@ const DimensionsWheel = ({ control }) => {
     },
   ];
 
-  
-
   const formFieldsTire = [
     {
       label: "타이어 전축",
       name: "undercarriage.tire_frontAxle",
-      type: "number",
+      type: "",
       unit: "",
     },
     {
       label: "타이어 후축",
       name: "undercarriage.tire_rearAxle",
-      type: "number",
+      type: "",
       unit: "",
     },
     {
@@ -85,78 +84,38 @@ const DimensionsWheel = ({ control }) => {
 
   return (
     <>
-     <Card sx={{ p: 3 }}>
+      <Card sx={{ p: 3 }}>
         <Grid container spacing={2}>
-            <Grid item xs={6}>
-
-              <Box
-                sx={{
-                  display: "grid",
-                  // columnGap: 2,
-                  // rowGap: 2,
-                  gridTemplateColumns: "2fr 2fr",
-                }}
-              >
-                {formFieldsAxle.map((fieldData) => (
-                  <Controller
-                    key={fieldData.name}
-                    render={({ field }) => (
-                      <TextField
-                        label={fieldData.label}
-                        {...field}
-                        value={field.value || ""}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {fieldData.unit}
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                    name={fieldData.name}
-                    type={fieldData.type}
-                    control={control}
-                  />
-                ))}
-              </Box>
-            </Grid>
-            <Grid item xs={6}>
-              <Box
-                sx={{
-                  display: "grid",
-                  // columnGap: 2,
-                  // rowGap: 2,
-                  gridTemplateColumns: "2fr 2fr ",
-                }}
-              >
-                {formFieldsTire.map((fieldData) => (
-                  <Controller
-                    key={fieldData.name}
-                    render={({ field }) => (
-                      <TextField
-                        label={fieldData.label}
-                        {...field}
-                        value={field.value || ""}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {fieldData.unit}
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                    name={fieldData.name}
-                    type={fieldData.type}
-                    control={control}
-                  />
-                ))}
-              </Box>
-            </Grid>
-          
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                display: "grid",
+                // columnGap: 2,
+                // rowGap: 2,
+                gridTemplateColumns: "2fr 2fr",
+              }}
+            >
+              {formFieldsAxle.map((fieldData) => (
+                <TextFieldInput fieldData={fieldData} control={control} />
+              ))}
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                display: "grid",
+                // columnGap: 2,
+                // rowGap: 2,
+                gridTemplateColumns: "2fr 2fr ",
+              }}
+            >
+              {formFieldsTire.map((fieldData) => (
+                <TextFieldInput fieldData={fieldData} control={control} />
+              ))}
+            </Box>
+          </Grid>
         </Grid>
-            </Card>
+      </Card>
     </>
   );
 };

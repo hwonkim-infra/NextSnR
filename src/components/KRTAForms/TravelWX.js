@@ -14,6 +14,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TinyEditor from "@/sections/@dashboard/KRTA/TinyEditor";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import TextFieldInput from "./TextFieldInput";
 
 const TravelWX = ({ control, values }) => {
   const formFieldsSpeed = [
@@ -56,7 +57,7 @@ const TravelWX = ({ control, values }) => {
       unit: "㎜",
     },
   ];
-  
+
   const formFieldsBraking = [
     {
       label: "브레이크 압력",
@@ -76,18 +77,17 @@ const TravelWX = ({ control, values }) => {
       type: "number",
       unit: "",
     },
-    
+
     {
       label: "브레이크 토크",
       name: "travel.brake_torque_axle",
       type: "number",
       unit: "㎏f",
     },
-    
-  ]
+  ];
 
   const formFieldsTravelRadius = [
-/*     {
+    /*     {
       label: "킹핀 간격",
       name: "travel.kingpin_gap",
       type: "number",
@@ -114,7 +114,7 @@ const TravelWX = ({ control, values }) => {
       type: "number",
       unit: "Nm",
     },
-    
+
     {
       label: "지면마찰계수",
       name: "travel.friction_surface",
@@ -135,8 +135,6 @@ const TravelWX = ({ control, values }) => {
     },
   ];
 
-
-
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -146,369 +144,289 @@ const TravelWX = ({ control, values }) => {
   return (
     <>
       <Paper sx={{ p: 2, borderRadius: 1 }}>
-        <Box sx={{p:1}}>
-
-        <Typography variant="subtitle2">주행 속도</Typography>
-        <Accordion
-          expanded={expanded === "panel1"}
-          onChange={handleChange("panel1")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+        <Box sx={{ p: 1 }}>
+          <Typography variant="subtitle2">주행 속도</Typography>
+          <Accordion
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
           >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-              (Opt. 1) 계산 데이터 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              주행펌프, 주행모터 용적, 미션/액슬 감속비
-            </Typography>
-
-           
-          </AccordionSummary>
-          <AccordionDetails>
-            {formFieldsSpeed.map((fieldData) => (
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 1) 계산 데이터 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                주행펌프, 주행모터 용적, 미션/액슬 감속비
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {formFieldsSpeed.map((fieldData) => (
+                <TextFieldInput fieldData={fieldData} control={control} />
+              ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel2"}
+            onChange={handleChange("panel2")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 2) 결과 직접 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                시험결과 등 별도의 자료 입력
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Controller
-                key={fieldData.name}
                 render={({ field }) => (
                   <TextField
-                    label={fieldData.label}
+                    label="주행 속도"
                     {...field}
                     value={field.value || ""}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
-                          {fieldData.unit}
+                          {"km/hr"}
                         </InputAdornment>
                       ),
                     }}
                   />
                 )}
-                name={fieldData.name}
-                type={fieldData.type}
+                name={"travel.travel_speed_tested"}
+                type={"number"}
                 control={control}
               />
-            ))}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel2"}
-          onChange={handleChange("panel2")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-          >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 2) 결과 직접 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              시험결과 등 별도의 자료 입력
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  label="주행 속도"
-                  {...field}
-                  value={field.value || ""}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">{"km/hr"}</InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-              name={"travel.travel_speed_tested"}
-              type={"number"}
-              control={control}
-            />
-            <Controller
-              name="travel.travel_speed_description"
-              control={control}
-              defaultValue=""
-              render={({ field: { onChange, value } }) => (
-                <TinyEditor onChange={onChange} value={value} />
-              )}
-            />
-          </AccordionDetails>
-        </Accordion>
+              <Controller
+                name="travel.travel_speed_description"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <TinyEditor onChange={onChange} value={value} />
+                )}
+              />
+            </AccordionDetails>
+          </Accordion>
         </Box>
 
-        <Box sx={{p:1}}>
-        <Typography variant="subtitle2">최소회전반경</Typography>
-        <Accordion
-          expanded={expanded === "panel21"}
-          onChange={handleChange("panel21")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+        <Box sx={{ p: 1 }}>
+          <Typography variant="subtitle2">최소회전반경</Typography>
+          <Accordion
+            expanded={expanded === "panel21"}
+            onChange={handleChange("panel21")}
           >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 1) 계산 데이터 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              킹핀-타이어 간격, 외륜조향각 데이터 입력{" "}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            {formFieldsTravelRadius.map((fieldData) => (
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 1) 계산 데이터 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                킹핀-타이어 간격, 외륜조향각 데이터 입력{" "}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {formFieldsTravelRadius.map((fieldData) => (
+                <TextFieldInput fieldData={fieldData} control={control} />
+              ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel22"}
+            onChange={handleChange("panel22")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 2) 결과 직접 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                시험결과 등 별도의 자료 입력
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Controller
-                key={fieldData.name}
                 render={({ field }) => (
                   <TextField
-                    label={fieldData.label}
+                    label="최소회전반경"
                     {...field}
                     value={field.value || ""}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">
-                          {fieldData.unit}
-                        </InputAdornment>
+                        <InputAdornment position="end">{"m"}</InputAdornment>
                       ),
                     }}
                   />
                 )}
-                name={fieldData.name}
-                type={fieldData.type}
+                name={"travel.turning_radius_tested"}
+                type={"number"}
                 control={control}
               />
-            ))}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel22"}
-          onChange={handleChange("panel22")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-          >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 2) 결과 직접 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              시험결과 등 별도의 자료 입력
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  label="최소회전반경"
-                  {...field}
-                  value={field.value || ""}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">{"m"}</InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-              name={"travel.turning_radius_tested"}
-              type={"number"}
-              control={control}
-            />                                                                                              
-            <Controller
-              name="travel.turning_radius_description"
-              control={control}
-              defaultValue=""
-              render={({ field: { onChange, value } }) => (
-                <TinyEditor onChange={onChange} value={value} />
-              )}
-            />
-          </AccordionDetails>
-        </Accordion>
+              <Controller
+                name="travel.turning_radius_description"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <TinyEditor onChange={onChange} value={value} />
+                )}
+              />
+            </AccordionDetails>
+          </Accordion>
         </Box>
 
-        <Box sx={{p:1}}>
-        <Typography variant="subtitle2">등판능력</Typography>
-        <Accordion
-          expanded={expanded === "panel31"}
-          onChange={handleChange("panel31")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+        <Box sx={{ p: 1 }}>
+          <Typography variant="subtitle2">등판능력</Typography>
+          <Accordion
+            expanded={expanded === "panel31"}
+            onChange={handleChange("panel31")}
           >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 1) 계산 데이터 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              견인력, 지면마찰, 주행저항, 기준등판각
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            {formFieldsTravelSlope.map((fieldData) => (
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 1) 계산 데이터 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                견인력, 지면마찰, 주행저항, 기준등판각
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {formFieldsTravelSlope.map((fieldData) => (
+                <TextFieldInput fieldData={fieldData} control={control} />
+              ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel32"}
+            onChange={handleChange("panel32")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 2) 결과 직접 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                시험결과 등 별도의 자료 입력
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Controller
-                key={fieldData.name}
                 render={({ field }) => (
                   <TextField
-                    label={fieldData.label}
+                    label="등판능력"
                     {...field}
                     value={field.value || ""}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">
-                          {fieldData.unit}
-                        </InputAdornment>
+                        <InputAdornment position="end">{"deg"}</InputAdornment>
                       ),
                     }}
                   />
                 )}
-                name={fieldData.name}
-                type={fieldData.type}
+                name={"travel.greadability_tested"}
+                type={"number"}
                 control={control}
               />
-            ))}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel32"}
-          onChange={handleChange("panel32")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-          >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 2) 결과 직접 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              시험결과 등 별도의 자료 입력
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-          <Controller
-              render={({ field }) => (
-                <TextField
-                  label="등판능력"
-                  {...field}
-                  value={field.value || ""}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">{"deg"}</InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-              name={"travel.greadability_tested"}
-              type={"number"}
-              control={control}
-            />
-            
-            <Controller
-              name="travel.greadability_description"
-              control={control}
-              defaultValue=""
-              render={({ field: { onChange, value } }) => (
-                <TinyEditor onChange={onChange} value={value} />
-              )}
-            />
-          </AccordionDetails>
-        </Accordion>
+
+              <Controller
+                name="travel.greadability_description"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <TinyEditor onChange={onChange} value={value} />
+                )}
+              />
+            </AccordionDetails>
+          </Accordion>
         </Box>
 
-        <Box sx={{p:1}}>
-        <Typography variant="subtitle2">제동능력</Typography>
-        <Accordion
-          expanded={expanded === "panel41"}
-          onChange={handleChange("panel41")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+        <Box sx={{ p: 1 }}>
+          <Typography variant="subtitle2">제동능력</Typography>
+          <Accordion
+            expanded={expanded === "panel41"}
+            onChange={handleChange("panel41")}
           >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 1) 계산 데이터 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              브레이크 압력, 효율, 오크, 허브 감속비, 타이어 동하중
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            {formFieldsBraking.map((fieldData) => (
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 1) 계산 데이터 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                브레이크 압력, 효율, 오크, 허브 감속비, 타이어 동하중
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {formFieldsBraking.map((fieldData) => (
+                                <TextFieldInput fieldData={fieldData} control={control} />
+
+              ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            expanded={expanded === "panel42"}
+            onChange={handleChange("panel42")}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2bh-content"
+              id="panel2bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                (Opt. 2) 결과 직접 입력
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                시험결과 등 별도의 자료 입력
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <Controller
-                key={fieldData.name}
                 render={({ field }) => (
                   <TextField
-                    label={fieldData.label}
+                    label="제동 거리"
                     {...field}
                     value={field.value || ""}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">
-                          {fieldData.unit}
-                        </InputAdornment>
+                        <InputAdornment position="end">{"m"}</InputAdornment>
                       ),
                     }}
                   />
                 )}
-                name={fieldData.name}
-                type={fieldData.type}
+                name={"travel.braking_distance_max_tested"}
+                type={"number"}
                 control={control}
               />
-            ))}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion
-          expanded={expanded === "panel42"}
-          onChange={handleChange("panel42")}
-        >
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-          >
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-            (Opt. 2) 결과 직접 입력
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              시험결과 등 별도의 자료 입력
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Controller
-              render={({ field }) => (
-                <TextField
-                  label="제동 거리"
-                  {...field}
-                  value={field.value || ""}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">{"m"}</InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-              name={"travel.braking_distance_max_tested"}
-              type={"number"}
-              control={control}
-            />
-            <Controller
-              name="travel.braking_description"
-              control={control}
-              defaultValue=""
-              render={({ field: { onChange, value } }) => (
-                <TinyEditor onChange={onChange} value={value} />
-              )}
-            />
-          </AccordionDetails>
-        </Accordion>
+              <Controller
+                name="travel.braking_description"
+                control={control}
+                defaultValue=""
+                render={({ field: { onChange, value } }) => (
+                  <TinyEditor onChange={onChange} value={value} />
+                )}
+              />
+            </AccordionDetails>
+          </Accordion>
         </Box>
-
-
-
-
       </Paper>
     </>
   );

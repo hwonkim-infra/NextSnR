@@ -205,7 +205,6 @@ const AddDrawings = ({ control }) => {
   ];
   return (
     <>
-      <div className="input-group mb-1">
         <Paper style={{ padding: 16 }}>
           <Tabs
             allowScrollButtonsMobile
@@ -229,7 +228,6 @@ const AddDrawings = ({ control }) => {
             return isMatched && <Box key={tab.value}>{tab.component}</Box>;
           })}
         </Paper>
-      </div>
     </>
   );
 };

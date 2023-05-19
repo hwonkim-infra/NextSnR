@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
+import TextFieldInput from "./TextFieldInput";
 
 const StabilityCOG = ({ control, values }) => {
   /* 전도정보입력 */
@@ -50,10 +51,6 @@ const StabilityCOG = ({ control, values }) => {
 
   // Math.round(Number( (values.operating_weight * (rearAxle_center - Number(values.undercarriage.COG_center_unload))) / values.undercarriage.wheel_base )) || ""; // 공차하중 1축
 
-
-
-
-
   return (
     <>
       <Card sx={{ p: 3 }}>
@@ -68,26 +65,7 @@ const StabilityCOG = ({ control, values }) => {
               }}
             >
               {tippingCapaFields.map((fieldData) => (
-                <Controller
-                  key={fieldData.name}
-                  render={({ field }) => (
-                    <TextField
-                      label={fieldData.label}
-                      {...field}
-                      value={field.value || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {fieldData.unit}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                  name={fieldData.name}
-                  type={fieldData.type}
-                  control={control}
-                />
+                <TextFieldInput fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>
@@ -101,31 +79,9 @@ const StabilityCOG = ({ control, values }) => {
               }}
             >
               {axleLoadFields.map((fieldData) => (
-                <Controller
-                  key={fieldData.name}
-                  render={({ field }) => (
-                    <TextField
-                      label={fieldData.label}
-                      {...field}
-                      value={field.value || ""}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            {fieldData.unit}
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                  name={fieldData.name}
-                  type={fieldData.type}
-                  control={control}
-                />
+                <TextFieldInput fieldData={fieldData} control={control} />
               ))}
             </Box>
-
-
-            
           </Grid>
         </Grid>
       </Card>
