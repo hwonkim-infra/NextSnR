@@ -102,7 +102,7 @@ const DimensionsQC = ({ control }) => {
               }}
             >
               {InputFormsQC.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>
@@ -116,7 +116,7 @@ const DimensionsQC = ({ control }) => {
               }}
             >
               {InputFormsWR.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>

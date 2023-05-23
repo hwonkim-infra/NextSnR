@@ -1,9 +1,5 @@
 import { Schema, models, model } from "mongoose";
 
-// var NPDStage = DesignItems.map((item) => ( {item: item, State_Desc: State_Desc} ));
-
-// const Schema = mongoose.Schema;
-
 const NPDCheck = [
         {
           itemName: String,
@@ -27,7 +23,8 @@ const NPDSchema = new Schema(
       grFour: NPDCheck
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  {strict: false}
 );
 
 export default models.NPD || model("NPD", NPDSchema);

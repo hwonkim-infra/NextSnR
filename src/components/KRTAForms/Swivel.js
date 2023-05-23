@@ -90,6 +90,7 @@ const Swivel = ({ control }) => {
                     >
                       {InputForms.map((fieldData) => (
                         <TextFieldInput
+                        key={fieldData.name}
                           fieldData={fieldData}
                           control={control}
                         />

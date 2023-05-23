@@ -96,7 +96,7 @@ const DimensionsWheel = ({ control }) => {
               }}
             >
               {formFieldsAxle.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>
@@ -110,7 +110,7 @@ const DimensionsWheel = ({ control }) => {
               }}
             >
               {formFieldsTire.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>

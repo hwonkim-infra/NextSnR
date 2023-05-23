@@ -52,7 +52,7 @@ const Dimensions = ({ control }) => {
                 }}
               >
                 {InputForms.map((fieldData) => (
-                  <TextFieldInput fieldData={fieldData} control={control} />
+                  <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
                 ))}
               </Box>
             </Card>

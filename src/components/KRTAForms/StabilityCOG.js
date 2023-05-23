@@ -65,7 +65,7 @@ const StabilityCOG = ({ control, values }) => {
               }}
             >
               {tippingCapaFields.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>
@@ -79,7 +79,7 @@ const StabilityCOG = ({ control, values }) => {
               }}
             >
               {axleLoadFields.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
           </Grid>

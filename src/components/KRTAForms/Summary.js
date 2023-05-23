@@ -13,7 +13,7 @@ const Summary = ({ control }) => {
   const InputForms = [
     { label: "기종명", name: "model_name" },
     { label: "일련번호", name: "serial_no", type: "number" },
-    { label: "형식번호", name: "registration_no", type: "number" },
+    { label: "형식번호", name: "registration_no", type: "" },
     { label: "변속기", name: "gearbox", type: "" },
     { label: "자체중량", name: "operating_weight", type: "number", unit: "㎏" },
     { label: "규격", name: "machine_grade" },
@@ -58,7 +58,7 @@ const Summary = ({ control }) => {
               }}
             >
               {InputForms.map((fieldData) => (
-                <TextFieldInput fieldData={fieldData} control={control} />
+                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
               ))}
             </Box>
             <Box>

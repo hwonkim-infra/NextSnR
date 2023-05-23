@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 // utils
 import useTabs from "@/hooks/useTabs";
 import NPDSummary from './NPDSummary';
+import axios from "axios";
 
 
 // MUI
@@ -25,7 +26,7 @@ import {
     Typography,
   } from "@mui/material";
   import DeleteIcon from "@mui/icons-material/Delete";
-import NPDPCRform from './NPDPCRform';
+import NPDPTRform from './NPDPTRform';
 
 const defaultValues = {}
 
@@ -46,7 +47,7 @@ const NPDEditForm = ({
         defaultValues: defaultValues,
       });
       const { push, query, pathname } = useRouter();
-      const { currentTab, onChangeTab } = useTabs("PCR");
+      const { currentTab, onChangeTab } = useTabs("ptr");
     
       const [snackbarOpen, setSnackbarOpen] = useState(false);
     
@@ -78,6 +79,31 @@ const NPDEditForm = ({
         }
       };
 
+
+  const updateNPD = async (values) => {
+    await axios
+      .put(`/api/NPD/${query.id}`, values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const createNPD = async (values) => {
+    values._id = values.model_name + "_" + Date.now();
+    console.log("posting values: ", values);
+
+    await axios
+      .post("/api/NPD/", values)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
       
   async function removeNPD() {
     const { id } = query;
@@ -100,18 +126,18 @@ const NPDEditForm = ({
 
   const FORM_TABS = [
     {
-      value: "PCR",
-      title: "PCR",
+      value: "ptr",
+      title: "PTR",
       component: (
         <>
           Product Concept Review
-          <NPDPCRform control={control} />
+          <NPDPTRform control={control} />
         </>
       ),
     },
     {
-      value: "swivelTravel",
-      title: "선회주행",
+      value: "dtr",
+      title: "DTR FDR",
       component: (
         <>
           DTR
@@ -122,8 +148,9 @@ const NPDEditForm = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <>
         <Grid container spacing={2}>
-          <Grid item xs={12} >
+          {/* <Grid item xs={12} > */}
             <Card sx={{ p: 1 }}>
               <Box
                 sx={{
@@ -133,8 +160,10 @@ const NPDEditForm = ({
                   gridTemplateColumns: "repeat(8, 1fr)",
                 }}
               >
-                <NPDSummary control={control} />
+                <NPDSummary control={control} values={values} />
               </Box>
+            </Card>
+              </Grid>
 
               <Tabs
                 allowScrollButtonsMobile
@@ -186,8 +215,6 @@ const NPDEditForm = ({
                   삭제
                 </Button>
               </Stack>
-            </Card>
-          </Grid>
           <Grid item xs={12} md={4}>
             <Card sx={{ p: 1 }}>
               <Typography
@@ -200,8 +227,8 @@ const NPDEditForm = ({
               {/* <SpecSheet values={values} /> */}
             </Card>
           </Grid>
-        </Grid>
               {JSON.stringify(values, 0, 2)}
+      </>
       </form>
   )
 }

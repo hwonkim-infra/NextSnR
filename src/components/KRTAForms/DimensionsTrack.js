@@ -3,6 +3,7 @@ import {
   Card,
   Grid
 } from "@mui/material";
+import TextFieldInput from "./TextFieldInput";
 
 const DimensionsTrack = ({ control }) => {
   const InputForms = [
@@ -52,7 +53,7 @@ const DimensionsTrack = ({ control }) => {
             }}
           >
             {InputForms.map((fieldData) => (
-              <TextFieldInput fieldData={fieldData} control={control} />
+              <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
             ))}
           </Box>
         </Card>
