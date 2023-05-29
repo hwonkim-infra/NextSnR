@@ -25,6 +25,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NPDPTRform from "./NPDPTRform";
+import NPDDTRform from "./NPDDTRform";
 
 const defaultValues = {};
 
@@ -128,7 +129,8 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
     {
       value: "dtr",
       title: "DTR FDR",
-      component: <>DTR</>,
+      component: <>          <NPDDTRform control={control} />
+      </>,
     },
   ];
 
