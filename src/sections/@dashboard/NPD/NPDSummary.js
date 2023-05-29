@@ -1,3 +1,4 @@
+import CheckboxMUIInput from "@/components/CheckboxMUIInput";
 import TextFieldInput from "@/components/KRTAForms/TextFieldInput";
 import {
   Box,
@@ -18,7 +19,11 @@ const NPDSummary = ({ control, values }) => {
     { label: "형식번호", name: "registration_no", type: "number" },
   ];
 
-
+  const TargetMarketForms = [
+    // { label: "EU", name: "targetMarket.europeanUnion" },
+    { label: "북미", name: "targetMarket.northAmerica" },
+    { label: "한국", name: "targetMarket.korea" },
+  ];
 
   return (
     <>
@@ -46,45 +51,38 @@ const NPDSummary = ({ control, values }) => {
               <Stack direction="row">
                 <label>EU</label>
                 <Controller
-                  name="target.europeanUnion"
+                  name="targetMarket.europeanUnion"
                   control={control}
-                  render={({ field }) => (
-                    <Checkbox
-                      onChange={(e) => field.onChange(e.target.checked)}
-                      checked={field.value}
-                    />
-                  )}
+                  render={({ field }) => <Checkbox {...field} />}
                 />
-                  <label>북미</label>
+               
+                {/*  <label>한국</label>
                 <Controller
-                  name="target.northAmerica"
+                  name="targetMarket.korea"
                   control={control}
                   render={({ field }) => (
                     <Checkbox
                       onChange={(e) => field.onChange(e.target.checked)}
-                      checked={field.value}
+                      checked={field.value || false}
                     />
                   )}
-                />
-                  <label>한국</label>
-                <Controller
-                  name="target.korea"
-                  control={control}
-                  render={({ field }) => (
-                    <Checkbox
-                      onChange={(e) => field.onChange(e.target.checked)}
-                      checked={field.value || false}                      
-                    />
-                  )}
-                />
+                /> */}
+
+                {TargetMarketForms.map((fieldData) => (
+                  <CheckboxMUIInput
+                    label={fieldData.label}
+                    fieldData={fieldData}
+                    control={control}
+                    key={fieldData.name}
+                  />
+                ))}
               </Stack>
-              {console.log(values.target?.korea)}
               {values.target?.korea && (
-        <div>
-          <label>한국형식승인</label>
-          <input type="text"  />
-        </div>
-      )}
+                <div>
+                  <label>한국형식승인</label>
+                  <input type="text" />
+                </div>
+              )}
             </Box>
           </Card>
         </Grid>

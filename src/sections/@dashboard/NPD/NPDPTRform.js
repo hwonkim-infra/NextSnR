@@ -1,53 +1,57 @@
 import {
   Box,
-  Card,
-  FormControlLabel,
-  Grid,
-  InputAdornment,
-  Paper,
-  Radio,
-  RadioGroup,
-  Stack,
-  TextField,
+  Grid
 } from "@mui/material";
-import { Controller } from "react-hook-form";
 
-import React from "react";
-import TextFieldInput from "@/components/KRTAForms/TextFieldInput";
 import SignalComponent from "./SignalComponent";
 
-import { NPD_Station, NPD_Access, NPD_Structure, NPD_PowerTrain } from "./NPDItems";
+import {
+  NPD_Access,
+  NPD_PowerTrain,
+  NPD_Station,
+  NPD_Structure,
+} from "./NPDItems";
+import { Controller } from "react-hook-form";
+import DatePicker from "react-multi-date-picker";
 
 const NPDPTRform = ({ control }) => {
-  const NPDStage = "pcr";
+  const NPDStage = "ptr";
 
   return (
     <>
       <Grid container spacing={2}>
-        <SignalComponent
-          group={"Access"}
-          groupItems={NPD_Access}
-          NPDStage={NPDStage}
-          control={control}
-        />
-        <SignalComponent
-          group={"Operator Station"}
-          groupItems={NPD_Station}
-          NPDStage={NPDStage}
-          control={control}
-        />
+      
+        <Grid item xs={4}>
+          <SignalComponent
+            group={"Access"}
+            groupItems={NPD_Access}
+            NPDStage={NPDStage}
+            control={control}
+          />
+          <SignalComponent
+            group={"Power_Train"}
+            groupItems={NPD_PowerTrain}
+            NPDStage={NPDStage}
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <SignalComponent
+            group={"Operator_Station"}
+            groupItems={NPD_Station}
+            NPDStage={NPDStage}
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={4}>
+
         <SignalComponent
           group={"Structure"}
           groupItems={NPD_Structure}
           NPDStage={NPDStage}
           control={control}
         />
-        <SignalComponent
-          group={"Power Train"}
-          groupItems={NPD_PowerTrain}
-          NPDStage={NPDStage}
-          control={control}
-        />
+        </Grid>
       </Grid>
     </>
   );

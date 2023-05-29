@@ -38,7 +38,7 @@ export default function NPDList({ NPDs = [] }) {
       <Grid container spacing={2}>
         <Grid item xs={6} sx={{ height: 200 }}>
           <HeaderBreadcrumbs
-            heading="Product Safety Compliance"
+            heading="NPD model dashboard"
             links={[{ name: "PVC" }, { name: "EU" }]}
             action={
               <NextLink href="NPD/new">
@@ -69,7 +69,7 @@ export default function NPDList({ NPDs = [] }) {
           }}
         >
           {NPDs.map((npd) => (
-            <NPDCard key={npd.id} npd={npd} />
+            <NPDCard key={npd._id} npd={npd} />
             ))}
         </Box>
             </Grid>

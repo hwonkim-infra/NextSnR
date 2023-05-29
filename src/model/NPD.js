@@ -1,30 +1,23 @@
 import { Schema, models, model } from "mongoose";
 
 const NPDCheck = [
-        {
-          itemName: String,
-          state: {
-            enum: ["Green", "Yellow", "Red"],
-          },
-          description: String,
-        },
-      ]
+  {
+    itemName: String,
+    state: {
+      enum: ["Green", "Yellow", "Red"],
+    },
+    description: String,
+  },
+];
 
 const NPDSchema = new Schema(
   {
-    // NPD 구조
-    model_name: String,
+    _id: String,
+    
+    
 
-    targetMarket: Array,
-
-    npdStage: {
-      ptr: NPDCheck,
-      dtr: NPDCheck,
-      grFour: NPDCheck
-    },
   },
-  { timestamps: true },
-  {strict: false}
+  { strict: false, timestamps: true }
 );
 
 export default models.NPD || model("NPD", NPDSchema);

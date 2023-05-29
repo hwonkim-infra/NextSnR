@@ -24,6 +24,7 @@ export default async (req, res) => {
         const newNPD = new NPD(body);
         const savedNPD = await newNPD.save();
         await runMiddleware(req, res, morgan);
+        console.log(res)
         return res.status(200).json(savedNPD);
       } catch (err) {
         return res.status(400).json({ msg: err.message });

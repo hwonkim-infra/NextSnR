@@ -28,7 +28,7 @@ import NPDPTRform from "./NPDPTRform";
 
 const defaultValues = {};
 
-const NPDEditForm = ({ isEdit = false, currendNPD }) => {
+const NPDEditForm = ({ isEdit = false, currentNPD }) => {
   const {
     control,
     handleSubmit,
@@ -57,17 +57,17 @@ const NPDEditForm = ({ isEdit = false, currendNPD }) => {
   const values = watch();
 
   useEffect(() => {
-    reset(currendNPD);
+    reset(currentNPD);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currendNPD]);
+  }, [isEdit, currentNPD]);
 
   const onSubmit = async (values) => {
     if (isEdit) {
       await updateNPD(values);
     } else {
       await createNPD(values);
-      await push("/dashboard/PSC/NPD");
+      // await push("/dashboard/PSC/NPD");
     }
   };
 
@@ -83,11 +83,11 @@ const NPDEditForm = ({ isEdit = false, currendNPD }) => {
   };
 
   const createNPD = async (values) => {
-    values._id = values.model_name + "_" + Date.now();
+    values._id = values.model_name + "_NPD_" + Date.now();
     console.log("posting values: ", values);
 
     await axios
-      .post("/api/PSC/NPD/", values)
+      .post("/api/PSC/NPD", values)
       .then((response) => {
         console.log(response);
       })
@@ -121,7 +121,6 @@ const NPDEditForm = ({ isEdit = false, currendNPD }) => {
       title: "PTR",
       component: (
         <>
-          Product Concept Review
           <NPDPTRform control={control} />
         </>
       ),
@@ -149,6 +148,34 @@ const NPDEditForm = ({ isEdit = false, currendNPD }) => {
             >
               <NPDSummary control={control} values={values} />
             </Box>
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="flex-end"
+              sx={{ p: 3 }}
+            >
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+                onClick={snackbarClick}
+              >
+                {!isEdit ? "Create Model" : "Save Changes"}
+              </LoadingButton>
+              <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                message="This File was updated successfully"
+                onClose={snackbarClose}
+              />
+              <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                onClick={removeNPD}
+              >
+                삭제
+              </Button>
+            </Stack>
           </Card>
         </Grid>
 
@@ -174,34 +201,6 @@ const NPDEditForm = ({ isEdit = false, currendNPD }) => {
           return isMatched && <Box key={tab.value}>{tab.component}</Box>;
         })}
 
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="flex-end"
-          sx={{ mt: 3 }}
-        >
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
-            onClick={snackbarClick}
-          >
-            {!isEdit ? "Create Model" : "Save Changes"}
-          </LoadingButton>
-          <Snackbar
-            open={snackbarOpen}
-            autoHideDuration={3000}
-            message="This File was updated successfully"
-            onClose={snackbarClose}
-          />
-          <Button
-            variant="outlined"
-            startIcon={<DeleteIcon />}
-            onClick={removeNPD}
-          >
-            삭제
-          </Button>
-        </Stack>
         <Grid item xs={12} md={4}>
           <Card sx={{ p: 1 }}>
             <Typography

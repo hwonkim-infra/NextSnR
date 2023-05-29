@@ -24,7 +24,7 @@ NPDEdit.getLayout = function getLayout(page) {
 
 export default function NPDEdit() {
 
-    const [currendNPD, setCurrendNPD] = useState({})
+    const [currentNPD, setCurrentNPD] = useState({})
 
     const {query} = useRouter();
 
@@ -32,7 +32,7 @@ export default function NPDEdit() {
         const response = await axios.get(`/api/PSC/NPD/${query.id}`);
 
         const data = response.data;
-        setCurrendNPD(data);
+        setCurrentNPD(data);
         console.log(data);
     };
 
@@ -50,7 +50,7 @@ export default function NPDEdit() {
             { name: 'New NPD' },
           ]} */
         /> 
-        <NPDEditForm isEdit currendNPD={currendNPD} />
+        <NPDEditForm isEdit currentNPD={currentNPD} />
     </Page>
   );
 }
