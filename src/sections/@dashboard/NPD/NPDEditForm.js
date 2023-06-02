@@ -24,7 +24,7 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import NPDPTRform from "./NPDPTRform";
+import NPDFDRform from "./NPDFDRform";
 import NPDDTRform from "./NPDDTRform";
 
 const defaultValues = {};
@@ -41,7 +41,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
     defaultValues: defaultValues,
   });
   const { push, query, pathname } = useRouter();
-  const { currentTab, onChangeTab } = useTabs("ptr");
+  const { currentTab, onChangeTab } = useTabs("fdr");
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -118,19 +118,40 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
 
   const FORM_TABS = [
     {
-      value: "ptr",
-      title: "PTR",
+      value: "fdr",
+      title: "FDR",
       component: (
         <>
-          <NPDPTRform control={control} />
+          <NPDFDRform control={control} />
         </>
       ),
     },
     {
       value: "dtr",
       title: "DTR FDR",
-      component: <>          <NPDDTRform control={control} />
-      </>,
+      component: (
+        <>
+          <NPDDTRform control={control} />
+        </>
+      ),
+    },
+    {
+      value: "dvc",
+      title: "DVC",
+      component: (
+        <>
+          DVC Stage
+        </>
+      ),
+    },
+    {
+      value: "pvc",
+      title: "PVC",
+      component: (
+        <>
+          PVC Stage
+        </>
+      ),
     },
   ];
 

@@ -17,12 +17,12 @@ import {
   colors,
 } from "@mui/material";
 import React from "react";
-import NPDPTRresult from "./NPDPTRresult";
+import NPDresults from "./NPDresults";
 import useTabs from "@/hooks/useTabs";
 
 export default function NPDViewFrame({ currentNPD }) {
   if (!currentNPD) return <CircularProgress />;
-  const { currentTab, onChangeTab } = useTabs("ptr");
+  const { currentTab, onChangeTab } = useTabs("FDR");
   const datas = [
     {
       signal: "red",
@@ -36,12 +36,12 @@ export default function NPDViewFrame({ currentNPD }) {
 
   const STAGE_TABS = [
     {
-      value: "ptr",
-      title: "PTR",
+      value: "FDR",
+      title: "FDR",
       component: (
         <>
           Product Target Review
-          <NPDPTRresult currentNPD={currentNPD.npdStage?.ptr} />
+          <NPDresults currentNPD={currentNPD.npdStage?.FDR} />
           
         </>
       ),

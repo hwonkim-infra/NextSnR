@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { Fragment } from "react";
 
-export default function SignalView({ stageSignals, group }) {
+export default function SignalView({ stageSignals, group, labels }) {
   if (!stageSignals) return <CircularProgress />;
 
   function letterColor(value) {
@@ -17,14 +17,14 @@ export default function SignalView({ stageSignals, group }) {
       return "black";
     }
   }
-  console.log(stageSignals.state)
+  // console.log(stageSignals.state)
   function signalMark(value) { return value.slice(0,1)}
 
   return (
     <Fragment>
       <h3>{group}</h3>
 
-      {Object.entries(stageSignals).map(([key, value]) => (
+      {Object.entries(stageSignals).map(([key, value], index) => (
         <ListItem key={key}>
           <ListItemIcon>
             <Box sx={{ width: 30, height: 30 }} backgroundColor={value.state}>
@@ -33,7 +33,7 @@ export default function SignalView({ stageSignals, group }) {
               </Typography>
             </Box>
           </ListItemIcon>
-          {key}, {value?.description}{" "}
+          {labels[index].label} {value?.description} 
         </ListItem>
       ))}
     </Fragment>

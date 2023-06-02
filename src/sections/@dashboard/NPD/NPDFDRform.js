@@ -4,6 +4,9 @@ import SignalComponent from "./SignalComponent";
 
 import {
   NPD_Access,
+  NPD_Electric,
+  NPD_Hydraulic,
+  NPD_MarketSpecific,
   NPD_PowerTrain,
   NPD_Station,
   NPD_Structure,
@@ -43,10 +46,24 @@ const NPDPTRform = ({ control }) => {
             </>
           </Box>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <SignalComponent
             group={"Access"}
             groupItems={NPD_Access}
+            NPDStage={NPDStage}
+            control={control}
+          />
+          <SignalComponent
+            group={"Structure"}
+            groupItems={NPD_Structure}
+            NPDStage={NPDStage}
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <SignalComponent
+            group={"Operator_Station"}
+            groupItems={NPD_Station}
             NPDStage={NPDStage}
             control={control}
           />
@@ -57,18 +74,24 @@ const NPDPTRform = ({ control }) => {
             control={control}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <SignalComponent
-            group={"Operator_Station"}
-            groupItems={NPD_Station}
+            group={"Elec_system"}
+            groupItems={NPD_Electric}
             NPDStage={NPDStage}
             control={control}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <SignalComponent
-            group={"Structure"}
-            groupItems={NPD_Structure}
+            group={"Hydraulics"}
+            groupItems={NPD_Hydraulic}
+            NPDStage={NPDStage}
+            control={control}
+          />
+          <SignalComponent
+            group={"Market"}
+            groupItems={NPD_MarketSpecific}
             NPDStage={NPDStage}
             control={control}
           />

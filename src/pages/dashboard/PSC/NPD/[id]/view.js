@@ -13,6 +13,7 @@ import Page from '@/components/Page';
 // sections
 import { useEffect, useState } from 'react';
 import NPDViewFrame from '@/sections/@dashboard/NPD/NPDViewFrame';
+import { Button } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -50,6 +51,13 @@ const { query } = useRouter();
             { name: (currentNPD?.item) },
           ]} */
         />
+        <Button
+                  sx={{ m: 1 }}
+                  variant="outlined"
+                  href={"edit"}
+                >
+                  수정
+                </Button>
 
         <NPDViewFrame currentNPD={currentNPD} />
     </Page>
