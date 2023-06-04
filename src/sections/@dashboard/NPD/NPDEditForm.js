@@ -27,7 +27,12 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import NPDFDRform from "./NPDFDRform";
 import NPDDTRform from "./NPDDTRform";
 
-const defaultValues = {};
+const defaultValues = {
+  npdStage: {
+    FDR: { Access: { stepPlatform: { state: "green", market: "EU" } } },
+    dtr: { Access: { stepPlatform: { state: "green", market: "EU" } } },
+  },
+};
 
 const NPDEditForm = ({ isEdit = false, currentNPD }) => {
   const {
@@ -138,20 +143,12 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
     {
       value: "dvc",
       title: "DVC",
-      component: (
-        <>
-          DVC Stage
-        </>
-      ),
+      component: <>DVC Stage</>,
     },
     {
       value: "pvc",
       title: "PVC",
-      component: (
-        <>
-          PVC Stage
-        </>
-      ),
+      component: <>PVC Stage</>,
     },
   ];
 

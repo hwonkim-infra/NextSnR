@@ -98,3 +98,4 @@ export const NPD_MarketSpecific = [
   { label: "EMC", name: "emc", market: ["europe", "cutr", "northAmerica "] },
   { label: "Noise Emission", name: "noiseEmission", market: ["europe", "china", "korea", "brazil"], },
 ];
+

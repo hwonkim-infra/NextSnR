@@ -11,13 +11,16 @@ import {
   NPD_Station,
   NPD_Structure,
 } from "./NPDItems";
-import { Controller } from "react-hook-form";
+import { Controller, reset, register } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NPDPTRform = ({ control }) => {
   const NPDStage = "FDR";
   // const [date, setDate] = useState(new Date());
+
+  
+ 
 
   return (
     <>
