@@ -12,7 +12,7 @@ import {
 } from "./NPDItems";
 
 const NPDPTRform = ({ control }) => {
-  const NPDStage = "dtr";
+  const NPDStage = "DTR";
 
   return (
     <>

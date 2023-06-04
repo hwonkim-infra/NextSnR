@@ -19,6 +19,7 @@ import {
 import React from "react";
 import NPDresults from "./NPDresults";
 import useTabs from "@/hooks/useTabs";
+import NPDDTRResults from "./NPDDTRresults";
 
 export default function NPDViewFrame({ currentNPD }) {
   if (!currentNPD) return <CircularProgress />;
@@ -47,20 +48,12 @@ export default function NPDViewFrame({ currentNPD }) {
       ),
     },
     {
-      value: "dtr",
+      value: "DTR",
       title: "DTR FDR",
       component: (
         <>
-          <ListItem>
-            <ListItemIcon>
-              <Box sx={{ width: 25, height: 25, backgroundColor: "green" }}>
-                <Typography variant="h6" color="white" align="center">
-                  G
-                </Typography>
-              </Box>
-            </ListItemIcon>
-            <ListItemText>Green Item</ListItemText>
-          </ListItem>
+          <NPDDTRResults currentNPD={currentNPD.npdStage?.DTR} />
+          
         </>
       ),
     },
