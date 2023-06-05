@@ -1,4 +1,11 @@
-import { Box, Button, CircularProgress, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import SignalView from "./SignalView";
 
 import {
@@ -11,67 +18,59 @@ import {
   NPD_Structure,
 } from "./NPDItems";
 import { useEffect, useState } from "react";
-
+import { NPDtargetMarkets } from "./NPDtargetMarkets";
 
 export default function NPDDTRResults({ currentNPD }) {
-  if (!currentNPD) return <CircularProgress />;
-  const targetMarkets = [
-    "All",
-    ...new Set(currentNPD.map((item) => item.market)),
-  ];
+  if (!currentNPD ) return <CircularProgress />;
 
-  console.log(targetMarkets);
-
-  const [activeMarket, setActiveMarket] = useState(targetMarkets);
+  const [activeMarket, setActiveMarket] = useState("All");
 
   const [npdDatas, setNpdDatas] = useState(currentNPD);
 
-  const activeTargetMarket = (marketBtn) => {
-    if (marketBtn === "All") {
-      setNpdDatas(currentNPD);
-    }
-
-    const marketFilteredNPD = currentNPD.filter(
-      (item) => item.market === marketBtn
-    );
-    setNpdDatas(marketFilteredNPD);
-  };
 
   function handleNPDsByMarket(e) {
     let marketNPDs = e.target.value;
     console.log(marketNPDs);
+    setActiveMarket(marketNPDs)
 
     marketNPDs !== "All"
       ? setNpdDatas(currentNPD.filter((item) => item.market === marketNPDs))
       : setNpdDatas(currentNPD);
   }
 
-  /* const keys = Object.keys(currentNPD);
-  console.log("keys: ", keys); */
+
   return (
     <>
-      {targetMarkets.map((market, index) => {
+     
+      <div>ToggleButtons</div>
+      <ToggleButtonGroup
+        value={activeMarket}
+        exclusive
+        onChange={handleNPDsByMarket}
+      >
+      {NPDtargetMarkets.map((market, index) => {
         return (
-          <Button key={index} value={market} onClick={handleNPDsByMarket}>
-            {market}
-          </Button>
+            <ToggleButton
+              key={market}
+              value={market}
+              onClick={handleNPDsByMarket}
+            >
+              {market}
+            </ToggleButton>
         );
       })}
+      </ToggleButtonGroup>
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <Box sx={{ p: 2 }}>
             DTR
-            {npdDatas &&
+            {
               npdDatas.map((item, index) => {
-                return (
-                  <div key={item.name}>
-                    {item.name}
-                    {item.state}
-                  </div>
-                );
+                return <div key={item.name}>{item.name}</div>;
               })}
           </Box>
         </Grid>
+        <Grid item xs={3}></Grid>
       </Grid>
     </>
   );
