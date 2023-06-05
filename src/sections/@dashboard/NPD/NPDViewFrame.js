@@ -23,7 +23,7 @@ import NPDDTRResults from "./NPDDTRresults";
 
 export default function NPDViewFrame({ currentNPD }) {
   if (!currentNPD) return <CircularProgress />;
-  const { currentTab, onChangeTab } = useTabs("FDR");
+  const { currentTab, onChangeTab } = useTabs("DTR");
   const datas = [
     {
       signal: "red",
