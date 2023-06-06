@@ -10,6 +10,7 @@ import {
     NPD_Station,
     NPD_Structure,
 } from "./NPDItems";
+import { SignalFormComponent } from "./SignalFormComponent";
 
 const NPDPTRform = ({ control }) => {
   const NPDStage = "DTR";
@@ -19,35 +20,24 @@ const NPDPTRform = ({ control }) => {
       <Grid container spacing={2}>
       
         <Grid item xs={4}>
-          <SignalComponent
-            group={"Access"}
+          <SignalFormComponent
             groupItems={NPD_Access}
             NPDStage={NPDStage}
+            npdDatas={npdDatas}
+            groupName="Access"
+            group={"access"}
             control={control}
           />
-          <SignalComponent
-            group={"Power_Train"}
-            groupItems={NPD_PowerTrain}
-            NPDStage={NPDStage}
-            control={control}
-          />
+          
+          
         </Grid>
         <Grid item xs={4}>
-          <SignalComponent
-            group={"Operator_Station"}
-            groupItems={NPD_Station}
-            NPDStage={NPDStage}
-            control={control}
-          />
+          
+          
         </Grid>
         <Grid item xs={4}>
 
-        <SignalComponent
-          group={"Structure"}
-          groupItems={NPD_Structure}
-          NPDStage={NPDStage}
-          control={control}
-        />
+
         </Grid>
       </Grid>
     </>
