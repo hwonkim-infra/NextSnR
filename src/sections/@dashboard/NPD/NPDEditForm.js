@@ -25,8 +25,8 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NPDFDRform from "./NPDFDRform";
-import NPDDTRform from "./NPDDTRform";
 import { NPD_DTR } from "./NPDdefaultItems";
+import NPDDTRform from "./NPDDTRform";
 
 const defaultValues = {
   npdStage: {

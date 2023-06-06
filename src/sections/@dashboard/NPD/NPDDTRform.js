@@ -1,47 +1,41 @@
-import {
-    Grid
-} from "@mui/material";
+import { Grid } from "@mui/material";
 
 import SignalComponent from "./SignalComponent";
 
 import {
-    NPD_Access,
-    NPD_PowerTrain,
-    NPD_Station,
-    NPD_Structure,
+  NPD_Access,
+  NPD_PowerTrain,
+  NPD_Station,
+  NPD_Structure,
 } from "./NPDItems";
-import { SignalFormComponent } from "./SignalFormComponent";
+import SignalFormComponent from "./SignalFormComponent";
 
-const NPDPTRform = ({ control }) => {
+const NPDDTRform = ({ control }) => {
   const NPDStage = "DTR";
+  console.log(NPD_Access);
 
   return (
     <>
       <Grid container spacing={2}>
-      
         <Grid item xs={4}>
-          <SignalFormComponent
+          <SignalComponent
+            group={"Access"}
             groupItems={NPD_Access}
             NPDStage={NPDStage}
-            npdDatas={npdDatas}
-            groupName="Access"
-            group={"access"}
             control={control}
           />
-          
-          
+          <SignalFormComponent
+            group={"Access"}
+            groupItems={NPD_Access}
+            NPDStage={NPDStage}
+            control={control}
+          />
         </Grid>
-        <Grid item xs={4}>
-          
-          
-        </Grid>
-        <Grid item xs={4}>
-
-
-        </Grid>
+        <Grid item xs={4}></Grid>
+        <Grid item xs={4}></Grid>
       </Grid>
     </>
   );
 };
 
-export default NPDPTRform;
+export default NPDDTRform;

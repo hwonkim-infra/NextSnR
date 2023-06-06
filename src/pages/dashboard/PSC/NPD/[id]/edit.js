@@ -33,7 +33,7 @@ export default function NPDEdit() {
 
         const data = response.data;
         setCurrentNPD(data);
-        console.log(data);
+        // console.log(data);
     };
 
     useEffect(() => {

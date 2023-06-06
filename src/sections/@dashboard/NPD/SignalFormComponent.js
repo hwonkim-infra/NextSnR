@@ -11,7 +11,7 @@ import {
 import { Fragment } from "react";
 import { Controller } from "react-hook-form";
 
-export const SignalFormComponent = ({ group, npdDatas, groupName, NPDStage, control }) => {
+const SignalFormComponent = ({ group, groupItems, NPDStage, control }) => {
   return (
     <Paper variant="outlined" sx={{ p: 3, width: "100%" }}>
       <h3>{group}</h3>
@@ -52,7 +52,7 @@ export const SignalFormComponent = ({ group, npdDatas, groupName, NPDStage, cont
                     </Stack>
                   </RadioGroup>
                 )}
-                name={`npdStage.${NPDStage}.${group}.${fieldData.name}.state`}
+                name={`npdStage.${NPDStage}.${fieldData.name}.state`}
                 control={control}
               />
 
@@ -80,3 +80,4 @@ export const SignalFormComponent = ({ group, npdDatas, groupName, NPDStage, cont
   );
 };
 
+export default SignalFormComponent;
