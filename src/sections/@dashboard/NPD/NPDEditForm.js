@@ -47,7 +47,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
     defaultValues: defaultValues,
   });
   const { push, query, pathname } = useRouter();
-  const { currentTab, onChangeTab } = useTabs("fdr");
+  const { currentTab, onChangeTab } = useTabs("DTR");
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -74,7 +74,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
       await updateNPD(values);
     } else {
       await createNPD(values);
-      // await push("/dashboard/PSC/NPD");
+      await push("/dashboard/PSC/NPD");
     }
   };
 
@@ -124,7 +124,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
 
   const FORM_TABS = [
     {
-      value: "fdr",
+      value: "FDR",
       title: "FDR",
       component: (
         <>
@@ -137,7 +137,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
       title: "DTR FDR",
       component: (
         <>
-          <NPDDTRform control={control} />
+          <NPDDTRform control={control} currentNPD={values.npdStage?.DTR} />
         </>
       ),
     },

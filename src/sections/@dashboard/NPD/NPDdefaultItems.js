@@ -1,7 +1,28 @@
 export const NPD_DTR = [
   {
     name: "guardrail",
-    label: "GuardRail",
+    label: "Guardrail",
+    group: "access",
+    market: "EU",
+    state: "green",
+  },
+  {
+    name: "handrail",
+    label: "Handrail",
+    group: "access",
+    market: "common",
+    state: "green",
+  },
+  {
+    name: "stepPlatform",
+    label: "Step/Platform",
+    group: "access",
+    market: "common",
+    state: "green",
+  },
+  {
+    name: "opening",
+    label: "Opening",
     group: "access",
     market: "common",
     state: "green",
@@ -9,28 +30,28 @@ export const NPD_DTR = [
   {
     name: "tieDownLifting",
     label: "Tie Down & Lifting",
-    group: "access",
+    group: "structure",
     market: "common",
     state: "green",
   },
   {
     name: "retrieval",
     label: "Retrieval",
-    group: "access",
+    group: "structure",
     market: "common",
     state: "green",
   },
   {
     name: "tankNcap",
     label: "Tank & Cap",
-    group: "access",
+    group: "structure",
     market: "common",
     state: "green",
   },
   {
     name: "articulateFrame",
     label: "Articulate Frame",
-    group: "access",
+    group: "structure",
     market: "common",
     state: "green",
   },
@@ -100,21 +121,21 @@ export const NPD_DTR = [
   {
     name: "hotParts",
     label: "Hot Parts",
-    group: "structure",
+    group: "powerTrain",
     market: "common",
     state: "green",
   },
   {
     name: "guard",
     label: "Guard",
-    group: "structure",
+    group: "powerTrain",
     market: "common",
     state: "green",
   },
   {
     name: "tireNrim",
     label: "Tire and Rim",
-    group: "structure",
+    group: "powerTrain",
     market: "common",
     state: "green",
   },
@@ -171,7 +192,7 @@ export const NPD_DTR = [
     name: "travelAlarm",
     label: "Travel Alarm",
     group: "electric",
-    market: "common",
+    market: ["EU", "Australia"],
     state: "green",
   },
   {
@@ -241,7 +262,7 @@ export const NPD_DTR = [
     name: "emc",
     label: "EMC",
     group: "certification",
-    market: ["EU", "Russia", "northAmerica"],
+    market: ["EU", "cutr", "northAmerica"],
     state: "green",
   },
   {
@@ -252,42 +273,3 @@ export const NPD_DTR = [
     state: "green",
   },
 ];
-
-/* 
-
-export const NPD_DTR = {
-  stepPlatform: {
-    group: "Access",
-    label: "Step/Platform",
-    state: "green",
-    market: ["EU", "Korea", "NorthAmerica"],
-  },
-  handrail: {
-    group: "Access",
-    label: "Handrail",
-    state: "green",
-    market: ["EU", "Korea", "NorthAmerica"],
-  },
-  stepPlatform: {
-    group: "Access",
-    label: "Step/Platform",
-    state: "green",
-    market: ["EU", "Korea", "NorthAmerica"],
-  },
-  degreeProtection: {
-    group: "Electric",
-    label: "Degree of Protection",
-    state: "green",
-    market: ["EU", "Korea", "NorthAmerica"],
-  },
-  
-  noiseEmission: {
-    group: "MarketSpecific",
-    label: "Noise Emission",
-    state: "green",
-    market: ["EU", "Korea", "China", "Brazil"],
-  },
-  
-};
-
- */

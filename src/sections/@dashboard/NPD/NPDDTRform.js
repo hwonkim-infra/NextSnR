@@ -10,29 +10,38 @@ import {
 } from "./NPDItems";
 import SignalFormComponent from "./SignalFormComponent";
 
-const NPDDTRform = ({ control }) => {
+const NPDDTRform = ({ control, currentNPD }) => {
+  console.log(
+    "🚀 ~ file: NPDDTRform.js:14 ~ NPDDTRform ~ currentNPD:",
+    currentNPD
+  );
   const NPDStage = "DTR";
-  console.log(NPD_Access);
+
+  const groupItems = (group) =>
+    currentNPD?.filter((item) => item.group === group);
+  console.log(
+    "🚀 ~ file: NPDDTRform.js:17 ~ NPDDTRform ~ groupItems:",
+    groupItems("access")
+  );
 
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={4}>
-          <SignalComponent
-            group={"Access"}
-            groupItems={NPD_Access}
-            NPDStage={NPDStage}
-            control={control}
-          />
+        <Grid item xs={3}>
           <SignalFormComponent
-            group={"Access"}
-            groupItems={NPD_Access}
+            groupName="Access"
+            group={"access"}
             NPDStage={NPDStage}
+            groupItems={currentNPD}
             control={control}
           />
+         
         </Grid>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={4}></Grid>
+        <Grid item xs={3}>
+        
+        </Grid>
+        <Grid item xs={3}></Grid>
+        <Grid item xs={3}></Grid>
       </Grid>
     </>
   );

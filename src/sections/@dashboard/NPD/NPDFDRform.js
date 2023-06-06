@@ -63,6 +63,9 @@ const NPDPTRform = ({ control }) => {
             control={control}
           />
         </Grid>
+
+{/* 
+
         <Grid item xs={3}>
           <SignalComponent
             group={"Operator_Station"}
@@ -99,6 +102,7 @@ const NPDPTRform = ({ control }) => {
             control={control}
           />
         </Grid>
+         */}
       </Grid>
     </>
   );
