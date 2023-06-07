@@ -17,6 +17,17 @@ const NPDDTRform = ({ control, currentNPD }) => {
   );
   const NPDStage = "DTR";
 
+const findIndex = (arr, groupName) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].group === groupName) {
+      return i;
+    }
+  }
+  return -1;
+};
+
+console.log("StructureIndex ",findIndex(currentNPD, "structure"));
+
   const groupItems = (group) =>
     currentNPD?.filter((item) => item.group === group);
   console.log(
