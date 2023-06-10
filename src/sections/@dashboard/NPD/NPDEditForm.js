@@ -159,22 +159,9 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
         <Grid container spacing={2}>
           {/* <Grid item xs={12} > */}
           <Card sx={{ p: 1 }}>
-            <Box
-              sx={{
-                // display: 'grid',
-                columnGap: 2,
-                rowGap: 3,
-                gridTemplateColumns: "repeat(8, 1fr)",
-              }}
-            >
+
+            <Stack direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ p: 3 }} >
               <NPDSummary control={control} values={values} />
-            </Box>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="flex-end"
-              sx={{ p: 3 }}
-            >
               <LoadingButton
                 type="submit"
                 variant="contained"

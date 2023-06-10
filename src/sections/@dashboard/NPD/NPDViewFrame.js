@@ -33,7 +33,7 @@ export default function NPDViewFrame({ currentNPD }) {
       component: (
         <>
           Product Target Review
-          <NPDresults currentNPD={currentNPD.npdStage?.FDR} />
+          <NPDDTRResults currentNPD={currentNPD.npdStage?.FDR} />
           
         </>
       ),
