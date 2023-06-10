@@ -32,7 +32,6 @@ export default function NPDViewFrame({ currentNPD }) {
       title: "FDR",
       component: (
         <>
-          Product Target Review
           <NPDDTRResults currentNPD={currentNPD.npdStage?.FDR} />
           
         </>

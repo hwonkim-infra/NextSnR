@@ -3,6 +3,7 @@ import {
   CircularProgress,
   ListItem,
   ListItemIcon,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Fragment } from "react";
@@ -18,22 +19,25 @@ export default function NPDSigns({ item }) {
     }
   }
   // console.log(stageSignals.state)
-  function signalMark(value) { return value.slice(0,1)}
 
   return (
     <Fragment>
-      
-      <ListItem >
-          <ListItemIcon>
-            <Box sx={{ width: 30, height: 30 }} backgroundColor={item.state}>
-              <Typography variant="h6" color={letterColor(item.state)} align="center">
-                {item.state?.slice(0,1).toUpperCase()}
-              </Typography>
-            </Box>
-          </ListItemIcon>
-          {item.label}
-        </ListItem>
-      
+      <ListItem>
+        <ListItemIcon>
+          <Box sx={{ width: 30, height: 30 }} backgroundColor={item.state}>
+            <Typography
+              variant="h6"
+              color={letterColor(item.state)}
+              align="center"
+            >
+              {item.state?.slice(0, 1).toUpperCase()}
+            </Typography>
+          </Box>
+        </ListItemIcon>
+        <Tooltip title={item.description} placement="top-start">
+          <Typography>{item.label}</Typography>
+        </Tooltip>
+      </ListItem>
     </Fragment>
   );
 }

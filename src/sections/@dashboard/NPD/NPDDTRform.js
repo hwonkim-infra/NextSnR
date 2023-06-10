@@ -1,18 +1,10 @@
 import { CircularProgress, Grid } from "@mui/material";
 
-import SignalComponent from "./SignalComponent";
 
-import {
-  NPD_Access,
-  NPD_PowerTrain,
-  NPD_Station,
-  NPD_Structure,
-} from "./NPDItems";
-import SignalFormComponent from "./SignalFormComponent";
-import { Fragment } from "react";
 import SignalForm from "./SignalForm";
 
 const NPDDTRform = ({ control, currentNPD }) => {
+  console.log("🚀 ~ file: NPDDTRform.js:7 ~ NPDDTRform ~ currentNPD:", currentNPD)
   if (!currentNPD) return <CircularProgress />;
 
   const NPDStage = "DTR";

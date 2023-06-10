@@ -46,40 +46,7 @@ export default function SignalForm({
                 <Fragment key={item.name}>
                   <h4>{item.label}</h4>
                   <Box sx={{ p: 1 }}>
-                    {/* <Controller
-                      name={`npdStage.${NPDStage}[${index}].state`}
-                      render={({ field }) => (
-                        <RadioGroup
-                          aria-label="signal"
-                          {...field}
-                          value={field.value || "white"}
-                        >
-                          <Stack direction="row">
-                            <FormControlLabel
-                              value="green"
-                              control={<Radio color="success" />}
-                              label="Green"
-                            />
-                            <FormControlLabel
-                              value="yellow"
-                              control={<Radio color="warning" />}
-                              label="Yellow"
-                            />
-                            <FormControlLabel
-                              value="red"
-                              control={<Radio color="error" />}
-                              label="Red"
-                            />
-                            <FormControlLabel
-                              value="white"
-                              control={<Radio color="default" />}
-                              label="White"
-                            />
-                          </Stack>
-                        </RadioGroup>
-                      )}
-                      control={control}
-                    /> */}
+                   
                           <Stack direction="row">
 
 
@@ -107,11 +74,12 @@ export default function SignalForm({
                           fullWidth
                           size="small"
                           variant="standard"
-                          // helperText="Check Result"
                           value={field.value || ""}
                         />
                       )}
                       name={`npdStage.${NPDStage}[${index}].description`}
+
+                    
                       control={control}
                     />
                           </Stack>

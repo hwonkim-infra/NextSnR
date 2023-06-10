@@ -25,12 +25,12 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NPDFDRform from "./NPDFDRform";
-import { NPD_DTR } from "./NPDdefaultItems";
+import { NPD_DTR, NPD_FDR } from "./NPDdefaultItems";
 import NPDDTRform from "./NPDDTRform";
 
 const defaultValues = {
   npdStage: {
-    FDR: { Access: { stepPlatform: { state: "green", market: "EU" } } },
+    FDR: NPD_FDR,
     DTR: NPD_DTR,
   },
 };
@@ -66,7 +66,6 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
   useEffect(() => {
     reset(currentNPD);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, currentNPD]);
 
   const onSubmit = async (values) => {
@@ -128,7 +127,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
       title: "FDR",
       component: (
         <>
-          <NPDFDRform control={control} />
+          <NPDDTRform control={control} currentNPD={values.npdStage?.FDR} />
         </>
       ),
     },
