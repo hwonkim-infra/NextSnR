@@ -30,12 +30,12 @@ const NPDSummary = ({ control, values }) => {
         {/* <Grid container spacing={2}> */}
           {/* <Card sx={{ p: 3 }}> */}
             <Box
-              sx={{
+              /* sx={{
                 display: "grid",
                 columnGap: 2,
                 // rowGap: 2,
-                gridTemplateColumns: "repeat(6, 1fr)",
-              }}
+                gridTemplateColumns: "repeat(4, 1fr)",
+              }} */
             >
               {InputForms.map((fieldData) => (
                 <TextFieldInput

@@ -2,6 +2,7 @@ import { CircularProgress, Grid } from "@mui/material";
 
 
 import SignalForm from "./SignalForm";
+import DueDateComponent from "./DueDateComponent";
 
 const NPDDTRform = ({ control, currentNPD }) => {
   console.log("🚀 ~ file: NPDDTRform.js:7 ~ NPDDTRform ~ currentNPD:", currentNPD)
@@ -13,6 +14,7 @@ const NPDDTRform = ({ control, currentNPD }) => {
   return (
     <>
       <Grid container spacing={2}>
+      <DueDateComponent control={control} NPDStage />
       <Grid item xs={3}>
         <SignalForm
             group={"access"}

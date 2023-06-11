@@ -27,6 +27,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { NPD_DTR, NPD_FDR, NPD_PVC } from "./NPDdefaultItems";
 import NPDDTRform from "./NPDDTRform";
 import NPDPVCform from "./NPDPVCform";
+import NPDFDRform from "./NPDFDRform";
 
 const defaultValues = {
   npdStage: {
@@ -128,7 +129,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
       title: "FDR",
       component: (
         <>
-          <NPDDTRform control={control} currentNPD={values.npdStage?.FDR} />
+          <NPDFDRform control={control} currentNPD={values.npdStage?.FDR} />
         </>
       ),
     },
@@ -157,7 +158,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
           {/* <Grid item xs={12} > */}
           <Card sx={{ p: 1 }}>
 
-            <Stack direction="row" justifyContent="space-between" alignItems="flex-end" sx={{ p: 3 }} >
+            <Stack direction="row" justifyContent="space-between"  sx={{ p: 3 }} >
               <NPDSummary control={control} values={values} />
               <LoadingButton
                 type="submit"
@@ -218,7 +219,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
             {/* <SpecSheet values={values} /> */}
           </Card>
         </Grid>
-        {JSON.stringify(values, 0, 2)}
+        {/* {JSON.stringify(values, 0, 2)} */}
       </>
     </form>
   );

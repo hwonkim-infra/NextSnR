@@ -1,34 +1,21 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import "react-multi-date-picker/styles/layouts/prime.css";
 
-import SignalComponent from "./SignalComponent";
+import SignalForm from "./SignalForm";
 
-import {
-  NPD_Access,
-  NPD_Electric,
-  NPD_Hydraulic,
-  NPD_MarketSpecific,
-  NPD_PowerTrain,
-  NPD_Station,
-  NPD_Structure,
-} from "./NPDItems";
-import { Controller, reset, register } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
-import { useState, useEffect } from "react";
 
-const NPDPTRform = ({ control }) => {
+export default function NPDFDRform({ control, currentNPD }) {
   const NPDStage = "FDR";
-  // const [date, setDate] = useState(new Date());
-
-  
- 
-
+  if (!currentNPD) return <CircularProgress />;
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Box align={"center"}>
+          <Box sx={{p:2}}>
             <>
-              <Stack direction="row">
+              <Stack direction="row" >
                 <Typography variant="subtitle1">Due Date:</Typography>
 
                 <Controller
@@ -37,6 +24,7 @@ const NPDPTRform = ({ control }) => {
                   render={({ field }) => (
                     <>
                       <DatePicker
+                        className="rmdp-prime"
                         label="Due Date"
                         selected={Date.parse(field.value)}
                         onChange={(e) => field.onChange(e)}
@@ -50,62 +38,57 @@ const NPDPTRform = ({ control }) => {
           </Box>
         </Grid>
         <Grid item xs={3}>
-          <SignalComponent
-            group={"Access"}
-            groupItems={NPD_Access}
+          <SignalForm
+            group={"access"}
+            groupName="Access"
             NPDStage={NPDStage}
             control={control}
+            currentNPD={currentNPD}
           />
-          <SignalComponent
-            group={"Structure"}
-            groupItems={NPD_Structure}
+          <SignalForm
+            group={"structure"}
+            groupName="Structure"
             NPDStage={NPDStage}
             control={control}
+            currentNPD={currentNPD}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <SignalForm
+            group={"operatorStation"}
+            groupName="Operator Station"
+            NPDStage={NPDStage}
+            control={control}
+            currentNPD={currentNPD}
+          />
+          <SignalForm
+            group={"powerTrain"}
+            groupName="PowerTrain Integration"
+            NPDStage={NPDStage}
+            control={control}
+            currentNPD={currentNPD}
           />
         </Grid>
 
-{/* 
-
         <Grid item xs={3}>
-          <SignalComponent
-            group={"Operator_Station"}
-            groupItems={NPD_Station}
+          <SignalForm
+            group={"electric"}
+            groupName="E/E System"
             NPDStage={NPDStage}
             control={control}
-          />
-          <SignalComponent
-            group={"Power_Train"}
-            groupItems={NPD_PowerTrain}
-            NPDStage={NPDStage}
-            control={control}
+            currentNPD={currentNPD}
           />
         </Grid>
         <Grid item xs={3}>
-          <SignalComponent
-            group={"Elec_system"}
-            groupItems={NPD_Electric}
+          <SignalForm
+            group={"hydraulics"}
+            groupName="Hydraulic System"
             NPDStage={NPDStage}
             control={control}
+            currentNPD={currentNPD}
           />
         </Grid>
-        <Grid item xs={3}>
-          <SignalComponent
-            group={"Hydraulics"}
-            groupItems={NPD_Hydraulic}
-            NPDStage={NPDStage}
-            control={control}
-          />
-          <SignalComponent
-            group={"Market"}
-            groupItems={NPD_MarketSpecific}
-            NPDStage={NPDStage}
-            control={control}
-          />
-        </Grid>
-         */}
       </Grid>
     </>
   );
-};
-
-export default NPDPTRform;
+}

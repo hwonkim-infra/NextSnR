@@ -61,9 +61,9 @@ export default function NPDList({ NPDs = [] }) {
             display: 'grid',
             gap: 3,
             gridTemplateColumns: {
-              xs: 'repeat(1, 1fr)',
+              xs: 'repeat(2, 1fr)',
               sm: 'repeat(2, 1fr)',
-              md: 'repeat(3, 1fr)',
+              md: 'repeat(5, 5fr)',
             },
           }}
         >

@@ -77,8 +77,8 @@ export default function NPDCard({ npd }) {
   return (
     <Card sx={{ textAlign: "center" }}>
       <Link color="inherit" href={`/dashboard/PSC/NPD/${_id}/view`}>
-        <Typography variant="h3" sx={{ mt: 6 }}>
-          {model_name}{" "}
+        <Typography variant="h3" sx={{ p: 2 }}>
+          {model_name}
         </Typography>
       </Link>
       <Divider sx={{ borderStyle: "dashed" }} />
@@ -102,12 +102,14 @@ export default function NPDCard({ npd }) {
               value={tab.value}
               icon={tab.icon}
               label={tab.title}
+              sx={{ textAlign: 'center' }}
             />
           ))}
         </Tabs>
         {COUNT_TABS.map((tab) => {
           const isMatched = tab.value === currentTab;
-          return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+              
+              return isMatched && <Box key={tab.value}   >{tab.component}</Box>;
         })}
       </Box>
     </Card>
