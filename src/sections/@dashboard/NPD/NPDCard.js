@@ -1,7 +1,8 @@
-import PropTypes from "prop-types";
 // @mui
-import { Card, Divider, Typography } from "@mui/material";
+import useTabs from "@/hooks/useTabs";
+import { Box, Card, Divider, Tab, Tabs, Typography } from "@mui/material";
 import Link from "next/link";
+import countColor from "./countColor";
 // utils
 // components
 
@@ -10,89 +11,105 @@ import Link from "next/link";
 // ----------------------------------------------------------------------
 
 export default function NPDCard({ npd }) {
+  if (!npd) return null;
   const { model_name, _id, npdStage } = npd;
-  const currentStage = Object.keys(npdStage)[0];
+  const currentStage = Object.keys(npdStage)[1];
   console.log(npdStage);
 
-  function countGreen(obj) {
-    let count = 0;
+  const { currentTab, onChangeTab } = useTabs("DTR");
 
-    // Iterate over the object's keys and values.
-    for (const [key, val] of Object.entries(obj)) {
-      // If the value is equal to "green", increment the count.
-      if (val === "green") {
-        count++;
-      }
+  const COUNT_TABS = [
+    {
+      value: "FDR",
+      title: "FDR",
+      component: (
+        <>
+          <Typography variant="subtitle2" color="green" sx={{ p: 1 }}>
+            Greens:
+            {countColor(npdStage.FDR, "green")}{" "}
+          </Typography>
+          <Typography variant="subtitle2" sx={{ p: 1 }}>
+            Yellow:
+            {countColor(npdStage.FDR, "yellow")}{" "}
+          </Typography>
+          <Typography variant="subtitle2" color="red" sx={{ p: 1 }}>
+            Red:
+            {countColor(npdStage.FDR, "red")}{" "}
+          </Typography>
+        </>
+      ),
+    },
+    {
+      value: "DTR",
+      title: "DTR FDR",
+      component: <> <Typography variant="subtitle2" color="green" sx={{ p: 1 }}>
+      Greens:
+      {countColor(npdStage.DTR, "green")}{" "}
+    </Typography>
+    <Typography variant="subtitle2" sx={{ p: 1 }}>
+      Yellow:
+      {countColor(npdStage.DTR, "yellow")}{" "}
+    </Typography>
+    <Typography variant="subtitle2" color="red" sx={{ p: 1 }}>
+      Red:
+      {countColor(npdStage.DTR, "red")}{" "}
+    </Typography></>,
+    },
+    {
+      value: "PVC",
+      title: "PVC",
+      component: <> <Typography variant="subtitle2" color="green" sx={{ p: 1 }}>
+      Greens:
+      {countColor(npdStage.PVC, "green")}{" "}
+    </Typography>
+    <Typography variant="subtitle2" sx={{ p: 1 }}>
+      Yellow:
+      {countColor(npdStage.PVC, "yellow")}{" "}
+    </Typography>
+    <Typography variant="subtitle2" color="red" sx={{ p: 1 }}>
+      Red:
+      {countColor(npdStage.PVC, "red")}{" "}
+    </Typography></>,
+    },
+  ];
 
-      // If the value is an object, recursively call the function.
-      if (typeof val === "object") {
-        count += countGreen(val);
-      }
-    }
-
-    // Return the count.
-    return count;
-  }
-
-  function countYellow(obj) {
-    let count = 0;
-
-    // Iterate over the object's keys and values.
-    for (const [key, val] of Object.entries(obj)) {
-      // If the value is equal to "green", increment the count.
-      if (val === "yellow") {
-        count++;
-      }
-
-      // If the value is an object, recursively call the function.
-      if (typeof val === "object") {
-        count += countYellow(val);
-      }
-    }
-
-    // Return the count.
-    return count;
-  }
-
-  function countRed(obj) {
-    let count = 0;
-
-    // Iterate over the object's keys and values.
-    for (const [key, val] of Object.entries(obj)) {
-      // If the value is equal to "green", increment the count.
-      if (val === "red") {
-        count++;
-      }
-
-      // If the value is an object, recursively call the function.
-      if (typeof val === "object") {
-        count += countRed(val);
-      }
-    }
-
-    // Return the count.
-    return count;
-  }
 
   return (
-    <Link color="inherit" href={`/dashboard/PSC/NPD/${_id}/view`}>
-      <Card sx={{ textAlign: "center" }}>
+    <Card sx={{ textAlign: "center" }}>
+      <Link color="inherit" href={`/dashboard/PSC/NPD/${_id}/view`}>
         <Typography variant="h3" sx={{ mt: 6 }}>
           {model_name}{" "}
         </Typography>
-        <Divider sx={{ borderStyle: "dashed" }} />
-        <Typography variant="subtitle1" sx={{ p: 3 }}> {currentStage.toLocaleUpperCase()}{" "} </Typography>
-        <Typography variant="subtitle2" color="green" sx={{ p: 1 }}> 
-        Greens: 
-        {countGreen(npdStage)} </Typography>
-        <Typography variant="subtitle2" sx={{ p: 1 }}> 
-        Yellow:
-        {countYellow(npdStage)} </Typography>
-        <Typography variant="subtitle2" color="red" sx={{ p: 1 }}> 
-        Red:
-        {countRed(npdStage)} </Typography>
+      </Link>
+      <Divider sx={{ borderStyle: "dashed" }} />
 
-      </Card>
-    </Link>
+      <Typography variant="subtitle1" sx={{ p: 3 }}>
+        {" "}
+        {currentStage.toLocaleUpperCase()}{" "}
+      </Typography>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          allowScrollButtonsMobile
+          variant="scrollable"
+          scrollButtons="auto"
+          value={currentTab}
+          onChange={onChangeTab}
+        >
+          {COUNT_TABS.map((tab) => (
+            <Tab
+              disableRipple
+              key={tab.value}
+              value={tab.value}
+              icon={tab.icon}
+              label={tab.title}
+            />
+          ))}
+        </Tabs>
+        {COUNT_TABS.map((tab) => {
+          const isMatched = tab.value === currentTab;
+          return isMatched && <Box key={tab.value}>{tab.component}</Box>;
+        })}
+      </Box>
+    </Card>
   );
 }

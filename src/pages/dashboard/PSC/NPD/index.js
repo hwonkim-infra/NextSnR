@@ -27,7 +27,6 @@ NPDList.getLayout = function getLayout(page) {
 export default function NPDList({ NPDs = [] }) {
   const router = useRouter();
   const [currentNPD, setCurrentNPD] = useState({});
-  console.log(NPDs);
 
   
   if (!NPDs) return <CircularProgress />;
