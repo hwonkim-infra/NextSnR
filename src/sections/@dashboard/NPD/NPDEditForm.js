@@ -24,14 +24,15 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import NPDFDRform from "./NPDFDRform";
-import { NPD_DTR, NPD_FDR } from "./NPDdefaultItems";
+import { NPD_DTR, NPD_FDR, NPD_PVC } from "./NPDdefaultItems";
 import NPDDTRform from "./NPDDTRform";
+import NPDPVCform from "./NPDPVCform";
 
 const defaultValues = {
   npdStage: {
     FDR: NPD_FDR,
     DTR: NPD_DTR,
+    PVC: NPD_PVC,
   },
 };
 
@@ -141,15 +142,12 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
       ),
     },
     {
-      value: "dvc",
-      title: "DVC",
-      component: <>DVC Stage</>,
-    },
-    {
-      value: "pvc",
+      value: "PVC",
       title: "PVC",
-      component: <>PVC Stage</>,
-    },
+      component: <>
+          <NPDPVCform control={control} currentNPD={values.npdStage?.PVC} />
+      </>,
+    }
   ];
 
   return (

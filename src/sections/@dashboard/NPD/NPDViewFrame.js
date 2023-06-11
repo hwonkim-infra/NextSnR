@@ -20,6 +20,7 @@ import React from "react";
 import NPDresults from "./NPDresults";
 import useTabs from "@/hooks/useTabs";
 import NPDDTRResults from "./NPDDTRresults";
+import NPDPVCResults from "./NPDPVCresults";
 
 export default function NPDViewFrame({ currentNPD }) {
   if (!currentNPD) return <CircularProgress />;
@@ -43,6 +44,16 @@ export default function NPDViewFrame({ currentNPD }) {
       component: (
         <>
           <NPDDTRResults currentNPD={currentNPD.npdStage?.DTR} />
+          
+        </>
+      ),
+    },
+    {
+      value: "PVC",
+      title: "PVC",
+      component: (
+        <>
+          <NPDPVCResults currentNPD={currentNPD.npdStage?.PVC} />
           
         </>
       ),

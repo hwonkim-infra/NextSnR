@@ -21,6 +21,13 @@ const NPDDTRform = ({ control, currentNPD }) => {
             control={control}
             currentNPD={currentNPD}
           />
+          <SignalForm
+            group={"structure"}
+            groupName="Structure"
+            NPDStage={NPDStage}
+            control={control}
+            currentNPD={currentNPD}
+          />
         </Grid>
         <Grid item xs={3}>
 
@@ -31,12 +38,35 @@ const NPDDTRform = ({ control, currentNPD }) => {
             control={control}
             currentNPD={currentNPD}
           />
+          <SignalForm
+            group={"powerTrain"}
+            groupName="PowerTrain Integration"
+            NPDStage={NPDStage}
+            control={control}
+            currentNPD={currentNPD}
+          />
           
 
         </Grid>
         
-        <Grid item xs={3}></Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={3}>
+        <SignalForm
+            group={"electric"}
+            groupName="E/E System"
+            NPDStage={NPDStage}
+            control={control}
+            currentNPD={currentNPD}
+          />
+        </Grid>
+        <Grid item xs={3}>
+        <SignalForm
+            group={"hydraulics"}
+            groupName="Hydraulic System"
+            NPDStage={NPDStage}
+            control={control}
+            currentNPD={currentNPD}
+          />
+        </Grid>
       </Grid>
     </>
   );
