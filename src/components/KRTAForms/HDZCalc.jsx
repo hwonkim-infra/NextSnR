@@ -14,6 +14,7 @@ const radians_to_degrees = (radians) => {
 };
 
 export default function HDZCalc (values) {
+  if (!values.travel) return;
   const grossWeight = Number(values.operating_weight) + 65; // 총중량
 
 
@@ -30,6 +31,12 @@ export default function HDZCalc (values) {
     ) || null; // 접지압
     
   /* 주행성능 */
+  const travel_speed = values.travel.drag * values.travel.teeth * values.travel.reduc_rpm * values.travel.pitch * 60 /(2*10**6)
+  
+  
+  
+/* 
+
   const TM_rev_1 =
     ((values.travel?.pump_displacement * values.travel?.TM_mv) /
       (values.travel?.TM_flow_1 * values.travel?.reduc)) *
@@ -38,12 +45,9 @@ export default function HDZCalc (values) {
     ((values.travel?.pump_displacement * values.travel?.TM_mv) /
       (values.travel?.TM_flow_2 * values.travel?.reduc)) *
     1000;
-  const travel_speed_1 =
-    (TM_rev_1 * 2 * Math.PI * values.travel?.sprocket_radius * 60) / 10 ** 6;
+  const travel_speed_1 = (TM_rev_1 * 2 * Math.PI * values.travel?.sprocket_radius * 60) / 10 ** 6;
   const travel_speed_2 =
     (TM_rev_2 * 2 * Math.PI * values.travel?.sprocket_radius * 60) / 10 ** 6;
-  const travel_speed =
-    roundTwo(Math.max(travel_speed_1, travel_speed_2)) || null;
 
   const TM_1 =
     ((values.travel?.pump_pressure * values.travel?.TM_flow_1) /
@@ -55,12 +59,11 @@ export default function HDZCalc (values) {
       (200 * Math.PI)) *
     values.travel?.reduc *
     values.travel?.TM_mt;
-
-  const Traction_Sprocket =
+    const Traction_Sprocket =
     ((2 * TM_2 * 1000) / values.travel?.sprocket_radius) * values.travel?.TM_r;
-  const ground_traction = values.travel?.surface_drag * grossWeight;
-
-  const TS = (
+    const ground_traction = values.travel?.surface_drag * grossWeight;
+    
+    const TS = (
     ((2 * TM_1 * 1000) / values.travel?.sprocket_radius) *
     values.travel?.TM_r
   ).toFixed(0);
@@ -86,21 +89,23 @@ export default function HDZCalc (values) {
       Math.asin(
         Number(
           (values.travel?.traction_force - values.travel?.drag * grossWeight) /
-            grossWeight
-        )
-      )
-    ) || "";
+          grossWeight
+          )
+          )
+          ) || "";
+          */
 
   /* 두 경우의 등판각 비교 */
+  /* 
   const greadability_1 = Math.min(theta_1, theta_2, theta_3);
   const greadability_2 = Math.min(
     values.travel?.greadability_ref,
     noslip_slope,
     traction_slope
-  );
-
-  const greadability = greadability_1 || greadability_2;
-
+    );
+    
+    const greadability = greadability_1 || greadability_2;
+   */  
   /* 전도안정도 */
 
   let baseMachine_weight = values.grossWeight - values.COG?.attachments_weight;
@@ -123,15 +128,6 @@ export default function HDZCalc (values) {
       values.grossWeight
   );
 
-  /* 선회성능 */
-  const swing_reduction_rev =
-    ((values.swivel?.pump_flow * values.swivel?.motor_eff) /
-      values.swivel?.motor_displacement) *
-    1000;
-
-  const swing_rev =
-    roundTwo(swing_reduction_rev / values.swivel?.reduction) || null;
-
   /* 수송중량 */
 
   const transport_1_weight =
@@ -146,22 +142,12 @@ export default function HDZCalc (values) {
       (values.transport?.transport_9_weight || 0) || "";
 
   return (
-    (HDZCalc.grossWeight = grossWeight),
-    (HDZCalc.ground_Length = ground_Length),
-    (HDZCalc.ground_pressure = ground_pressure),
-    (HDZCalc.TM_rev_1 = TM_rev_1),
-    (HDZCalc.TM_rev_2 = TM_rev_2),
-    (HDZCalc.TM_1 = TM_1),
-    (HDZCalc.TM_2 = TM_2),
-    (HDZCalc.DP = DP),
-    (HDZCalc.travel_speed_1 = travel_speed_1),
-    (HDZCalc.travel_speed_2 = travel_speed_2),
-    (HDZCalc.travel_speed = travel_speed),
-    (HDZCalc.theta_1 = theta_1),
-    (HDZCalc.theta_2 = theta_2),
-    (HDZCalc.traction_slope = traction_slope),
-    (HDZCalc.greadability = greadability),
-    (HDZCalc.transport_1_weight = transport_1_weight),
+    (values.grossWeight = grossWeight),
+    (values.undercarriage.ground_Length = ground_Length),
+    (values.undercarriage.ground_pressure = ground_pressure),
+    
+    (values.travel.travel_speed = travel_speed),
+    
     ""
   );
 };

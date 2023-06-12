@@ -30,7 +30,7 @@ import EngineFields from "@/components/KRTAForms/EngineFields";
 import HDZCalc from "@/components/KRTAForms/HDZCalc";
 import TAResult from "@/components/KRTAForms/TAResult";
 import TransPortation from "@/components/KRTAForms/TransPortation";
-import TravelHX from "@/components/KRTAForms/TravelHX";
+import TravelDZ from "@/components/KRTAForms/TravelDZ";
 import SpecSheetDZ from "@/components/KRTAForms/previews/SpecSheetDZ";
 import SummaryDZ from "@/components/KRTAForms/SummaryDZ";
 
@@ -191,7 +191,7 @@ const HDZEditForm = ({
       title: "주행성능",
       component: (
         <>
-          <TravelHX control={control} />
+          <TravelDZ control={control} />
         </>
       ),
     },

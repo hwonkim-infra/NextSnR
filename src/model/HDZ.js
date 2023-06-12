@@ -63,21 +63,38 @@ const HDZSchema = new Schema({
 
     // 주행성능 관련
     travel: {
-        pump_displacement: Number,
-        pump_pressure: Number,
-        traction_force: Number,
+        // 주행속도
+        engine_rev: Number,
         TM_flow_1: Number,
-        TM_flow_2: Number,
-        TM_mv: Number,
+        reduc: Number,
+        teeth: Number,
+        pitch: Number,
+        TM_rpm: Number,
+        reduc_rpm: Number,
+        drag: Number,
+
+        // 출력토크
+        pump_pressure: Number,
+        TM_flow_q: Number,
         TM_mt: Number,
+        TM_torque: Number, // 출력토크 계산결과 
+
+        // 구동력
+        reduc_trac: Number,
+        sprocket_PCD: Number,
+        eff_trac: Number,
+        TM_tracion: Number, // 구동력 계산결과
+
+
+
+
+
+        
+
         TM_r: Number,
         surface_drag: Number,
-        sprocket_radius: Number,
-        drag: Number,
-        reduc: Number,
         
         TM_1: Number,
-        TM_2: Number,
 
         DP: Number, // 견인력 계산
 
