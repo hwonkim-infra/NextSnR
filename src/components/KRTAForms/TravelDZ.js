@@ -29,12 +29,7 @@ export default function TravelDZ({ control }) {
       type: "number",
       unit: "rpm",
     },
-    {
-      label: "주행감속기 속도(nr)",
-      name: "travel.reduc_rpm",
-      type: "number",
-      unit: "rpm",
-    },
+    
     { label: "주행 효율(η)", name: "travel.drag", type: "number", unit: "" },
   ];
 
@@ -72,6 +67,14 @@ export default function TravelDZ({ control }) {
       type: "number",
       unit: "",
     },
+    // 등판능력 계산
+    {
+      label: "주행저항계수(P)",
+      name: "travel.travel_drag",
+      type: "number",
+      unit: "",
+    },
+    
   ];
 
   return (

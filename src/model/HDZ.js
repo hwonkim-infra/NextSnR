@@ -83,10 +83,13 @@ const HDZSchema = new Schema({
         reduc_trac: Number,
         sprocket_PCD: Number,
         eff_trac: Number,
-        TM_tracion: Number, // 구동력 계산결과
+        TM_traction: Number, // 구동력 계산결과
 
-
-
+        travel_drag: Number,  // 주행저항계수
+        
+        
+        greadability_ref: Number,
+        greadability: Number,        
 
 
         
@@ -103,11 +106,9 @@ const HDZSchema = new Schema({
 
         friction_surface: Number,
         traction_slope: Number,
-        greadability_ref: Number,
         brake_torque: Number,
 
         travel_speed: Number,        
-        greadability: Number,        
         
         travel_speed_description: String,
         greadability_description: String,

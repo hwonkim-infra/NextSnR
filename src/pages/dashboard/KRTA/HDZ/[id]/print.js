@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
-import React from 'react'
-import { useRouter } from "next/router";
 import axios from "axios";
-import dynamic from 'next/dynamic'
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 // print Page components
-import HDZSpec from "@/components/KRTAForms/print/HDZSpec";
 import Drawings from "@/components/KRTAForms/print/Drawings";
-import GrossWeights from "@/components/KRTAForms/print/GrossWeights";
+import GrossWeightsDZ from "@/components/KRTAForms/print/GrossWeightsDZ";
 import GroundPressure from "@/components/KRTAForms/print/GroundPressure";
-import TravelSpecHX from "@/components/KRTAForms/print/TravelSpecHX";
-import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
+import HDZSpec from "@/components/KRTAForms/print/HDZSpec";
 import Transportation from "@/components/KRTAForms/print/Transportation";
+import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
+import TravelSpecHZ from "@/components/KRTAForms/print/TravelSpecHZ";
 import CompareChangeData from "@/sections/@dashboard/KRTA/CompareChangeData";
 
 const HDZprint = () => {
@@ -35,23 +33,17 @@ const HDZprint = () => {
 
       <HDZSpec values={newHDZ} />
         {newHDZ.ChangeModel && <CompareChangeData values={newHDZ} type={"HDZ"} /> }
-      <Drawings values={newHDZ}  />
-      <GrossWeights values={newHDZ} />
-      <GroundPressure values={newHDZ} />
-      {/* <TravelSpecHXKatex values={newHDZ}  /> */}
-      <TravelSpecHX values={newHDZ}  />
-      <TravelSlope values={newHDZ}  />
+        <GrossWeightsDZ values={newHDZ} />
+        <TravelSpecHZ values={newHDZ}  />
+        <TravelSlope values={newHDZ}  />
+      {/* <Drawings values={newHDZ}  />
+        <GroundPressure values={newHDZ} />
       <Transportation values={newHDZ}  /> 
-      {/* 
-      */}
+       */}
     </div>
         </>
   )
 }
 
-
-/* const HDZprintNoSSR = dynamic(() => Promise.resolve(HDZprint), {
-  ssr: false,
-}) */
 
   export default HDZprint
