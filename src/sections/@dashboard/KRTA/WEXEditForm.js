@@ -36,6 +36,7 @@ import TravelWX from "@/components/KRTAForms/TravelWX";
 import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
 import StabilityCOG from "@/components/KRTAForms/StabilityCOG";
 import CompareChangeData from "./CompareChangeData";
+import TravelWXslope from "@/components/KRTAForms/TravelWXslope";
 
 const defaultValues = {
   ECN: null,
@@ -196,12 +197,29 @@ const WEXEditForm = ({
       ),
     },
     {
-      value: "swivelTravel",
-      title: "선회주행",
+      value: "Swivel",
+      title: "선회",
       component: (
         <>
-          <Swivel control={control} />
+          <Swivel control={control} values={values} />
+        </>
+      ),
+    },
+    {
+      value: "Travel",
+      title: "주행",
+      component: (
+        <>
           <TravelWX control={control} values={values} />
+        </>
+      ),
+    },
+    {
+      value: "Slope",
+      title: "등판",
+      component: (
+        <>
+          <TravelWXslope control={control} values={values} />
         </>
       ),
     },

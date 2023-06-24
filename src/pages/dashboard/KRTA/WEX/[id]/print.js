@@ -16,6 +16,9 @@ import TravelSpecHW from "@/components/KRTAForms/print/TravelSpecHW";
 import WEXSpec from "@/components/KRTAForms/print/WEXSpec";
 import WorkingRange from "@/components/KRTAForms/print/WorkingRange";
 import CompareChangeData from "@/sections/@dashboard/KRTA/CompareChangeData";
+import PrintBoarder from "@/layouts/PrintBoarder";
+import SwivelSpeed_calc from "@/components/KRTAForms/print/SwivelSpeed_calc";
+import SwivelSpeed_backup from "@/components/KRTAForms/print/SwivelSpeed_backup";
 
 const WEXprint = () => {
   const { push, query } = useRouter();
@@ -33,23 +36,32 @@ const WEXprint = () => {
     if (query.id) getWEX();
   }, [query.id]);
 
-  
-
   return (
     <div contentEditable={true} suppressContentEditableWarning={true}>
       <>
         <WEXSpec values={newWEX} />
-        {newWEX.ChangeModel && <CompareChangeData values={newWEX} type={"WEX"} /> }
+        {newWEX.ChangeModel && (
+          <CompareChangeData values={newWEX} type={"WEX"} />
+        )}
+        
+        <PrintBoarder pageTitle="선회속도">
+          <SwivelSpeed_calc values={newWEX} />
+        </PrintBoarder>
+        <PrintBoarder pageTitle="선회속도 관련 자료">
+          <SwivelSpeed_backup values={newWEX} />
+        </PrintBoarder>
+
+
         <Drawings values={newWEX} />
         <WorkingRange values={newWEX} />
         <QCouplr values={newWEX} />
         <GrossWeights values={newWEX} />
-        <AxleAndLoad values={newWEX}  />
-        <SwivelSpeed values={newWEX}  />
-        <TravelSpecHW values={newWEX}  />
-        <TravelRadiusHW values={newWEX}  />
+        <AxleAndLoad values={newWEX} />
+        <SwivelSpeed values={newWEX} />
+        <TravelSpecHW values={newWEX} />
+        <TravelRadiusHW values={newWEX} />
         <TravelSlopeWX values={newWEX} />
-        <TravelBrakingWX values={newWEX}  />
+        <TravelBrakingWX values={newWEX} />
         <Transportation values={newWEX} />
       </>
     </div>

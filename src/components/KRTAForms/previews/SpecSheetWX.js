@@ -145,8 +145,8 @@ const SpecSheet = ({ values }) => {
                 {values.attachments?.quick_coupler_1}{" "}
                 {Math.max(
                   values.attachments?.quick_coupler_weight_1,
-                  (values.attachments?.quick_coupler_weight_2 || '')
-                )}
+                  (values.attachments?.quick_coupler_weight_2)
+                ) || ''}
                 ㎏
               </td>
               <td>선회속도 </td>

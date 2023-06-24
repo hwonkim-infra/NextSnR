@@ -39,7 +39,7 @@ const Dimensions = ({ control }) => {
       <div className="input-group mb-1">
         <Paper style={{ padding: 16 }}>
           <Grid container alignItems="flex-start" spacing={2}>
-            <Card sx={{ p: 3 }}>
+            <Card sx={{ p: 1 }}>
               <Box
                 sx={{
                   display: "grid",
@@ -47,7 +47,7 @@ const Dimensions = ({ control }) => {
                   // rowGap: 2,
                   gridTemplateColumns: {
                     xs: "repeat(4, 1fr)",
-                    sm: "repeat(4, 1fr)",
+                    sm: "repeat(6, 1fr)",
                   },
                 }}
               >

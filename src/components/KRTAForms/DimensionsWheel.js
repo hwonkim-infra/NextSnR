@@ -84,7 +84,7 @@ const DimensionsWheel = ({ control }) => {
 
   return (
     <>
-      <Card sx={{ p: 3 }}>
+      <Card sx={{ p: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Box
@@ -92,7 +92,7 @@ const DimensionsWheel = ({ control }) => {
                 display: "grid",
                 // columnGap: 2,
                 // rowGap: 2,
-                gridTemplateColumns: "2fr 2fr",
+                gridTemplateColumns: "repeat(2, 1fr)",
               }}
             >
               {formFieldsAxle.map((fieldData) => (

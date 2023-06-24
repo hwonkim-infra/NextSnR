@@ -12,18 +12,18 @@ import Page from "@/components/Page";
 
 // DataGrid
 import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
-import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWL";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheet";
 import CertPrev from "@/components/KRTAForms/previews/CertPrev";
 
 // Preview
 
-WLDList.getLayout = function getLayout(page) {
+HEXList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
-export default function WLDList({ WLDs = [] }) {
+export default function HEXList({ HEXs = [] }) {
   const router = useRouter();
-  const [currentWLD, setCurrentWLD] = useState({});
+  const [currentHEX, setCurrentHEX] = useState({});
 
   const columns = [
     // { field: "id", headerName: "ID", width: 70 },
@@ -31,44 +31,50 @@ export default function WLDList({ WLDs = [] }) {
     { field: "registration_no", headerName: "형식", width: 70 },
     { field: "weight", headerName: "중량", width: 70 },
     { field: "boom", headerName: "Boom", width: 60 },
+    { field: "arm", headerName: "Arm", width: 60 },
     { field: "bucket", headerName: "버켓", width: 60 },
     { field: "height", headerName: "높이", width: 60 },
     { field: "width", headerName: "너비", width: 60 },
-    { field: "tire", headerName: "타이어", width: 130 },
+    { field: "shoe", headerName: "shoe", width: 60 },
     { field: "counterWeight", headerName: "CW", width: 50 },
     { field: "updated", headerName: "수정", width: 60 },
     { field: "changeModel", headerName: "형식변경", width: 120 },
-    { field: "result", headerName: "확인검사", width: 50 },
+    { field: "result", headerName: "완료", width: 50 },
   ];
 
-  const rows = WLDs.map((WLD) => {
+  const rows = HEXs.map((HEX) => {
     return {
-      id: WLD._id,
-      model_name: WLD.model_name,
-      registration_no: WLD.registration_no,
-      weight: WLD.operating_weight,
-      boom: WLD.attachments?.boom_length,
-      bucket: WLD.attachments?.bucket_heap,
-      height: WLD.overall_height,
-      width: WLD.overall_width,
-      tire: WLD.undercarriage?.tire_frontAxle,
-      updated: new Date(WLD.updatedAt).toLocaleDateString("Ko-kr"),
-      changeModel: WLD.ChangeModel ? WLD.ECN + " 변경" : " ",
-      counterWeight: WLD.COG?.counterWeight_weight / 1000 || "",
-      result: WLD.approval_result ? "완료" : " ",
-      ...WLD,
+      id: HEX._id,
+      model_name: HEX.model_name,
+      registration_no: HEX.registration_no,
+      weight: HEX.operating_weight,
+      boom: HEX.attachments?.boom_length,
+      arm: HEX.attachments?.arm_length,
+      bucket: HEX.attachments?.bucket_heap,
+      height: HEX.overall_height,
+      width: HEX.overall_width,
+      updated: new Date(HEX.updatedAt).toLocaleDateString("Ko-kr"),
+      shoe: HEX.undercarriage?.shoe_width,
+      changeModel: HEX.ChangeModel ? HEX.ECN + " 변경" : " ",
+      counterWeight: HEX.COG?.counterWeight_weight / 1000 || "",
+      result: HEX.approval_result ? "완료" : " ",
+      ...HEX,
     };
   });
 
   return (
-    <Page title="형식승인: WLD">
+    <Page title="형식승인: HEX">
+
       <Grid container spacing={2}>
         <Grid item xs={8} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
-            heading="Wheeled Loader"
-            links={[{ name: "형식승인" }, { name: "WLD" }]}
+            heading="Crawler Excavator"
+            links={[
+              { name: "Dashboard"  },
+              { name: "형식승인: HEX"  },
+            ]}
             action={
-              <NextLink href="WLD/new">
+              <NextLink href="/dashboard/KRTA/HEX/new">
                 <Button
                   variant="contained"
                   startIcon={<Iconify icon={"eva:plus-fill"} />}
@@ -87,7 +93,7 @@ export default function WLDList({ WLDs = [] }) {
               const selectedRowData = rows.filter((row) =>
                 selectedIDs.has(row.id.toString())
               );
-              setCurrentWLD(selectedRowData[0]);
+              setCurrentHEX(selectedRowData[0]);
             }}
           />
         </Grid>
@@ -99,18 +105,18 @@ export default function WLDList({ WLDs = [] }) {
             justifyContent="space-between"
           >
             <Box component="span" sx={{ fontSize: "h2.fontSize" }}>
-              {currentWLD?.model_name}
+              {currentHEX?.model_name}
             </Box>
             <Box component="span" sx={{ p: 1, border: "1px" }}>
-              {currentWLD?.serial_no}
+              {currentHEX?.serial_no}
             </Box>
 
-            {currentWLD.model_name && (
+            {currentHEX.model_name && (
               <Box>
                 <Button
                   sx={{ m: 1 }}
                   variant="outlined"
-                  href={"WLD/" + currentWLD?.id + "/edit"}
+                  href={"HEX/" + currentHEX?.id + "/edit"}
                 >
                   수정
                 </Button>
@@ -118,7 +124,7 @@ export default function WLDList({ WLDs = [] }) {
                   sx={{ m: 1 }}
                   variant="contained"
                   // startIcon={<PrintIcon />}
-                  href={"WLD/" + currentWLD?.id + "/print"}
+                  href={"HEX/" + currentHEX?.id + "/print"}
                   target="_blank"
                 >
                   출력
@@ -127,7 +133,7 @@ export default function WLDList({ WLDs = [] }) {
                   sx={{ m: 1 }}
                   variant="text"
                   // startIcon={<TextSnippet />}
-                  href={"WLD/" + currentWLD?.id + "/specECR"}
+                  href={"HEX/" + currentHEX?.id + "/specECR"}
                   target="_blank"
                 >
                   제원표
@@ -136,31 +142,32 @@ export default function WLDList({ WLDs = [] }) {
             )}
           </Stack>
 
-          {!currentWLD.ChangeModel && currentWLD.model_name && (
+          {!currentHEX.ChangeModel && currentHEX.model_name && (
             <Box>
               <Button
                 variant="outlined"
                 // startIcon={<QueueIcon />}
-                href={"WLD/" + currentWLD?.id + "/addChange"}
+                href={"HEX/" + currentHEX?.id + "/addChange"}
               >
-                {" "}
                 변경형식
               </Button>
             </Box>
           )}
 
-          <SpecSheet values={currentWLD}></SpecSheet>
-              <CertPrev values={currentWLD}></CertPrev>
+          <SpecSheet values={currentHEX}></SpecSheet>
+              <CertPrev values={currentHEX}></CertPrev>
         </Grid>
       </Grid>
     </Page>
+
   );
 }
 
+
 export async function getServerSideProps() {
-  const res = await axios.get("http://127.0.0.1:3000/api/WLD/");
-  const WLDs = res.data;
+  const res = await axios.get("http://127.0.0.1:3000/api/HEX/");
+  const HEXs = res.data;
   return {
-    props: { WLDs }, // will be passed to the page component as props
+    props: { HEXs }, 
   };
 }

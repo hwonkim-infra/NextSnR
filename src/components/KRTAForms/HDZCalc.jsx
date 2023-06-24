@@ -39,15 +39,15 @@ export default function HDZCalc (values) {
   const travel_speed = roundTwo(values.travel.drag * values.travel.teeth * reduc_rpm * values.travel.pitch * 60 /(2*10**6))
   
   /* 출력토크 */
-  const TM_torque = ((values.travel.pump_pressure * values.travel.TM_flow_q * values.travel.TM_mt) /
+  const TM_torque = roundTwo((values.travel.pump_pressure * values.travel.TM_flow_q * values.travel.TM_mt) /
   (200 * Math.PI)) 
 
   /* 구동력 */
-  const TM_traction = ((2 * TM_torque * values.travel.reduc_trac * values.travel.eff_trac ) / (values.travel.sprocket_PCD / 2)) ;
+  const TM_traction = roundTwo((2 * TM_torque * values.travel.reduc * values.travel.eff_trac ) / (values.travel.sprocket_PCD / 2)) ;
 
 
   /* 최대등판각도_구동력 */
-  const traction_slope = ( (180 / Math.PI) * Math.asin((TM_traction - values.travel.travel_drag * grossWeight) / grossWeight) );
+  const traction_slope = roundTwo( (180 / Math.PI) * Math.asin((TM_traction - values.travel.travel_drag * grossWeight/1000) / (grossWeight/1000)) );
   
   
   /* 전도안정도 */

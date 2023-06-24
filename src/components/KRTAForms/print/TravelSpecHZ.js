@@ -175,7 +175,7 @@ const TravelSpecHZ = ({ values, config }) => {
                       <tr>
                         <td>
                           
-                          <InlineMath>{` n_r = \\cfrac{감속비}{모터속도} = \\cfrac{i}{n_m} = \\cfrac{ ${values.travel.TM_rpm} }{ ${values.travel.reduc}} =  ${values.travel.reduc_rpm} `}</InlineMath>
+                          <InlineMath>{` n_r =  \\cfrac{i}{n_m} = \\cfrac{ ${values.travel.TM_rpm} }{ ${values.travel.reduc}} =  ${values.travel.reduc_rpm} `}</InlineMath>
                         </td>
                       </tr>
                       

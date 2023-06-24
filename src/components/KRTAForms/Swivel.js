@@ -17,7 +17,9 @@ import { useState } from "react";
 import { Controller } from "react-hook-form";
 import TextFieldInput from "./TextFieldInput";
 
-const Swivel = ({ control }) => {
+import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
+
+const Swivel = ({ control, values }) => {
   const InputForms = [
     {
       label: "선회펌프 유량",
@@ -96,6 +98,8 @@ const Swivel = ({ control }) => {
                         />
                       ))}
                     </Box>
+        <SwivelSpeed values={values}  />
+
                   </Card>
                 </Grid>
               </Paper>

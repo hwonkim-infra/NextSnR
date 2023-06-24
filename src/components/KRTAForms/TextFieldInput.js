@@ -10,6 +10,8 @@ const TextFieldInput = ({ fieldData, control }) => {
         <TextField
           label={fieldData.label}
           type={fieldData.type}
+          size="small"
+
           {...field}
           value={field.value || ""}
           InputProps={{

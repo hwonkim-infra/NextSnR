@@ -15,7 +15,6 @@ export default function TravelDZ({ control }) {
       type: "number",
       unit: "cc/rev",
     },
-    { label: "주행 감속비(i)", name: "travel.reduc", type: "number", unit: "" },
     { label: "No.Teeth(z)", name: "travel.teeth", type: "number", unit: "" },
     {
       label: "Link Pitch(z)",
@@ -23,6 +22,7 @@ export default function TravelDZ({ control }) {
       type: "number",
       unit: "㎜",
     },
+    { label: "주행 감속비(i)", name: "travel.reduc", type: "number", unit: "" },
     {
       label: "주행모터 속도(nm)",
       name: "travel.TM_rpm",
@@ -54,7 +54,6 @@ export default function TravelDZ({ control }) {
       unit: "",
     },
     // 구동력
-    { label: "감속비(i)", name: "travel.reduc_trac", type: "number", unit: "" },
     {
       label: "스프로켓 PCD",
       name: "travel.sprocket_PCD",

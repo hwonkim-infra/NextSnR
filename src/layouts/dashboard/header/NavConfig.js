@@ -26,6 +26,7 @@ const navConfig = [
         children: [
           { title: 'HEX', path: '/dashboard/KRTA/HEX' },
           { title: 'WEX', path: '/dashboard/KRTA/WEX' },
+          { title: 'WLD', path: '/dashboard/KRTA/WLD' },
           { title: 'HDZ', path: '/dashboard/KRTA/HDZ' },
         ],
       },

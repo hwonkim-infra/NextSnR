@@ -11,30 +11,30 @@ import Layout from '@/layouts';
 import Page from '@/components/Page';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 // sections
-import WLDEditForm from '@/sections/@dashboard/KRTA/WLDEditForm';
+import HEXEditForm from '@/sections/@dashboard/KRTA/HEXEditForm2';
 
 // ----------------------------------------------------------------------
 
-WLDCreate.getLayout = function getLayout(page) {
+HEXCreate.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
 
-export default function WLDCreate() {
+export default function HEXCreate() {
   // const { themeStretch } = useSettings();
 
   return (
-    <Page title="WLD: Create a new WLD">
+    <Page title="HEX: Create a new HEX">
         <HeaderBreadcrumbs
-          heading="Create a new Wheel Loader"
+          heading="Create a new HEX"
           links={[
-            { name: 'Dashboard', },
-            { name: 'WLD',  },
-            { name: 'New WLD' },
+            { name: 'Dashboard', href: "/dashboard/app" },
+            { name: 'HEX', href: "/dashboard/KRTA/HEX" },
+            { name: 'New HEX' },
           ]}
         /> 
-        <WLDEditForm />
+        <HEXEditForm />
     </Page>
   );
 }

@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 
 // next
 import { useRouter } from "next/router";
 
 // utils
 import useTabs from "@/hooks/useTabs";
-
 import { useForm } from "react-hook-form";
+
 import Summary from "@/components/KRTAForms/Summary";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
@@ -24,22 +24,27 @@ import {
 } from "@mui/material";
 
 import Dimensions from "@/components/KRTAForms/Dimensions";
-import DimensionsTrack from "@/components/KRTAForms/DimensionsTrack";
+import DimensionsWLbkt from "@/components/KRTAForms/DimensionsWLbkt";
+import DimensionsWheel from "@/components/KRTAForms/DimensionsWheel";
 import AddDrawings from "@/components/KRTAForms/Drawings/AddDrawings";
 import EngineFields from "@/components/KRTAForms/EngineFields";
-import HDZCalc from "@/components/KRTAForms/HDZCalc";
+import WLDCalc from "@/components/KRTAForms/WLDCalc";
+import Swivel from "@/components/KRTAForms/Swivel";
 import TAResult from "@/components/KRTAForms/TAResult";
 import TransPortation from "@/components/KRTAForms/TransPortation";
-import TravelDZ from "@/components/KRTAForms/TravelDZ";
-import SpecSheetDZ from "@/components/KRTAForms/previews/SpecSheetDZ";
-import SummaryDZ from "@/components/KRTAForms/SummaryDZ";
+import TravelWX from "@/components/KRTAForms/TravelWX";
+import SpecSheet from "@/components/KRTAForms/previews/SpecSheetWX";
+import StabilityCOG from "@/components/KRTAForms/StabilityCOG";
+import CompareChangeData from "./CompareChangeData";
 
 const defaultValues = {
   ECN: null,
   engine: { engine_name: null },
   undercarriage: { ground_clearance: null },
-  attachments: { dozer_width: null },
-
+  attachments: { bucket_struck: null },
+  swivel: {
+    pump_flow: null,
+  },
   travel: {
     pump_displacement: null,
   },
@@ -58,7 +63,7 @@ const defaultValues = {
   },
 };
 
-const HDZEditForm = ({
+const WLDEditForm = ({
   isEdit = false,
   isChangeModel = false,
   currentModel,
@@ -97,38 +102,40 @@ const HDZEditForm = ({
   }, [isEdit, isChangeModel, currentModel]);
 
   const onSubmit = async (values) => {
-    {
-      HDZCalc(values);
-    }
-
+    {WLDCalc(values)}
+    
     if (isChangeModel) {
-      await createHDZChange(values);
-      await push("/dashboard/KRTA/HDZ");
+      await createWLDChange(values);
+      await push("/dashboard/KRTA/WLD");
     } else if (isEdit) {
-      await updateHDZ(values);
+      await updateWLD(values);
     } else {
-      await createHDZ(values);
-      await push("/dashboard/KRTA/HDZ");
+      await createWLD(values);
+      await push("/dashboard/KRTA/WLD");
     }
   };
 
-  const updateHDZ = async (values) => {
+  const updateWLD = async (values) => {
+    console.log("🚀 ~ file: WLDEditForm.js:116 ~ updateWLD ~ values:", values)
+    
     await axios
-      .put(`/api/HDZ/${query.id}`, values)
+      .put(`/api/WLD/${query.id}`, values)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  const createHDZ = async (values) => {
+  const createWLD = async (values) => {
     values._id = values.model_name + "_" + Date.now();
-    console.log("posting values: ", values);
+    console.log(values._id);
+
+   
 
     await axios
-      .post("/api/HDZ/", values)
+      .post("/api/WLD/", values)
       .then((response) => {
         console.log(response);
       })
@@ -137,17 +144,18 @@ const HDZEditForm = ({
       });
   };
 
-  const createHDZChange = async (values) => {
+  const createWLDChange = async (values) => {
     values.origin = values._id;
     delete values._id;
-
+   
     values._id = values.model_name + "_" + Date.now();
     values.ChangeModel = true;
     values.ECN = "";
-    values.approval_result = "";
+    values.approval_result = '';
+
 
     await axios
-      .post("/api/HDZ/", values)
+      .post("/api/WLD/", values)
       .then((response) => {
         console.log(response);
       })
@@ -156,19 +164,19 @@ const HDZEditForm = ({
       });
   };
 
-  async function removeHDZ() {
+  async function removeWLD() {
     const { id } = query;
     if (window.confirm("이 모델을 삭제하시겠습니까")) {
       try {
         await axios
-          .delete(`/api/HDZ/${id}`)
+          .delete(`/api/WLD/${id}`)
           .then((response) => {
             console.log(response);
           })
           .catch((error) => {
             console.error(error);
           });
-        await push("/dashboard/KRTA/HDZ");
+        await push("/dashboard/KRTA/WLD");
       } catch (error) {
         console.log(error);
       }
@@ -182,22 +190,32 @@ const HDZEditForm = ({
       component: (
         <>
           <Dimensions control={control} />
-          <DimensionsTrack control={control} />
+          <DimensionsWLbkt control={control} />
+          <DimensionsWheel control={control} />
         </>
       ),
     },
     {
-      value: "travelSlope",
-      title: "주행등판",
+      value: "Travel",
+      title: "주행",
       component: (
         <>
-          <TravelDZ control={control} />
+          <TravelWX control={control} values={values} />
+        </>
+      ),
+    },
+    {
+      value: "stabilityCOG",
+      title: "축중 안정도",
+      component: (
+        <>
+          <StabilityCOG control={control} values={values} />
         </>
       ),
     },
     {
       value: "engine",
-      title: "엔진사양",
+      title: "엔진 사양",
       component: (
         <>
           <EngineFields control={control} />
@@ -215,7 +233,7 @@ const HDZEditForm = ({
     },
     {
       value: "transportation",
-      title: "분해수송",
+      title: "분해 수송",
       component: (
         <>
           <TransPortation control={control} />
@@ -247,8 +265,7 @@ const HDZEditForm = ({
                   gridTemplateColumns: "repeat(8, 1fr)",
                 }}
               >
-                {HDZCalc(values)}
-                <SummaryDZ control={control} />
+                <Summary control={control} />
               </Box>
               <Tabs
                 allowScrollButtonsMobile
@@ -286,15 +303,16 @@ const HDZEditForm = ({
                   {!isEdit ? "Create Model" : "Save Changes"}
                 </LoadingButton>
                 <Snackbar
-                  open={snackbarOpen}
-                  autoHideDuration={3000}
-                  message="This File was updated successfully"
-                  onClose={snackbarClose}
-                />
+                    open={snackbarOpen}
+                    autoHideDuration={3000}
+                    message= {!isEdit ? "This File was created successfully" : "This File was updated successfully"}
+                    onClose={snackbarClose}
+                  />
+
                 <Button
                   variant="outlined"
                   startIcon={<DeleteIcon />}
-                  onClick={removeHDZ}
+                  onClick={removeWLD}
                 >
                   삭제
                 </Button>
@@ -310,14 +328,16 @@ const HDZEditForm = ({
               >
                 Preview
               </Typography>
-              <SpecSheetDZ values={values} />
+                  {/* {values.ChangeModel && <CompareChangeData values={values} type={"WLD"} />} */}
+              <SpecSheet values={values} />
             </Card>
           </Grid>
         </Grid>
-        {JSON.stringify(values, 0, 2)}
+                {WLDCalc(values)}
+              {/* {JSON.stringify(values.travel, 0, 2)} */}
       </form>
     </div>
   );
 };
 
-export default HDZEditForm;
+export default WLDEditForm;

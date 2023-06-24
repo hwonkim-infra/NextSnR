@@ -8,7 +8,7 @@ import GrossWeightsDZ from "@/components/KRTAForms/print/GrossWeightsDZ";
 import GroundPressure from "@/components/KRTAForms/print/GroundPressure";
 import HDZSpec from "@/components/KRTAForms/print/HDZSpec";
 import Transportation from "@/components/KRTAForms/print/Transportation";
-import TravelSlope from "@/components/KRTAForms/print/TravelSlope";
+import TravelSlopeHZ from "@/components/KRTAForms/print/TravelSlopeHZ";
 import TravelSpecHZ from "@/components/KRTAForms/print/TravelSpecHZ";
 import CompareChangeData from "@/sections/@dashboard/KRTA/CompareChangeData";
 
@@ -35,7 +35,7 @@ const HDZprint = () => {
         {newHDZ.ChangeModel && <CompareChangeData values={newHDZ} type={"HDZ"} /> }
         <GrossWeightsDZ values={newHDZ} />
         <TravelSpecHZ values={newHDZ}  />
-        <TravelSlope values={newHDZ}  />
+        <TravelSlopeHZ values={newHDZ}  />
       {/* <Drawings values={newHDZ}  />
         <GroundPressure values={newHDZ} />
       <Transportation values={newHDZ}  /> 

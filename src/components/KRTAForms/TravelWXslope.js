@@ -16,48 +16,8 @@ import { useState } from "react";
 import { Controller } from "react-hook-form";
 import TextFieldInput from "./TextFieldInput";
 
-const TravelWX = ({ control, values }) => {
-  const formFieldsSpeed = [
-    {
-      label: "주행 펌프 용량",
-      name: "travel.pump_displacement_travel",
-      type: "number",
-      unit: "l/min",
-    },
-    {
-      label: "주행 모터 용적",
-      name: "travel.motor_displacement_travel",
-      type: "number",
-      unit: "㏄/rev",
-    },
-    {
-      label: "주행 모터 효율",
-      name: "travel.motor_eff_travel",
-      type: "number",
-      unit: "",
-      min: "0",
-      max: "1",
-    },
-    {
-      label: "감속비: 미션",
-      name: "travel.TM_reduction",
-      type: "number",
-      unit: "",
-    },
-    {
-      label: "감속비: 액슬",
-      name: "travel.axle_reduction",
-      type: "number",
-      unit: "",
-    },
-    {
-      label: "타이어 동하중 반경",
-      name: "travel.tire_rolling_radius",
-      type: "number",
-      unit: "㎜",
-    },
-  ];
-
+const TravelWXslope = ({ control, values }) => {
+ 
   const formFieldsBraking = [
     {
       label: "브레이크 압력",
@@ -86,26 +46,6 @@ const TravelWX = ({ control, values }) => {
     },
   ];
 
-  const formFieldsTravelRadius = [
-    /*     {
-      label: "킹핀 간격",
-      name: "travel.kingpin_gap",
-      type: "number",
-      unit: "㎜",
-    }, */
-    {
-      label: "킹핀 - 타이어 간격",
-      name: "travel.kingpin_offset",
-      type: "number",
-      unit: "㎜",
-    },
-    {
-      label: "외륜최대조향각",
-      name: "travel.wheel_angle",
-      type: "number",
-      unit: "",
-    },
-  ];
 
   const formFieldsTravelSlope = [
     {
@@ -144,11 +84,12 @@ const TravelWX = ({ control, values }) => {
   return (
     <>
       <Paper sx={{ p: 2, borderRadius: 1 }}>
+
         <Box sx={{ p: 1 }}>
-          <Typography variant="subtitle2">주행 속도</Typography>
+          <Typography variant="subtitle2">등판능력</Typography>
           <Accordion
-            expanded={expanded === "panel1"}
-            onChange={handleChange("panel1")}
+            expanded={expanded === "panel31"}
+            onChange={handleChange("panel31")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -159,18 +100,18 @@ const TravelWX = ({ control, values }) => {
                 (Opt. 1) 계산 데이터 입력
               </Typography>
               <Typography sx={{ color: "text.secondary" }}>
-                주행펌프, 주행모터 용적, 미션/액슬 감속비
+                견인력, 지면마찰, 주행저항, 기준등판각
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {formFieldsSpeed.map((fieldData) => (
-                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
+              {formFieldsTravelSlope.map((fieldData) => (
+                <TextFieldInput key={fieldData.name}  fieldData={fieldData} control={control} />
               ))}
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expanded === "panel2"}
-            onChange={handleChange("panel2")}
+            expanded={expanded === "panel32"}
+            onChange={handleChange("panel32")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -188,24 +129,23 @@ const TravelWX = ({ control, values }) => {
               <Controller
                 render={({ field }) => (
                   <TextField
-                    label="주행 속도"
+                    label="등판능력"
                     {...field}
                     value={field.value || ""}
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">
-                          {"km/hr"}
-                        </InputAdornment>
+                        <InputAdornment position="end">{"deg"}</InputAdornment>
                       ),
                     }}
                   />
                 )}
-                name={"travel.travel_speed_tested"}
+                name={"travel.greadability_tested"}
                 type={"number"}
                 control={control}
               />
+
               <Controller
-                name="travel.travel_speed_description"
+                name="travel.greadability_description"
                 control={control}
                 defaultValue=""
                 render={({ field: { onChange, value } }) => (
@@ -217,10 +157,10 @@ const TravelWX = ({ control, values }) => {
         </Box>
 
         <Box sx={{ p: 1 }}>
-          <Typography variant="subtitle2">최소회전반경</Typography>
+          <Typography variant="subtitle2">제동능력</Typography>
           <Accordion
-            expanded={expanded === "panel21"}
-            onChange={handleChange("panel21")}
+            expanded={expanded === "panel41"}
+            onChange={handleChange("panel41")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -231,18 +171,19 @@ const TravelWX = ({ control, values }) => {
                 (Opt. 1) 계산 데이터 입력
               </Typography>
               <Typography sx={{ color: "text.secondary" }}>
-                킹핀-타이어 간격, 외륜조향각 데이터 입력{" "}
+                브레이크 압력, 효율, 오크, 허브 감속비, 타이어 동하중
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {formFieldsTravelRadius.map((fieldData) => (
-                <TextFieldInput key={fieldData.name} fieldData={fieldData} control={control} />
+              {formFieldsBraking.map((fieldData) => (
+                                <TextFieldInput fieldData={fieldData} control={control} />
+
               ))}
             </AccordionDetails>
           </Accordion>
           <Accordion
-            expanded={expanded === "panel22"}
-            onChange={handleChange("panel22")}
+            expanded={expanded === "panel42"}
+            onChange={handleChange("panel42")}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -260,7 +201,7 @@ const TravelWX = ({ control, values }) => {
               <Controller
                 render={({ field }) => (
                   <TextField
-                    label="최소회전반경"
+                    label="제동 거리"
                     {...field}
                     value={field.value || ""}
                     InputProps={{
@@ -270,12 +211,12 @@ const TravelWX = ({ control, values }) => {
                     }}
                   />
                 )}
-                name={"travel.turning_radius_tested"}
+                name={"travel.braking_distance_max_tested"}
                 type={"number"}
                 control={control}
               />
               <Controller
-                name="travel.turning_radius_description"
+                name="travel.braking_description"
                 control={control}
                 defaultValue=""
                 render={({ field: { onChange, value } }) => (
@@ -285,10 +226,9 @@ const TravelWX = ({ control, values }) => {
             </AccordionDetails>
           </Accordion>
         </Box>
-
       </Paper>
     </>
   );
 };
 
-export default TravelWX;
+export default TravelWXslope;
