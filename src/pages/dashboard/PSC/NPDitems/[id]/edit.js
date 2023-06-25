@@ -1,6 +1,6 @@
 // next
-import { useRouter } from 'next/router';
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 // @mui
 // routes
@@ -11,47 +11,47 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import PSCEditForm from '@/sections/@dashboard/PSC/PSCEditForm';
+import NPDitemForm from '@/sections/@dashboard/NPD/NPDitemForm';
 import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
-PSCEdit.getLayout = function getLayout(page) {
+NPDitemEdit.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
 
-export default function PSCEdit() {
-const [currentPSC, setCurrentPSC] = useState()
+export default function NPDitemEdit() {
+const [currentNPDitem, setCurrentNPDitem] = useState()
 
 const { query } = useRouter();
 
-  const getPSC = async () => {
-    const response = await axios.get(`/api/PSC/EU/${query.id}`);
+  const getNPDitem = async () => {
+    const response = await axios.get(`/api/PSC/NPDItems/${query.id}`);
 
     const data = response.data;
-    setCurrentPSC(data);
+    setCurrentNPDitem(data);
   };
 
   useEffect(() => {
-    if (query.id) getPSC();
+    if (query.id) getNPDitem();
   }, [query.id]);
 
 //   const currentModel = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="PSC: Edit ">
+    <Page title="NPDitem: Edit ">
         <HeaderBreadcrumbs
-          heading="Edit PSC"
-          links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.PSC },
-            { name: 'PSC', href: PATH_DASHBOARD.PSC.EU  },
-            { name: (currentPSC?.item) },
-          ]}
+          heading="Edit NPDitem"
+          /* links={[
+            { name: 'Dashboard', href: PATH_DASHBOARD.NPDitem },
+            { name: 'NPDitem', href: PATH_DASHBOARD.NPDitem.EU  },
+            { name: (currentNPDitem?.item) },
+          ]} */
         />
 
-        <PSCEditForm isEdit currentPSC={currentPSC} />
+        <NPDitemForm isEdit currentNPDitem={currentNPDitem} />
     </Page>
   );
 }

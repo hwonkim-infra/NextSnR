@@ -1,32 +1,33 @@
 import {
-    Autocomplete,
-    Box,
-    Checkbox,
-    Chip,
-    FormControlLabel,
-    FormGroup,
-    InputAdornment,
-    TextField
+  Autocomplete,
+  Box,
+  Chip,
+  InputAdornment,
+  MenuItem,
+  Select,
+  TextField
 } from "@mui/material";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import { NPDtargetMarkets } from "./NPDtargetMarkets";
 
-const TAGS_OPTION = ["MD", "EU", "NA", "China", "Korea"];
-
+// const Markets_Option = ["MD", "EU", "NA", "China", "Korea"];
+const Markets_Option = NPDtargetMarkets.filter((item) => item !== "All");
 
 const NPDitemInput = ({ control }) => {
-    const [checked, setChecked] = useState(["common", "common2", "common3"]);
+  const [status, setStatus] = useState("struc");
 
-    const handleChange = (event) => {
-        const value = event.target.value;
-        setChecked([...checked, value]);
-      };
-    const InputForms = [
+  const InputForms = [
     { label: "Item name", name: "itemName", type: "" },
+    { label: "Label", name: "label", type: "" },
     { label: "Reference", name: "reference", type: "" },
     // { label: "requirements", name: "requirements", type: "" },
     // { label: "Compliance Statement", name: "complyStatements", type: "" },
   ];
+
+  const handleClose = () => {
+    setOpen(null);
+  };
 
   return (
     <>
@@ -61,7 +62,6 @@ const NPDitemInput = ({ control }) => {
             control={control}
           />
         ))}
-                
       </Box>
       <Box
         sx={{
@@ -84,23 +84,21 @@ const NPDitemInput = ({ control }) => {
             />
           )}
         />
+{/* 
+<Controller
+              render={({ field }) => (
+                <Select {...field}>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              )}
+              name="Select"
+              control={control}
+            /> */}
 
         <Controller
-          name="complyStatements"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              multiline
-              label="Compliance Statement"
-              {...field}
-              InputLabelProps={{ shrink: true }}
-              value={field.value || ""}
-            />
-          )}
-        />
-
-        <Controller
-          name="tags"
+          name="markets"
           control={control}
           render={({ field }) => (
             <>
@@ -108,7 +106,7 @@ const NPDitemInput = ({ control }) => {
                 multiple
                 freeSolo
                 onChange={(event, newValue) => field.onChange(newValue)}
-                options={TAGS_OPTION.map((option) => option)}
+                options={Markets_Option.map((option) => option)}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
                     <Chip
@@ -120,7 +118,7 @@ const NPDitemInput = ({ control }) => {
                   ))
                 }
                 renderInput={(params, field) => (
-                  <TextField label="Tags" {...params} />
+                  <TextField label="target Markets" {...params} />
                 )}
               />
             </>

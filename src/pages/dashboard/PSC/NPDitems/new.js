@@ -22,9 +22,9 @@ PSCCreate.getLayout = function getLayout(page) {
 export default function PSCCreate() {
 
   return (
-    <Page title="PSC: Create a new PSC">
+    <Page title="new NPD Items">
         <HeaderBreadcrumbs
-          heading="Create a new PSC"
+          heading="NPD: Add a new NPD Items"
           /* links={[
             { name: 'Dashboard', href: PATH_DASHBOARD.PSC  },
             { name: 'PSC', href: PATH_DASHBOARD.PSC.EU },

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 // utils
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import { LoadingButton } from "@mui/lab";
@@ -13,18 +13,17 @@ import {
   Button,
   Card,
   Checkbox,
+  FormControlLabel,
+  FormGroup,
   Grid,
   Snackbar,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 
 import axios from "axios";
 import NPDitemInputs from "./NPDitemInputs";
-import { NPDtargetMarkets } from "./NPDtargetMarkets";
 
-NPDtargetMarkets.shift();
-console.log("🚀 ~ file: NPDitemForm.js:25 ~ NPDtargetMarkets:", NPDtargetMarkets)
 
 
 // const targetMarkets = NPDtargetMarkets.splice(1,-1)
@@ -41,11 +40,11 @@ const NPDitemForm = ({ isEdit = false, currentNPDitem }) => {
     formState: { isSubmitting },
   } = useForm({});
   const { push, query, pathname } = useRouter();
-
+  
   const values = watch();
-
+  
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
+  
   const snackbarClick = () => {
     setSnackbarOpen(true);
   };
@@ -55,76 +54,86 @@ const NPDitemForm = ({ isEdit = false, currentNPDitem }) => {
     }
     setSnackbarOpen(false);
   };
-
+  
   useEffect(() => {
     reset(currentNPDitem);
   }, [isEdit, currentNPDitem]);
-
+  
   const onSubmit = async (values) => {
     if (isEdit) {
       await updateNPDitem(values);
     } else {
       await createNPDitem(values);
-      await push("/dashboard/NPDitem/EU");
+      9;
+      await push("/dashboard/PSC/NPDitems");
     }
   };
-
+  
   const updateNPDitem = async (values) => {
     axios
-      .put(`/api/NPDitem/EU/${query.id}`, values)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    .put(`/api/PSC/NPDItems/${query.id}`, values)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
-
+  
   const createNPDitem = async (values) => {
     axios
-      .post("/api/NPDitem/EU", values)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    .post("/api/PSC/NPDItems", values)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
-
+  
   async function removeNPDitem() {
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
       try {
         axios
-          .delete(`/api/NPDitem/EU/${query.id}`, values)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-        await push("/dashboard/NPDitem/EU");
+        .delete(`/api/PSC/NPDItems/${query.id}`, values)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        
+        await push("/dashboard/PSC/NPDItems");
       } catch (error) {
         console.log(error);
       }
     }
   }
+  
+
+const NPDStages = ["PDR", "DTR", "PVC"]
 
   // console.log("🚀 ~ file: NPDitemForm.js:99 ~ NPDitemForm ~ targetMarkets:", targetMarkets)
-
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={7}>
           <Card sx={{ p: 1 }}>
             <NPDitemInputs control={control} />
-            {NPDtargetMarkets.map(value => (
-              <Checkbox
-                key={value}
-                value={value}
-                {...register("market")}
-              />
-            ))}
+            <FormGroup aria-label="position" row>
+              {NPDStages.map((value) => (
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={value}
+                  labelPlacement="bottom"
+                  key={value}
+                  value={value}
+                  {...register("market")}
+                />
+              ))}
+            </FormGroup>
+            
 
             <Stack
               direction="row"
@@ -138,7 +147,7 @@ const NPDitemForm = ({ isEdit = false, currentNPDitem }) => {
                 loading={isSubmitting}
                 onClick={snackbarClick}
               >
-                {!isEdit ? "Create File" : "Save Changes"}
+                {!isEdit ? "Create Item" : "Save Changes"}
               </LoadingButton>
               <Snackbar
                 open={snackbarOpen}
@@ -156,7 +165,7 @@ const NPDitemForm = ({ isEdit = false, currentNPDitem }) => {
             </Stack>
           </Card>
         </Grid>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={5}>
           <Card sx={{ p: 1 }}>
             <Typography
               paragraph

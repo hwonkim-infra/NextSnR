@@ -1,4 +1,4 @@
-import NPD from "@/model/NPD";
+import NPDitems from "@/model/NPDitems";
 import Morgan from "morgan";
 import { dbConnect, runMiddleware } from "@/utils/index";
 
@@ -15,8 +15,8 @@ export default async (req, res) => {
   switch (method) {
     case "GET":
       try {
-        const task = await NPD.findById(id);
-        if (!task) return res.status(400).json({ msg: "NPD does Not exits " });
+        const task = await NPDitems.findById(id);
+        if (!task) return res.status(400).json({ msg: "NPDitems does Not exits " });
         await runMiddleware(req, res, morgan);
         return res.status(200).json(task);
       } catch (err) {
@@ -24,9 +24,9 @@ export default async (req, res) => {
       }
     case "DELETE":
       try {
-        const deletedNPD = await NPD.findByIdAndDelete(id);
-        if (!deletedNPD)
-          return res.status(404).json({ msg: "NPD does Not exits " });
+        const deletedNPDitems = await NPDitems.findByIdAndDelete(id);
+        if (!deletedNPDitems)
+          return res.status(404).json({ msg: "NPDitems does Not exits " });
         await runMiddleware(req, res, morgan);
         return res.status(200).json();
       } catch (err) {
@@ -34,13 +34,13 @@ export default async (req, res) => {
       }
     case "PUT":
       try {
-        const updatedNPD = await NPD.findByIdAndUpdate(id, body, {
+        const updatedNPDitems = await NPDitems.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
-        if (!updatedNPD)
-          return res.status(404).json({ msg: "NPD does Not exits " });
-        return res.status(200).json(updatedNPD);
+        if (!updatedNPDitems)
+          return res.status(404).json({ msg: "NPDitems does Not exits " });
+        return res.status(200).json(updatedNPDitems);
       } catch (err) {
         return res.status(400).json({ msg: err.message });
       }

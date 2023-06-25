@@ -47,7 +47,7 @@ export default function NPDitemList({ NPDitems = [] }) {
   const rows = NPDitems.map((NPDitem) => {
     return {
       id: NPDitem._id,
-      ITEM: NPDitem.item,
+      ITEM: NPDitem.itemName,
       reference: NPDitem.reference,
       requirements: NPDitem.requirements,
       ...NPDitem,
