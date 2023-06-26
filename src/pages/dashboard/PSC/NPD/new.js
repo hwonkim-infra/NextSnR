@@ -10,6 +10,8 @@ import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
 import NPDEditForm from '@/sections/@dashboard/NPD/NPDEditForm';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
@@ -21,6 +23,22 @@ NPDCreate.getLayout = function getLayout(page) {
 
 export default function NPDCreate() {
 
+  const [NPDitems, setNPDitems] = useState({})
+  
+  const getNPDitems = async () => {
+    const response = await axios.get(`/api/PSC/NPDItems/`);
+
+    const data = response.data.data;
+    setNPDitems(data);
+    // console.log(data);
+};
+
+ 
+useEffect(() => {
+  getNPDitems();
+}, [])
+
+
   return (
     <Page title="NPD: Create a new NPD">
         <HeaderBreadcrumbs
@@ -31,7 +49,7 @@ export default function NPDCreate() {
             { name: 'New NPD' },
           ]} */
         /> 
-        <NPDEditForm />
+        <NPDEditForm defaultItems={NPDitems} />
     </Page>
   );
 }

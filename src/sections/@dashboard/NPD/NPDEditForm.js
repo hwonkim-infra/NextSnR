@@ -37,7 +37,11 @@ const defaultValues = {
   },
 };
 
-const NPDEditForm = ({ isEdit = false, currentNPD }) => {
+const NPDEditForm = ({ isEdit = false, currentNPD, defaultItems }) => {
+  console.log( "🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defaultItems );
+
+  /* const DVCitems = defaultItems.filter((item) => item.npdStage.includes("DVC"))
+  console.log("🚀 ~ file: NPDEditForm.js:44 ~ NPDEditForm ~ DVCitems:", DVCitems) */
   const {
     control,
     handleSubmit,
@@ -67,7 +71,6 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
 
   useEffect(() => {
     reset(currentNPD);
-
   }, [isEdit, currentNPD]);
 
   const onSubmit = async (values) => {
@@ -145,10 +148,12 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
     {
       value: "PVC",
       title: "PVC",
-      component: <>
+      component: (
+        <>
           <NPDPVCform control={control} currentNPD={values.npdStage?.PVC} />
-      </>,
-    }
+        </>
+      ),
+    },
   ];
 
   return (
@@ -157,8 +162,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD }) => {
         <Grid container spacing={2}>
           {/* <Grid item xs={12} > */}
           <Card sx={{ p: 1 }}>
-
-            <Stack direction="row" justifyContent="space-between"  sx={{ p: 3 }} >
+            <Stack direction="row" justifyContent="space-between" sx={{ p: 3 }}>
               <NPDSummary control={control} values={values} />
               <LoadingButton
                 type="submit"

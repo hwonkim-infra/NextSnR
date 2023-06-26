@@ -5,7 +5,6 @@ import SignalForm from "./SignalForm";
 import DueDateComponent from "./DueDateComponent";
 
 const NPDDTRform = ({ control, currentNPD }) => {
-  console.log("🚀 ~ file: NPDDTRform.js:7 ~ NPDDTRform ~ currentNPD:", currentNPD)
   if (!currentNPD) return <CircularProgress />;
 
   const NPDStage = "DTR";

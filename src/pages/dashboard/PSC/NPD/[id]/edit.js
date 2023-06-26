@@ -36,6 +36,8 @@ export default function NPDEdit() {
         // console.log(data);
     };
 
+    
+
     useEffect(() => {
         if (query.id) getNPD();
     }, [query.id])

@@ -5,7 +5,7 @@ import {
   InputAdornment,
   MenuItem,
   Select,
-  TextField
+  TextField,
 } from "@mui/material";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
@@ -13,6 +13,7 @@ import { NPDtargetMarkets } from "./NPDtargetMarkets";
 
 // const Markets_Option = ["MD", "EU", "NA", "China", "Korea"];
 const Markets_Option = NPDtargetMarkets.filter((item) => item !== "All");
+const Groups = ["access", "structure","operatorStation","powerTrain","electric","hydraulics","certification","","",];
 
 const NPDitemInput = ({ control }) => {
   const [status, setStatus] = useState("struc");
@@ -72,30 +73,18 @@ const NPDitemInput = ({ control }) => {
         }}
       >
         <Controller
-          name="requirements"
-          control={control}
           render={({ field }) => (
-            <TextField
-              multiline
-              label="requirements"
-              {...field}
-              InputLabelProps={{ shrink: true }}
-              value={field.value || ""}
-            />
+            <Select {...field}>
+                {Groups.map((group) => (
+                    <MenuItem key={group} value={group}>{group}</MenuItem>
+
+                )) }
+              
+            </Select>
           )}
+          name="group"
+          control={control}
         />
-{/* 
-<Controller
-              render={({ field }) => (
-                <Select {...field}>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              )}
-              name="Select"
-              control={control}
-            /> */}
 
         <Controller
           name="markets"

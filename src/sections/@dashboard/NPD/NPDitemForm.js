@@ -111,7 +111,7 @@ const NPDitemForm = ({ isEdit = false, currentNPDitem }) => {
   }
   
 
-const NPDStages = ["PDR", "DTR", "PVC"]
+const NPDStages = ["PDR","FDR", "DVC", "PVC"]
 
   // console.log("🚀 ~ file: NPDitemForm.js:99 ~ NPDitemForm ~ targetMarkets:", targetMarkets)
   
@@ -129,7 +129,7 @@ const NPDStages = ["PDR", "DTR", "PVC"]
                   labelPlacement="bottom"
                   key={value}
                   value={value}
-                  {...register("market")}
+                  {...register("npdStage")}
                 />
               ))}
             </FormGroup>

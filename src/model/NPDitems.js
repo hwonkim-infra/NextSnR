@@ -6,9 +6,11 @@ const NPDitemsSchema = new Schema(
   {
     itemName: String,
     label: String,
+    reference: String,
     group: String,
     state: String,
-    market: Array,
+    npdStage: Array,
+    markets: Array,
     stage: Array
         
     

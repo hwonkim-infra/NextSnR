@@ -34,10 +34,11 @@ export default function NPDitemList({ NPDitems = [] }) {
   const columns = [
     // { field: "id", headerName: "ID", width: 70 },
     { field: "ITEM", headerName: "ITEM", width: 200 },
-    { field: "reference", headerName: "reference", width: 200 },
+    { field: "group", headerName: "Group", width: 200 },
+    { field: "npdStage", headerName: "NPDstage", width: 200 },
     {
-      field: "requirements",
-      headerName: "requirements",
+      field: "markets",
+      headerName: "Target",
       flex: 1,
       minWidth: 400,
     },
@@ -48,9 +49,9 @@ export default function NPDitemList({ NPDitems = [] }) {
     return {
       id: NPDitem._id,
       ITEM: NPDitem.itemName,
-      reference: NPDitem.reference,
-      requirements: NPDitem.requirements,
-      ...NPDitem,
+      npdStage: NPDitem.npdStage,
+      group: NPDitem.group,
+      ...NPDitem
     };
   });
 
