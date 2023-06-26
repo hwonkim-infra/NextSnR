@@ -21,22 +21,7 @@ NPDCreate.getLayout = function getLayout(page) {
 
 // ----------------------------------------------------------------------
 
-export default function NPDCreate() {
-
-  const [NPDitems, setNPDitems] = useState({})
-  
-  const getNPDitems = async () => {
-    const response = await axios.get(`/api/PSC/NPDItems/`);
-
-    const data = response.data.data;
-    setNPDitems(data);
-    // console.log(data);
-};
-
- 
-useEffect(() => {
-  getNPDitems();
-}, [])
+export default function NPDCreate({FDRitems=[], DVCitems=[]}) {
 
 
   return (
@@ -49,7 +34,21 @@ useEffect(() => {
             { name: 'New NPD' },
           ]} */
         /> 
-        <NPDEditForm defaultItems={NPDitems} />
+        <NPDEditForm defaultItems = {[FDRitems, DVCitems]}  />
     </Page>
   );
+}
+
+
+export async function getServerSideProps() {
+  const FDRs = await axios.get("http://127.0.0.1:3000/api/PSC/NPDItems/npdStage/FDR");
+  const DVCs = await axios.get("http://127.0.0.1:3000/api/PSC/NPDItems/npdStage/DVC");
+  const FDRitems = FDRs.data;
+  const DVCitems = DVCs.data;
+  
+  return {
+    props: {
+      FDRitems, DVCitems
+    },
+  };
 }

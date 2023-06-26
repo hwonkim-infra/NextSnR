@@ -1,14 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 
-import EditIcon from '@mui/icons-material/Edit';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Grid,
-  Paper
-} from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import { Box, Button, CircularProgress, Grid, Paper } from "@mui/material";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
@@ -21,7 +15,6 @@ import Layout from "@/layouts";
 // import NPDitemDetailPrev from "@/components/NPDitem/NPDitemDetailPrev";
 import Page from "@/components/Page";
 import { DataGrid } from "@mui/x-data-grid";
-
 
 NPDitemList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
@@ -51,14 +44,14 @@ export default function NPDitemList({ NPDitems = [] }) {
       ITEM: NPDitem.itemName,
       npdStage: NPDitem.npdStage,
       group: NPDitem.group,
-      ...NPDitem
+      ...NPDitem,
     };
   });
 
   return (
     <Page title="NPDitem List">
       <Grid container spacing={2}>
-        <Grid item xs={6} sx={{ height: 900 }}>
+        <Grid item xs={8} sx={{ height: 900 }}>
           <HeaderBreadcrumbs
             heading="NPD check Items"
             links={[{ name: "PVC" }, { name: "EU" }]}
@@ -87,22 +80,23 @@ export default function NPDitemList({ NPDitems = [] }) {
             }}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           {currentNPDitem._id && (
             <>
               <Paper elevation={2} style={{ padding: "5px", m: 1 }}>
                 {/* <NPDitemDetailPrev currentNPDitem={currentNPDitem} /> */}
               </Paper>
               <Box>
-                 
                 <Button
-          sx={{ m: 1 }}
-          variant="outlined"
-          startIcon={<EditIcon />}
-          href={"/dashboard/PSC/NPDitems/" + currentNPDitem?.id + "/edit"}
-        >
-          Edit
-        </Button>
+                  sx={{ m: 1 }}
+                  variant="outlined"
+                  startIcon={<EditIcon />}
+                  href={
+                    "/dashboard/PSC/NPDitems/" + currentNPDitem?.id + "/edit"
+                  }
+                >
+                  Edit
+                </Button>
               </Box>
 
               <Paper elevation={2} style={{ padding: "5px" }}>
@@ -110,8 +104,6 @@ export default function NPDitemList({ NPDitems = [] }) {
               </Paper>
             </>
           )}
-
-          
         </Grid>
       </Grid>
     </Page>

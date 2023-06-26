@@ -6,7 +6,7 @@ import { dbConnect, runMiddleware } from "@/utils";
 dbConnect();
 
 export default async (req, res) => {
-  const { method, body } = req;
+  const { method, body, query } = req;
   const morgan = Morgan("combined");
 
   switch (method) {

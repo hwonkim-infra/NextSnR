@@ -13,7 +13,7 @@ import { NPDtargetMarkets } from "./NPDtargetMarkets";
 
 // const Markets_Option = ["MD", "EU", "NA", "China", "Korea"];
 const Markets_Option = NPDtargetMarkets.filter((item) => item !== "All");
-const Groups = ["access", "structure","operatorStation","powerTrain","electric","hydraulics","certification","","",];
+const Groups = ["access", "structure","operatorStation","powerTrain","electric","hydraulics","certification","brake","steering","protective","HVAC","objectHandling","electric","engineEmission","noiseVibration",];
 
 const NPDitemInput = ({ control }) => {
   const [status, setStatus] = useState("struc");

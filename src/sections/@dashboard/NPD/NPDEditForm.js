@@ -38,7 +38,7 @@ const defaultValues = {
 };
 
 const NPDEditForm = ({ isEdit = false, currentNPD, defaultItems }) => {
-  console.log( "🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defaultItems );
+console.log("🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defaultItems)
 
   /* const DVCitems = defaultItems.filter((item) => item.npdStage.includes("DVC"))
   console.log("🚀 ~ file: NPDEditForm.js:44 ~ NPDEditForm ~ DVCitems:", DVCitems) */
