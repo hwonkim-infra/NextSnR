@@ -43,8 +43,9 @@ const navConfig = [
     path: '/dashboard/PSC',
         icon: ICONS.dashboard,
         children: [
-          { title: 'NPD ', path: '/dashboard/PSC/NPD' },
-          { title: 'EU ', path: '/dashboard/PSC/EU' },
+          { title: 'NPDmodels ', path: '/dashboard/PSC/NPD' },
+          { title: 'NPDitems ', path: '/dashboard/PSC/NPDitems' },
+          { title: 'PRC Guide ', path: '/dashboard/PSC/EU' },
           { title: 'worldData ', path: '/dashboard/PSC/Global' },
         ],
       },

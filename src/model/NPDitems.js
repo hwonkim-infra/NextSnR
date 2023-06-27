@@ -9,7 +9,7 @@ const NPDitemsSchema = new Schema(
     reference: String,
     group: String,
     state: String,
-    npdStage: Array,
+    npdStage: String,
     markets: Array,
     stage: Array
         

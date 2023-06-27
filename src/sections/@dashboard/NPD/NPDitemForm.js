@@ -121,7 +121,7 @@ const NPDStages = ["PDR","FDR", "DVC", "PVC"]
         <Grid item xs={12} md={7}>
           <Card sx={{ p: 1 }}>
             <NPDitemInputs control={control} />
-            <FormGroup aria-label="position" row>
+            {/* <FormGroup aria-label="position" row>
               {NPDStages.map((value) => (
                 <FormControlLabel
                   control={<Checkbox />}
@@ -132,7 +132,7 @@ const NPDStages = ["PDR","FDR", "DVC", "PVC"]
                   {...register("npdStage")}
                 />
               ))}
-            </FormGroup>
+            </FormGroup> */}
             
 
             <Stack

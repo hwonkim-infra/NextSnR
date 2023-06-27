@@ -7,6 +7,7 @@ import { Controller } from "react-hook-form";
 import DatePicker from "react-multi-date-picker";
 
 export default function NPDFDRform({ control, currentNPD }) {
+  console.log("🚀 ~ file: NPDFDRform.js:10 ~ NPDFDRform ~ currentNPD:", currentNPD)
   const NPDStage = "FDR";
   if (!currentNPD) return <CircularProgress />;
   return (
@@ -30,6 +31,7 @@ export default function NPDFDRform({ control, currentNPD }) {
                         onChange={(e) => field.onChange(e)}
                         value={field.value || ""}
                       />
+    
                     </>
                   )}
                 />
@@ -37,6 +39,7 @@ export default function NPDFDRform({ control, currentNPD }) {
             </>
           </Box>
         </Grid>
+        
         <Grid item xs={3}>
           <SignalForm
             group={"access"}

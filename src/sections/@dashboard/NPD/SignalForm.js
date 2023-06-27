@@ -43,46 +43,40 @@ export default function SignalForm({
           {currentNPD.map((item, index) => {
             if (groupIndexing(group).includes(index)) {
               return (
-                <Fragment key={item.name}>
+                <Fragment key={item.itemName}>
                   <h4>{item.label}</h4>
                   <Box sx={{ p: 1 }}>
-                   
-                          <Stack direction="row">
+                    <Stack direction="row">
+                      <Controller
+                        name={`npdStage.${NPDStage}[${index}].state`}
+                        render={({ field }) => (
+                          <Select {...field}>
+                            <MenuItem value={"green"}>✅Green</MenuItem>
+                            <MenuItem value={"yellow"}>🟨Yellow</MenuItem>
+                            <MenuItem value={"red"}>❌Red</MenuItem>
+                            <MenuItem value={"white"}>🔘White</MenuItem>
+                            <MenuItem value={"NA"}>No Account</MenuItem>
+                          </Select>
+                        )}
+                        control={control}
+                      />
 
-
-<Controller
-                      name={`npdStage.${NPDStage}[${index}].state`}
-                      render={({ field }) => (
-                        <Select {...field}>
-                        <MenuItem value={"green"}>✅Green</MenuItem>
-                        <MenuItem value={"yellow"}>🟨Yellow</MenuItem>
-                        <MenuItem value={"red"}>❌Red</MenuItem>
-                        <MenuItem value={"white"}>🔘White</MenuItem>
-                        <MenuItem value={"NA"}>No Account</MenuItem>
-                      </Select>
-                      )}
-                      control={control}
-                    />
-
-
-                    <Controller
-                      render={({ field }) => (
-                        <TextField
-                          sx={{ width: "100%" }}
-                          label={"description"}
-                          {...field}
-                          fullWidth
-                          size="small"
-                          variant="standard"
-                          value={field.value || ""}
-                        />
-                      )}
-                      name={`npdStage.${NPDStage}[${index}].description`}
-
-                    
-                      control={control}
-                    />
-                          </Stack>
+                      <Controller
+                        render={({ field }) => (
+                          <TextField
+                            sx={{ width: "100%" }}
+                            label={"description"}
+                            {...field}
+                            fullWidth
+                            size="small"
+                            variant="standard"
+                            value={field.value || ""}
+                          />
+                        )}
+                        name={`npdStage.${NPDStage}[${index}].description`}
+                        control={control}
+                      />
+                    </Stack>
                   </Box>
                 </Fragment>
               );

@@ -5,6 +5,7 @@ import {
   InputAdornment,
   MenuItem,
   Select,
+  Stack,
   TextField,
 } from "@mui/material";
 import { useState } from "react";
@@ -13,7 +14,23 @@ import { NPDtargetMarkets } from "./NPDtargetMarkets";
 
 // const Markets_Option = ["MD", "EU", "NA", "China", "Korea"];
 const Markets_Option = NPDtargetMarkets.filter((item) => item !== "All");
-const Groups = ["access", "structure","operatorStation","powerTrain","electric","hydraulics","certification","brake","steering","protective","HVAC","objectHandling","electric","engineEmission","noiseVibration",];
+const Groups = [
+  "access",
+  "structure",
+  "operatorStation",
+  "powerTrain",
+  "electric",
+  "hydraulics",
+  "certification",
+  "brake",
+  "steering",
+  "protective",
+  "HVAC",
+  "objectHandling",
+  "electric",
+  "engineEmission",
+  "noiseVibration",
+];
 
 const NPDitemInput = ({ control }) => {
   const [status, setStatus] = useState("struc");
@@ -65,26 +82,40 @@ const NPDitemInput = ({ control }) => {
         ))}
       </Box>
       <Box
-        sx={{
-          display: "grid",
-          columnGap: 2,
-          rowGap: 2,
-          gridTemplateColumns: "auto",
-        }}
+      sx={{
+        display: "grid",
+        columnGap: 2,
+        rowGap: 2,
+        gridTemplateColumns: "auto",
+      }}
       >
-        <Controller
-          render={({ field }) => (
-            <Select {...field}>
-                {Groups.map((group) => (
-                    <MenuItem key={group} value={group}>{group}</MenuItem>
+        <Stack direction="row">
+          <Controller
+            name={`npdStage`}
+            render={({ field }) => (
+              <Select  label="Stage" {...field} sx={{ minWidth: 200 }}>
+                <MenuItem value={"FDR"}>FDR</MenuItem>
+                <MenuItem value={"DVC"}>DVC</MenuItem>
+                <MenuItem value={"PVC"}>PVC</MenuItem>
+              </Select>
+            )}
+            control={control}
+          />
 
-                )) }
-              
-            </Select>
-          )}
-          name="group"
-          control={control}
-        />
+          <Controller
+            render={({ field }) => (
+              <Select {...field} sx={{ minWidth: 200 }}>
+                {Groups.map((group) => (
+                  <MenuItem key={group} value={group}>
+                    {group}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
+            name="group"
+            control={control}
+          />
+        </Stack>
 
         <Controller
           name="markets"

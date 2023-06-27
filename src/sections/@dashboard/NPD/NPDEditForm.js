@@ -25,20 +25,19 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { NPD_DTR, NPD_FDR, NPD_PVC } from "./NPDdefaultItems";
-import NPDDTRform from "./NPDDTRform";
-import NPDPVCform from "./NPDPVCform";
+import NPDDVCform from "./NPDDVCform";
 import NPDFDRform from "./NPDFDRform";
 
-const defaultValues = {
-  npdStage: {
-    FDR: NPD_FDR,
-    DTR: NPD_DTR,
-    PVC: NPD_PVC,
-  },
-};
 
 const NPDEditForm = ({ isEdit = false, currentNPD, defaultItems }) => {
-console.log("🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defaultItems)
+  // console.log("🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defaultItems[0])
+  const defaultValues = {
+    npdStage: {
+      FDR: defaultItems[0].data,
+      DVC: defaultItems[1].data,
+      
+    },
+  };
 
   /* const DVCitems = defaultItems.filter((item) => item.npdStage.includes("DVC"))
   console.log("🚀 ~ file: NPDEditForm.js:44 ~ NPDEditForm ~ DVCitems:", DVCitems) */
@@ -53,7 +52,7 @@ console.log("🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defa
     defaultValues: defaultValues,
   });
   const { push, query, pathname } = useRouter();
-  const { currentTab, onChangeTab } = useTabs("DTR");
+  const { currentTab, onChangeTab } = useTabs("FDR");
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -137,20 +136,11 @@ console.log("🚀 ~ file: NPDEditForm.js:41 ~ NPDEditForm ~ defaultItems:", defa
       ),
     },
     {
-      value: "DTR",
-      title: "DTR FDR",
+      value: "DVC",
+      title: "DVC",
       component: (
         <>
-          <NPDDTRform control={control} currentNPD={values.npdStage?.DTR} />
-        </>
-      ),
-    },
-    {
-      value: "PVC",
-      title: "PVC",
-      component: (
-        <>
-          <NPDPVCform control={control} currentNPD={values.npdStage?.PVC} />
+          <NPDDVCform control={control} currentNPD={values.npdStage?.DVC} />
         </>
       ),
     },

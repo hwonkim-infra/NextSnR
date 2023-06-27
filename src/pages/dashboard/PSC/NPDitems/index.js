@@ -15,6 +15,7 @@ import Layout from "@/layouts";
 // import NPDitemDetailPrev from "@/components/NPDitem/NPDitemDetailPrev";
 import Page from "@/components/Page";
 import { DataGrid } from "@mui/x-data-grid";
+import NPDitemDetailPrev from "@/sections/@dashboard/NPD/NPDitemDetailPrev";
 
 NPDitemList.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
@@ -84,16 +85,15 @@ export default function NPDitemList({ NPDitems = [] }) {
           {currentNPDitem._id && (
             <>
               <Paper elevation={2} style={{ padding: "5px", m: 1 }}>
-                {/* <NPDitemDetailPrev currentNPDitem={currentNPDitem} /> */}
+                Preview
+                <NPDitemDetailPrev currentNPDitem={currentNPDitem} />
               </Paper>
               <Box>
                 <Button
                   sx={{ m: 1 }}
                   variant="outlined"
                   startIcon={<EditIcon />}
-                  href={
-                    "/dashboard/PSC/NPDitems/" + currentNPDitem?.id + "/edit"
-                  }
+                  href={ "/dashboard/PSC/NPDitems/" + currentNPDitem?.id + "/edit" }
                 >
                   Edit
                 </Button>
