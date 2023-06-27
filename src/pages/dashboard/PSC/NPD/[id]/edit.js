@@ -22,7 +22,7 @@ NPDEdit.getLayout = function getLayout(page) {
 
 // ----------------------------------------------------------------------
 
-export default function NPDEdit() {
+export default function NPDEdit({FDRitems=[], DVCitems=[]}) {
 
     const [currentNPD, setCurrentNPD] = useState({})
 
@@ -52,7 +52,21 @@ export default function NPDEdit() {
             { name: 'New NPD' },
           ]} */
         /> 
-        <NPDEditForm isEdit currentNPD={currentNPD} />
+        <NPDEditForm isEdit currentNPD={currentNPD} defaultItems = {[FDRitems, DVCitems]}  />
     </Page>
   );
+}
+
+
+export async function getServerSideProps() {
+  const FDRs = await axios.get("http://127.0.0.1:3000/api/PSC/NPDItems/npdStage/FDR");
+  const DVCs = await axios.get("http://127.0.0.1:3000/api/PSC/NPDItems/npdStage/DVC");
+  const FDRitems = FDRs.data;
+  const DVCitems = DVCs.data;
+  
+  return {
+    props: {
+      FDRitems, DVCitems
+    },
+  };
 }

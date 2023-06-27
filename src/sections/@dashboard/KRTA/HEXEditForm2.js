@@ -318,7 +318,7 @@ const HEXEditForm = ({
             </Card>
           </Grid>
         </Grid>
-              {/* {JSON.stringify(values, 0, 2)} */}
+              {JSON.stringify(values.attachments, 0, 2)}
       </form>
     </div>
   );

@@ -14,9 +14,9 @@ export default function NPDCard({ npd }) {
   if (!npd) return null;
   const { model_name, _id, npdStage } = npd;
   const currentStage = Object.keys(npdStage)[1];
-  console.log(npdStage);
+  // console.log(npdStage);
 
-  const { currentTab, onChangeTab } = useTabs("DTR");
+  const { currentTab, onChangeTab } = useTabs("FDR");
 
   const COUNT_TABS = [
     {
@@ -40,22 +40,22 @@ export default function NPDCard({ npd }) {
       ),
     },
     {
-      value: "DTR",
-      title: "DTR FDR",
+      value: "DVC",
+      title: "DVC",
       component: <> <Typography variant="subtitle2" color="green" sx={{ p: 1 }}>
       Greens:
-      {countColor(npdStage.DTR, "green")}{" "}
+      {countColor(npdStage.DVC, "green")}{" "}
     </Typography>
     <Typography variant="subtitle2" sx={{ p: 1 }}>
       Yellow:
-      {countColor(npdStage.DTR, "yellow")}{" "}
+      {countColor(npdStage.DVC, "yellow")}{" "}
     </Typography>
     <Typography variant="subtitle2" color="red" sx={{ p: 1 }}>
       Red:
-      {countColor(npdStage.DTR, "red")}{" "}
+      {countColor(npdStage.DVC, "red")}{" "}
     </Typography></>,
     },
-    {
+    /* {
       value: "PVC",
       title: "PVC",
       component: <> <Typography variant="subtitle2" color="green" sx={{ p: 1 }}>
@@ -70,7 +70,7 @@ export default function NPDCard({ npd }) {
       Red:
       {countColor(npdStage.PVC, "red")}{" "}
     </Typography></>,
-    },
+    }, */
   ];
 
 

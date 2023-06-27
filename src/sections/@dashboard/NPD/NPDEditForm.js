@@ -213,7 +213,7 @@ const NPDEditForm = ({ isEdit = false, currentNPD, defaultItems }) => {
             {/* <SpecSheet values={values} /> */}
           </Card>
         </Grid>
-        {/* {JSON.stringify(values, 0, 2)} */}
+        {JSON.stringify(values, 0, 2)}
       </>
     </form>
   );

@@ -11,7 +11,6 @@ const NPDitemsSchema = new Schema(
     state: String,
     npdStage: String,
     markets: Array,
-    stage: Array
         
     
 

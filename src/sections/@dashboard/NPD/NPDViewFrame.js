@@ -19,12 +19,12 @@ import {
 import React from "react";
 import NPDresults from "./NPDresults";
 import useTabs from "@/hooks/useTabs";
-import NPDDTRResults from "./NPDDTRresults";
 import NPDPVCResults from "./NPDPVCresults";
+import NPDFDRResults from "./NPDFDRresults";
 
 export default function NPDViewFrame({ currentNPD }) {
   if (!currentNPD) return <CircularProgress />;
-  const { currentTab, onChangeTab } = useTabs("DTR");
+  const { currentTab, onChangeTab } = useTabs("FDR");
   
 
   const STAGE_TABS = [
@@ -33,22 +33,22 @@ export default function NPDViewFrame({ currentNPD }) {
       title: "FDR",
       component: (
         <>
-          <NPDDTRResults currentNPD={currentNPD.npdStage?.FDR} />
+          <NPDFDRResults currentNPD={currentNPD.npdStage?.FDR} />
           
         </>
       ),
     },
-    {
-      value: "DTR",
-      title: "DTR FDR",
+    /* {
+      value: "DVC",
+      title: "DVC",
       component: (
         <>
-          <NPDDTRResults currentNPD={currentNPD.npdStage?.DTR} />
+          <NPDDTRResults currentNPD={currentNPD.npdStage?.DVC} />
           
         </>
       ),
-    },
-    {
+    }, */
+    /* {
       value: "PVC",
       title: "PVC",
       component: (
@@ -57,7 +57,7 @@ export default function NPDViewFrame({ currentNPD }) {
           
         </>
       ),
-    },
+    }, */
   ];
   return (
     <>

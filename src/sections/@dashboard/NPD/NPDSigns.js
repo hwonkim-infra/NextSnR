@@ -9,6 +9,7 @@ import {
 import { Fragment } from "react";
 
 export default function NPDSigns({ item }) {
+  console.log("🚀 ~ file: NPDSigns.js:12 ~ NPDSigns ~ item:", item)
   if (!item) return <CircularProgress />;
 
   function letterColor(value) {
@@ -16,7 +17,8 @@ export default function NPDSigns({ item }) {
       return "white";
     } else {
       return "black";
-    }
+    } 
+    
   }
   // console.log(stageSignals.state)
 

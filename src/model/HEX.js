@@ -64,6 +64,7 @@ const HEXSchema = new Schema({
         quick_coupler_weight_1: Number,
         quick_coupler_2: String,
         quick_coupler_weight_2: Number,
+        quickCoupler: Array,
 
         // 작업반경
         digging_reach: Number,

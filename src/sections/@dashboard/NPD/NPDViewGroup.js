@@ -9,6 +9,7 @@ import { Fragment } from "react";
 import NPDSigns from "./NPDSigns";
 
 export default function NPDViewGroup({ npdDatas, groupName, group }) {
+  console.log("🚀 ~ file: NPDViewGroup.js:12 ~ NPDViewGroup ~ npdDatas:", npdDatas)
   if (!npdDatas) return <CircularProgress />;
 
   return (
@@ -17,7 +18,7 @@ export default function NPDViewGroup({ npdDatas, groupName, group }) {
       {npdDatas
         .filter((item) => item.group ===  group )
         .map((item, index) => {
-          return <NPDSigns key={item.name} item={item} />;
+          return <NPDSigns key={item.itemName} item={item} />;
         })}
     </Box>
   );

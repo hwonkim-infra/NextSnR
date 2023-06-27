@@ -10,10 +10,7 @@ import Iconify from "@/components/Iconify";
 
 const PSCdetailInput = ({control} ) => {
 
-    const { fields, append, remove, prepend } = useFieldArray({
-        control,
-        name: "actions",
-      });
+    const { fields, append, remove, prepend } = useFieldArray({ control, name: "actions", });
 
   return (
     <Fragment>
