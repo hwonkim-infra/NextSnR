@@ -64,26 +64,24 @@ const HDZSchema = new Schema({
     // 주행성능 관련
     travel: {
         // 주행속도
-        engine_rev: Number,
-        TM_flow_1: Number,
-        reduc: Number,
-        teeth: Number,
-        pitch: Number,
-        TM_rpm: Number,
-        reduc_rpm: Number,
-        drag: Number,
-
-        // 출력토크
-        pump_pressure: Number,
-        TM_flow_q: Number,
-        TM_mt: Number,
-        TM_torque: Number, // 출력토크 계산결과 
+        Q_Pump: Number,
+        q_Motor: Number,
+        Gear_Ratio: Number,
+        Sprocket_Radius: Number,
+        vol_eff: Number,
+        
+        travel_speed: Number,        
 
         // 구동력
-        reduc_trac: Number,
-        sprocket_PCD: Number,
-        eff_trac: Number,
-        TM_traction: Number, // 구동력 계산결과
+        P_Pump: Number,
+        q_Motor_T: Number,
+        T_Motor: Number,
+        Gear_eff: Number,
+        Mech_eff: Number,
+        
+        traction: Number,        
+
+        
 
         travel_drag: Number,  // 주행저항계수
         
@@ -108,7 +106,6 @@ const HDZSchema = new Schema({
         traction_slope: Number,
         brake_torque: Number,
 
-        travel_speed: Number,        
         
         travel_speed_description: String,
         greadability_description: String,

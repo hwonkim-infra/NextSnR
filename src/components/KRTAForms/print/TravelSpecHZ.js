@@ -4,36 +4,18 @@ import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
 
+const roundTwo = (num) => {
+  return +(Math.round(num + "e+2") + "e-2");
+};
 
 const TravelSpecHZ = ({ values, config }) => {
     if (!values.travel) return <CircularProgress />
-  const TM_rev_1 =
-    Math.round(
-      ((values.travel.pump_displacement * values.travel.TM_mv) /
-        (values.travel.TM_flow_1 * values.travel.reduc)) *
-        1000 *
-        100
-    ) / 100;
-  const TM_rev_2 =
-    Math.round(
-      ((values.travel.pump_displacement * values.travel.TM_mv) /
-        (values.travel.TM_flow_2 * values.travel.reduc)) *
-        1000 *
-        100
-    ) / 100;
+  
+    const N_Motor = roundTwo(((values.travel.Q_Pump * 1000) / values.travel.q_Motor) * values.travel.vol_eff);
 
-  const travel_speed_1 =
-    Math.round(
-      ((TM_rev_1 * 2 * Math.PI * values.travel.sprocket_radius * 60) /
-        10 ** 6) *
-        100
-    ) / 100;
-  const travel_speed_2 =
-    Math.round(
-      ((TM_rev_2 * 2 * Math.PI * values.travel.sprocket_radius * 60) /
-        10 ** 6) *
-        100
-    ) / 100;
+
+  const N_RG = roundTwo(N_Motor / values.travel.Gear_Ratio);
+
 
   return (
     <>
@@ -67,82 +49,59 @@ const TravelSpecHZ = ({ values, config }) => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td>주행시 엔진 회전수</td>
+                      <td>주행펌프</td>
                       <td>
-                        <InlineMath>{`\ n_e`}</InlineMath>
+                        <InlineMath>{`\ Q_{Pump}`}</InlineMath>
                       </td>
                       <td>rpm</td>
-                      <td>{values.travel.engine_rev}</td>
+                      <td>{values.travel.Q_Pump}</td>
                       <td></td>
                     </tr>
                     <tr>
-                      <td>모터 용적</td>
+                      <td>주행모터</td>
                       <td>
-                        <InlineMath>{`\ q_m`}</InlineMath>
+                        <InlineMath>{`\ q_{Motor}`}</InlineMath>
                       </td>
                       <td>cc/rev</td>
-                      <td>{values.travel.TM_flow_1}</td>
+                      <td>{values.travel.q_Motor}</td>
                       <td></td>
                     </tr>
                     <tr>
-                      <td>감속비</td>
+                      <td>기어비</td>
                       <td>
                       <InlineMath>{`\ i`}</InlineMath>
                         
                       </td>
                       <td></td>
                       <td>
-                        {values.travel.reduc}
-                      </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>No. of Teeth</td>
-                      <td>
-                      <InlineMath>{`\ z`}</InlineMath>
-                        
-                      </td>
-                      <td></td>
-                      <td>
-                        {values.travel.teeth}
-                      </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Link Pitch</td>
-                      <td>
-                      <InlineMath>{`\ P_1`}</InlineMath>
-                      </td>
-                      <td></td>
-                      <td>
-                        {values.travel.pitch}
-                      </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>모터속도</td>
-                      <td>
-                      <InlineMath>{`\ n_m`}</InlineMath>
-                      </td>
-                      <td>rpm</td>
-                      <td>
-                        {values.travel.TM_rpm}
+                        {values.travel.Gear_Ratio}
                       </td>
                       <td></td>
                     </tr>
                     
                     <tr>
-                      <td>주행 효율</td>
+                      <td>스프로켓 반경</td>
                       <td>
-                      <InlineMath>{`\ η`}</InlineMath>
-                        
+                      <InlineMath>{`\ R_{sprocket}`}</InlineMath>
                       </td>
-                      <td></td>
+                      <td>m</td>
                       <td>
-                        {values.travel.drag}
+                        {values.travel.Sprocket_Radius}
                       </td>
                       <td></td>
                     </tr>
+                    <tr>
+                      <td>주행효율</td>
+                      <td>
+                      <InlineMath>{`\ n_m`}</InlineMath>
+                      </td>
+                      <td></td>
+                      <td>
+                        {values.travel.vol_eff}
+                      </td>
+                      <td></td>
+                    </tr>
+                    
                     
                   </tbody>
                 </table>
@@ -163,33 +122,49 @@ const TravelSpecHZ = ({ values, config }) => {
 
             <tr>
               <td className={styles.head_description}>
-                <p>○ 감속기 회전속도에 따른 주행속도 계산</p>
+                <p>○ 주행모터 회전속도에 따른 주행속도 계산</p>
                     <table style={{width:"100%", height:"70%", margin: "auto"}} >
                     <tbody >
                       <tr>
                         <TableCell >
-                          감속기 축 회전 <InlineMath>{` n_r`}</InlineMath>
+                          <InlineMath>{` n_{motor}`}</InlineMath>
 
                         </TableCell>
                       </tr>
                       <tr>
                         <td>
                           
-                          <InlineMath>{` n_r =  \\cfrac{i}{n_m} = \\cfrac{ ${values.travel.TM_rpm} }{ ${values.travel.reduc}} =  ${values.travel.reduc_rpm} `}</InlineMath>
+                          <InlineMath>{` n_{motor} =  \\cfrac{Q_{Pump}*1000}{q_{motor}} \\times vol_{eff} =  \\cfrac{${values.travel.Q_Pump}*1000}{${values.travel.q_Motor}} \\times ${values.travel.vol_eff} = { ${N_Motor} } `}</InlineMath>
                         </td>
                       </tr>
                       
                       
                       <tr>
                         <TableCell >
-                          주행속도 (km/hr)
+                          N_RG
                         </TableCell>
                       </tr>
                       <tr>
                         <td>
-                          <InlineMath>{`V_e = \\cfrac{η \\times z \\times P_1 \\times n_r  \\times 60}{2 \\times 10^6}  = \\cfrac{ ${values.travel.drag} \\times ${values.travel.teeth} \\times ${values.travel.pitch} \\times ${values.travel.reduc_rpm} \\times 60}{2 \\times 10^6}  = ${values.travel.travel_speed}`}</InlineMath>
+                        <InlineMath>{` n_{RG} =  \\cfrac{ Q_{Pump} }{ i_{gear} } =  \\cfrac{${N_Motor}*1000}{${values.travel.Gear_Ratio}} \\times ${values.travel.vol_eff} = { ${N_RG} } `}</InlineMath>
+                          
                         </td>
                       </tr>
+
+                      
+                      <tr>
+                        <TableCell >
+                          주행속도
+                        </TableCell>
+                      </tr>
+                      <tr>
+                        <td>
+                        <InlineMath>{` \\cfrac{ n_{RG} \\times 2 \\times \\pi \\times R_{sprocket}  }{ 60 } \\times \\cfrac{ 3600}{1000}  =  \\cfrac{ ${N_RG} \\times 2 \\times \\pi \\times ${values.travel.Sprocket_Radius}  }{ 60 } \\times \\cfrac{ 3600}{1000} = { ${values.travel.travel_speed} } `}</InlineMath>
+                          
+                        </td>
+                      </tr>
+                      
+
                       
                     </tbody>
                   </table>

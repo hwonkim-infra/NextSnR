@@ -4,62 +4,59 @@ import TextFieldInput from "./TextFieldInput";
 export default function TravelDZ({ control }) {
   const travelSpeedForms = [
     {
-      label: "엔진 회전수(ne)",
-      name: "travel.engine_rev",
+      label: "주행펌프(Q_Pump)",
+      name: "travel.Q_Pump",
       type: "number",
       unit: "rpm",
     },
     {
-      label: "주행모터 용적(qm)",
-      name: "travel.TM_flow_1",
+      label: "주행모터 용적(q_Motor)",
+      name: "travel.q_Motor",
       type: "number",
       unit: "cc/rev",
     },
-    { label: "No.Teeth(z)", name: "travel.teeth", type: "number", unit: "" },
+    { label: "기어비(Gear_Ratio)", name: "travel.Gear_Ratio", type: "number", unit: "" },
     {
-      label: "Link Pitch(z)",
-      name: "travel.pitch",
+      label: "스프로켓 PCD",
+      name: "travel.Sprocket_Radius",
       type: "number",
       unit: "㎜",
     },
-    { label: "주행 감속비(i)", name: "travel.reduc", type: "number", unit: "" },
     {
-      label: "주행모터 속도(nm)",
-      name: "travel.TM_rpm",
+      label: "주행효율(vol_eff,η)",
+      name: "travel.vol_eff",
       type: "number",
-      unit: "rpm",
+      unit: "㎜",
     },
-    
-    { label: "주행 효율(η)", name: "travel.drag", type: "number", unit: "" },
   ];
 
   const greadabilityForms = [
     // 출력토크
     {
-      label: "주행펌프 압력",
-      name: "travel.pump_pressure",
+      label: "견인펌프(P_Pump)",
+      name: "travel.P_Pump",
       type: "number",
-      unit: "(P, bar)",
+      unit: "rpm",
     },
     {
-      label: "주행모터 용량",
-      name: "travel.TM_flow_q",
+      label: "견인모터(T_Motor)",
+      name: "travel.q_Motor_T",
       type: "number",
       unit: "cc/rev",
     },
     {
-      label: "주행모터 효율(η)",
-      name: "travel.TM_mt",
+      label: "견인모터효율(Gear_eff,η)",
+      name: "travel.Gear_eff",
+      type: "number",
+      unit: "",
+    },
+    {
+      label: "기계효율(Mech_eff)",
+      name: "travel.Mech_eff",
       type: "number",
       unit: "",
     },
     // 구동력
-    {
-      label: "스프로켓 PCD",
-      name: "travel.sprocket_PCD",
-      type: "number",
-      unit: "㎜",
-    },
     {
       label: "구동 효율(η)",
       name: "travel.eff_trac",

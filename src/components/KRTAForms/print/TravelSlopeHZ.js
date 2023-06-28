@@ -10,8 +10,18 @@ import {
   TableRow,
 } from "@mui/material";
 
+const roundTwo = (num) => {
+  return +(Math.round(num + "e+2") + "e-2");
+};
+
+
 const TravelSlopeHZ = ({ values, config }) => {
   if (!values.travel) return <CircularProgress />;
+
+  const T_Motor = roundTwo(values.travel.P_Pump*values.travel.q_Motor_T/2/  Math.PI * values.travel.Mech_eff);
+
+  const T_RG = roundTwo(T_Motor * values.travel.Gear_Ratio * values.travel.Gear_eff);
+
 
   let slope_traction;
   (values.travel.traction_slope <= 0) ? (slope_traction = "∞") : (slope_traction = values.travel.traction_slope);
@@ -40,7 +50,7 @@ const TravelSlopeHZ = ({ values, config }) => {
                 </p>
 
                 <p>○ 등판 구동력 관련 제원</p>
-                <table style={{ width: "80%", height: "45%", margin: "auto" }}>
+                <table style={{ width: "80%", height: "40%", margin: "auto" }}>
                   <thead>
                     <tr style={{ height: "10%", margin: "auto" }}>
                       <th>항목</th>
@@ -60,82 +70,95 @@ const TravelSlopeHZ = ({ values, config }) => {
                       <td>{values.grossWeight}</td>
                     </tr>
                     <tr>
-                      <td>주행 펌프 압력</td>
+                      <td>주행펌프(견인)</td>
                       <td>
-                        <InlineMath>{`\ P`}</InlineMath>
+                        <InlineMath>{`\ P_{Pump}`}</InlineMath>
                       </td>
                       <td>㎏/㎠</td>
-                      <td>{values.travel.pump_pressure}</td>
+                      <td>{values.travel.P_Pump}</td>
                     </tr>
+                    
                     <tr>
-                      <td>주행 모터 용량</td>
+                      <td>주행모터(견인)</td>
                       <td>
-                        <InlineMath>{`\ q`}</InlineMath>
+                        <InlineMath>{`\ q_{MotorT}`}</InlineMath>
                       </td>
                       <td>cc/rev</td>
-                      <td>{values.travel.TM_flow_q}</td>
+                      <td>{values.travel.q_Motor_T}</td>
                     </tr>
                     <tr>
-                      <td>주행모터 효율</td>
+                      <td>기어효율</td>
+                      <td>
+                        <InlineMath>{`\ μ`}</InlineMath>
+                      </td>
+                      <td>cc/rev</td>
+                      <td>{values.travel.Gear_eff}</td>
+                    </tr>
+                    <tr>
+                      <td>기계효율</td>
                       <td>
                         <InlineMath>{`\ η`}</InlineMath>
                       </td>
 
                       <td></td>
-                      <td>{values.travel.TM_mt}</td>
+                      <td>{values.travel.Mech_eff}</td>
                     </tr>
 
-                    <tr>
-                      <td>감속비</td>
-                      <td>
-                        <InlineMath>{`\ i`}</InlineMath>
-                      </td>
-                      <td></td>
-                      <td>{values.travel.reduc}</td>
-                    </tr>
 
                     <tr>
-                      <td>스프로켓 PCD</td>
+                      <td>스프로켓 반경</td>
                       <td>
-                        <InlineMath>{`\ D`}</InlineMath>
+                      <InlineMath>{`\ R_{sprocket}`}</InlineMath>
                       </td>
-                      <td>㎜</td>
-                      <td>{values.travel.sprocket_PCD}</td>
-                    </tr>
-                    <tr>
-                      <td>모터 기계 효율</td>
+                      <td>m</td>
                       <td>
-                        <InlineMath>{`\ η_g`}</InlineMath>
+                        {values.travel.Sprocket_Radius}
                       </td>
-
-                      <td></td>
-                      <td>{values.travel.TM_mt}</td>
                     </tr>
+                    
                   </tbody>
                 </table>
                 <p>○ 주행 모터 토크를 이용한 구동력 계산</p>
 
-                <table style={{ width: "90%", height: "20%", margin: "auto" }}>
+                <table style={{ width: "90%", height: "15%", margin: "auto" }}>
                   <tbody>
                     <tr>
                       <td>주행 모터 토크 계산</td>
                     </tr>
                     <tr>
                       <TableCell rowSpan="2">
-                        <InlineMath>{`TM = \\cfrac{P \\times q \\times η}{200 \\pi} = \\cfrac{${values.travel.pump_pressure} \\times ${values.travel.TM_flow_q}  \\times ${values.travel.TM_mt} }{200 \\pi} = ${values.travel.TM_torque} `}</InlineMath>
+                        <InlineMath>{` T_{Motor} = \\cfrac{P_{Pump}*q_{Motor} \\times \\pi}{2} \\times \ η =  \\cfrac{${values.travel.P_Pump}\\times${values.travel.q_Motor_T} \\times \\pi}{2} \\times \ η = ${T_Motor} `}</InlineMath>
+                      </TableCell>
+                    </tr>
+                    {/* 
+                    <tr>
+                      <TableCell rowSpan="2">
+                        <InlineMath>{` T_RG = T_Motor * Gear_Ratio * Gear_eff =  ${T_Motor} * ${values.travel.Gear_Ratio} * ${values.travel.Gear_eff} = ${T_RG} `}</InlineMath>
+                      </TableCell>
+                    </tr> */}
+                  </tbody>
+                </table>
+                <table style={{ width: "90%", height: "15%", margin: "auto" }}>
+                  <tbody>
+                    <tr>
+                      <td>T_RG 계산</td>
+                    </tr>
+                    <tr>
+                      <TableCell rowSpan="2">
+                        <InlineMath>{` T_{RG} = T_{Motor} \\times i \\times μ =  ${T_Motor} \\times ${values.travel.Gear_Ratio} \\times ${values.travel.Gear_eff} = ${T_RG} `}</InlineMath>
                       </TableCell>
                     </tr>
                   </tbody>
                 </table>
-                <table style={{ width: "90%", height: "20%", margin: "auto" }}>
+
+                <table style={{ width: "90%", height: "15%", margin: "auto" }}>
                   <tbody>
                     <tr>
                       <td>구동력 계산</td>
                     </tr>
                     <tr>
                       <TableCell rowSpan="2">
-                        <InlineMath>{`F = \\cfrac{2 \\times \TM \\times i \\times η_g }{ D/2 }  = \\cfrac{ 
-                          2 \\times ${values.travel.TM_torque} \\times ${values.travel.reduc}  \\times ${values.travel.eff_trac} }{200 \\pi} = ${values.travel.TM_traction} `}</InlineMath>
+                        <InlineMath>{`F = \\cfrac{T_{RG} \\times 2}{ R_{sprocket} \\times 1000 } = \\cfrac{ ${T_RG} \\times 2}{ ${values.travel.Sprocket_Radius} \\times 1000 }  = ${values.travel.traction} `}</InlineMath>
                       </TableCell>
                     </tr>
                   </tbody>
