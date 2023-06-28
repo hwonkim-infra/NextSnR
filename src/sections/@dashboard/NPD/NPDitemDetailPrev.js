@@ -85,9 +85,10 @@ const NPDitemDetailPrev = ({ currentNPDitem }) => {
               variant="overline"
               sx={{ color: "text.disabled" }}
             >
-              Type Approval
+              Reference
             </Typography>
             <Typography variant="body2">
+              {currentNPDitem.reference}
             </Typography>
           </Grid>
 

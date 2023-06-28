@@ -172,7 +172,7 @@ const NPDStages = ["PDR","FDR", "DVC", "PVC"]
               variant="overline"
               sx={{ color: "text.disabled" }}
             >
-              Actions Detail
+              Preview
             </Typography>
             <pre>{JSON.stringify(values, 0, 2)}</pre>
           </Card>

@@ -1,12 +1,14 @@
 import {
   Box,
   CircularProgress,
+  Link,
   ListItem,
   ListItemIcon,
   Tooltip,
   Typography,
 } from "@mui/material";
 import { Fragment } from "react";
+import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined';
 
 export default function NPDSigns({ item }) {
   console.log("🚀 ~ file: NPDSigns.js:12 ~ NPDSigns ~ item:", item)
@@ -36,8 +38,13 @@ export default function NPDSigns({ item }) {
             </Typography>
           </Box>
         </ListItemIcon>
+        <Link href={item.reference || ''}>
+          
+          <SourceOutlinedIcon fontSize="small"/>
+        </Link>
         <Tooltip title={item.description} placement="top-start">
-          <Typography>{item.label}</Typography>
+          <Typography >{item.label}
+          </Typography>
         </Tooltip>
       </ListItem>
     </Fragment>

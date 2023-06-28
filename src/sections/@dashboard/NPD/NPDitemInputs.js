@@ -81,26 +81,24 @@ const NPDitemInput = ({ control }) => {
           />
         ))}
       </Box>
-      <Box
-      sx={{
-        display: "grid",
-        columnGap: 2,
-        rowGap: 2,
-        gridTemplateColumns: "auto",
-      }}
-      >
+      <Box>
         <Stack direction="row">
+          <Box sx={{p:1}} label="Stage">
+
           <Controller
             name={`npdStage`}
+            label="Stage"
             render={({ field }) => (
-              <Select  label="Stage" {...field} sx={{ minWidth: 200 }}>
+              <Select label="Stage" defaultValue={field.npdStage}   {...field} sx={{ minWidth: 200 }}>
                 <MenuItem value={"FDR"}>FDR</MenuItem>
                 <MenuItem value={"DVC"}>DVC</MenuItem>
                 <MenuItem value={"PVC"}>PVC</MenuItem>
               </Select>
             )}
             control={control}
-          />
+            />
+            </Box>
+            <Box sx={{p:1}} >
 
           <Controller
             render={({ field }) => (
@@ -115,8 +113,9 @@ const NPDitemInput = ({ control }) => {
             name="group"
             control={control}
           />
-        </Stack>
 
+            </Box>
+            <Box sx={{p:1}} >
         <Controller
           name="markets"
           control={control}
@@ -138,12 +137,14 @@ const NPDitemInput = ({ control }) => {
                   ))
                 }
                 renderInput={(params, field) => (
-                  <TextField label="target Markets" {...params} />
+                  <TextField  sx={{ minWidth: 300 }} label="target Markets" {...params} />
                 )}
               />
             </>
           )}
         />
+            </Box>
+        </Stack>
       </Box>
     </>
   );

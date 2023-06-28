@@ -33,7 +33,7 @@ export default function SignalView({ stageSignals, group, labels }) {
               </Typography>
             </Box>
           </ListItemIcon>
-          {labels[index].label} {value?.description} 
+          {labels[index].label} {value?.description} {value.reference} 
         </ListItem>
       ))}
     </Fragment>
