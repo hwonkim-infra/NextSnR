@@ -54,6 +54,18 @@ export default function HDZCalc(values) {
   const traction = roundTwo(T_RG/ values.travel.Sprocket_Radius*2/1000);
 
   /* 최대등판각도_구동력 */
+  
+  const travel_drag = 0.1;
+  const slope_traction_cal =  ( values.travel.traction - travel_drag *(values.grossWeight/1000))  /(values.grossWeight/1000)
+  const slope_traction_calc =  Math.asin (slope_traction_cal)
+
+
+
+  let slope_traction;
+  (!slope_traction_calc || slope_traction_calc <= 0 ) ? (slope_traction = "∞") : (slope_traction = slope_traction_calc);
+
+  const greadability = (slope_traction < values.travel.greadability_ref) ? slope_traction : values.travel.greadability_ref;
+
   // const traction_slope = roundTwo( (180 / Math.PI) * Math.asin( (TM_traction - (values.travel.travel_drag * grossWeight) / 1000) / (grossWeight / 1000) ) );
 
   /* 전도안정도 */
@@ -99,7 +111,7 @@ export default function HDZCalc(values) {
     (values.travel.travel_speed = travel_speed),
     (values.travel.T_Motor = T_Motor),
     (values.travel.traction = traction),
-    // (values.travel.traction_slope = traction_slope),
+    (values.travel.greadability = greadability),
     ""
   );
 }

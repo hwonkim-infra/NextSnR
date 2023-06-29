@@ -56,17 +56,17 @@ export default function TravelDZ({ control }) {
       type: "number",
       unit: "",
     },
-    // 구동력
-    {
-      label: "구동 효율(η)",
-      name: "travel.eff_trac",
-      type: "number",
-      unit: "",
-    },
     // 등판능력 계산
     {
       label: "주행저항계수(P)",
       name: "travel.travel_drag",
+      type: "number",
+      unit: "",
+    },
+    // 엔진 팬 제한각
+    {
+      label: "엔진기준등판각",
+      name: "travel.greadability_ref",
       type: "number",
       unit: "",
     },

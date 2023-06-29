@@ -1,5 +1,5 @@
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
-import { CircularProgress, TableCell } from "@mui/material";
+import { Box, CircularProgress, TableCell } from "@mui/material";
 import 'katex/dist/katex.min.css';
 import { InlineMath } from 'react-katex';
 
@@ -34,10 +34,10 @@ const TravelSpecHZ = ({ values, config }) => {
                     {" "}
                     최고 주행 속도는 {values.travel.travel_speed}㎞/h
                   </strong>
-                <br />
-                <br />
-                <p>○ 주행 성능 관련 사양</p>
-                    <table style={{width:"100%", height:"60%", margin: "auto"}} >
+                
+                <Box sx={{p:2}}>○ 주행 성능 관련 사양</Box>
+                
+                    <table style={{width:"100%", height:"30%", margin: "auto"}} >
                   <thead>
                     <tr>
                       <th>항목</th>
@@ -105,57 +105,40 @@ const TravelSpecHZ = ({ values, config }) => {
                     
                   </tbody>
                 </table>
-              </td>
-            </tr></tbody>
-          </table>
-        </div>
 
-    <div className={styles.pages}>
-      <table className={styles.borderTable}>
-
-            <thead>
-              <tr>
-                <th >주행 속도</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            <tr>
-              <td className={styles.head_description}>
-                <p>○ 주행모터 회전속도에 따른 주행속도 계산</p>
-                    <table style={{width:"100%", height:"70%", margin: "auto"}} >
+                <Box sx={{p:2}}>○ 주행모터 회전속도에 따른 주행속도 계산</Box>
+                    <table style={{width:"100%", height:"50%", margin: "auto"}} >
                     <tbody >
                       <tr>
-                        <TableCell >
+                        <td>
                           <InlineMath>{` n_{motor}`}</InlineMath>
 
-                        </TableCell>
+                        </td>
                       </tr>
-                      <tr>
-                        <td>
+                      <tr >
+                        <td >
                           
-                          <InlineMath>{` n_{motor} =  \\cfrac{Q_{Pump}*1000}{q_{motor}} \\times vol_{eff} =  \\cfrac{${values.travel.Q_Pump}*1000}{${values.travel.q_Motor}} \\times ${values.travel.vol_eff} = { ${N_Motor} } `}</InlineMath>
+                          <InlineMath >{` n_{motor} =  \\cfrac{Q_{Pump}*1000}{q_{motor}} \\times vol_{eff} =  \\cfrac{${values.travel.Q_Pump}*1000}{${values.travel.q_Motor}} \\times ${values.travel.vol_eff} = { ${N_Motor} } `}</InlineMath>
                         </td>
                       </tr>
                       
                       
                       <tr>
-                        <TableCell >
-                          N_RG
-                        </TableCell>
+                      <InlineMath>{` N_{RG}  `}</InlineMath>
+
                       </tr>
                       <tr>
                         <td>
-                        <InlineMath>{` n_{RG} =  \\cfrac{ Q_{Pump} }{ i_{gear} } =  \\cfrac{${N_Motor}*1000}{${values.travel.Gear_Ratio}} \\times ${values.travel.vol_eff} = { ${N_RG} } `}</InlineMath>
+                        <InlineMath>{`  \\cfrac{ Q_{Pump} }{ i_{gear} } =  \\cfrac{${N_Motor}*1000}{${values.travel.Gear_Ratio}} \\times ${values.travel.vol_eff} = { ${N_RG} } `}</InlineMath>
                           
                         </td>
                       </tr>
 
                       
                       <tr>
-                        <TableCell >
+                        <td >
                           주행속도
-                        </TableCell>
+                        </td>
                       </tr>
                       <tr>
                         <td>
@@ -169,10 +152,10 @@ const TravelSpecHZ = ({ values, config }) => {
                     </tbody>
                   </table>
               </td>
-            </tr>
-            </tbody>
+            </tr></tbody>
           </table>
         </div>
+
     </>
   );
 };

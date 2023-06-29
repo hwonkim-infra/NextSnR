@@ -3,6 +3,7 @@ import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
 import {
+  Box,
   CircularProgress,
   Table,
   TableBody,
@@ -22,11 +23,17 @@ const TravelSlopeHZ = ({ values, config }) => {
 
   const T_RG = roundTwo(T_Motor * values.travel.Gear_Ratio * values.travel.Gear_eff);
 
+  const travel_drag = 0.1;
+  const slope_traction_cal =   ( values.travel.traction - values.travel.travel_drag *(values.grossWeight/1000))  /(values.grossWeight/1000)
+  const slope_traction_calc =  Math.asin (slope_traction_cal)
+
+
+
 
   let slope_traction;
-  (values.travel.traction_slope <= 0) ? (slope_traction = "∞") : (slope_traction = values.travel.traction_slope);
+  (!slope_traction_calc || slope_traction_calc <= 0 ) ? (slope_traction = "∞") : (slope_traction = slope_traction_calc);
 
-
+  
 
   return (
     <>
@@ -49,8 +56,9 @@ const TravelSlopeHZ = ({ values, config }) => {
                   유지할 수 있는 제동장치 및 제동잠금장치를 갖추어야 한다.
                 </p>
 
-                <p>○ 등판 구동력 관련 제원</p>
-                <table style={{ width: "80%", height: "40%", margin: "auto" }}>
+                <Box sx={{p:2}}>○ 등판 구동력 관련 제원</Box>
+                
+                <table style={{ width: "80%", height: "35%", margin: "auto" }}>
                   <thead>
                     <tr style={{ height: "10%", margin: "auto" }}>
                       <th>항목</th>
@@ -118,8 +126,8 @@ const TravelSlopeHZ = ({ values, config }) => {
                     
                   </tbody>
                 </table>
-                <p>○ 주행 모터 토크를 이용한 구동력 계산</p>
-
+                <Box sx={{p:2}}>○ 주행 모터 토크를 이용한 구동력 계산</Box>
+                
                 <table style={{ width: "90%", height: "15%", margin: "auto" }}>
                   <tbody>
                     <tr>
@@ -158,7 +166,7 @@ const TravelSlopeHZ = ({ values, config }) => {
                     </tr>
                     <tr>
                       <TableCell rowSpan="2">
-                        <InlineMath>{`F = \\cfrac{T_{RG} \\times 2}{ R_{sprocket} \\times 1000 } = \\cfrac{ ${T_RG} \\times 2}{ ${values.travel.Sprocket_Radius} \\times 1000 }  = ${values.travel.traction} `}</InlineMath>
+                        <InlineMath>{`F_{traction} = \\cfrac{T_{RG} \\times 2}{ R_{sprocket} \\times 1000 } = \\cfrac{ ${T_RG} \\times 2}{ ${values.travel.Sprocket_Radius} \\times 1000 }  = ${values.travel.traction} `}</InlineMath>
                       </TableCell>
                     </tr>
                   </tbody>
@@ -183,48 +191,60 @@ const TravelSlopeHZ = ({ values, config }) => {
           <tbody>
             <tr>
               <td className={styles.head_description}>
-                <p>
-                  등판 및 정차 가능 경사각은 아래 사양 중 가장 작은 각에 해당:{" "}
-                  <br />
-                  아래 계산 결과에 따라 등판 가능 경사각:{" "}
-                  <InlineMath>{` ${Math.min(
-                    values.travel.greadability
-                  )}°`}</InlineMath>
-                </p>
 
-                <table style={{ width: "90%", height: "50%", margin: "auto" }}>
+                  등판 및 정차 가능 경사각은 아래 사양 중 가장 작은 각에 해당:{" "}
+                  <Box sx={{p:2}}> <strong>아래 계산 결과에 따라 등판 가능 경사각: {values.travel.greadability}</strong>  </Box>
+
+                
+                <table style={{ width: "90%", height: "25%", margin: "auto" }}>
                   <tbody>
-                    
                     <tr>
-                      <TableCell >구동견인력에 의한 등판 능력</TableCell>
+                      <td>
+                      <Box sx={{p:2}}>○ 구동견인력에 의한 등판 능력: {slope_traction} </Box>
+
+
+                      </td>
                     </tr>
-                    <tr >
-                      <TableCell>
+                    <tr>
+                    <TableCell>
                         <InlineMath>{`F_{traction} - P \\cdot W = W  \\cdot \\sin \\theta`}</InlineMath>
                       </TableCell>
-                      
-                    </tr>
-
+                      </tr>
                     <tr>
-                      <TableCell>
-                      <InlineMath>{` \\theta = \\sin^{-1} {\\cfrac{F - P \\cdot W}{W}} = \\sin^{-1} {\\cfrac{ ${ values.travel.TM_traction} - ${ values.travel.travel_drag } \\cdot ${values.grossWeight/1000}  }{${values.grossWeight/1000}}} =  `}</InlineMath>
+                    <TableCell>
+
+                     등판각 <InlineMath>{` \\theta = \\sin^{-1} {\\cfrac{F - P \\cdot W}{W}} = \\sin^{-1} {\\cfrac{ ${ values.travel.traction} - ${ values.travel.travel_drag } \\cdot ${values.grossWeight/1000}  }{${values.grossWeight/1000}}} =  `}</InlineMath>
                         {/* <InlineMath>{`\\theta = \\sin^{-1}{\\cfrac{F - P \\cdot W}{W}} = \\sin^{-1}(\\cfrac{${ values.travel.TM_traction } - ${ values.travel.travel_drag } \\times ${values.grossWeight/1000}}{${ values.grossWeight/1000 }}) = ${ values.travel.traction_slope }`} </InlineMath> */}
                       <InlineMath>{`${slope_traction}`}</InlineMath>
                         
                       </TableCell>
-                      
                     </tr>
-                    <tr>
-                      <TableCell >
-                        엔진 오일 팬에 의한 최대 허용 경사
-                      </TableCell>
-                    </tr>
-                    <tr>
-                      <TableCell>엔진 팬 제한 각 </TableCell>
-                      
-                    </tr>
+
+                    
                   </tbody>
                 </table>
+
+                <table style={{ width: "90%", height: "20%", margin: "auto" }}>
+                  <tbody>
+                    <tr>
+                      <td>
+                      <Box sx={{p:2}}>○ 엔진 오일 팬에 의한 최대 허용 경사: {values.travel.greadability_ref} </Box>
+
+
+                      </td>
+                    </tr>
+                    <tr>
+                    <TableCell>
+                        <InlineMath>{`Greadability_{ref} = ${values.travel.greadability_ref}`}</InlineMath>
+                      </TableCell>
+                      </tr>
+                   
+
+                    
+                  </tbody>
+                </table>
+
+
               </td>
             </tr>
           </tbody>
