@@ -28,7 +28,7 @@ const [currentPSC, setCurrentPSC] = useState()
 const { query } = useRouter();
 
   const getPSC = async () => {
-    const response = await axios.get(`/api/PSC/EU/${query.id}`);
+    const response = await axios.get(`/api/PSC/GuideBook/${query.id}`);
 
     const data = response.data;
     setCurrentPSC(data);

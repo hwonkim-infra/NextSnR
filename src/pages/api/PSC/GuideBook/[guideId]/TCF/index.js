@@ -11,13 +11,21 @@ export default async (req, res) => {
   const morgan = Morgan("combined");
 
   // @desc      Get TCFs
-// @route     GET /api/v1/courses
-// @route     GET /api/v1/bootcamps/:bootcampId/courses
+// @route     GET /api/PSC/GuideBook/:guideId/TCFs
 // @access    Public
-  switch (method) {
+
+switch (method) {
     case "GET":
       try {
-        const TCFs = await TCF.find()
+        let query;
+
+        if (req.params.guideId) {
+            query = TCF.find({PSC: req.params.guideId})
+
+        } else {
+
+        }
+        const TCFs = await TCF.find({PSC: req.params.guideId})
         
         
         await runMiddleware(req, res, morgan);

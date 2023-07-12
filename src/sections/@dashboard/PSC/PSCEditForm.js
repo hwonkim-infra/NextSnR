@@ -56,7 +56,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
 
   const updatePSC = async (values) => {
     axios
-      .put(`/api/PSC/EU/${query.id}`, values)
+      .put(`/api/PSC/GuideBook/${query.id}`, values)
       .then((response) => {
         console.log(response.data);
       })
@@ -67,7 +67,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
 
   const createPSC = async (values) => {    
     axios
-      .post("/api/PSC/EU", values)
+      .post("/api/PSC/GuideBook", values)
       .then((response) => {
         console.log(response);
       })
@@ -82,7 +82,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
     if (window.confirm("이 파일을 삭제하시겠습니까")) {
       try {
         axios
-          .delete(`/api/PSC/EU/${query.id}`, values)
+          .delete(`/api/PSC/GuideBook/${query.id}`, values)
           .then((response) => {
             console.log(response);
           })
@@ -90,7 +90,7 @@ const PSCEditForm = ({ isEdit = false, currentPSC }) => {
             console.error(error);
           });
 
-        await push("/dashboard/PSC/EU");
+        await push("/dashboard/PSC/GuideBook");
       } catch (error) {
         console.log(error);
       }

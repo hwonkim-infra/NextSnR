@@ -118,7 +118,7 @@ export default function PSCList({ PSCs = [] }) {
 }
 
 export async function getServerSideProps() {
-  const response = await axios.get("http://127.0.0.1:3000/api/PSC/EU/");
+  const response = await axios.get("http://127.0.0.1:3000/api/PSC/GuideBook/");
   const PSCs = response.data;
 
   return {
