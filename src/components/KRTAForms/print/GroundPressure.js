@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "@/components/KRTAForms/print/printPages.module.scss";
+import { CircularProgress } from "@mui/material";
 
 // 퀵커플러 탈착
 
 const GroundPressure = ({ values, config }) => {
+  if (!values.undercarriage) return <CircularProgress />;
   const quick_coupler_weight = Math.max(
     values.attachments?.quick_coupler_weight_1,
     values.attachments?.quick_coupler_weight_2
@@ -28,7 +30,7 @@ const GroundPressure = ({ values, config }) => {
                   width="80%"
                   margin= "auto"
                 />
-                    <table style={{width:"100%", height:"80%", margin: "auto"}} >
+                    <table style={{width:"100%", height:"50%", margin: "auto"}} >
 
                   <tbody>
                     <tr>
@@ -40,7 +42,7 @@ const GroundPressure = ({ values, config }) => {
                       <td width="28%">텀블러 중심거리</td>
                       <td width="5%">l</td>
                       <td width="15%" id="">
-                        {(values.undercarriage?.tumbler_distance / 10) ||'' }
+                        {(values.undercarriage.tumbler_distance / 10) ||'' }
                       </td>
                       <td width="10%">(㎝)</td>
                       <td> </td>
@@ -50,14 +52,14 @@ const GroundPressure = ({ values, config }) => {
                       <td>
                         L<sub>t</sub>{" "}
                       </td>
-                      <td>{(values.undercarriage?.track_length / 10) || ''}</td>
+                      <td>{(values.undercarriage.track_length / 10) || ''}</td>
                       <td>(㎝)</td>
                       <td>　</td>
                     </tr>
                     <tr>
                       <td>접지길이</td>
                       <td>L</td>
-                      <td>{values.undercarriage?.ground_Length  || ''}</td>
+                      <td>{values.undercarriage.ground_Length  || ''}</td>
                       <td>(㎝)</td>
                       <td>
                       l+0.35×(L<sub>t</sub>-L<sub>c</sub>)
@@ -66,21 +68,21 @@ const GroundPressure = ({ values, config }) => {
                     <tr>
                       <td>장비전중량</td>
                       <td>W</td>
-                      <td>{(values.grossWeight - quick_coupler_weight) || ''}</td>
+                      <td>{(values.grossWeight - quick_coupler_weight) || values.grossWeight}</td>
                       <td>(㎏)</td>
                       <td>운전자 65㎏</td>
                     </tr>
                     <tr>
                       <td>슈폭</td>
                       <td>B</td>
-                      <td>{(values.undercarriage?.shoe_width) || ''}</td>
+                      <td>{(values.undercarriage.shoe_width) || ''}</td>
                       <td>(㎝)</td>
                       <td>　</td>
                     </tr>
                     <tr>
                       <td>접지압</td>
                       <td>P</td>
-                      <td>{values.undercarriage?.ground_pressure_woqc || ''}</td>
+                      <td>{values.undercarriage.ground_pressure_woqc || values.undercarriage.ground_pressure}</td>
                       <td>(kg/㎠)</td>
                       <td>
                         {" "}
@@ -88,6 +90,12 @@ const GroundPressure = ({ values, config }) => {
                         (트랙의 수 × 슈폭 × 접지길이){" "}
                       </td>
                     </tr>
+                    {quick_coupler_weight.length >0  && 
+                    (<>
+                    <table style={{width:"100%", height:"30%", margin: "auto"}} >
+                      <tbody>
+
+
                     <tr>
                       <td colSpan="5">
                        <h4>접지압 (퀵커플러 {quick_coupler_weight}kg 포함)</h4> 
@@ -108,11 +116,17 @@ const GroundPressure = ({ values, config }) => {
                       <td>
                         P<sub>qc</sub>
                       </td>
-                      <td>{values.undercarriage?.ground_pressure || ''}</td>
+                      <td>{values.undercarriage.ground_pressure || ''}</td>
                       <td>(kg/㎠)</td>
                       <td>
                       </td>
                     </tr>
+                      </tbody>
+
+                    </table>
+                    </>
+                    )
+                    }
                   </tbody>
                 </table>
               </td>

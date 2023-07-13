@@ -11,39 +11,39 @@ import Transportation from "@/components/KRTAForms/print/Transportation";
 import TravelSlopeHZ from "@/components/KRTAForms/print/TravelSlopeHZ";
 import TravelSpecHZ from "@/components/KRTAForms/print/TravelSpecHZ";
 import CompareChangeData from "@/sections/@dashboard/KRTA/CompareChangeData";
+import Drawings_extDimension from "@/components/KRTAForms/print/Drawings_extDimension";
 
 const HDZprint = () => {
-    const { push, query } = useRouter();
-    const [newHDZ, setNewHDZ] = useState({});
+  const { push, query } = useRouter();
+  const [newHDZ, setNewHDZ] = useState({});
 
-    const getHDZ = async () => {
+  const getHDZ = async () => {
     const response = await axios.get(`/api/HDZ/${query.id}`);
-        const data = response.data;
-        setNewHDZ(data);
-      };
-    
-      useEffect(() => {
-        if (query.id) getHDZ();
-      }, [query.id]);
+    const data = response.data;
+    setNewHDZ(data);
+  };
 
-      
+  useEffect(() => {
+    if (query.id) getHDZ();
+  }, [query.id]);
+
   return (
-    <>    
-    <div contentEditable={true} suppressContentEditableWarning={true}>
-
-      <HDZSpec values={newHDZ} />
-        {newHDZ.ChangeModel && <CompareChangeData values={newHDZ} type={"HDZ"} /> }
+    <>
+      <div contentEditable={true} suppressContentEditableWarning={true}>
+        <HDZSpec values={newHDZ} />
+        {newHDZ.ChangeModel && (
+          <CompareChangeData values={newHDZ} type={"HDZ"} />
+        )}
         <GrossWeightsDZ values={newHDZ} />
-        <TravelSpecHZ values={newHDZ}  />
-        <TravelSlopeHZ values={newHDZ}  />
-      {/* <Drawings values={newHDZ}  />
+        <TravelSpecHZ values={newHDZ} />
+        <TravelSlopeHZ values={newHDZ} />
+        <Drawings values={newHDZ} />
+        <Drawings_extDimension values={newHDZ} />
         <GroundPressure values={newHDZ} />
-      <Transportation values={newHDZ}  /> 
-       */}
-    </div>
-        </>
-  )
-}
+        <Transportation values={newHDZ} />
+      </div>
+    </>
+  );
+};
 
-
-  export default HDZprint
+export default HDZprint;
