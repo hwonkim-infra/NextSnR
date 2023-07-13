@@ -319,7 +319,7 @@ export const AnnexIII = [
   {
     id: 'd1e1535',
     title: '1.5.13. Emissions of hazardous materials and substances        ',
-    category: ['Emission'],
+    category: ['Environment'],
     component: <D1E1535article />,
     // history: <D1E1535history />,
   },

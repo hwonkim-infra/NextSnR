@@ -17,7 +17,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React from 'react';
 import { useState } from 'react';
 
-const MPRcategories = ['All','Elec', 'Control', 'Structure', 'Station'];
+const categories = []
+AnnexIII.forEach(item => categories.push(...item.category))
+// console.log("🚀 ~ file: index.jsx:21 ~ categories:", categories)
+
+
+
+const MPRcategories = ['All', ...(new Set(categories))];
 
 export default function Index() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -47,10 +53,7 @@ export default function Index() {
     <>
       <Page title="Machinery and Related Product Regulation">
         <Grid container sx={{ p: 2 }}>
-          <Grid item xs={2}>
-            Table Of Contents
-          </Grid>
-          <Grid item xs={9} style={{ maxHeight: '100vh', overflow: 'auto' }}>
+        <Grid item xs={12}>
             <ToggleButtonGroup value={activeCategory} exclusive onChange={handleMPRByCategory}>
               {MPRcategories.map((category, index) => {
                 return (
@@ -60,6 +63,12 @@ export default function Index() {
                 );
               })}
             </ToggleButtonGroup>
+
+        </Grid>
+          <Grid item xs={2}>
+            Table Of Contents
+          </Grid>
+          <Grid item xs={9} style={{ maxHeight: '85vh', overflow: 'auto' }}>
             
             {/* {npdDatas.map((tab) => <Box key={tab.id}>{tab.component}</Box>)} */}
             {npdDatas.map((item) => (
