@@ -372,7 +372,9 @@ export const D1E2744history = () => (
         </tr>
       </thead>
       <tbody>
+        
         <tr>
+          <td></td>
           <td>
             Where relevant, autonomous mobile machinery or related products shall have a supervisory function specific
             to the autonomous mode. This function shall allow the supervisor to remotely receive information from the
@@ -390,6 +392,7 @@ export const D1E2744history = () => (
           </td>
         </tr>
         <tr>
+          <td></td>
           <td>
             The information the supervisor receives from the machinery when the supervisory function is active shall
             enable the supervisor to have a complete and accurate view of the operation, movement and safe positioning
@@ -401,6 +404,7 @@ export const D1E2744history = () => (
           </td>
         </tr>
         <tr>
+          <td></td>
           <td>
             This information shall alert the supervisor of the occurrence of unforeseen or dangerous situations present
             or impending, which require the intervention of the supervisor.
@@ -411,6 +415,7 @@ export const D1E2744history = () => (
           </td>
         </tr>
         <tr>
+          <td></td>
           <td>If the supervisory function is not active, the machinery shall not be able to operate.</td>
           <td>감독 기능이 활성화되지 않으면 기계가 작동할 수 없어야 한다.</td>
         </tr>
@@ -486,6 +491,7 @@ export const D1E2761history = () => (
       </thead>
       <tbody>
         <tr>
+          <td></td>
           <td>
             For autonomous mobile machinery or related product, the control system shall be designed to perform the
             safety functions by itself as set out in this section, even when actions are ordered by using a remote
@@ -546,6 +552,7 @@ export const D1E2814history = () => (
       </thead>
       <tbody>
         <tr>
+          <td></td>
           <td>
             The movement of autonomous mobile machinery shall take into account the risks related to the area where it
             is intended to move and work.{' '}
