@@ -1,4 +1,142 @@
 /* eslint-disable react/self-closing-comp */
+
+export const D1E4444article = () => (
+  <div>
+    <p id="L_2023165EN.01004401-g-002-0002" className="oj-ti-grseq-1">
+               <span className="oj-bold">Definitions</span>
+            </p>
+            <p className="oj-normal">For the purposes of this Annex, the following definitions apply:</p>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(a)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘hazard’ means a potential source of injury or damage to health;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(b)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘danger zone’ means any zone within and/or around machinery or a related product in which a person is subject to a risk to his or her health or safety;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(c)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘exposed person’ means any person wholly or partially in a danger zone;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(d)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘operator’ means the person or persons installing, operating, adjusting, maintaining, cleaning, repairing or moving machinery or a related product;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(e)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘risk’ means a combination of the probability and the degree of an injury or damage to health that can arise in a hazardous situation;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(f)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘guard’ means a part of machinery or a related product used specifically to provide protection by means of a physical barrier;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(g)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘protective device’ means a device (other than a guard) which reduces the risk, either alone or in conjunction with a guard;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(h)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘intended use’ means the use of machinery or a related product in accordance with the information provided in the instructions for use;</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+               <colgroup><col width="4%"/>
+               <col width="96%"/>
+               </colgroup><tbody>
+                  <tr>
+                     <td valign="top">
+                        <p className="oj-normal">(i)</p>
+                     </td>
+                     <td valign="top">
+                        <p className="oj-normal">‘reasonably foreseeable misuse’ means the use of machinery or a related product in a way not intended in the instructions for use, but which may result from readily predictable human behaviour.</p>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+  </div>
+
+)
+
+
 export const D1E137article = () => (
     <div>
       <table width="100%" border="0" cellSpacing="0" cellPadding="0">

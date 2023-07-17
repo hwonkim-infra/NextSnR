@@ -18,7 +18,7 @@ import {
   D1E1561article,
   D1E1574article,
 } from './ANNEX_III/D1E1365otherRisk';
-import { D1E137article, D1E137history } from './ANNEX_III/D1E137general';
+import { D1E137article, D1E137history, D1E4444article } from './ANNEX_III/D1E137general';
 import {
   D1E1585article,
   D1E1611article,
@@ -83,6 +83,13 @@ export const AnnexIII = [
       </>
     ),
   }, */
+  {
+    id: 'd1e137',
+    title: 'PART A Definition',
+    category: [],
+    component: <D1E4444article />,
+    // history: <D1E137history />,
+  },
   {
     id: 'd1e137',
     title: 'PART B General principles',
