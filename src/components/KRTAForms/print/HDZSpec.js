@@ -135,18 +135,18 @@ const HDZSpec = ({ values }) => {
             <td id="">{values.attachments?.dozer_width} </td>
           </tr>
           <tr>
-            <td colSpan="2">틸트량</td>
+            <td colSpan="2">틸트량 (㎜)</td>
             <td id="">{values.attachments?.dozer_tilt} </td>
 
-            <td colSpan="2">배토판 높이</td>
+            <td colSpan="2">배토판 높이 (㎜)</td>
             <td id="">{values.attachments?.dozer_height} </td>
           </tr>
           <tr>
-            <td colSpan="2">앵글량</td>
+            <td colSpan="2">앵글량 (°)</td>
             <td id="">{values.attachments?.dozer_angle} </td>
 
-            <td colSpan="2">최대견인력</td>
-            <td id="">{"최대견인력"} </td>
+            <td colSpan="2">최대견인력 (ton)</td>
+            <td id="">{values.travel?.traction}</td>
           </tr>
 
           <tr>

@@ -51,7 +51,7 @@ export default function HDZCalc(values) {
   const T_RG = T_Motor * values.travel.Gear_Ratio * values.travel.Gear_eff;
               
   /* traction	J50/$D$15*2/1000 = T_RG/Sprocket_Raduis*2/1000 */
-  const traction = roundTwo(T_RG/ values.travel.Sprocket_Radius*2/1000);
+  const traction = roundTwo(T_RG/ values.travel.Sprocket_Radius*2/1000/9.81);
 
   /* 최대등판각도_구동력 */
   

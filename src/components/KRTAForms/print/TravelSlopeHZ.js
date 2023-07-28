@@ -166,7 +166,7 @@ const TravelSlopeHZ = ({ values, config }) => {
                     </tr>
                     <tr>
                       <TableCell rowSpan="2">
-                        <InlineMath>{`F_{traction} = \\cfrac{T_{RG} \\times 2}{ R_{sprocket} \\times 1000 } = \\cfrac{ ${T_RG} \\times 2}{ ${values.travel.Sprocket_Radius} \\times 1000 }  = ${values.travel.traction} `}</InlineMath>
+                        <InlineMath>{`F_{traction} = \\cfrac{T_{RG} \\times 2}{ R_{sprocket} \\times 1000 } = \\cfrac{ ${T_RG} \\times 2}{ ${values.travel.Sprocket_Radius} \\times 1000 \\times 9.81}  = ${values.travel.traction} `}</InlineMath>
                       </TableCell>
                     </tr>
                   </tbody>
