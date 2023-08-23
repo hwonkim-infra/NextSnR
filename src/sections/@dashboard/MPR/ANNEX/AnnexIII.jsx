@@ -160,7 +160,7 @@ export const AnnexIII = [
   {
     id: 'd1e473',
     title: '1.1.9.   Protection against corruption',
-    category: ['Cybersecurity', 'Connected'],
+    category: ['Cybersecurity', 'Connected', 'Remote'],
     component: <D1E473article />,
     history: <D1E473history />,
   },
@@ -448,7 +448,7 @@ export const AnnexIII = [
   {
     id: 'd1e2604',
     title: '3.   SUPPLEMENTARY ESSENTIAL HEALTH AND SAFETY REQUIREMENTS TO OFFSET RISKS DUE TO THE MOBILITY OF MACHINERY OR RELATED PRODUCTS',
-    category: ["Common", "AI"],
+    category: ["Common", "AI", "Remote"],
     component: <D1E2604article />,
     history: <D1E2604history />,
   },
@@ -483,7 +483,7 @@ export const AnnexIII = [
   {
     id: 'd1e2761',
     title: '3.3. Control systems        ',
-    category: ["Control","AI"],
+    category: ["Control","AI", "Remote"],
     component: <D1E2761article />,
     history: <D1E2761history />,
   },
@@ -503,7 +503,7 @@ export const AnnexIII = [
   {
     id: 'd1e2835',
     title: '3.3.3. Travelling function                ',
-    category: ["PowerTrain", "AI"],
+    category: ["PowerTrain", "AI", "Remote"],
     component: <D1E2835article />,
     history: <D1E2835history />,
   },
@@ -592,7 +592,7 @@ export const AnnexIII = [
   {
     id: 'd1e3131',
     title: '3.6.1. Signs, signals and warnings        ',
-    category: ["Station"],
+    category: ["Station", "Remote"],
     component: <D1E3131article />,
   },
   {

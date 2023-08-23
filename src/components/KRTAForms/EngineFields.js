@@ -15,12 +15,7 @@ const EngineFields = ({ control }) => {
     { label: "엔진제작사", name: "engine.supplier", type: "", unit: "" },
     { label: "출력(정격)", name: "engine.power", type: "number", unit: "ps" },
     { label: "", name: "engine.nominal_rev", type: "number", unit: "rpm" },
-    {
-      label: "최대 토크",
-      name: "engine.torque",
-      type: "number",
-      unit: "kgf m",
-    },
+    { label: "최대 토크", name: "engine.torque", type: "number", unit: "kgf m", },
     { label: "", name: "engine.torque_rev", type: "number", unit: "rpm" },
     { label: "", name: "engine.cylinder", type: "number", unit: "기통" },
   ];
