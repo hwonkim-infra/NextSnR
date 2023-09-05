@@ -47,6 +47,7 @@ const navConfig = [
           { title: 'NPDitems ', path: '/dashboard/PSC/NPDitems' },
           { title: 'PRC Guide ', path: '/dashboard/PSC/EU' },
           { title: 'worldData ', path: '/dashboard/PSC/Global' },
+          { title: 'OptionPSC ', path: '/dashboard/PSC/OptionPSC' },
         ],
       },
     ],

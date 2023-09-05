@@ -1,5 +1,4 @@
-import { Grid, Paper, Table, TableBody, TableRow, Typography } from "@mui/material";
-import React from "react";
+import { Paper, Table, TableBody, TableRow } from "@mui/material";
 
 const SpecSheet = ({ values }) => {
   values.undercarriage ??= {};

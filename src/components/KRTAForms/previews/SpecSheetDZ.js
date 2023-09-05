@@ -1,5 +1,4 @@
-import { Grid, Paper, Table, tbody, tr, Typography } from "@mui/material";
-import React from "react";
+import { Table } from "@mui/material";
 
 export default function SpecSheetDZ({ values }) {
   return (
