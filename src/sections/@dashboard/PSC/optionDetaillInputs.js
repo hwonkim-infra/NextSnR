@@ -28,13 +28,13 @@ const OptionDetaillInputs = ({control} ) => {
               >
 
                   <Controller
-                    render={({ field }) => <TextField size="small" sx={{width: "40%"}} {...field} label="code" />}
+                    render={({ field }) => <TextField size="small" sx={{width: "20%"}} {...field} label="code" />}
                     name={`items.${index}.Code`}
                     defaultValue=""
                     control={control}
                   />
                   <Controller
-                    render={({ field }) => <TextField size="small" sx={{width: "60%"}} {...field} label="features" />}
+                    render={({ field }) => <TextField size="small" sx={{width: "80%"}} {...field} label="features" />}
                     name={`items.${index}.Features`}
                     defaultValue=""
                     control={control}

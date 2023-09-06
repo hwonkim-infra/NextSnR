@@ -28,10 +28,14 @@ import FolderIcon from "@mui/icons-material/Folder";
 import EditIcon from '@mui/icons-material/Edit';
 import PageviewIcon from "@mui/icons-material/Pageview";
 
-const OptionPSCDetailPrev = ({ currentOptionPSC }) => {
+const regionSignal = (regionResult) => regionResult ? "✅" : "❌"
+
+
+
+export default function OptionPSCDetailPrev({ currentOptionPSC }) {
   if (!currentOptionPSC) return <CircularProgress />;
   const {items} = currentOptionPSC;
-  const {region} = currentOptionPSC.items;
+  // const {region} = currentOptionPSC.items;
 
   console.log("🚀 ~ file: OptionPSCDetailPrev.js:34 ~ OptionPSCDetailPrev ~ items:", items)
 
@@ -72,18 +76,18 @@ const OptionPSCDetailPrev = ({ currentOptionPSC }) => {
     </TableRow>
   </TableHead>
   <TableBody>
-    {items.map((item, index) => {
+    {items?.map((item, index) => {
       return (
       <TableRow key={item.Code}>
         <TableCell>{item.Code}</TableCell>
         <TableCell>{item.Features}</TableCell>
-        <TableCell>{item.region.EN}</TableCell>
-        <TableCell>{item.region.NA}</TableCell>
-        <TableCell>{item.region.KR}</TableCell>
-        <TableCell>{item.region.AUS}</TableCell>
-        <TableCell>{item.region.CHN}</TableCell>
-        <TableCell>{item.region.BRA}</TableCell>
-        <TableCell>{item.region.CUTR}</TableCell>
+        <TableCell>{regionSignal(item.region.EN)}</TableCell>
+        <TableCell>{regionSignal(item.region.NA)}</TableCell>
+        <TableCell>{regionSignal(item.region.KR)}</TableCell>
+        <TableCell>{regionSignal(item.region.AUS)}</TableCell>
+        <TableCell>{regionSignal(item.region.CHN)}</TableCell>
+        <TableCell>{regionSignal(item.region.BRA)}</TableCell>
+        <TableCell>{regionSignal(item.region.CUTR)}</TableCell>
       </TableRow>)
     })}
 
@@ -91,24 +95,7 @@ const OptionPSCDetailPrev = ({ currentOptionPSC }) => {
 </Table>
 
       
-      <Box sx={{ p: 2 }}>
-      {currentOptionPSC.actions?.map((row) => (
-                <ListItem sx={{  }} key={row?.subItem}>
-                  <ListItemIcon>
-                    <FolderIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={row?.subItem}
-                    // secondary={secondary ? 'Secondary text' : null}
-                  />
-                  </ListItem>
-              ))}
-
-      </Box>
-
      
     </Card>
   );
 };
-
-export default OptionPSCDetailPrev;

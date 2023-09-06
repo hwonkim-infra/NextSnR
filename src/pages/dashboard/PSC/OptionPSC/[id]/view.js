@@ -11,47 +11,47 @@ import Layout from '@/layouts';
 import HeaderBreadcrumbs from '@/components/HeaderBreadcrumbs';
 import Page from '@/components/Page';
 // sections
-import PSCviewFrame from '@/sections/@dashboard/PSC/PSCviewFrame';
 import { useEffect, useState } from 'react';
+import OptionPSCviewFrame from '@/sections/@dashboard/PSC/OptionPSCviewFrame';
 
 // ----------------------------------------------------------------------
 
-PSCview.getLayout = function getLayout(page) {
+OptionPSCview.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
 
 // ----------------------------------------------------------------------
 
-export default function PSCview() {
-const [currentPSC, setCurrentPSC] = useState({})
+export default function OptionPSCview() {
+const [currentOptionPSC, setCurrentOptionPSC] = useState({})
 
 const { query } = useRouter();
 
-  const getPSC = async () => {
-    const response = await axios.get(`/api/PSC/GuideBook/${query.id}`);
+  const getOptionPSC = async () => {
+    const response = await axios.get(`/api/PSC/OptionPSC/${query.id}`);
 
     const data = response.data;
-    setCurrentPSC(data);
+    setCurrentOptionPSC(data);
   };
 
   useEffect(() => {
-    if (query.id) getPSC();
+    if (query.id) getOptionPSC();
   }, [query.id]);
 
 //   const currentModel = _userList.find((user) => paramCase(user.name) === name);
 
   return (
-    <Page title="PSC: View Item ">
+    <Page title="OptionPSC: View Item ">
         <HeaderBreadcrumbs
-          heading={"View PSC: "+ currentPSC.item}
+          heading={"View OptionPSC: "+ currentOptionPSC.optionName}
           links={[
-            { name: 'Dashboard', href: PATH_DASHBOARD.PSC },
-            { name: 'PSC', href: PATH_DASHBOARD.PSC.EU  },
-            { name: (currentPSC?.item) },
+            { name: 'Dashboard', href: PATH_DASHBOARD.PSC.OptionPSC },
+            { name: 'OptionPSC', href: PATH_DASHBOARD.PSC.OptionPSC  },
+            { name: (currentOptionPSC?.optionName) },
           ]}
         />
 
-        <PSCviewFrame currentPSC={currentPSC} />
+        <OptionPSCviewFrame currentOptionPSC={currentOptionPSC} />
     </Page>
   );
 }
