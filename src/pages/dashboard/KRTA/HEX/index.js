@@ -142,7 +142,7 @@ export default function HEXList({ HEXs = [] }) {
             )}
           </Stack>
 
-          {!currentHEX.ChangeModel && currentHEX.model_name && (
+          {currentHEX.model_name && (
             <Box>
               <Button
                 variant="outlined"

@@ -17,7 +17,7 @@ import { useState } from "react";
 import { Controller } from "react-hook-form";
 import TextFieldInput from "./TextFieldInput";
 
-import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
+// import SwivelSpeed from "@/components/KRTAForms/print/SwivelSpeed";
 
 const Swivel = ({ control, values }) => {
   const InputForms = [
@@ -98,7 +98,7 @@ const Swivel = ({ control, values }) => {
                         />
                       ))}
                     </Box>
-        <SwivelSpeed values={values}  />
+        {/* <SwivelSpeed values={values}  /> */}
 
                   </Card>
                 </Grid>
